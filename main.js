@@ -19,13 +19,13 @@ const DICT = {
     heroDesc: 'בניית אתרים, חנויות אונליין, אפליקציות, מערכות ואוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.',
     processTitle1: 'איך אנחנו הופכים רעיון',
     processTitle2: 'לפתרון שמייצר תוצאות',
-    pCardHead1: '01 אסטרטגיה ואפיון',
+    pCardNum1: '1', pCardHead1: 'אסטרטגיה ואפיון',
     pCardDesc1: 'איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים',
-    pCardHead2: '02 פיתוח אתרים ומערכות Web',
+    pCardNum2: '2', pCardHead2: 'פיתוח אתרים ומערכות Web',
     pCardDesc2: 'בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות',
-    pCardHead3: '03 אוטומציות AI ואפליקציות מותאמות',
+    pCardNum3: '3', pCardHead3: 'אוטומציות AI ואפליקציות מותאמות',
     pCardDesc3: 'פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7',
-    pCardHead4: '04 מעטפת Cloud אבטחה וצמיחה מתמדת',
+    pCardNum4: '4', pCardHead4: 'מעטפת Cloud אבטחה וצמיחה מתמדת',
     pCardDesc4: 'תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן',
     contactTitle1: 'רוצים לשמוע עוד?',
     contactTitle2: 'צרו איתנו קשר',
@@ -79,13 +79,13 @@ const DICT = {
     heroDesc: 'Building websites, online stores, apps, custom systems and AI automations <strong>that keep you steps ahead of your competitors</strong>.',
     processTitle1: 'How We Turn An Idea',
     processTitle2: 'Into A Solution That Drives Results',
-    pCardHead1: '01 Strategy & UX Architecture',
+    pCardNum1: '1', pCardHead1: 'Strategy & UX Architecture',
     pCardDesc1: 'Precise architecture and market research identifying your exact growth engines to convert visitors into paying clients',
-    pCardHead2: '02 Websites & Web Systems Development',
+    pCardNum2: '2', pCardHead2: 'Websites & Web Systems Development',
     pCardDesc2: 'Building luxury websites, E-commerce stores and advanced Web systems',
-    pCardHead3: '03 AI Automations & Custom Apps',
+    pCardNum3: '3', pCardHead3: 'AI Automations & Custom Apps',
     pCardDesc3: 'Custom mobile apps and intelligent AI agents saving up to 80% manual work while boosting sales and 24/7 support',
-    pCardHead4: '04 Cloud Infrastructure & Growth',
+    pCardNum4: '4', pCardHead4: 'Cloud Infrastructure & Growth',
     pCardDesc4: 'Enterprise cloud cyber security and ongoing personal management by Yotam Cohen ensuring continuous revenue growth',
     contactTitle1: 'Want to hear more?',
     contactTitle2: 'Contact Us',
@@ -166,10 +166,10 @@ function toggleLanguage() {
   setHtml('heroSubtitle', data.heroDesc);
   setHtml('processTitle', `<p class="border-b-line" style="color:#cfcfcf;font-weight:300">${data.processTitle1}</p><p class="border-b-line text-brand">${data.processTitle2}</p>`);
 
-  setText('pCardHead1', data.pCardHead1); setText('pCardDesc1', data.pCardDesc1);
-  setText('pCardHead2', data.pCardHead2); setText('pCardDesc2', data.pCardDesc2);
-  setText('pCardHead3', data.pCardHead3); setText('pCardDesc3', data.pCardDesc3);
-  setText('pCardHead4', data.pCardHead4); setText('pCardDesc4', data.pCardDesc4);
+  setText('pCardNum1', data.pCardNum1); setText('pCardHead1', data.pCardHead1); setText('pCardDesc1', data.pCardDesc1);
+  setText('pCardNum2', data.pCardNum2); setText('pCardHead2', data.pCardHead2); setText('pCardDesc2', data.pCardDesc2);
+  setText('pCardNum3', data.pCardNum3); setText('pCardHead3', data.pCardHead3); setText('pCardDesc3', data.pCardDesc3);
+  setText('pCardNum4', data.pCardNum4); setText('pCardHead4', data.pCardHead4); setText('pCardDesc4', data.pCardDesc4);
 
   setHtml('contactTitle', `<span class="border-b-line">${data.contactTitle1}</span><span class="border-b-line text-brand">${data.contactTitle2}</span>`);
   setText('contactSubtitle', data.contactSub);
