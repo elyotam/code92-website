@@ -251,6 +251,16 @@ function initHumanSalesBot() {
     }, 1200);
   }
 
+  function openWhatsApp(customText) {
+    const waText = encodeURIComponent(`שלום ליותם כהן (ELYOTAM)! 👋\nפנייה מנציג/ה: ${activeRep.name}\n${customText}`);
+    const waUrl = `https://wa.me/${WA_NUMBER}?text=${waText}`;
+    try {
+      window.location.href = waUrl;
+    } catch (e) {
+      window.open(waUrl, '_blank');
+    }
+  }
+
   function setOptions(optionsList) {
     opts.innerHTML = '';
     optionsList.forEach(opt => {
@@ -260,7 +270,18 @@ function initHumanSalesBot() {
       btn.addEventListener('click', () => {
         addMsg(opt.label, false);
         opts.innerHTML = '';
-        replyWithTyping(opt.response);
+        replyWithTyping(opt.response, () => {
+          const redirectMsg = currentLang === 'he' ? 'מעביר אותך כעת ל-WhatsApp...' : 'Redirecting to WhatsApp...';
+          const btnLabel = currentLang === 'he' ? '📲 פתח שיחה ב-WhatsApp בלחיצה כאן' : '📲 Click to Open WhatsApp Chat';
+          const waText = encodeURIComponent(`שלום ליותם כהן (ELYOTAM)! 👋\nפנייה מנציג/ה: ${activeRep.name}\nנושא: ${opt.label}`);
+          const waUrl = `https://wa.me/${WA_NUMBER}?text=${waText}`;
+          
+          addMsg(`${redirectMsg}<br><br><a href="${waUrl}" target="_blank" rel="noopener" class="chat-wa-direct-btn">${btnLabel}</a>`);
+          
+          setTimeout(() => {
+            openWhatsApp(`נושא: ${opt.label}`);
+          }, 1400);
+        });
       });
       opts.appendChild(btn);
     });
@@ -301,10 +322,15 @@ function initHumanSalesBot() {
     input.value = '';
 
     replyWithTyping(DICT[currentLang].botRedirecting, () => {
+      const btnLabel = currentLang === 'he' ? '📲 לחץ כאן למעבר מיידי ל-WhatsApp' : '📲 Click here for instant WhatsApp chat';
+      const waText = encodeURIComponent(`שלום ליותם כהן (ELYOTAM)! 👋\nפנייה מנציג/ה: ${activeRep.name}\nהודעת לקוח: ${val}`);
+      const waUrl = `https://wa.me/${WA_NUMBER}?text=${waText}`;
+      
+      addMsg(`<a href="${waUrl}" target="_blank" rel="noopener" class="chat-wa-direct-btn">${btnLabel}</a>`);
+
       setTimeout(() => {
-        const waText = encodeURIComponent(`שלום ליותם כהן (ELYOTAM)! 👋\nפנייה מנציג/ה: ${activeRep.name}\nהודעת לקוח: ${val}`);
-        window.open(`https://wa.me/${WA_NUMBER}?text=${waText}`, '_blank');
-      }, 800);
+        openWhatsApp(`הודעת לקוח: ${val}`);
+      }, 1400);
     });
   }
 
@@ -355,7 +381,88 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initHumanSalesBot();
   initHeroParticlesCanvas();
+  initProcessCardTypewriter();
 });
+
+// Dynamic Real-Time Typewriter Effect for Process Cards
+let typingTimers = {};
+
+function initProcessCardTypewriter() {
+  const cards = document.querySelectorAll('.process-card');
+
+  cards.forEach(card => {
+    const cardId = card.getAttribute('data-card');
+    const descEl = card.querySelector('.card-desc');
+    if (!descEl || !cardId) return;
+
+    function getTargetText() {
+      const dictKey = `pCardDesc${cardId}`;
+      return DICT[currentLang]?.[dictKey] || descEl.getAttribute('data-fulltext') || descEl.textContent.trim();
+    }
+
+    function startTyping() {
+      if (typingTimers[cardId]) {
+        clearInterval(typingTimers[cardId]);
+      }
+
+      const fullText = getTargetText();
+      descEl.setAttribute('data-fulltext', fullText);
+      
+      descEl.style.opacity = '1';
+      descEl.style.transform = 'translateY(0)';
+
+      let charIndex = 0;
+      descEl.innerHTML = '<span class="typed-content"></span><span class="typing-cursor">|</span>';
+      const typedSpan = descEl.querySelector('.typed-content');
+
+      typingTimers[cardId] = setInterval(() => {
+        if (charIndex < fullText.length) {
+          typedSpan.textContent += fullText.charAt(charIndex);
+          charIndex++;
+        } else {
+          clearInterval(typingTimers[cardId]);
+          const cursor = descEl.querySelector('.typing-cursor');
+          if (cursor) cursor.style.display = 'none';
+        }
+      }, 16);
+    }
+
+    function stopTyping() {
+      if (typingTimers[cardId]) {
+        clearInterval(typingTimers[cardId]);
+      }
+      descEl.style.opacity = '0';
+      descEl.style.transform = 'translateY(12px)';
+      const fullText = descEl.getAttribute('data-fulltext') || getTargetText();
+      descEl.textContent = fullText;
+    }
+
+    // Desktop Mouse Hover
+    card.addEventListener('mouseenter', startTyping);
+    card.addEventListener('mouseleave', stopTyping);
+
+    // Mobile Tap / Click
+    card.addEventListener('click', () => {
+      const isActive = card.classList.contains('active');
+      
+      cards.forEach(c => {
+        c.classList.remove('active');
+        const cId = c.getAttribute('data-card');
+        const cDesc = c.querySelector('.card-desc');
+        if (cDesc && typingTimers[cId]) {
+          clearInterval(typingTimers[cId]);
+          cDesc.style.opacity = '0';
+          cDesc.style.transform = 'translateY(12px)';
+        }
+      });
+
+      if (!isActive) {
+        card.classList.add('active');
+        startTyping();
+      }
+    });
+  });
+}
 
 // Dynamic Cyber Particle Matrix Canvas
 function initHeroParticlesCanvas() {
