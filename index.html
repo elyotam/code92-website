@@ -1,298 +1,294 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl" class="h-full">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Code92 | פתרונות דיגיטליים ברמה בינלאומית</title>
-  <meta name="description" content="אנחנו מספקים פתרון מקיף לפרויקט שלכם - מאסטרטגיה ועד להשקה, עם צוות מקצועי ומנהל פרויקט אישי צמוד שמלווה אותכם בכל התהליך." />
-  
+  <meta name="description" content="Code92 מספקים פתרונות דיגיטליים מתקדמים – אתרים, חנויות, אפליקציות, מערכות ואוטומציות AI שמקדמות אותכם כמה צעדים לפני המתחרים." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="style.css?v=3.0" />
+  <link rel="stylesheet" href="style.css?v=6.0" />
 </head>
-<body class="min-h-full flex flex-col antialiased">
+<body>
 
-  <!-- ====================================================================
-       HEADER 1:1
-       ==================================================================== -->
-  <header class="header">
-    <div class="container">
-      <div class="header-inner">
-        <!-- Logo -->
-        <a aria-label="Code92" class="logo-link" href="#">
-          <span class="logo-text">Code92<span class="logo-dot">.</span></span>
+  <!-- ═══════════════════════════════════════════════════════════════
+       1. SYSTEM IGNITION LOADER
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="loader" id="loader">
+    <div class="loader-flare" id="loaderFlare"></div>
+    <div class="loader-wordmark" id="loaderWordmark">Code92<span class="dot">.</span></div>
+    <div class="loader-status" id="loaderStatus" data-decipher="INITIALIZING QUANTUM CORE...">INITIALIZING QUANTUM CORE...</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       2. THREE.JS WEBGL CANVAS (The Central 3D Visual Universe)
+       ═══════════════════════════════════════════════════════════════ -->
+  <canvas id="webglCanvas" class="webgl-canvas"></canvas>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       3. AMBIENT CURSOR GLOW & INTERACTION RING
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       4. REAL-TIME HUD TELEMETRY BAR (Signature Technical Detail)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="hud-telemetry" id="hudTelemetry">
+    <span class="tel-item" id="telDepth">DEPTH: 18.0m</span>
+    <span class="tel-divider">|</span>
+    <span class="tel-item" id="telFps">60 FPS</span>
+    <span class="tel-divider">|</span>
+    <span class="tel-item" id="telCoords">X: 0.00 Y: 0.00</span>
+    <span class="tel-divider">|</span>
+    <span class="tel-item accent" id="telStatus">CORE: IMPULSE READY</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       5. HUD HEADER
+       ═══════════════════════════════════════════════════════════════ -->
+  <header class="hud-header" id="mainHeader">
+    <div class="header-inner">
+      <a class="logo" href="#">Code92<span class="dot">.</span></a>
+      <div class="hud-status-indicator">
+        <span class="pulse-dot"></span>
+        <span class="hud-status-text" id="hudSystemStatus" data-decipher="CORE ONLINE">CORE ONLINE</span>
+      </div>
+      <div class="header-actions">
+        <button id="langToggleBtn" class="lang-toggle" aria-label="Toggle Language">EN</button>
+        <a href="https://wa.me/972522057074?text=שלום%20Code92!%20אני%20מעוניין%20בפתרון%20דיגיטלי" target="_blank" rel="noopener noreferrer" class="btn-wa-header" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.892c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652a12.062 12.062 0 005.71 1.447h.005c6.582 0 11.945-5.335 11.948-11.892a11.821 11.821 0 00-3.48-8.413z"></path></svg>
         </a>
-
-        <!-- Right Nav Group -->
-        <div class="nav-right">
-          <button id="langToggleBtn" class="lang-btn" aria-label="Toggle Language">EN</button>
-          
-          <a href="https://wa.me/972522057074?text=שלום%20Code92!%20אני%20מעוניין%20בפתרון%20דיגיטלי" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="btn-wa-sq">
-            <svg viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.892c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652a12.062 12.062 0 005.71 1.447h.005c6.582 0 11.945-5.335 11.948-11.892a11.821 11.821 0 00-3.48-8.413z"></path>
-            </svg>
-          </a>
-
-          <a class="btn-rubicon" href="#contact">
-            <span id="navContactBtnText">צרו איתנו קשר</span>
-            <svg viewBox="0 0 25 14" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23.4062 6.91304H1.40625M7.25 12.8261L1.40625 6.91304L7.25 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </a>
-        </div>
+        <a class="btn-cta" href="#contact" id="navContactBtn">
+          <span id="navContactBtnText" data-decipher="צרו קשר">צרו קשר</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- ====================================================================
-       HERO SECTION 1:1 CLEAN
-       ==================================================================== -->
-  <section id="hero" class="hero">
-    <video class="hero-video" autoplay muted loop playsinline preload="auto">
-      <source src="hero-video.mp4" type="video/mp4" />
-    </video>
+  <!-- ═══════════════════════════════════════════════════════════════
+       6. HUD SPATIAL NAVIGATION DOTS
+       ═══════════════════════════════════════════════════════════════ -->
+  <nav class="nav-dots" id="navDots" aria-label="Section navigation">
+    <a href="#hero" class="nav-dot active" data-section="hero">
+      <span class="nav-dot-label" id="navLabelHero">הליבה</span>
+    </a>
+    <a href="#services" class="nav-dot" data-section="services">
+      <span class="nav-dot-label" id="navLabelServices">ממשקים</span>
+    </a>
+    <a href="#metrics" class="nav-dot" data-section="metrics">
+      <span class="nav-dot-label" id="navLabelMetrics">אימפקט</span>
+    </a>
+    <a href="#contact" class="nav-dot" data-section="contact">
+      <span class="nav-dot-label" id="navLabelContact">חיבור</span>
+    </a>
+  </nav>
 
-    <div class="hero-gradient" aria-hidden="true"></div>
+  <!-- ═══════════════════════════════════════════════════════════════
+       7. SPATIAL CONTENT SCENES
+       ═══════════════════════════════════════════════════════════════ -->
+  <main class="spatial-world">
 
-    <div class="container hero-content">
-      <div class="hero-text-block">
-        <h1 class="h1-rubicon" id="heroHeadline">
-          <span class="border-b-line">פתרונות דיגיטליים</span>
-          <span class="border-b-line">לאנשים שרוצים</span>
-          <span class="border-b-line">לייצר <span class="text-brand">תוצאות</span></span>
+    <!-- ── SCENE 1: THE QUANTUM HERO ───────────────────────────── -->
+    <section id="hero" class="spatial-scene hero-scene">
+      <div class="scene-content">
+        <h1 class="kinetic-title" id="heroTitle">
+          <span class="title-line line-1" id="heroLine1" data-decipher="פתרונות דיגיטליים">פתרונות דיגיטליים</span>
+          <span class="title-line line-2" id="heroLine2" data-decipher="לאנשים שרוצים">לאנשים שרוצים</span>
+          <span class="title-line line-3 accent" id="heroLine3" data-decipher="לייצר תוצאות">לייצר תוצאות</span>
         </h1>
-
-        <p class="hero-desc" id="heroSubtitle">
-          בניית אתרים, חנויות אונליין, אפליקציות, מערכות ואוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       PROCESS SECTION ("פרימיום במחיר הגיוני: איך זה עובד?") 1:1
-       ==================================================================== -->
-  <section id="process" class="process-section">
-    <div class="container">
-      <div class="process-title" id="processTitle">
-        <p class="border-b-line" style="color:#cfcfcf;font-weight:300">איך אנחנו הופכים רעיון</p>
-        <p class="border-b-line text-brand">לפתרון שמייצר תוצאות</p>
+        <p class="hero-sub" id="heroSub">בניית אתרים, חנויות אונליין, אפליקציות, מערכות ואוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.</p>
+        <div class="hero-cta-wrap">
+          <a class="hero-cta" href="#contact" id="heroCta">
+            <span id="heroCtaText">צרו איתנו קשר</span>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.75 9H2.25M8.25 15L2.25 9l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
       </div>
 
-      <div class="process-grid">
-        <div class="process-card" data-card="1">
-          <div class="plus-btn">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3.5v17M3.5 12h17" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
-          </div>
-          <span class="card-num" id="pCardNum1">1</span>
-          <p class="card-heading" id="pCardHead1">אסטרטגיה ואפיון</p>
-          <p class="card-desc" id="pCardDesc1" data-fulltext="איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים">איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים</p>
-          
-          <!-- 3D Graphic Badge 01 -->
-          <div class="card-3d-badge">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
-                </linearGradient>
-                <linearGradient id="glass1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
-                </linearGradient>
-                <filter id="glow1" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <path d="M60 15 L105 38 L60 61 L15 38 Z" fill="url(#glass1)" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
-              <path d="M60 35 L105 58 L60 81 L15 58 Z" fill="url(#glass1)" stroke="url(#grad1)" stroke-width="1.5"/>
-              <path d="M60 55 L105 78 L60 101 L15 78 Z" fill="url(#grad1)" stroke="#00e676" stroke-width="2" filter="url(#glow1)"/>
-              <line x1="60" y1="25" x2="60" y2="75" stroke="#00e676" stroke-width="2" stroke-dasharray="3 3"/>
-              <circle cx="60" cy="25" r="5" fill="#00e676" filter="url(#glow1)"/>
-              <circle cx="82" cy="48" r="4" fill="#ffffff" fill-opacity="0.8"/>
-              <circle cx="38" cy="48" r="4" fill="#ffffff" fill-opacity="0.8"/>
-            </svg>
-          </div>
+      <div class="scroll-indicator" id="scrollIndicator">
+        <div class="scroll-dot"></div>
+        <div class="scroll-line"></div>
+        <span class="scroll-txt" id="scrollTxt" data-decipher="CLICK CORE TO IMPULSE // SCROLL TO WARP">CLICK CORE TO IMPULSE // SCROLL TO WARP</span>
+      </div>
+    </section>
+
+    <!-- ── SCENE 2: SPATIAL CORE SATELLITE EXPLORER (Services) ── -->
+    <section id="services" class="spatial-scene services-scene">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="hud-tag" id="servicesLabel" data-decipher="ORBITAL SATELLITES // 04">ORBITAL SATELLITES // 04</span>
+          <h2 class="section-title" id="servicesTitle">איך אנחנו הופכים רעיון<br><strong>לפתרון שמייצר תוצאות</strong></h2>
         </div>
 
-        <div class="process-card" data-card="2">
-          <div class="plus-btn">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3.5v17M3.5 12h17" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
-          </div>
-          <span class="card-num" id="pCardNum2">2</span>
-          <p class="card-heading" id="pCardHead2">פיתוח אתרים ומערכות Web</p>
-          <p class="card-desc" id="pCardDesc2" data-fulltext="בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות">בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות</p>
-          
-          <!-- 3D Graphic Badge 02 -->
-          <div class="card-3d-badge">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
-                </linearGradient>
-                <linearGradient id="glass2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
-                </linearGradient>
-                <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <rect x="25" y="45" width="75" height="55" rx="6" fill="url(#grad2)" stroke="#00e676" stroke-width="1.5" filter="url(#glow2)"/>
-              <rect x="15" y="25" width="80" height="58" rx="6" fill="url(#glass2)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
-              <circle cx="27" cy="34" r="2.5" fill="#00e676"/>
-              <circle cx="35" cy="34" r="2.5" fill="#ffffff" fill-opacity="0.6"/>
-              <circle cx="43" cy="34" r="2.5" fill="#ffffff" fill-opacity="0.6"/>
-              <line x1="15" y1="42" x2="95" y2="42" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1"/>
-              <path d="M42 52 L34 60 L42 68" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M68 52 L76 60 L68 68" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <line x1="60" y1="50" x2="50" y2="70" stroke="#00e676" stroke-width="2" stroke-linecap="round" filter="url(#glow2)"/>
-            </svg>
-          </div>
-        </div>
+        <!-- 3D Orbital Satellites Deck -->
+        <div class="orbital-satellites-deck" id="satellitesDeck">
+          <!-- Satellite 1 -->
+          <article class="satellite-card" data-node="1" id="node1">
+            <div class="sat-header">
+              <span class="sat-code">SAT // 01</span>
+              <span class="sat-ping"></span>
+            </div>
+            <div class="sat-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M24 4L44 16V32L24 44L4 32V16L24 4Z"/>
+                <path d="M24 4V44M4 16L44 16M4 32L24 20L44 32"/>
+              </svg>
+            </div>
+            <h3 class="sat-title" id="svcTitle1" data-decipher="אסטרטגיה ואפיון">אסטרטגיה ואפיון</h3>
+            <p class="sat-desc" id="svcDesc1">איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים.</p>
+            <div class="sat-footer">
+              <span class="sat-status">ACTIVE NODE</span>
+              <span class="sat-arrow">→</span>
+            </div>
+          </article>
 
-        <div class="process-card" data-card="3">
-          <div class="plus-btn">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3.5v17M3.5 12h17" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
-          </div>
-          <span class="card-num" id="pCardNum3">3</span>
-          <p class="card-heading" id="pCardHead3">אוטומציות AI ואפליקציות מותאמות</p>
-          <p class="card-desc" id="pCardDesc3" data-fulltext="פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7">פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7</p>
-          
-          <!-- 3D Graphic Badge 03 -->
-          <div class="card-3d-badge">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
-                </linearGradient>
-                <linearGradient id="glass3" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
-                </linearGradient>
-                <filter id="glow3" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <rect x="35" y="18" width="50" height="84" rx="10" fill="url(#glass3)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
-              <line x1="52" y1="24" x2="68" y2="24" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
-              <rect x="44" y="42" width="32" height="32" rx="6" fill="url(#grad3)" stroke="#00e676" stroke-width="1.5" filter="url(#glow3)"/>
-              <path d="M60 48 L60 68 M50 60 L70 60" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="60" cy="60" r="4" fill="#ffffff"/>
-              <circle cx="44" cy="50" r="2" fill="#00e676"/>
-              <circle cx="76" cy="50" r="2" fill="#00e676"/>
-              <circle cx="44" cy="70" r="2" fill="#00e676"/>
-              <circle cx="76" cy="70" r="2" fill="#00e676"/>
-            </svg>
-          </div>
-        </div>
+          <!-- Satellite 2 -->
+          <article class="satellite-card" data-node="2" id="node2">
+            <div class="sat-header">
+              <span class="sat-code">SAT // 02</span>
+              <span class="sat-ping"></span>
+            </div>
+            <div class="sat-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="4" y="8" width="40" height="32" rx="4"/>
+                <line x1="4" y1="16" x2="44" y2="16"/>
+                <path d="M18 26L14 30L18 34M30 26L34 30L30 34"/>
+              </svg>
+            </div>
+            <h3 class="sat-title" id="svcTitle2" data-decipher="פיתוח אתרים ומערכות Web">פיתוח אתרים ומערכות Web</h3>
+            <p class="sat-desc" id="svcDesc2">בניית אתרים יוקרתיים, חנויות E-commerce ומערכות Web מתקדמות ברמה בינלאומית עם ביצועים יוצאי דופן.</p>
+            <div class="sat-footer">
+              <span class="sat-status">ACTIVE NODE</span>
+              <span class="sat-arrow">→</span>
+            </div>
+          </article>
 
-        <div class="process-card" data-card="4">
-          <div class="plus-btn">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3.5v17M3.5 12h17" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
+          <!-- Satellite 3 -->
+          <article class="satellite-card" data-node="3" id="node3">
+            <div class="sat-header">
+              <span class="sat-code">SAT // 03</span>
+              <span class="sat-ping"></span>
+            </div>
+            <div class="sat-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="24" cy="24" r="8"/>
+                <circle cx="24" cy="6" r="3"/>
+                <circle cx="24" cy="42" r="3"/>
+                <circle cx="6" cy="24" r="3"/>
+                <circle cx="42" cy="24" r="3"/>
+                <line x1="24" y1="9" x2="24" y2="16"/>
+                <line x1="24" y1="32" x2="24" y2="39"/>
+                <line x1="9" y1="24" x2="16" y2="24"/>
+                <line x1="32" y1="24" x2="39" y2="24"/>
+              </svg>
+            </div>
+            <h3 class="sat-title" id="svcTitle3" data-decipher="אוטומציות AI ואפליקציות">אוטומציות AI ואפליקציות</h3>
+            <p class="sat-desc" id="svcDesc3">פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7.</p>
+            <div class="sat-footer">
+              <span class="sat-status">ACTIVE NODE</span>
+              <span class="sat-arrow">→</span>
+            </div>
+          </article>
+
+          <!-- Satellite 4 -->
+          <article class="satellite-card" data-node="4" id="node4">
+            <div class="sat-header">
+              <span class="sat-code">SAT // 04</span>
+              <span class="sat-ping"></span>
+            </div>
+            <div class="sat-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M24 12L36 20V36C36 40 24 44 24 44C24 44 12 40 12 36V20L24 12Z"/>
+                <path d="M18 28L22 32L30 24"/>
+              </svg>
+            </div>
+            <h3 class="sat-title" id="svcTitle4" data-decipher="Cloud, אבטחה וצמיחה">Cloud, אבטחה וצמיחה</h3>
+            <p class="sat-desc" id="svcDesc4">תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן — המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן.</p>
+            <div class="sat-footer">
+              <span class="sat-status">ACTIVE NODE</span>
+              <span class="sat-arrow">→</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SCENE 3: ENERGY ACCELERATOR (Metrics) ───────────────── -->
+    <section id="metrics" class="spatial-scene metrics-scene">
+      <div class="container">
+        <div class="metrics-grid">
+          <div class="metric-card" data-target="150" data-suffix="+">
+            <span class="metric-val" id="metricNum1">0</span><span class="metric-suf">+</span>
+            <span class="metric-lbl" id="metricLabel1" data-decipher="פרויקטים שהושלמו">פרויקטים שהושלמו</span>
           </div>
-          <span class="card-num" id="pCardNum4">4</span>
-          <p class="card-heading" id="pCardHead4">מעטפת Cloud אבטחה וצמיחה מתמדת</p>
-          <p class="card-desc" id="pCardDesc4" data-fulltext="תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן">תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן</p>
-          
-          <!-- 3D Graphic Badge 04 -->
-          <div class="card-3d-badge">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
-                </linearGradient>
-                <linearGradient id="glass4" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
-                </linearGradient>
-                <filter id="glow4" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <path d="M30 65 C25 65 20 60 20 52 C20 45 26 40 33 40 C36 32 45 28 55 30 C63 25 74 28 80 35 C88 36 94 43 93 51 C98 55 97 65 90 67 Z" fill="url(#glass4)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
-              <path d="M60 48 L78 56 V72 C78 84 60 92 60 92 C60 92 42 84 42 72 V56 L60 48 Z" fill="url(#grad4)" stroke="#00e676" stroke-width="1.5" filter="url(#glow4)"/>
-              <path d="M60 58 L65 67 L60 65 L55 67 Z" fill="#ffffff"/>
-              <circle cx="60" cy="72" r="3" fill="#ffffff" fill-opacity="0.8"/>
-            </svg>
+          <div class="metric-card" data-target="99.9" data-suffix="%" data-decimals="1">
+            <span class="metric-val" id="metricNum2">0</span><span class="metric-suf">%</span>
+            <span class="metric-lbl" id="metricLabel2" data-decipher="Uptime SLA">Uptime SLA</span>
+          </div>
+          <div class="metric-card" data-target="24" data-suffix="/7">
+            <span class="metric-val" id="metricNum3">0</span><span class="metric-suf">/7</span>
+            <span class="metric-lbl" id="metricLabel3" data-decipher="תמיכה וניטור">תמיכה וניטור</span>
+          </div>
+          <div class="metric-card" data-target="80" data-suffix="%">
+            <span class="metric-val" id="metricNum4">0</span><span class="metric-suf">%</span>
+            <span class="metric-lbl" id="metricLabel4" data-decipher="חיסכון בזמן עם AI">חיסכון בזמן עם AI</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ====================================================================
-       FOOTER & CONTACT FORM 1:1
-       ==================================================================== -->
-  <footer id="contact" class="footer-contact-section">
-    <div class="container">
-      <div class="contact-layout">
-        <div>
-          <h2 class="contact-title" id="contactTitle">
-            <span class="border-b-line">רוצים לשמוע עוד?</span>
-            <span class="border-b-line text-brand">צרו איתנו קשר</span>
-          </h2>
-          <p style="font-size:20px;color:#878787;margin-top:24px;text-align:start" id="contactSubtitle">
-            השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.
-          </p>
-        </div>
+    <!-- ── SCENE 4: CONTAINMENT PORTAL (Contact) ───────────────── -->
+    <section id="contact" class="spatial-scene contact-scene">
+      <div class="container">
+        <div class="contact-layout">
+          <div class="contact-text">
+            <h2 class="contact-title" id="contactTitle">רוצים לשמוע עוד?<br><strong id="contactTitleStrong">צרו איתנו קשר</strong></h2>
+            <p class="contact-subtitle" id="contactSubtitle">השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.</p>
+          </div>
 
-        <div class="form-box">
-          <form id="rubiconContactForm">
+          <div class="form-box">
+            <form id="rubiconContactForm">
               <div class="form-field">
                 <label for="name" id="lblFullname">שם מלא *</label>
                 <input type="text" id="name" required placeholder="שם מלא" />
               </div>
-
               <div class="form-field">
                 <label for="phone" id="lblPhone">טלפון *</label>
                 <input type="tel" id="phone" required placeholder="052-2057074" />
               </div>
-
               <div class="form-field">
                 <label for="email" id="lblEmail">אימייל *</label>
                 <input type="email" id="email" required placeholder="name@company.com" />
               </div>
-
-            <div class="form-field">
-              <label for="message" id="lblMsg">הודעה</label>
-              <textarea id="message" rows="4" placeholder="איך נוכל לעזור?"></textarea>
-            </div>
-
-            <button type="submit" class="btn-rubicon" style="width:100%;background-color:var(--brand-red)">
-              <span id="btnSubmitTxt">שליחה</span>
-              <svg viewBox="0 0 25 14" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-                <path d="M23.4062 6.91304H1.40625M7.25 12.8261L1.40625 6.91304L7.25 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </button>
-          </form>
+              <div class="form-field">
+                <label for="message" id="lblMsg">הודעה</label>
+                <textarea id="message" rows="4" placeholder="איך נוכל לעזור?"></textarea>
+              </div>
+              <button type="submit" class="btn-submit">
+                <span id="btnSubmitTxt">שליחה</span>
+                <svg viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 5H1M5 9L1 5l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="copyright-bar" id="copyrightBar">
-        © Code92 · כל הזכויות שמורות ליותם כהן
-      </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       8. FOOTER
+       ═══════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text" id="copyrightBar">© Code92 · כל הזכויות שמורות ליותם כהן</p>
     </div>
   </footer>
 
-  <!-- ====================================================================
-       HUMAN SALES REPRESENTATIVE CHATBOT
-       ==================================================================== -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       9. SALES BOT WIDGET (100% Preserved)
+       ═══════════════════════════════════════════════════════════════ -->
   <div class="sales-bot-widget">
     <div class="sales-chat-panel" id="salesChatPanel">
       <div class="chat-rep-header">
@@ -301,32 +297,37 @@
           <div>
             <div class="rep-name-title" id="repName">עידו מ-Code92</div>
             <div class="rep-status-sub">
-              <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block"></span>
+              <span style="width:7px;height:7px;border-radius:50%;background:#10b981;display:inline-block"></span>
               <span id="repStatusTxt">מחובר/ת כעת לשיחה</span>
             </div>
           </div>
         </div>
         <button class="chat-close-btn" id="salesChatClose" aria-label="Close">&times;</button>
       </div>
-
       <div class="chat-messages-body" id="salesChatMessages"></div>
-
       <div class="chat-quick-opts" id="salesChatOpts"></div>
-
       <div class="chat-input-container">
         <input type="text" id="salesChatInput" placeholder="הקלד/י הודעה או מספר טלפון..." />
-        <button class="chat-send-btn" id="salesChatSend"><i class="fa fa-paper-plane"></i></button>
+        <button class="chat-send-btn" id="salesChatSend" aria-label="Send">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
       </div>
     </div>
 
     <button class="bot-fab-btn" id="salesChatFab" aria-label="Sales Chat">
       <span class="bot-online-badge"></span>
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="currentColor"/>
       </svg>
     </button>
   </div>
 
-  <script src="main.js?v=3.0"></script>
+  <!-- ═══════════════════════════════════════════════════════════════
+       SCRIPTS: THREE.JS + GSAP + MAIN
+       ═══════════════════════════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js?v=6.0"></script>
 </body>
 </html>
