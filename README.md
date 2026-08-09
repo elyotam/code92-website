@@ -1,10 +1,10 @@
-# ELYOTAM · פתרונות דיגיטליים מתקדמים 🚀
+# Code92 · פתרונות דיגיטליים מתקדמים 🚀
 
-![ELYOTAM Website](https://img.shields.io/badge/Status-Live%20Online-00E676?style=for-the-badge&logo=github)
+![Code92 Website](https://img.shields.io/badge/Status-Live%20Online-00E676?style=for-the-badge&logo=github)
 ![Tech Stack](https://img.shields.io/badge/Tech%20Stack-HTML5%20%7C%20CSS3%20%7C%20JS%20ES6+-060608?style=for-the-badge)
 ![Owner](https://img.shields.io/badge/Owner-Yotam%20Cohen%20%7C%20052--2057074-00E676?style=for-the-badge)
 
-**ELYOTAM (`ELYOTAM.`)** היא סוכנות פרימיום לבניית אתרים, חנויות E-commerce, אפליקציות מותאמות, מערכות Web מתקדמות ואוטומציות AI שמקדמות את העסק שלכם כמה צעדים לפני המתחרים.
+**Code92 (`Code92.`)** היא סוכנות פרימיום לבניית אתרים, חנויות E-commerce, אפליקציות מותאמות, מערכות Web מתקדמות ואוטומציות AI שמקדמות את העסק שלכם כמה צעדים לפני המתחרים.
 
 ---
 
@@ -36,7 +36,7 @@
 
 * **בעלים:** יותם כהן (Yotam Cohen)
 * **טלפון / WhatsApp:** [052-2057074](https://wa.me/972522057074)
-* **זכויות יוצרים:** © ELYOTAM · כל הזכויות שמורות ליותם כהן
+* **זכויות יוצרים:** © Code92 · כל הזכויות שמורות ליותם כהן
 
 ---
-*Built with excellence by ELYOTAM.*
+*Built with excellence by Code92.*

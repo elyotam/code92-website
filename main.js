@@ -1,6 +1,6 @@
 /**
- * ELYOTAM 1:1 EXACT CLONE — main.js v35.0
- * Company: ELYOTAM
+ * Code92 — main.js v35.0
+ * Company: Code92
  * Owner: יותם כהן (Yotam Cohen) | 052-2057074
  * Dual Language Translation & Human Sales Representative Chatbot (5 Core Services + Live Typing Indicator)
  */
@@ -39,7 +39,7 @@ const DICT = {
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'איך נוכל לעזור?',
     btnSubmitTxt: 'שליחה',
-    copyright: '© ELYOTAM · כל הזכויות שמורות ליותם כהן',
+    copyright: '© Code92 · כל הזכויות שמורות ליותם כהן',
 
     // Bot Translations
     botStatus: 'מחובר/ת כעת לשיחה',
@@ -674,8 +674,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const text = encodeURIComponent(
-        `שלום ליותם כהן (ELYOTAM)! 👋\n\n` +
-        `פנייה חדשה מאתר ELYOTAM:\n` +
+        `שלום ליותם כהן (Code92)! 👋\n\n` +
+        `פנייה חדשה מאתר Code92:\n` +
         `👤 שם: ${name}\n` +
         `📞 טלפון: ${phone}\n` +
         `✉️ אימייל: ${email}\n` +
