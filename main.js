@@ -144,14 +144,14 @@ const DICT = {
 
 let currentLang = 'he';
 
-// Human Representatives Pool (Male & Female Icons)
+// Human Representatives Pool (Updated with Dana, Guy, Ahuvit, Ido, Aviv, Karin)
 const SALES_REPS = [
-  { name: 'ענבל', gender: 'female', icon: '👩‍💼', enName: 'Inbal' },
+  { name: 'דנה', gender: 'female', img: 'assets/rep_dana.png', icon: '👩‍💼', enName: 'Dana' },
+  { name: 'גיא', gender: 'male', icon: '👨‍💼', enName: 'Guy' },
+  { name: 'אהובית', gender: 'female', img: 'assets/rep_ahuvit.png', icon: '👩‍💼', enName: 'Ahuvit' },
   { name: 'עידו', gender: 'male', icon: '👨‍💼', enName: 'Ido' },
-  { name: 'שירה', gender: 'female', icon: '👩‍💼', enName: 'Shira' },
-  { name: 'דניאל', gender: 'male', icon: '👨‍💼', enName: 'Daniel' },
-  { name: 'רוני', gender: 'female', icon: '👩‍💼', enName: 'Roni' },
-  { name: 'אלון', gender: 'male', icon: '👨‍💼', enName: 'Alon' }
+  { name: 'אביב', gender: 'male', icon: '👨‍💼', enName: 'Aviv' },
+  { name: 'קארין', gender: 'female', img: 'assets/rep_karin.png', icon: '👩‍💼', enName: 'Karin' }
 ];
 
 let activeRep = null;
@@ -231,9 +231,14 @@ function initHumanSalesBot() {
   function renderRepInfo() {
     const isHe = currentLang === 'he';
     if (avatar) {
-      avatar.innerHTML = activeRep.icon;
-      avatar.style.fontSize = '1.35rem';
-      avatar.style.backgroundColor = activeRep.gender === 'female' ? '#db2777' : 'var(--brand-red)';
+      if (activeRep.img) {
+        avatar.innerHTML = `<img src="${activeRep.img}" alt="${activeRep.name}" class="rep-avatar-img" />`;
+        avatar.style.backgroundColor = 'transparent';
+      } else {
+        avatar.innerHTML = activeRep.icon;
+        avatar.style.fontSize = '1.35rem';
+        avatar.style.backgroundColor = activeRep.gender === 'female' ? '#db2777' : 'var(--brand-red)';
+      }
     }
     if (nameEl) nameEl.textContent = isHe ? `${activeRep.name} מ-Code92` : `${activeRep.enName} from Code92`;
     if (statusEl) statusEl.textContent = DICT[currentLang].botStatus;
