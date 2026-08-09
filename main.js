@@ -150,7 +150,7 @@ const SALES_REPS = [
   { name: 'גיא', gender: 'male', img: 'assets/rep_guy.jpg', icon: '👨‍💼', enName: 'Guy' },
   { name: 'אהובית', gender: 'female', img: 'assets/rep_ahuvit.png', icon: '👩‍💼', enName: 'Ahuvit' },
   { name: 'עידו', gender: 'male', icon: '👨‍💼', enName: 'Ido' },
-  { name: 'אביב', gender: 'male', icon: '👨‍💼', enName: 'Aviv' },
+  { name: 'אביב', gender: 'male', img: 'assets/rep_aviv.png', icon: '👨‍💼', enName: 'Aviv' },
   { name: 'קארין', gender: 'female', img: 'assets/rep_karin.png', icon: '👩‍💼', enName: 'Karin' }
 ];
 
