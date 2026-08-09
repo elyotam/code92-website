@@ -146,7 +146,7 @@ let currentLang = 'he';
 
 // Human Representatives Pool (Updated with Dana, Guy, Ahuvit, Ido, Aviv, Karin)
 const SALES_REPS = [
-  { name: 'דנה', gender: 'female', img: 'assets/rep_dana.png', icon: '👩‍💼', enName: 'Dana' },
+  { name: 'דנה', gender: 'female', img: 'assets/rep_dana.jpg', icon: '👩‍💼', enName: 'Dana' },
   { name: 'גיא', gender: 'male', img: 'assets/rep_guy.jpg', icon: '👨‍💼', enName: 'Guy' },
   { name: 'אהובית', gender: 'female', img: 'assets/rep_ahuvit.jpg', icon: '👩‍💼', enName: 'Ahuvit' },
   { name: 'עידו', gender: 'male', img: 'assets/rep_ido.png', icon: '👨‍💼', enName: 'Ido' },
