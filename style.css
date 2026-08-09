@@ -1,7 +1,8 @@
 /* ================================================================
-   CODE92 — CODE BECOMES REALITY Spatial System v8.0
+   CODE92 — BENEATH THE SURFACE Spatial Design System v9.0
    Brand Owner: יותם כהן (Yotam Cohen) | 052-2057074
-   Visual Narrative: SOURCE -> COMPILE -> BUILD -> DEPLOY -> SCALE
+   Master Concept: WHAT PEOPLE SEE IS ONLY THE SURFACE.
+                   CODE92 BUILDS EVERYTHING UNDERNEATH IT.
    ================================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -9,12 +10,12 @@
 /* ── Root Design Tokens ────────────────────────────────────────── */
 :root {
   /* Atmosphere */
-  --bg-source:      #000003;
+  --bg-surface:     #000003;
   --bg-deep:        #020206;
   --bg-warm:        #06060a;
   --bg-glass-card:  rgba(255, 255, 255, 0.02);
 
-  /* CODE92 Core Colors */
+  /* CODE92 Core Palette */
   --emerald:       #00e676;
   --emerald-dim:   #00c853;
   --emerald-glow:  rgba(0, 230, 118, 0.5);
@@ -63,12 +64,12 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
-  background: var(--bg-source);
+  background: var(--bg-surface);
 }
 
 body {
   font-family: var(--font-hebrew);
-  background: var(--bg-source);
+  background: var(--bg-surface);
   color: var(--text-bright);
   line-height: 1.6;
   overflow-x: hidden;
@@ -81,13 +82,13 @@ img, video { max-width: 100%; display: block; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-source); }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 230, 118, 0.3);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--emerald); }
-html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-source); }
+html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-surface); }
 
 .container {
   width: 100%;
@@ -98,7 +99,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
 
 .text-center { text-align: center; }
 
-/* ── 1. Three.js Canvas Layer ──────────────────────────────────── */
+/* ── 1. Three.js Canvas Layer (Digital Matter Universe) ────────── */
 .webgl-canvas {
   position: fixed;
   top: 0;
@@ -109,7 +110,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   z-index: 1;
 }
 
-/* ── 2. Cursor Glow & Inspection Ring ──────────────────────────── */
+/* ── 2. Cursor Glow & Digital X-Ray Ring ───────────────────────── */
 .cursor-glow {
   position: fixed;
   top: 0;
@@ -140,13 +141,18 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   z-index: 999;
   opacity: 0;
   transform: translate(-16px, -16px);
-  transition: transform 0.08s linear, opacity 0.4s;
+  transition: transform 0.08s linear, opacity 0.4s, border-color var(--dur);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .cursor-ring.active { opacity: 0.7; }
+
+.cursor-ring.xray-mode {
+  border-color: var(--cyan-accent);
+  box-shadow: 0 0 16px var(--cyan-glow);
+}
 
 .cursor-state {
   font-family: var(--font-mono);
@@ -156,7 +162,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   display: none;
 }
 
-/* ── 3. HUD Telemetry Bar (Compiler Readout) ───────────────────── */
+/* ── 3. HUD Telemetry & X-Ray Readout Bar ──────────────────────── */
 .hud-telemetry {
   position: fixed;
   bottom: 20px;
@@ -179,7 +185,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
 .tel-divider { color: var(--border-subtle); }
 .tel-item.accent { color: var(--emerald); }
 
-/* ── 4. C92://INITIALIZING Loader ──────────────────────────────── */
+/* ── 4. C92://BENEATH_THE_SURFACE Loader ───────────────────────── */
 .loader {
   position: fixed;
   inset: 0;
@@ -444,7 +450,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   transform: translateX(0);
 }
 
-/* ── 7. Spatial World & Scenes ─────────────────────────────────── */
+/* ── 7. Spatial World & Depth Scenes ───────────────────────────── */
 .spatial-world {
   position: relative;
   z-index: 2;
@@ -507,7 +513,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   font-weight: 300;
   line-height: 1.7;
   color: var(--text-mid);
-  max-width: 640px;
+  max-width: 660px;
   margin: 0 auto 48px;
   opacity: 0;
   transform: translateY(30px);
@@ -593,12 +599,12 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   color: var(--text-dim);
 }
 
-/* ── 5 EXECUTABLE MODULE SCENES STYLING ────────────────────────── */
-.module-scene {
+/* ── 5 DEPTH LAYER SCENES STYLING ──────────────────────────────── */
+.layer-scene {
   text-align: center;
 }
 
-.module-code-badge {
+.layer-hud-badge {
   display: inline-block;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -611,7 +617,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   margin-bottom: 24px;
 }
 
-.module-title {
+.layer-title {
   font-family: var(--font-mono);
   font-size: clamp(34px, 5.8vw, 62px);
   font-weight: 700;
@@ -620,7 +626,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   margin-bottom: 20px;
 }
 
-.module-desc {
+.layer-desc {
   font-size: clamp(16px, 2.2vw, 20px);
   font-weight: 300;
   color: var(--text-mid);
@@ -678,7 +684,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   color: var(--text-mid);
 }
 
-/* ── STABILIZED DEPLOYMENT PORTAL (CONTACT) ────────────────────── */
+/* ── THE CODE92 BIG REVEAL (CONTACT) ──────────────────────────── */
 .contact-scene {
   background: var(--bg-warm);
 }
@@ -697,9 +703,9 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
 
 .contact-title {
   font-family: var(--font-hebrew);
-  font-size: clamp(32px, 4.5vw, 52px);
+  font-size: clamp(28px, 4.2vw, 48px);
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.35;
   color: var(--text-bright);
   margin-bottom: 20px;
 }
@@ -716,7 +722,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
 }
 
 .contact-subtitle {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 400;
   color: var(--text-mid);
   line-height: 1.7;
@@ -807,7 +813,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   position: relative;
   z-index: 2;
   padding: 32px 0;
-  background: var(--bg-source);
+  background: var(--bg-surface);
   border-top: 1px solid var(--border-ghost);
   text-align: center;
 }

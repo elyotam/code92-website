@@ -1,15 +1,15 @@
 /**
- * CODE92 — main.js v8.0
- * CODE BECOMES REALITY: Source -> Compile -> Build -> Deploy -> Scale Engine
+ * CODE92 — main.js v9.0
+ * BENEATH THE SURFACE Engine — Digital Matter Spatial System
  * Owner: יותם כהן (Yotam Cohen) | 052-2057074
  * 
  * Signature Mechanics:
- * 1. CodeCompilerEngine (Three.js WebGL: AST Nodes, Wireframes, Geometry Compilation)
- * 2. Source <-> Reality Pointer Scrubbing: Horizontal mouse X position scrubs raw syntax to compiled UI
- * 3. Signature REALITY DECOMPILATION: Hovering elements reveals underlying wireframe & coordinate skeleton
- * 4. 5 Executable Program Modules: WEB -> APPS -> COMMERCE -> DEVOPS -> AI -> build_next() Collapse
- * 5. C92://INITIALIZING Opening Sequence (5s)
- * 6. Cybernetic Decipher Animation Engine
+ * 1. DigitalMatterEngine (Three.js WebGL procedural Digital Matter)
+ * 2. Mouse Pointer State Scrubbing: Horizontal mouse X scrubs Digital Matter across WEB <-> APPS <-> COMMERCE <-> DEVOPS <-> AI
+ * 3. Signature DIGITAL X-RAY Interaction: Hovering elements triggers 250ms wireframe & API connection skeleton reveal
+ * 4. 5 Depth Layers: SURFACE (WEB) -> PRODUCT (APPS) -> COMMERCE -> DEVOPS -> AI -> THE CODE92 BIG REVEAL
+ * 5. C92://BENEATH_THE_SURFACE Opening Sequence (5s)
+ * 6. Cybernetic Decipher Text Engine
  * 7. Preserved Dual-Language Engine & Human Sales Bot Widget
  */
 'use strict';
@@ -23,30 +23,30 @@ const DICT = {
   he: {
     langBtn: 'EN',
     navContactBtnText: 'מתחילים פרויקט',
-    hudSystemStatus: 'SYSTEM // EXECUTING',
-    heroLine1: 'אנחנו כותבים',
-    heroLine2: 'את מה שאחרים',
-    heroLine3: 'רק מדמיינים.',
-    heroSub: 'אתרים, אפליקציות, מסחר דיגיטלי, תשתיות DevOps ופתרונות AI מתקדמים <strong>הנבנים מקוד למציאות פועלת</strong>.',
+    hudSystemStatus: 'SYSTEM // ACTIVE',
+    heroLine1: 'מה שאתם רואים',
+    heroLine2: 'זה רק השכבה',
+    heroLine3: 'הראשונה.',
+    heroSub: 'אנחנו בונים את מה שרואים. ואת כל מה שמתחת: אתרים, אפליקציות, מסחר דיגיטלי, תשתיות DevOps ופתרונות AI מתקדמים <strong>הפועלים בהרמוניה מלאה</strong>.',
     heroCtaText: 'מתחילים פרויקט',
-    scrollTxt: 'SCRUB HORIZONTALLY: SOURCE ↔ REALITY // SCROLL TO EXECUTE PROGRAM',
-    webTitle: 'STRUCTURE BECOMING EXPERIENCE',
+    scrollTxt: 'SCRUB HORIZONTALLY: TRANSFORMS DIGITAL MATTER // SCROLL TO PENETRATE SURFACE',
+    webTitle: 'WEBSITES & EXPERIENCES',
     webDesc: 'בניית אתרי פרימיום, חנויות אונליין וממשקי Web מתקדמים ברמה בינלאומית עם ביצועים יוצאי דופן.',
-    appsTitle: 'LOGIC BECOMING PRODUCT',
+    appsTitle: 'SOFTWARE ARCHITECTURE & SAAS',
     appsDesc: 'ארכיטקטורת תוכנה, מערכות SaaS ואפליקציות מובייל מותאמות אישית המציגות ממשקי משתמש עוצמתיים.',
-    commerceTitle: 'TRANSACTIONS BECOMING FLOW',
+    commerceTitle: 'TRANSACTIONAL ECOSYSTEMS',
     commerceDesc: 'רשתות מסחר דיגיטליות, סליקה מתקדמת וחנויות E-commerce שנבנות להמרה מקסימלית בטכנולוגיות Next.js.',
-    devopsTitle: 'INFRASTRUCTURE UNDERNEATH REALITY',
+    devopsTitle: 'CLOUD DEVOPS & CLUSTERS',
     devopsDesc: 'טופולוגיות ענן מורכבות (AWS/GCP), ניהול Kubernetes, אבטחת מידע קפדנית ורמת זמינות של 99.99% Uptime SLA.',
-    aiTitle: 'COMPUTATION BECOMING INTELLIGENCE',
+    aiTitle: 'COMPUTATIONAL AI ENGINE',
     aiDesc: 'סוכני AI חכמים, אוטומציות עסקיות ואלגוריתמים המייעלים את מערך המכירות והשירות 24/7 וחוסכים 80% מזמן העבודה.',
     metricLabel1: 'פרויקטים שהושלמו',
     metricLabel2: 'Uptime SLA',
     metricLabel3: 'תמיכה וניטור',
     metricLabel4: 'חיסכון בזמן עם AI',
-    contactTitle: 'יש לכם רעיון?',
-    contactTitleStrong: 'בואו נהפוך אותו למציאות.',
-    contactSub: 'השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.',
+    contactTitle: 'אנחנו לא בונים רק את מה שהלקוחות שלכם רואים.',
+    contactTitleStrong: 'אנחנו בונים את כל מה שגורם לזה לעבוד.',
+    contactSub: 'יש לכם רעיון? בואו נבנה את מה שנמצא מתחתיו.',
     lblFullname: 'שם מלא *',
     lblPhone: 'טלפון *',
     lblEmail: 'אימייל *',
@@ -57,13 +57,13 @@ const DICT = {
     placeholderMsg: 'איך נוכל לעזור?',
     btnSubmitTxt: 'מתחילים פרויקט',
     copyright: '© CODE92 · כל הזכויות שמורות ליותם כהן',
-    navLabelHero: 'SOURCE',
-    navLabelWeb: 'MOD_01',
-    navLabelApps: 'MOD_02',
-    navLabelCommerce: 'MOD_03',
-    navLabelDevops: 'MOD_04',
-    navLabelAi: 'MOD_05',
-    navLabelContact: 'DEPLOY',
+    navLabelHero: 'MATTER',
+    navLabelWeb: 'SURFACE',
+    navLabelApps: 'PRODUCT',
+    navLabelCommerce: 'COMMERCE',
+    navLabelDevops: 'DEVOPS',
+    navLabelAi: 'AI',
+    navLabelContact: 'REVEAL',
     // Bot
     botStatus: 'מחובר/ת כעת לשיחה',
     botTyping: 'מקליד/ה...',
@@ -81,30 +81,30 @@ const DICT = {
   en: {
     langBtn: 'HE',
     navContactBtnText: 'Start Project',
-    hudSystemStatus: 'SYSTEM // EXECUTING',
-    heroLine1: 'We Engineer What',
-    heroLine2: 'Others Only',
-    heroLine3: 'Imagine.',
-    heroSub: 'Websites, mobile apps, E-commerce platforms, DevOps cloud infrastructure and AI systems built from code into working reality.',
+    hudSystemStatus: 'SYSTEM // ACTIVE',
+    heroLine1: 'What You See Is Only',
+    heroLine2: 'The First Surface',
+    heroLine3: 'Layer.',
+    heroSub: 'We build what you see. And everything underneath: websites, mobile apps, E-commerce platforms, DevOps cloud infrastructure and AI systems operating in total harmony.',
     heroCtaText: 'Start Project',
-    scrollTxt: 'SCRUB HORIZONTALLY: SOURCE ↔ REALITY // SCROLL TO EXECUTE PROGRAM',
-    webTitle: 'STRUCTURE BECOMING EXPERIENCE',
+    scrollTxt: 'SCRUB HORIZONTALLY: TRANSFORMS DIGITAL MATTER // SCROLL TO PENETRATE SURFACE',
+    webTitle: 'WEBSITES & EXPERIENCES',
     webDesc: 'Building luxury websites, E-commerce stores and advanced Web applications at international standards with exceptional performance.',
-    appsTitle: 'LOGIC BECOMING PRODUCT',
+    appsTitle: 'SOFTWARE ARCHITECTURE & SAAS',
     appsDesc: 'Software architecture, custom SaaS platforms and native mobile apps engineered for powerful user experiences.',
-    commerceTitle: 'TRANSACTIONS BECOMING FLOW',
+    commerceTitle: 'TRANSACTIONAL ECOSYSTEMS',
     commerceDesc: 'Digital commerce networks, payment routing and high-conversion E-commerce built with Next.js.',
-    devopsTitle: 'INFRASTRUCTURE UNDERNEATH REALITY',
+    devopsTitle: 'CLOUD DEVOPS & CLUSTERS',
     devopsDesc: 'Complex cloud topologies (AWS/GCP), Kubernetes orchestration, cyber security, and 99.99% Uptime SLA.',
-    aiTitle: 'COMPUTATION BECOMING INTELLIGENCE',
+    aiTitle: 'COMPUTATIONAL AI ENGINE',
     aiDesc: 'Intelligent AI agents, business automations and algorithms saving up to 80% manual work with 24/7 reliability.',
     metricLabel1: 'Projects Delivered',
     metricLabel2: 'Uptime SLA',
     metricLabel3: 'Support & Monitoring',
     metricLabel4: 'Time Saved with AI',
-    contactTitle: 'Have an Idea?',
-    contactTitleStrong: 'Let Us Turn It Into Reality.',
-    contactSub: 'Leave your details and we will get back to you shortly with full answers.',
+    contactTitle: 'We do not build only what your customers see.',
+    contactTitleStrong: 'We build everything that powers it.',
+    contactSub: 'Have an idea? Let us build what lies underneath.',
     lblFullname: 'Full Name *',
     lblPhone: 'Phone *',
     lblEmail: 'Email *',
@@ -115,13 +115,13 @@ const DICT = {
     placeholderMsg: 'How can we help?',
     btnSubmitTxt: 'Start Project',
     copyright: '© CODE92 · All Rights Reserved to Yotam Cohen',
-    navLabelHero: 'SOURCE',
-    navLabelWeb: 'MOD_01',
-    navLabelApps: 'MOD_02',
-    navLabelCommerce: 'MOD_03',
-    navLabelDevops: 'MOD_04',
-    navLabelAi: 'MOD_05',
-    navLabelContact: 'DEPLOY',
+    navLabelHero: 'MATTER',
+    navLabelWeb: 'SURFACE',
+    navLabelApps: 'PRODUCT',
+    navLabelCommerce: 'COMMERCE',
+    navLabelDevops: 'DEVOPS',
+    navLabelAi: 'AI',
+    navLabelContact: 'REVEAL',
     // Bot
     botStatus: 'Online Now',
     botTyping: 'typing...',
@@ -156,9 +156,9 @@ let activeRep = null;
 let updateBotUiFn = null;
 
 /* ═══════════════════════════════════════════════════════════════════
-   1. CODE COMPILER ENGINE (Three.js WebGL Architecture)
+   1. DIGITAL MATTER ENGINE (Three.js WebGL Architecture)
    ═══════════════════════════════════════════════════════════════════ */
-class CodeCompilerEngine {
+class DigitalMatterEngine {
   constructor() {
     this.canvas = document.getElementById('webglCanvas');
     if (!this.canvas || typeof THREE === 'undefined') return;
@@ -177,16 +177,16 @@ class CodeCompilerEngine {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
-    this.compileRatio = 0; // 0 = Source (raw code), 0.5 = Compiling, 1.0 = Compiled Reality
+    this.matterState = 0; // 0 = WEB, 0.25 = APPS, 0.50 = COMMERCE, 0.75 = DEVOPS, 1.0 = AI
     this.scrollProgress = 0;
     this.lastFrameTime = performance.now();
     this.frameCount = 0;
     this.fps = 60;
-    this.isDecompiling = false;
+    this.isXrayActive = false;
 
     this.initLights();
-    this.createCompilerObjects();
-    this.createSyntaxParticleCloud();
+    this.createDigitalMatter();
+    this.createSpatialParticleField();
     this.bindEvents();
     this.animate();
   }
@@ -204,11 +204,11 @@ class CodeCompilerEngine {
     this.scene.add(this.cyanLight);
   }
 
-  createCompilerObjects() {
-    this.masterGroup = new THREE.Group();
+  createDigitalMatter() {
+    this.matterGroup = new THREE.Group();
 
-    // ── Source Layer: Raw AST Wireframe Geometries
-    this.wireframeCore = new THREE.Group();
+    // ── Core Architectural Wireframe Skeleton
+    this.wireframeSkeleton = new THREE.Group();
     const innerGeo = new THREE.IcosahedronGeometry(2.8, 2);
     const innerMat = new THREE.MeshBasicMaterial({
       color: 0x00e676,
@@ -216,18 +216,18 @@ class CodeCompilerEngine {
       transparent: true,
       opacity: 0.8
     });
-    this.wireframeCore.add(new THREE.Mesh(innerGeo, innerMat));
+    this.wireframeSkeleton.add(new THREE.Mesh(innerGeo, innerMat));
 
     const ringGeo = new THREE.TorusGeometry(4.2, 0.03, 16, 80);
     const ringMat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.6 });
     const ring = new THREE.Mesh(ringGeo, ringMat);
     ring.rotation.x = Math.PI * 0.35;
-    this.wireframeCore.add(ring);
+    this.wireframeSkeleton.add(ring);
 
-    this.masterGroup.add(this.wireframeCore);
+    this.matterGroup.add(this.wireframeSkeleton);
 
-    // ── Compiled Reality Layer: Solid Polished Geometry Hull
-    this.compiledCore = new THREE.Group();
+    // ── Translucent Polished Hull (The Surface)
+    this.surfaceHull = new THREE.Group();
     const outerGeo = new THREE.DodecahedronGeometry(3.6, 1);
     const outerMat = new THREE.MeshPhongMaterial({
       color: 0x00e676,
@@ -238,15 +238,15 @@ class CodeCompilerEngine {
       transparent: true,
       opacity: 0.15
     });
-    this.compiledMesh = new THREE.Mesh(outerGeo, outerMat);
-    this.compiledCore.add(this.compiledMesh);
+    this.hullMesh = new THREE.Mesh(outerGeo, outerMat);
+    this.surfaceHull.add(this.hullMesh);
 
-    this.masterGroup.add(this.compiledCore);
+    this.matterGroup.add(this.surfaceHull);
 
-    this.scene.add(this.masterGroup);
+    this.scene.add(this.matterGroup);
   }
 
-  createSyntaxParticleCloud() {
+  createSpatialParticleField() {
     const isMobile = window.innerWidth < 768;
     const count = isMobile ? 1000 : 2500;
     const geometry = new THREE.BufferGeometry();
@@ -290,38 +290,48 @@ class CodeCompilerEngine {
       this.mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
     });
 
-    // Signature Interaction: Reality Decompilation Hover Trigger
-    document.querySelectorAll('.module-scene, .hero-cta, .btn-cta, .nav-dot').forEach(el => {
-      el.addEventListener('mouseenter', () => this.triggerDecompilation());
+    // Signature Interaction: DIGITAL X-RAY Hover Trigger
+    document.querySelectorAll('.layer-scene, .hero-cta, .btn-cta, .nav-dot').forEach(el => {
+      el.addEventListener('mouseenter', () => this.triggerXrayMode());
     });
   }
 
-  // Signature Mechanism: 200ms REALITY DECOMPILATION Skeleton Reveal
-  triggerDecompilation() {
-    if (this.isDecompiling) return;
-    this.isDecompiling = true;
+  // Signature Mechanism: 250ms DIGITAL X-RAY Skeleton Reveal
+  triggerXrayMode() {
+    if (this.isXrayActive) return;
+    this.isXrayActive = true;
 
-    if (this.compiledMesh) {
-      this.compiledMesh.material.wireframe = true;
-      this.compiledMesh.material.opacity = 0.8;
+    if (this.hullMesh) {
+      this.hullMesh.material.wireframe = true;
+      this.hullMesh.material.opacity = 0.85;
     }
 
     const cursorRing = document.getElementById('cursorRing');
     const cursorState = document.getElementById('cursorState');
-    if (cursorRing) cursorRing.classList.add('decompiling');
+    const telXray = document.getElementById('telXray');
+
+    if (cursorRing) cursorRing.classList.add('xray-mode');
     if (cursorState) {
       cursorState.style.display = 'block';
-      cursorState.textContent = 'DECOMPILE';
+      cursorState.textContent = 'X-RAY';
+    }
+    if (telXray) {
+      telXray.textContent = 'X-RAY: DISSOLVED';
+      telXray.style.color = 'var(--cyan-accent)';
     }
 
     setTimeout(() => {
-      if (this.compiledMesh) {
-        this.compiledMesh.material.wireframe = false;
-        this.compiledMesh.material.opacity = 0.15;
+      if (this.hullMesh) {
+        this.hullMesh.material.wireframe = false;
+        this.hullMesh.material.opacity = 0.15;
       }
-      if (cursorRing) cursorRing.classList.remove('decompiling');
+      if (cursorRing) cursorRing.classList.remove('xray-mode');
       if (cursorState) cursorState.style.display = 'none';
-      this.isDecompiling = false;
+      if (telXray) {
+        telXray.textContent = 'X-RAY: READY';
+        telXray.style.color = 'var(--emerald)';
+      }
+      this.isXrayActive = false;
     }, 250);
   }
 
@@ -342,21 +352,20 @@ class CodeCompilerEngine {
     this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.05;
     this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.05;
 
-    // Signature Hero Mouse X Pointer Scrubbing: Source <-> Reality
-    // Map mouse.x (-1 to +1) to compileRatio (0 to 1)
-    const targetRatio = Math.max(0, Math.min(1, (this.mouse.x + 1) / 2));
-    this.compileRatio += (targetRatio - this.compileRatio) * 0.06;
+    // Desktop Horizontal Mouse Pointer State Scrubbing (0.0 to 1.0)
+    const targetState = Math.max(0, Math.min(1, (this.mouse.x + 1) / 2));
+    this.matterState += (targetState - this.matterState) * 0.06;
 
-    // Transform Wireframe vs Compiled opacity based on compileRatio
-    if (this.wireframeCore && this.compiledCore) {
-      this.wireframeCore.scale.setScalar(1 + (1 - this.compileRatio) * 0.4);
-      this.compiledCore.scale.setScalar(1 + this.compileRatio * 0.3);
+    // Transform Digital Matter geometry based on matterState
+    if (this.wireframeSkeleton && this.surfaceHull) {
+      this.wireframeSkeleton.scale.setScalar(1 + (1 - this.matterState) * 0.4);
+      this.surfaceHull.scale.setScalar(1 + this.matterState * 0.3);
     }
 
-    // Rotate master computational group
-    if (this.masterGroup) {
-      this.masterGroup.rotation.y += 0.003;
-      this.masterGroup.rotation.x = -this.mouse.y * 0.35;
+    // Rotate Digital Matter Group
+    if (this.matterGroup) {
+      this.matterGroup.rotation.y += 0.003;
+      this.matterGroup.rotation.x = -this.mouse.y * 0.35;
     }
 
     if (this.particleSystem) {
@@ -369,31 +378,29 @@ class CodeCompilerEngine {
   setCameraSpatialState(progress) {
     this.scrollProgress = progress;
 
-    if (this.camera && this.masterGroup) {
+    if (this.camera && this.matterGroup) {
       // Camera Z penetration: 20m -> -15m
       this.camera.position.z = 20 - progress * 35;
       this.camera.position.y = -progress * 6;
-      this.masterGroup.rotation.z = progress * Math.PI;
+      this.matterGroup.rotation.z = progress * Math.PI;
     }
   }
 
   updateHUDTelemetry() {
     const telDepth = document.getElementById('telDepth');
     const telFps = document.getElementById('telFps');
-    const telCompileRatio = document.getElementById('telCompileRatio');
     const telState = document.getElementById('telState');
 
     const depthVal = (20 - this.scrollProgress * 35).toFixed(1);
     if (telDepth) telDepth.textContent = `DEPTH: ${depthVal}m`;
     if (telFps) telFps.textContent = `${this.fps} FPS`;
 
-    const pct = Math.round(this.compileRatio * 100);
-    if (telCompileRatio) telCompileRatio.textContent = `COMPILE: ${pct}%`;
-
     if (telState) {
-      if (this.compileRatio < 0.35) telState.textContent = 'STATE: SOURCE';
-      else if (this.compileRatio < 0.70) telState.textContent = 'STATE: COMPILING';
-      else telState.textContent = 'STATE: REALITY';
+      if (this.matterState < 0.2) telState.textContent = 'STATE: WEB SURFACE';
+      else if (this.matterState < 0.4) telState.textContent = 'STATE: APPLICATIONS';
+      else if (this.matterState < 0.6) telState.textContent = 'STATE: COMMERCE FLOW';
+      else if (this.matterState < 0.8) telState.textContent = 'STATE: DEVOPS CLOUDS';
+      else telState.textContent = 'STATE: AI INTELLIGENCE';
     }
   }
 }
@@ -432,7 +439,7 @@ function runDecipherEffect(element, targetText) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   3. C92://INITIALIZING OPENING SEQUENCE (First 5 Seconds)
+   3. C92://BENEATH_THE_SURFACE OPENING SEQUENCE (First 5 Seconds)
    ═══════════════════════════════════════════════════════════════════ */
 function initLoadingSequence() {
   const loader = document.getElementById('loader');
@@ -442,7 +449,7 @@ function initLoadingSequence() {
   const prefix = document.querySelector('.loader-terminal-prefix');
   if (!loader) return;
 
-  runDecipherEffect(status, 'COMPILING SOURCE CODE INTO REALITY...');
+  runDecipherEffect(status, 'INITIALIZING DIGITAL MATTER ENGINE...');
 
   const tl = gsap.timeline({
     onComplete: () => {
@@ -463,7 +470,7 @@ function initLoadingSequence() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   4. HERO ENTRANCE & KINETIC TYPOGRAPHY OCCLUSION
+   4. HERO ENTRANCE & HEBREW TYPOGRAPHY OCCLUSION
    ═══════════════════════════════════════════════════════════════════ */
 function initHeroEntrance() {
   const lines = document.querySelectorAll('.title-line');
@@ -491,7 +498,7 @@ function initHeroEntrance() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   5. GSAP SPATIAL SCROLL TIMELINE (Executing 5 Program Modules)
+   5. GSAP SPATIAL SCROLL TIMELINE (Penetrating Beneath Surface)
    ═══════════════════════════════════════════════════════════════════ */
 function initScrollTimeline() {
   gsap.registerPlugin(ScrollTrigger);
@@ -500,7 +507,7 @@ function initScrollTimeline() {
   const navDots = document.getElementById('navDots');
 
   ScrollTrigger.create({
-    trigger: '#module-web',
+    trigger: '#layer-web',
     start: 'top 80%',
     onEnter: () => {
       header?.classList.add('visible');
@@ -525,12 +532,12 @@ function initScrollTimeline() {
     }
   });
 
-  // Reveal Executable Program Modules
-  document.querySelectorAll('.module-scene').forEach(mod => {
-    const title = mod.querySelector('.module-title');
+  // Reveal Depth Layers
+  document.querySelectorAll('.layer-scene').forEach(layer => {
+    const title = layer.querySelector('.layer-title');
     if (title) {
       ScrollTrigger.create({
-        trigger: mod,
+        trigger: layer,
         start: 'top 70%',
         onEnter: () => runDecipherEffect(title)
       });
@@ -586,7 +593,7 @@ function animateMetrics() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   7. MOUSE LIGHTING & CURSOR TARGET RING
+   7. MOUSE LIGHTING & DIGITAL X-RAY CURSOR
    ═══════════════════════════════════════════════════════════════════ */
 function initMouseLighting() {
   const cursorGlow = document.getElementById('cursorGlow');
@@ -619,7 +626,7 @@ function initMouseLighting() {
 
 function initVerticalNav() {
   const dots = document.querySelectorAll('.nav-dot');
-  const sections = ['hero', 'module-web', 'module-apps', 'module-commerce', 'module-devops', 'module-ai', 'contact'];
+  const sections = ['hero', 'layer-web', 'layer-apps', 'layer-commerce', 'layer-devops', 'layer-ai', 'contact'];
 
   dots.forEach(dot => {
     dot.addEventListener('click', (e) => {
@@ -675,7 +682,7 @@ function toggleLanguage() {
   setText('heroCtaText', d.heroCtaText);
   setText('scrollTxt', d.scrollTxt);
 
-  // Modules
+  // Layers
   setText('webTitle', d.webTitle); setText('webDesc', d.webDesc);
   setText('appsTitle', d.appsTitle); setText('appsDesc', d.appsDesc);
   setText('commerceTitle', d.commerceTitle); setText('commerceDesc', d.commerceDesc);
@@ -1015,7 +1022,7 @@ function initContactForm() {
    INITIALIZATION
    ═══════════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  coreEngine = new CodeCompilerEngine();
+  coreEngine = new DigitalMatterEngine();
 
   document.getElementById('langToggleBtn')?.addEventListener('click', (e) => {
     e.preventDefault();

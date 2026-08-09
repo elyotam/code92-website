@@ -3,57 +3,57 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CODE92 | מרעיון. לקוד. למציאות.</title>
-  <meta name="description" content="CODE92 — המנוע שוהפך רעיונות למערכות דיגיטליות פועלות: אתרים מתקדמים, אפליקציות, מסחר דיגיטלי, תשתיות DevOps ו-AI." />
+  <title>CODE92 | מה שאתם רואים זה רק השכבה הראשונה</title>
+  <meta name="description" content="CODE92 — בונים את מה שרואים ואת כל מה שמתחת: אתרים, אפליקציות, מסחר דיגיטלי, תשתיות ענן DevOps וסוכני AI." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="style.css?v=8.0" />
+  <link rel="stylesheet" href="style.css?v=9.0" />
 </head>
 <body>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       1. C92://INITIALIZING LOADER
+       1. C92://BENEATH_THE_SURFACE LOADER
        ═══════════════════════════════════════════════════════════════ -->
   <div class="loader" id="loader">
-    <div class="loader-terminal-prefix">C92://INITIALIZING</div>
+    <div class="loader-terminal-prefix">C92://BENEATH_THE_SURFACE</div>
     <div class="loader-wordmark" id="loaderWordmark">CODE92<span class="dot">.</span></div>
-    <div class="loader-status" id="loaderStatus" data-decipher="COMPILING SOURCE CODE INTO REALITY...">COMPILING SOURCE CODE INTO REALITY...</div>
+    <div class="loader-status" id="loaderStatus" data-decipher="INITIALIZING DIGITAL MATTER ENGINE...">INITIALIZING DIGITAL MATTER ENGINE...</div>
     <div class="loader-bar-track"><div class="loader-bar-fill" id="loaderBarFill"></div></div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       2. THREE.JS WEBGL CANVAS (The Code Compiler Space)
+       2. THREE.JS WEBGL CANVAS (Digital Matter Spatial Space)
        ═══════════════════════════════════════════════════════════════ -->
   <canvas id="webglCanvas" class="webgl-canvas"></canvas>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       3. AMBIENT CURSOR & INSPECTION TARGET RING
+       3. AMBIENT CURSOR & DIGITAL X-RAY RING
        ═══════════════════════════════════════════════════════════════ -->
   <div class="cursor-glow" id="cursorGlow"></div>
-  <div class="cursor-ring" id="cursorRing"><span class="cursor-state" id="cursorState">INSPECT</span></div>
+  <div class="cursor-ring" id="cursorRing"><span class="cursor-state" id="cursorState">X-RAY</span></div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       4. REAL-TIME HUD COMPILER TELEMETRY BAR
+       4. REAL-TIME HUD TELEMETRY & X-RAY BAR
        ═══════════════════════════════════════════════════════════════ -->
   <div class="hud-telemetry" id="hudTelemetry">
-    <span class="tel-item" id="telState">STATE: SOURCE</span>
+    <span class="tel-item" id="telState">STATE: WEB SURFACE</span>
     <span class="tel-divider">|</span>
     <span class="tel-item" id="telDepth">DEPTH: 20.0m</span>
     <span class="tel-divider">|</span>
     <span class="tel-item" id="telFps">60 FPS</span>
     <span class="tel-divider">|</span>
-    <span class="tel-item accent" id="telCompileRatio">COMPILE: 0%</span>
+    <span class="tel-item accent" id="telXray">X-RAY: READY</span>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       5. HUD HEADER (Minimalist Integrated Controls)
+       5. HUD HEADER (Minimalist Controls)
        ═══════════════════════════════════════════════════════════════ -->
   <header class="hud-header" id="mainHeader">
     <div class="header-inner">
       <a class="logo" href="#">CODE92<span class="dot">.</span></a>
       <div class="hud-status-indicator">
         <span class="pulse-dot"></span>
-        <span class="hud-status-text" id="hudSystemStatus" data-decipher="SYSTEM // EXECUTING">SYSTEM // EXECUTING</span>
+        <span class="hud-status-text" id="hudSystemStatus" data-decipher="SYSTEM // ACTIVE">SYSTEM // ACTIVE</span>
       </div>
       <div class="header-actions">
         <button id="langToggleBtn" class="lang-toggle" aria-label="Toggle Language">EN</button>
@@ -72,42 +72,42 @@
        ═══════════════════════════════════════════════════════════════ -->
   <nav class="nav-dots" id="navDots" aria-label="System navigation">
     <a href="#hero" class="nav-dot active" data-section="hero">
-      <span class="nav-dot-label" id="navLabelHero">SOURCE</span>
+      <span class="nav-dot-label" id="navLabelHero">MATTER</span>
     </a>
-    <a href="#module-web" class="nav-dot" data-section="module-web">
-      <span class="nav-dot-label" id="navLabelWeb">MOD_01</span>
+    <a href="#layer-web" class="nav-dot" data-section="layer-web">
+      <span class="nav-dot-label" id="navLabelWeb">SURFACE</span>
     </a>
-    <a href="#module-apps" class="nav-dot" data-section="module-apps">
-      <span class="nav-dot-label" id="navLabelApps">MOD_02</span>
+    <a href="#layer-apps" class="nav-dot" data-section="layer-apps">
+      <span class="nav-dot-label" id="navLabelApps">PRODUCT</span>
     </a>
-    <a href="#module-commerce" class="nav-dot" data-section="module-commerce">
-      <span class="nav-dot-label" id="navLabelCommerce">MOD_03</span>
+    <a href="#layer-commerce" class="nav-dot" data-section="layer-commerce">
+      <span class="nav-dot-label" id="navLabelCommerce">COMMERCE</span>
     </a>
-    <a href="#module-devops" class="nav-dot" data-section="module-devops">
-      <span class="nav-dot-label" id="navLabelDevops">MOD_04</span>
+    <a href="#layer-devops" class="nav-dot" data-section="layer-devops">
+      <span class="nav-dot-label" id="navLabelDevops">DEVOPS</span>
     </a>
-    <a href="#module-ai" class="nav-dot" data-section="module-ai">
-      <span class="nav-dot-label" id="navLabelAi">MOD_05</span>
+    <a href="#layer-ai" class="nav-dot" data-section="layer-ai">
+      <span class="nav-dot-label" id="navLabelAi">AI</span>
     </a>
     <a href="#contact" class="nav-dot" data-section="contact">
-      <span class="nav-dot-label" id="navLabelContact">DEPLOY</span>
+      <span class="nav-dot-label" id="navLabelContact">REVEAL</span>
     </a>
   </nav>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       7. CONTINUOUS EXECUTABLE PROGRAM JOURNEY
+       7. BENEATH THE SURFACE CONTINUOUS SPATIAL MACHINE
        ═══════════════════════════════════════════════════════════════ -->
-  <main class="spatial-world" id="codeCompilerViewport">
+  <main class="spatial-world" id="beneathSurfaceViewport">
 
-    <!-- ── HERO: SOURCE ↔ REALITY COMPILATION ──────────────────── -->
+    <!-- ── HERO: DIGITAL MATTER & SURFACE HEBREW COPY ──────────── -->
     <section id="hero" class="spatial-scene hero-scene">
       <div class="scene-content">
         <h1 class="kinetic-title" id="heroTitle">
-          <span class="title-line line-1" id="heroLine1" data-decipher="אנחנו כותבים">אנחנו כותבים</span>
-          <span class="title-line line-2" id="heroLine2" data-decipher="את מה שאחרים">את מה שאחרים</span>
-          <span class="title-line line-3 accent" id="heroLine3" data-decipher="רק מדמיינים.">רק מדמיינים.</span>
+          <span class="title-line line-1" id="heroLine1" data-decipher="מה שאתם רואים">מה שאתם רואים</span>
+          <span class="title-line line-2" id="heroLine2" data-decipher="זה רק השכבה">זה רק השכבה</span>
+          <span class="title-line line-3 accent" id="heroLine3" data-decipher="הראשונה.">הראשונה.</span>
         </h1>
-        <p class="hero-sub" id="heroSub">אתרים, אפליקציות, מסחר דיגיטלי, תשתיות DevOps ופתרונות AI מתקדמים <strong>הנבנים מקוד למציאות פועלת</strong>.</p>
+        <p class="hero-sub" id="heroSub">אנחנו בונים את מה שרואים. ואת כל מה שמתחת: אתרים, אפליקציות, מסחר דיגיטלי, תשתיות DevOps ופתרונות AI מתקדמים <strong>הפועלים בהרמוניה מלאה</strong>.</p>
         <div class="hero-cta-wrap">
           <a class="hero-cta" href="#contact" id="heroCta">
             <span id="heroCtaText" data-decipher="מתחילים פרויקט">מתחילים פרויקט</span>
@@ -119,56 +119,56 @@
       <div class="scroll-indicator" id="scrollIndicator">
         <div class="scroll-dot"></div>
         <div class="scroll-line"></div>
-        <span class="scroll-txt" id="scrollTxt" data-decipher="SCRUB HORIZONTALLY: SOURCE ↔ REALITY // SCROLL TO EXECUTE PROGRAM">SCRUB HORIZONTALLY: SOURCE ↔ REALITY // SCROLL TO EXECUTE PROGRAM</span>
+        <span class="scroll-txt" id="scrollTxt" data-decipher="SCRUB HORIZONTALLY: TRANSFORMS DIGITAL MATTER // SCROLL TO PENETRATE SURFACE">SCRUB HORIZONTALLY: TRANSFORMS DIGITAL MATTER // SCROLL TO PENETRATE SURFACE</span>
       </div>
     </section>
 
-    <!-- ── MODULE_01: WEB (Structure Becoming Experience) ──────── -->
-    <section id="module-web" class="spatial-scene module-scene">
+    <!-- ── LAYER 01: THE SURFACE (WEB) ─────────────────────────── -->
+    <section id="layer-web" class="spatial-scene layer-scene">
       <div class="container">
-        <div class="module-code-badge">MODULE_01 // WEB_ARCHITECTURE</div>
-        <h2 class="module-title" id="webTitle" data-decipher="STRUCTURE BECOMING EXPERIENCE">STRUCTURE BECOMING EXPERIENCE</h2>
-        <p class="module-desc" id="webDesc">בניית אתרי פרימיום, חנויות אונליין וממשקי Web מתקדמים ברמה בינלאומית עם ביצועים יוצאי דופן.</p>
+        <div class="layer-hud-badge">LAYER // 01 — THE SURFACE</div>
+        <h2 class="layer-title" id="webTitle" data-decipher="WEBSITES & EXPERIENCES">WEBSITES & EXPERIENCES</h2>
+        <p class="layer-desc" id="webDesc">בניית אתרי פרימיום, חנויות אונליין וממשקי Web מתקדמים ברמה בינלאומית עם ביצועים יוצאי דופן.</p>
       </div>
     </section>
 
-    <!-- ── MODULE_02: APPLICATIONS (Logic Becoming Product) ────── -->
-    <section id="module-apps" class="spatial-scene module-scene">
+    <!-- ── LAYER 02: THE PRODUCT (APPLICATIONS) ────────────────── -->
+    <section id="layer-apps" class="spatial-scene layer-scene">
       <div class="container">
-        <div class="module-code-badge">MODULE_02 // APPLICATION_MATRIX</div>
-        <h2 class="module-title" id="appsTitle" data-decipher="LOGIC BECOMING PRODUCT">LOGIC BECOMING PRODUCT</h2>
-        <p class="module-desc" id="appsDesc">ארכיטקטורת תוכנה, מערכות SaaS ואפליקציות מובייל מותאמות אישית המציגות ממשקי משתמש עוצמתיים.</p>
+        <div class="layer-hud-badge">LAYER // 02 — THE PRODUCT</div>
+        <h2 class="layer-title" id="appsTitle" data-decipher="SOFTWARE ARCHITECTURE & SAAS">SOFTWARE ARCHITECTURE & SAAS</h2>
+        <p class="layer-desc" id="appsDesc">ארכיטקטורת תוכנה, מערכות SaaS ואפליקציות מובייל מותאמות אישית המציגות ממשקי משתמש עוצמתיים.</p>
       </div>
     </section>
 
-    <!-- ── MODULE_03: COMMERCE (Transactions Becoming Flow) ────── -->
-    <section id="module-commerce" class="spatial-scene module-scene">
+    <!-- ── LAYER 03: COMMERCE FLOW ─────────────────────────────── -->
+    <section id="layer-commerce" class="spatial-scene layer-scene">
       <div class="container">
-        <div class="module-code-badge">MODULE_03 // COMMERCE_ENGINE</div>
-        <h2 class="module-title" id="commerceTitle" data-decipher="TRANSACTIONS BECOMING FLOW">TRANSACTIONS BECOMING FLOW</h2>
-        <p class="module-desc" id="commerceDesc">רשתות מסחר דיגיטליות, סליקה מתקדמת וחנויות E-commerce שנבנות להמרה מקסימלית בטכנולוגיות Next.js.</p>
+        <div class="layer-hud-badge">LAYER // 03 — COMMERCE FLOW</div>
+        <h2 class="layer-title" id="commerceTitle" data-decipher="TRANSACTIONAL ECOSYSTEMS">TRANSACTIONAL ECOSYSTEMS</h2>
+        <p class="layer-desc" id="commerceDesc">רשתות מסחר דיגיטליות, סליקה מתקדמת וחנויות E-commerce שנבנות להמרה מקסימלית בטכנולוגיות Next.js.</p>
       </div>
     </section>
 
-    <!-- ── MODULE_04: DEVOPS (Infrastructure Underneath Reality) ─ -->
-    <section id="module-devops" class="spatial-scene module-scene">
+    <!-- ── LAYER 04: INFRASTRUCTURE TOPOLOGY (DEVOPS) ──────────── -->
+    <section id="layer-devops" class="spatial-scene layer-scene">
       <div class="container">
-        <div class="module-code-badge">MODULE_04 // CLOUD_DEVOPS_TOPOLOGY</div>
-        <h2 class="module-title" id="devopsTitle" data-decipher="INFRASTRUCTURE UNDERNEATH REALITY">INFRASTRUCTURE UNDERNEATH REALITY</h2>
-        <p class="module-desc" id="devopsDesc">טופולוגיות ענן מורכבות (AWS/GCP), ניהול Kubernetes, אבטחת מידע קפדנית ורמת זמינות של 99.99% Uptime SLA.</p>
+        <div class="layer-hud-badge">LAYER // 04 — INFRASTRUCTURE</div>
+        <h2 class="layer-title" id="devopsTitle" data-decipher="CLOUD DEVOPS & CLUSTERS">CLOUD DEVOPS & CLUSTERS</h2>
+        <p class="layer-desc" id="devopsDesc">טופולוגיות ענן מורכבות (AWS/GCP), ניהול Kubernetes, אבטחת מידע קפדנית ורמת זמינות של 99.99% Uptime SLA.</p>
       </div>
     </section>
 
-    <!-- ── MODULE_05: AI (Computation Becoming Intelligence) ──── -->
-    <section id="module-ai" class="spatial-scene module-scene">
+    <!-- ── LAYER 05: COMPUTATIONAL INTELLIGENCE (AI) ───────────── -->
+    <section id="layer-ai" class="spatial-scene layer-scene">
       <div class="container">
-        <div class="module-code-badge">MODULE_05 // ADAPTIVE_AI_SINGULARITY</div>
-        <h2 class="module-title" id="aiTitle" data-decipher="COMPUTATION BECOMING INTELLIGENCE">COMPUTATION BECOMING INTELLIGENCE</h2>
-        <p class="module-desc" id="aiDesc">סוכני AI חכמים, אוטומציות עסקיות ואלגוריתמים המייעלים את מערך המכירות והשירות 24/7 וחוסכים 80% מזמן העבודה.</p>
+        <div class="layer-hud-badge">LAYER // 05 — AI INTELLIGENCE</div>
+        <h2 class="layer-title" id="aiTitle" data-decipher="COMPUTATIONAL AI ENGINE">COMPUTATIONAL AI ENGINE</h2>
+        <p class="layer-desc" id="aiDesc">סוכני AI חכמים, אוטומציות עסקיות ואלגוריתמים המייעלים את מערך המכירות והשירות 24/7 וחוסכים 80% מזמן העבודה.</p>
       </div>
     </section>
 
-    <!-- ── METRICS COMPILER METRICS ────────────────────────────── -->
+    <!-- ── METRICS ACCELERATOR ─────────────────────────────────── -->
     <section id="metrics" class="spatial-scene metrics-scene">
       <div class="container">
         <div class="metrics-grid">
@@ -192,13 +192,13 @@
       </div>
     </section>
 
-    <!-- ── FINAL STABILIZED DEPLOYMENT PORTAL (Contact) ───────── -->
+    <!-- ── THE CODE92 BIG REVEAL (Contact & Final Portal) ────── -->
     <section id="contact" class="spatial-scene contact-scene">
       <div class="container">
         <div class="contact-layout">
           <div class="contact-text">
-            <h2 class="contact-title" id="contactTitle">יש לכם רעיון?<br><strong id="contactTitleStrong">בואו נהפוך אותו למציאות.</strong></h2>
-            <p class="contact-subtitle" id="contactSubtitle">השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.</p>
+            <h2 class="contact-title" id="contactTitle">אנחנו לא בונים רק את מה שהלקוחות שלכם רואים.<br><strong id="contactTitleStrong">אנחנו בונים את כל מה שגורם לזה לעבוד.</strong></h2>
+            <p class="contact-subtitle" id="contactSubtitle">יש לכם רעיון? בואו נבנה את מה שנמצא מתחתיו.</p>
           </div>
 
           <div class="form-box">
@@ -282,6 +282,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="main.js?v=8.0"></script>
+  <script src="main.js?v=9.0"></script>
 </body>
 </html>
