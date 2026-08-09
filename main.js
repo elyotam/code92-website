@@ -1,15 +1,16 @@
 /**
- * Code92 — main.js v7.0
- * THE DIGITAL SINGULARITY: 3D Living Core Machine & 5 System Worlds Engine
+ * CODE92 — main.js v8.0
+ * CODE BECOMES REALITY: Source -> Compile -> Build -> Deploy -> Scale Engine
  * Owner: יותם כהן (Yotam Cohen) | 052-2057074
  * 
- * Systems:
- * 1. Three.js DigitalCoreApp (5 Procedural Layers: AI Nucleus, DevOps Rings, Commerce Torus, Apps Matrix, Web Shell)
- * 2. Signature Deconstruction Engine: Pointer X position explodes Core layers in 3D spatial space
- * 3. Spatial Penetration Scroll Timeline: Camera Z moves into & through the 5 worlds (WEB -> APPS -> COMMERCE -> DEVOPS -> AI -> Recombination)
- * 4. 5-Second Mechanical Assembly Opening Sequence
- * 5. Cybernetic Decipher Animation Engine
- * 6. Preserved Dual-Language Dictionary & Human Sales Bot Widget
+ * Signature Mechanics:
+ * 1. CodeCompilerEngine (Three.js WebGL: AST Nodes, Wireframes, Geometry Compilation)
+ * 2. Source <-> Reality Pointer Scrubbing: Horizontal mouse X position scrubs raw syntax to compiled UI
+ * 3. Signature REALITY DECOMPILATION: Hovering elements reveals underlying wireframe & coordinate skeleton
+ * 4. 5 Executable Program Modules: WEB -> APPS -> COMMERCE -> DEVOPS -> AI -> build_next() Collapse
+ * 5. C92://INITIALIZING Opening Sequence (5s)
+ * 6. Cybernetic Decipher Animation Engine
+ * 7. Preserved Dual-Language Engine & Human Sales Bot Widget
  */
 'use strict';
 
@@ -22,29 +23,29 @@ const DICT = {
   he: {
     langBtn: 'EN',
     navContactBtnText: 'מתחילים פרויקט',
-    hudSystemStatus: 'SINGULARITY ONLINE',
-    heroLine1: 'פתרונות דיגיטליים',
-    heroLine2: 'שבונים את העתיד',
-    heroLine3: 'של העסק שלכם',
-    heroSub: 'מערכת אקולוגית דיגיטלית אחת: אתרים מתקדמים, אפליקציות, חנויות E-commerce, תשתיות ענן וסוכני AI <strong>שמקדמים אותכם כמה צעדים לפני המתחרים</strong>.',
+    hudSystemStatus: 'SYSTEM // EXECUTING',
+    heroLine1: 'אנחנו כותבים',
+    heroLine2: 'את מה שאחרים',
+    heroLine3: 'רק מדמיינים.',
+    heroSub: 'אתרים, אפליקציות, מסחר דיגיטלי, תשתיות DevOps ופתרונות AI מתקדמים <strong>הנבנים מקוד למציאות פועלת</strong>.',
     heroCtaText: 'מתחילים פרויקט',
-    scrollTxt: 'MOVE CURSOR HORIZONTALLY TO EXPLODE CORE // SCROLL TO ENTER MACHINE',
-    webTitle: 'WEB ARCHITECTURE',
+    scrollTxt: 'SCRUB HORIZONTALLY: SOURCE ↔ REALITY // SCROLL TO EXECUTE PROGRAM',
+    webTitle: 'STRUCTURE BECOMING EXPERIENCE',
     webDesc: 'בניית אתרי פרימיום, חנויות אונליין וממשקי Web מתקדמים ברמה בינלאומית עם ביצועים יוצאי דופן.',
-    appsTitle: 'MODULAR APPLICATIONS',
+    appsTitle: 'LOGIC BECOMING PRODUCT',
     appsDesc: 'ארכיטקטורת תוכנה, מערכות SaaS ואפליקציות מובייל מותאמות אישית המציגות ממשקי משתמש עוצמתיים.',
-    commerceTitle: 'TRANSACTIONAL COMMERCE',
+    commerceTitle: 'TRANSACTIONS BECOMING FLOW',
     commerceDesc: 'רשתות מסחר דיגיטליות, סליקה מתקדמת וחנויות E-commerce שנבנות להמרה מקסימלית בטכנולוגיות Next.js.',
-    devopsTitle: 'CLOUD INFRASTRUCTURE & DEVOPS',
+    devopsTitle: 'INFRASTRUCTURE UNDERNEATH REALITY',
     devopsDesc: 'טופולוגיות ענן מורכבות (AWS/GCP), ניהול Kubernetes, אבטחת מידע קפדנית ורמת זמינות של 99.99% Uptime SLA.',
-    aiTitle: 'COMPUTATIONAL AI INTELLIGENCE',
+    aiTitle: 'COMPUTATION BECOMING INTELLIGENCE',
     aiDesc: 'סוכני AI חכמים, אוטומציות עסקיות ואלגוריתמים המייעלים את מערך המכירות והשירות 24/7 וחוסכים 80% מזמן העבודה.',
     metricLabel1: 'פרויקטים שהושלמו',
     metricLabel2: 'Uptime SLA',
     metricLabel3: 'תמיכה וניטור',
     metricLabel4: 'חיסכון בזמן עם AI',
     contactTitle: 'יש לכם רעיון?',
-    contactTitleStrong: 'אנחנו נהפוך אותו למערכת שעובדת.',
+    contactTitleStrong: 'בואו נהפוך אותו למציאות.',
     contactSub: 'השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.',
     lblFullname: 'שם מלא *',
     lblPhone: 'טלפון *',
@@ -55,54 +56,54 @@ const DICT = {
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'איך נוכל לעזור?',
     btnSubmitTxt: 'מתחילים פרויקט',
-    copyright: '© Code92 · כל הזכויות שמורות ליותם כהן',
-    navLabelHero: 'הליבה',
-    navLabelWeb: 'WEB',
-    navLabelApps: 'APPS',
-    navLabelCommerce: 'COMMERCE',
-    navLabelDevops: 'DEVOPS',
-    navLabelAi: 'AI',
-    navLabelContact: 'חיבור',
+    copyright: '© CODE92 · כל הזכויות שמורות ליותם כהן',
+    navLabelHero: 'SOURCE',
+    navLabelWeb: 'MOD_01',
+    navLabelApps: 'MOD_02',
+    navLabelCommerce: 'MOD_03',
+    navLabelDevops: 'MOD_04',
+    navLabelAi: 'MOD_05',
+    navLabelContact: 'DEPLOY',
     // Bot
     botStatus: 'מחובר/ת כעת לשיחה',
     botTyping: 'מקליד/ה...',
     botPlaceholder: 'הקלד/י הודעה או מספר טלפון...',
-    botGreeting: (name) => `שלום! 👋 שמי ${name} מ-Code92.\nבמה אוכל לסייע לך בפרויקט היום?`,
-    botRedirecting: `תודה רבה! העברתי את פנייתך ליותם כהן ב-Code92.\nלחץ על הלחצן למטה לפתיחת שיחה ב-WhatsApp:`,
+    botGreeting: (name) => `שלום! 👋 שמי ${name} מ-CODE92.\nבמה אוכל לסייע לך בפרויקט היום?`,
+    botRedirecting: `תודה רבה! העברתי את פנייתך ליותם כהן ב-CODE92.\nלחץ על הלחצן למטה לפתיחת שיחה ב-WhatsApp:`,
     botServices: [
-      { id: 'ecommerce', label: '🛍️ חנויות E-commerce', response: `בחירה מעולה! חנויות E-commerce ב-Code92 נבנות להמרה מקסימלית ב-Next.js 🚀\nאשמח לדעת: מדובר בחנות חדשה מאפס או שדרוג חנות קיימת, וכמה מוצרים מתוכננים בה בערך?` },
-      { id: 'ai', label: '🤖 אוטומציות עסקיות + AI', response: `בחירה מצוינת! סוכני AI ואוטומציות עסקיות ב-Code92 חוסכים עד 80% מזמן העבודה 🤖\nאיזה תהליך בעסק היית רוצה לאוטמט? (סוכן מכירות, מענה ללקוחות, ניהול CRM או חשבוניות)` },
-      { id: 'web', label: '💻 בניית אתרים ומערכות Web לעסקים', response: `נפלא! אנחנו מתמחים בבניית אתרים ומערכות Web פרימיום ב-Code92 ברמה בינלאומית 💻\nמה סוג הפרויקט שדרוש לך? (אתר תדמית יוקרתי, קטלוג מוצרים, או מערכת ניהול מותאמת)` },
-      { id: 'apps', label: '📱 פיתוח מערכות ואפליקציות מותאמות לעסק', response: `מעולה! ארכיטקטורת תוכנה, SaaS ואפליקציות מותאמות אישית ב-Code92 📱\nבאיזו פלטפורמה מדובר? (אפליקציית מובייל iOS/Android, מערכת ענן SaaS, או תוכנה פנימית)` },
-      { id: 'cloud', label: '🛡️ תחזוקה, Cloud, אבטחה וניהול שוטף', response: `מצוין! תשתיות ענן, DevOps, אבטחת מידע וניהול שוטף עם 99.99% Uptime SLA ב-Code92 🛡️\nבאיזה שירות מדובר? (אבטחת מידע, אחסון ענן AWS, או תחזוקה שוטפת)` }
+      { id: 'ecommerce', label: '🛍️ חנויות E-commerce', response: `בחירה מעולה! חנויות E-commerce ב-CODE92 נבנות להמרה מקסימלית ב-Next.js 🚀\nאשמח לדעת: מדובר בחנות חדשה מאפס או שדרוג חנות קיימת, וכמה מוצרים מתוכננים בה בערך?` },
+      { id: 'ai', label: '🤖 אוטומציות עסקיות + AI', response: `בחירה מצוינת! סוכני AI ואוטומציות עסקיות ב-CODE92 חוסכים עד 80% מזמן העבודה 🤖\nאיזה תהליך בעסק היית רוצה לאוטמט? (סוכן מכירות, מענה ללקוחות, ניהול CRM או חשבוניות)` },
+      { id: 'web', label: '💻 בניית אתרים ומערכות Web לעסקים', response: `נפלא! אנחנו מתמחים בבניית אתרים ומערכות Web פרימיום ב-CODE92 ברמה בינלאומית 💻\nמה סוג הפרויקט שדרוש לך? (אתר תדמית יוקרתי, קטלוג מוצרים, או מערכת ניהול מותאמת)` },
+      { id: 'apps', label: '📱 פיתוח מערכות ואפליקציות מותאמות לעסק', response: `מעולה! ארכיטקטורת תוכנה, SaaS ואפליקציות מותאמות אישית ב-CODE92 📱\nבאיזו פלטפורמה מדובר? (אפליקציית מובייל iOS/Android, מערכת ענן SaaS, או תוכנה פנימית)` },
+      { id: 'cloud', label: '🛡️ תחזוקה, Cloud, אבטחה וניהול שוטף', response: `מצוין! תשתיות ענן, DevOps, אבטחת מידע וניהול שוטף עם 99.99% Uptime SLA ב-CODE92 🛡️\nבאיזה שירות מדובר? (אבטחת מידע, אחסון ענן AWS, או תחזוקה שוטפת)` }
     ]
   },
   en: {
     langBtn: 'HE',
     navContactBtnText: 'Start Project',
-    hudSystemStatus: 'SINGULARITY ONLINE',
-    heroLine1: 'Digital Solutions',
-    heroLine2: 'Building The Future',
-    heroLine3: 'Of Your Business',
-    heroSub: 'One complete digital ecosystem: advanced websites, mobile apps, E-commerce stores, cloud DevOps infrastructure and AI agents.',
+    hudSystemStatus: 'SYSTEM // EXECUTING',
+    heroLine1: 'We Engineer What',
+    heroLine2: 'Others Only',
+    heroLine3: 'Imagine.',
+    heroSub: 'Websites, mobile apps, E-commerce platforms, DevOps cloud infrastructure and AI systems built from code into working reality.',
     heroCtaText: 'Start Project',
-    scrollTxt: 'MOVE CURSOR HORIZONTALLY TO EXPLODE CORE // SCROLL TO ENTER MACHINE',
-    webTitle: 'WEB ARCHITECTURE',
+    scrollTxt: 'SCRUB HORIZONTALLY: SOURCE ↔ REALITY // SCROLL TO EXECUTE PROGRAM',
+    webTitle: 'STRUCTURE BECOMING EXPERIENCE',
     webDesc: 'Building luxury websites, E-commerce stores and advanced Web applications at international standards with exceptional performance.',
-    appsTitle: 'MODULAR APPLICATIONS',
+    appsTitle: 'LOGIC BECOMING PRODUCT',
     appsDesc: 'Software architecture, custom SaaS platforms and native mobile apps engineered for powerful user experiences.',
-    commerceTitle: 'TRANSACTIONAL COMMERCE',
+    commerceTitle: 'TRANSACTIONS BECOMING FLOW',
     commerceDesc: 'Digital commerce networks, payment routing and high-conversion E-commerce built with Next.js.',
-    devopsTitle: 'CLOUD INFRASTRUCTURE & DEVOPS',
+    devopsTitle: 'INFRASTRUCTURE UNDERNEATH REALITY',
     devopsDesc: 'Complex cloud topologies (AWS/GCP), Kubernetes orchestration, cyber security, and 99.99% Uptime SLA.',
-    aiTitle: 'COMPUTATIONAL AI INTELLIGENCE',
+    aiTitle: 'COMPUTATION BECOMING INTELLIGENCE',
     aiDesc: 'Intelligent AI agents, business automations and algorithms saving up to 80% manual work with 24/7 reliability.',
     metricLabel1: 'Projects Delivered',
     metricLabel2: 'Uptime SLA',
     metricLabel3: 'Support & Monitoring',
     metricLabel4: 'Time Saved with AI',
     contactTitle: 'Have an Idea?',
-    contactTitleStrong: 'We Engineer Systems That Work.',
+    contactTitleStrong: 'Let Us Turn It Into Reality.',
     contactSub: 'Leave your details and we will get back to you shortly with full answers.',
     lblFullname: 'Full Name *',
     lblPhone: 'Phone *',
@@ -113,26 +114,26 @@ const DICT = {
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'How can we help?',
     btnSubmitTxt: 'Start Project',
-    copyright: '© Code92 · All Rights Reserved to Yotam Cohen',
-    navLabelHero: 'Core',
-    navLabelWeb: 'WEB',
-    navLabelApps: 'APPS',
-    navLabelCommerce: 'COMMERCE',
-    navLabelDevops: 'DEVOPS',
-    navLabelAi: 'AI',
-    navLabelContact: 'Connect',
+    copyright: '© CODE92 · All Rights Reserved to Yotam Cohen',
+    navLabelHero: 'SOURCE',
+    navLabelWeb: 'MOD_01',
+    navLabelApps: 'MOD_02',
+    navLabelCommerce: 'MOD_03',
+    navLabelDevops: 'MOD_04',
+    navLabelAi: 'MOD_05',
+    navLabelContact: 'DEPLOY',
     // Bot
     botStatus: 'Online Now',
     botTyping: 'typing...',
     botPlaceholder: 'Type a message or phone number...',
-    botGreeting: (name) => `Hello! 👋 My name is ${name} from Code92.\nHow can I assist you with your project today?`,
-    botRedirecting: `Thank you! I forwarded your inquiry to Yotam Cohen at Code92.\nClick the button below to start a WhatsApp chat:`,
+    botGreeting: (name) => `Hello! 👋 My name is ${name} from CODE92.\nHow can I assist you with your project today?`,
+    botRedirecting: `Thank you! I forwarded your inquiry to Yotam Cohen at CODE92.\nClick the button below to start a WhatsApp chat:`,
     botServices: [
-      { id: 'ecommerce', label: '🛍️ E-Commerce Online Stores', response: `Excellent choice! E-commerce stores by Code92 built in Next.js for high conversion 🚀\nIs this a new store from scratch or an existing store upgrade? How many products are planned?` },
-      { id: 'ai', label: '🤖 Business Automation & AI', response: `Great choice! AI Agents & Automations by Code92 saving up to 80% manual work 🤖\nWhich business process would you like to automate? (Sales agent, customer support, CRM)` },
-      { id: 'web', label: '💻 Website & Web System Development', response: `Great! At Code92 we engineer world-class premium websites 💻\nWhat type of project do you need? (Luxury brand site, product catalog, or custom Web App)` },
-      { id: 'apps', label: '📱 Custom App & Software Engineering', response: `Enterprise software architecture, SaaS & custom mobile apps by Code92 📱\nWhich platform? (iOS/Android mobile app, Cloud SaaS, or internal tool)` },
-      { id: 'cloud', label: '🛡️ Cloud, DevOps, Cyber & Maintenance', response: `Cloud infrastructure, DevOps, Cyber Security & ongoing management with 99.99% Uptime SLA by Code92 🛡️\nWhich service? (Cyber security, AWS Cloud, or ongoing maintenance)` }
+      { id: 'ecommerce', label: '🛍️ E-Commerce Online Stores', response: `Excellent choice! E-commerce stores by CODE92 built in Next.js for high conversion 🚀\nIs this a new store from scratch or an existing store upgrade? How many products are planned?` },
+      { id: 'ai', label: '🤖 Business Automation & AI', response: `Great choice! AI Agents & Automations by CODE92 saving up to 80% manual work 🤖\nWhich business process would you like to automate? (Sales agent, customer support, CRM)` },
+      { id: 'web', label: '💻 Website & Web System Development', response: `Great! At CODE92 we engineer world-class premium websites 💻\nWhat type of project do you need? (Luxury brand site, product catalog, or custom Web App)` },
+      { id: 'apps', label: '📱 Custom App & Software Engineering', response: `Enterprise software architecture, SaaS & custom mobile apps by CODE92 📱\nWhich platform? (iOS/Android mobile app, Cloud SaaS, or internal tool)` },
+      { id: 'cloud', label: '🛡️ Cloud, DevOps, Cyber & Maintenance', response: `Cloud infrastructure, DevOps, Cyber Security & ongoing management with 99.99% Uptime SLA by CODE92 🛡️\nWhich service? (Cyber security, AWS Cloud, or ongoing maintenance)` }
     ]
   }
 };
@@ -155,9 +156,9 @@ let activeRep = null;
 let updateBotUiFn = null;
 
 /* ═══════════════════════════════════════════════════════════════════
-   1. THREE.JS DIGITAL SINGULARITY ENGINE (The Living Core Machine)
+   1. CODE COMPILER ENGINE (Three.js WebGL Architecture)
    ═══════════════════════════════════════════════════════════════════ */
-class DigitalSingularityEngine {
+class CodeCompilerEngine {
   constructor() {
     this.canvas = document.getElementById('webglCanvas');
     if (!this.canvas || typeof THREE === 'undefined') return;
@@ -176,15 +177,16 @@ class DigitalSingularityEngine {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    this.compileRatio = 0; // 0 = Source (raw code), 0.5 = Compiling, 1.0 = Compiled Reality
     this.scrollProgress = 0;
-    this.deconstructionFactor = 0;
     this.lastFrameTime = performance.now();
     this.frameCount = 0;
     this.fps = 60;
+    this.isDecompiling = false;
 
     this.initLights();
-    this.create5LayerDigitalCore();
-    this.createParticleUniverse();
+    this.createCompilerObjects();
+    this.createSyntaxParticleCloud();
     this.bindEvents();
     this.animate();
   }
@@ -202,79 +204,49 @@ class DigitalSingularityEngine {
     this.scene.add(this.cyanLight);
   }
 
-  create5LayerDigitalCore() {
-    this.coreMaster = new THREE.Group();
+  createCompilerObjects() {
+    this.masterGroup = new THREE.Group();
 
-    // ── Layer 1: AI Nucleus (Generative Node Matrix)
-    this.layerAi = new THREE.Group();
-    const nucleusGeo = new THREE.IcosahedronGeometry(2.2, 3);
-    const nucleusMat = new THREE.MeshBasicMaterial({
+    // ── Source Layer: Raw AST Wireframe Geometries
+    this.wireframeCore = new THREE.Group();
+    const innerGeo = new THREE.IcosahedronGeometry(2.8, 2);
+    const innerMat = new THREE.MeshBasicMaterial({
       color: 0x00e676,
       wireframe: true,
       transparent: true,
-      opacity: 0.75
+      opacity: 0.8
     });
-    this.layerAi.add(new THREE.Mesh(nucleusGeo, nucleusMat));
-    this.coreMaster.add(this.layerAi);
+    this.wireframeCore.add(new THREE.Mesh(innerGeo, innerMat));
 
-    // ── Layer 2: DevOps Ring Topology
-    this.layerDevops = new THREE.Group();
-    const ringGeo = new THREE.TorusGeometry(3.6, 0.04, 16, 80);
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, transparent: true, opacity: 0.5 });
-    for (let i = 0; i < 3; i++) {
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI * (i * 0.33);
-      ring.rotation.y = Math.PI * (i * 0.25);
-      this.layerDevops.add(ring);
-    }
-    this.coreMaster.add(this.layerDevops);
+    const ringGeo = new THREE.TorusGeometry(4.2, 0.03, 16, 80);
+    const ringMat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.6 });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI * 0.35;
+    this.wireframeCore.add(ring);
 
-    // ── Layer 3: Commerce Transaction Torus
-    this.layerCommerce = new THREE.Group();
-    const commerceGeo = new THREE.TorusGeometry(4.8, 0.06, 16, 100);
-    const commerceMat = new THREE.MeshPhongMaterial({
-      color: 0x00e676,
-      emissive: 0x002211,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.35
-    });
-    this.commerceMesh = new THREE.Mesh(commerceGeo, commerceMat);
-    this.layerCommerce.add(this.commerceMesh);
-    this.coreMaster.add(this.layerCommerce);
+    this.masterGroup.add(this.wireframeCore);
 
-    // ── Layer 4: Modular Apps Panel Matrix
-    this.layerApps = new THREE.Group();
-    const panelGeo = new THREE.BoxGeometry(0.8, 0.8, 0.08);
-    const panelMat = new THREE.MeshPhongMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.4 });
-    for (let i = 0; i < 12; i++) {
-      const panel = new THREE.Mesh(panelGeo, panelMat);
-      const angle = (i / 12) * Math.PI * 2;
-      panel.position.set(Math.cos(angle) * 5.8, Math.sin(angle) * 5.8, (Math.random() - 0.5) * 2);
-      this.layerApps.add(panel);
-    }
-    this.coreMaster.add(this.layerApps);
-
-    // ── Layer 5: Web Outer Shell
-    this.layerWeb = new THREE.Group();
-    const shellGeo = new THREE.DodecahedronGeometry(6.6, 1);
-    const shellMat = new THREE.MeshPhongMaterial({
+    // ── Compiled Reality Layer: Solid Polished Geometry Hull
+    this.compiledCore = new THREE.Group();
+    const outerGeo = new THREE.DodecahedronGeometry(3.6, 1);
+    const outerMat = new THREE.MeshPhongMaterial({
       color: 0x00e676,
       emissive: 0x001100,
       specular: 0x00e5ff,
       shininess: 100,
-      wireframe: true,
+      wireframe: false,
       transparent: true,
       opacity: 0.15
     });
-    this.shellMesh = new THREE.Mesh(shellGeo, shellMat);
-    this.layerWeb.add(this.shellMesh);
-    this.coreMaster.add(this.layerWeb);
+    this.compiledMesh = new THREE.Mesh(outerGeo, outerMat);
+    this.compiledCore.add(this.compiledMesh);
 
-    this.scene.add(this.coreMaster);
+    this.masterGroup.add(this.compiledCore);
+
+    this.scene.add(this.masterGroup);
   }
 
-  createParticleUniverse() {
+  createSyntaxParticleCloud() {
     const isMobile = window.innerWidth < 768;
     const count = isMobile ? 1000 : 2500;
     const geometry = new THREE.BufferGeometry();
@@ -285,7 +257,7 @@ class DigitalSingularityEngine {
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const r = Math.cbrt(Math.random()) * 30 + 4;
+      const r = Math.cbrt(Math.random()) * 28 + 4;
 
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
@@ -318,21 +290,39 @@ class DigitalSingularityEngine {
       this.mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
     });
 
-    // Impulse trigger on viewport click
-    window.addEventListener('click', (e) => {
-      if (e.target.closest('#salesChatPanel') || e.target.closest('.lang-toggle') || e.target.closest('input')) return;
-      this.triggerCoreImpulse();
+    // Signature Interaction: Reality Decompilation Hover Trigger
+    document.querySelectorAll('.module-scene, .hero-cta, .btn-cta, .nav-dot').forEach(el => {
+      el.addEventListener('mouseenter', () => this.triggerDecompilation());
     });
   }
 
-  triggerCoreImpulse() {
-    gsap.to(this.coreMaster.scale, {
-      x: 1.35, y: 1.35, z: 1.35,
-      duration: 0.25,
-      yoyo: true,
-      repeat: 1,
-      ease: 'power2.out'
-    });
+  // Signature Mechanism: 200ms REALITY DECOMPILATION Skeleton Reveal
+  triggerDecompilation() {
+    if (this.isDecompiling) return;
+    this.isDecompiling = true;
+
+    if (this.compiledMesh) {
+      this.compiledMesh.material.wireframe = true;
+      this.compiledMesh.material.opacity = 0.8;
+    }
+
+    const cursorRing = document.getElementById('cursorRing');
+    const cursorState = document.getElementById('cursorState');
+    if (cursorRing) cursorRing.classList.add('decompiling');
+    if (cursorState) {
+      cursorState.style.display = 'block';
+      cursorState.textContent = 'DECOMPILE';
+    }
+
+    setTimeout(() => {
+      if (this.compiledMesh) {
+        this.compiledMesh.material.wireframe = false;
+        this.compiledMesh.material.opacity = 0.15;
+      }
+      if (cursorRing) cursorRing.classList.remove('decompiling');
+      if (cursorState) cursorState.style.display = 'none';
+      this.isDecompiling = false;
+    }, 250);
   }
 
   animate() {
@@ -352,22 +342,21 @@ class DigitalSingularityEngine {
     this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.05;
     this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.05;
 
-    // Horizontal Pointer Deconstruction Signature Mechanism
-    // Moving mouse horizontally explodes core layers in 3D spatial space
-    const targetDeconstruct = Math.abs(this.mouse.x);
-    this.deconstructionFactor += (targetDeconstruct - this.deconstructionFactor) * 0.06;
+    // Signature Hero Mouse X Pointer Scrubbing: Source <-> Reality
+    // Map mouse.x (-1 to +1) to compileRatio (0 to 1)
+    const targetRatio = Math.max(0, Math.min(1, (this.mouse.x + 1) / 2));
+    this.compileRatio += (targetRatio - this.compileRatio) * 0.06;
 
-    // Apply 3D Spatial Deconstruction offsets
-    if (this.layerAi) this.layerAi.position.x = -this.deconstructionFactor * 2.5;
-    if (this.layerDevops) this.layerDevops.position.x = this.deconstructionFactor * 2.5;
-    if (this.layerCommerce) this.layerCommerce.position.y = this.deconstructionFactor * 2.0;
-    if (this.layerApps) this.layerApps.position.y = -this.deconstructionFactor * 2.0;
-    if (this.layerWeb) this.layerWeb.position.z = this.deconstructionFactor * 3.0;
+    // Transform Wireframe vs Compiled opacity based on compileRatio
+    if (this.wireframeCore && this.compiledCore) {
+      this.wireframeCore.scale.setScalar(1 + (1 - this.compileRatio) * 0.4);
+      this.compiledCore.scale.setScalar(1 + this.compileRatio * 0.3);
+    }
 
-    // Rotate core elements
-    if (this.coreMaster) {
-      this.coreMaster.rotation.y += 0.003;
-      this.coreMaster.rotation.x = -this.mouse.y * 0.35;
+    // Rotate master computational group
+    if (this.masterGroup) {
+      this.masterGroup.rotation.y += 0.003;
+      this.masterGroup.rotation.x = -this.mouse.y * 0.35;
     }
 
     if (this.particleSystem) {
@@ -377,39 +366,34 @@ class DigitalSingularityEngine {
     this.renderer.render(this.scene, this.camera);
   }
 
-  // Camera Spatial Penetration trajectory through the 5 systems
   setCameraSpatialState(progress) {
     this.scrollProgress = progress;
 
-    if (this.camera && this.coreMaster) {
-      // Camera Z enters the core: 20m -> -15m
+    if (this.camera && this.masterGroup) {
+      // Camera Z penetration: 20m -> -15m
       this.camera.position.z = 20 - progress * 35;
       this.camera.position.y = -progress * 6;
-      this.coreMaster.rotation.z = progress * Math.PI;
+      this.masterGroup.rotation.z = progress * Math.PI;
     }
   }
 
   updateHUDTelemetry() {
     const telDepth = document.getElementById('telDepth');
     const telFps = document.getElementById('telFps');
-    const telDeconstruct = document.getElementById('telDeconstruct');
-    const telWorld = document.getElementById('telWorld');
+    const telCompileRatio = document.getElementById('telCompileRatio');
+    const telState = document.getElementById('telState');
 
     const depthVal = (20 - this.scrollProgress * 35).toFixed(1);
-    if (telDepth) telDepth.textContent = `Z-DEPTH: ${depthVal}m`;
+    if (telDepth) telDepth.textContent = `DEPTH: ${depthVal}m`;
     if (telFps) telFps.textContent = `${this.fps} FPS`;
 
-    const pct = Math.round(this.deconstructionFactor * 100);
-    if (telDeconstruct) telDeconstruct.textContent = `DECONSTRUCT: ${pct}%`;
+    const pct = Math.round(this.compileRatio * 100);
+    if (telCompileRatio) telCompileRatio.textContent = `COMPILE: ${pct}%`;
 
-    // Dynamic System World Label
-    if (telWorld) {
-      if (this.scrollProgress < 0.15) telWorld.textContent = 'SYSTEM: THE DIGITAL CORE';
-      else if (this.scrollProgress < 0.32) telWorld.textContent = 'WORLD 1: WEB ARCHITECTURE';
-      else if (this.scrollProgress < 0.48) telWorld.textContent = 'WORLD 2: MODULAR APPS';
-      else if (this.scrollProgress < 0.64) telWorld.textContent = 'WORLD 3: COMMERCE NET';
-      else if (this.scrollProgress < 0.80) telWorld.textContent = 'WORLD 4: CLOUD DEVOPS';
-      else telWorld.textContent = 'WORLD 5: AI SINGULARITY';
+    if (telState) {
+      if (this.compileRatio < 0.35) telState.textContent = 'STATE: SOURCE';
+      else if (this.compileRatio < 0.70) telState.textContent = 'STATE: COMPILING';
+      else telState.textContent = 'STATE: REALITY';
     }
   }
 }
@@ -448,16 +432,17 @@ function runDecipherEffect(element, targetText) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   3. MECHANICAL ASSEMBLY OPENING SEQUENCE (First 5 Seconds)
+   3. C92://INITIALIZING OPENING SEQUENCE (First 5 Seconds)
    ═══════════════════════════════════════════════════════════════════ */
 function initLoadingSequence() {
   const loader = document.getElementById('loader');
-  const preview = document.getElementById('loaderCorePreview');
+  const bar = document.getElementById('loaderBarFill');
   const wordmark = document.getElementById('loaderWordmark');
   const status = document.getElementById('loaderStatus');
+  const prefix = document.querySelector('.loader-terminal-prefix');
   if (!loader) return;
 
-  runDecipherEffect(status, 'ASSEMBLING DIGITAL CORE...');
+  runDecipherEffect(status, 'COMPILING SOURCE CODE INTO REALITY...');
 
   const tl = gsap.timeline({
     onComplete: () => {
@@ -466,15 +451,15 @@ function initLoadingSequence() {
     }
   });
 
-  tl.to(preview, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.2)
-    .to(preview, { width: '80vw', height: '3px', borderRadius: '2px', duration: 0.8, ease: 'power3.out' }, 0.5)
-    .to(wordmark, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0)
-    .to(status, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 1.2)
-    .to(preview, { opacity: 0, width: '140vw', height: '140vh', duration: 0.7, ease: 'power2.in' }, 1.8)
-    .to(wordmark, { opacity: 0, y: -20, duration: 0.5 }, 1.8)
-    .to(status, { opacity: 0 }, 1.8)
-    .to(loader, { opacity: 0, duration: 0.6 }, 2.2)
-    .set(loader, { display: 'none' }, 2.8);
+  tl.to(prefix, { opacity: 1, duration: 0.4 }, 0.2)
+    .to(bar, { width: '100%', duration: 1.2, ease: 'power2.inOut' }, 0.4)
+    .to(wordmark, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.8)
+    .to(status, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 1.0)
+    .to(wordmark, { opacity: 0, y: -20, duration: 0.5 }, 2.0)
+    .to(status, { opacity: 0 }, 2.0)
+    .to(prefix, { opacity: 0 }, 2.0)
+    .to(loader, { opacity: 0, duration: 0.6 }, 2.4)
+    .set(loader, { display: 'none' }, 3.0);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -506,7 +491,7 @@ function initHeroEntrance() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   5. GSAP SPATIAL PENETRATION SCROLL TIMELINE
+   5. GSAP SPATIAL SCROLL TIMELINE (Executing 5 Program Modules)
    ═══════════════════════════════════════════════════════════════════ */
 function initScrollTimeline() {
   gsap.registerPlugin(ScrollTrigger);
@@ -515,7 +500,7 @@ function initScrollTimeline() {
   const navDots = document.getElementById('navDots');
 
   ScrollTrigger.create({
-    trigger: '#world-web',
+    trigger: '#module-web',
     start: 'top 80%',
     onEnter: () => {
       header?.classList.add('visible');
@@ -540,14 +525,12 @@ function initScrollTimeline() {
     }
   });
 
-  // Reveal System Worlds
-  document.querySelectorAll('.world-scene').forEach(world => {
-    const title = world.querySelector('.world-title');
-    const badge = world.querySelector('.world-hud-badge');
-
+  // Reveal Executable Program Modules
+  document.querySelectorAll('.module-scene').forEach(mod => {
+    const title = mod.querySelector('.module-title');
     if (title) {
       ScrollTrigger.create({
-        trigger: world,
+        trigger: mod,
         start: 'top 70%',
         onEnter: () => runDecipherEffect(title)
       });
@@ -626,7 +609,7 @@ function initMouseLighting() {
     }
 
     if (cursorRing) {
-      cursorRing.style.transform = `translate(${targetX - 12}px, ${targetY - 12}px)`;
+      cursorRing.style.transform = `translate(${targetX - 16}px, ${targetY - 16}px)`;
     }
 
     requestAnimationFrame(update);
@@ -636,7 +619,7 @@ function initMouseLighting() {
 
 function initVerticalNav() {
   const dots = document.querySelectorAll('.nav-dot');
-  const sections = ['hero', 'world-web', 'world-apps', 'world-commerce', 'world-devops', 'world-ai', 'contact'];
+  const sections = ['hero', 'module-web', 'module-apps', 'module-commerce', 'module-devops', 'module-ai', 'contact'];
 
   dots.forEach(dot => {
     dot.addEventListener('click', (e) => {
@@ -692,7 +675,7 @@ function toggleLanguage() {
   setText('heroCtaText', d.heroCtaText);
   setText('scrollTxt', d.scrollTxt);
 
-  // System Worlds
+  // Modules
   setText('webTitle', d.webTitle); setText('webDesc', d.webDesc);
   setText('appsTitle', d.appsTitle); setText('appsDesc', d.appsDesc);
   setText('commerceTitle', d.commerceTitle); setText('commerceDesc', d.commerceDesc);
@@ -770,7 +753,7 @@ function initHumanSalesBot() {
         avatar.style.backgroundColor = activeRep.gender === 'female' ? '#db2777' : 'var(--emerald)';
       }
     }
-    if (nameEl) nameEl.textContent = isHe ? `${activeRep.name} מ-Code92` : `${activeRep.enName} from Code92`;
+    if (nameEl) nameEl.textContent = isHe ? `${activeRep.name} מ-CODE92` : `${activeRep.enName} from CODE92`;
     if (statusEl) statusEl.textContent = DICT[currentLang].botStatus;
     if (input) input.placeholder = DICT[currentLang].botPlaceholder;
   }
@@ -916,7 +899,7 @@ function initHumanSalesBot() {
     } else if (chatState.step === 'SPECIFIC_ANSWERED') {
       chatState.timeline = opt.label;
       chatState.step = 'TIMELINE_ANSWERED';
-      const ask = isHe ? `מעולה! קיבלתי את כל הנתונים 👍\nכדי ששיחה תועבר לטיפול אישי של יותם כהן ב-Code92 — נא להקליד שם מלא ומספר טלפון לחזרה:` : `Great! Received all details 👍\nPlease type your Full Name and Phone Number for Yotam Cohen at Code92:`;
+      const ask = isHe ? `מעולה! קיבלתי את כל הנתונים 👍\nכדי ששיחה תועבר לטיפול אישי של יותם כהן ב-CODE92 — נא להקליד שם מלא ומספר טלפון לחזרה:` : `Great! Received all details 👍\nPlease type your Full Name and Phone Number for Yotam Cohen at CODE92:`;
       replyWithTyping(ask, () => setOptions([]));
     }
   }
@@ -949,14 +932,14 @@ function initHumanSalesBot() {
   function finishLeadCapture() {
     const isHe = currentLang === 'he';
     const summary = isHe
-      ? `תודה רבה! 🙏\nפנייתך נקלטה בהצלחה במערכת Code92:\n• תחום: ${chatState.category || 'פנייה כללית'}\n• פרטים: ${chatState.specificDetails || '-'}\n• לוח זמנים: ${chatState.timeline || '-'}\n• איש קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nנציג מ-Code92 (ניהול יותם כהן) יחזור אליך בהקדם!`
-      : `Thank you! 🙏\nYour inquiry is submitted to Code92:\n• Category: ${chatState.category || 'General'}\n• Details: ${chatState.specificDetails || '-'}\n• Timeline: ${chatState.timeline || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nA representative from Code92 will contact you shortly!`;
+      ? `תודה רבה! 🙏\nפנייתך נקלטה בהצלחה במערכת CODE92:\n• תחום: ${chatState.category || 'פנייה כללית'}\n• פרטים: ${chatState.specificDetails || '-'}\n• לוח זמנים: ${chatState.timeline || '-'}\n• איש קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nנציג מ-CODE92 (ניהול יותם כהן) יחזור אליך בהקדם!`
+      : `Thank you! 🙏\nYour inquiry is submitted to CODE92:\n• Category: ${chatState.category || 'General'}\n• Details: ${chatState.specificDetails || '-'}\n• Timeline: ${chatState.timeline || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nA representative from CODE92 will contact you shortly!`;
 
     replyWithTyping(summary, () => {
       const waNote = isHe ? 'מעדיף/ה להמשיך את השיחה ב-WhatsApp כעת?' : 'Prefer to continue on WhatsApp now?';
-      const btnLabel = isHe ? '📲 לחץ/י כאן לפתיחת שיחה ב-WhatsApp' : '📲 Click to open WhatsApp chat with Code92';
+      const btnLabel = isHe ? '📲 לחץ/י כאן לפתיחת שיחה ב-WhatsApp' : '📲 Click to open WhatsApp chat with CODE92';
       const text = encodeURIComponent(
-        `שלום ליותם כהן (Code92)! 👋\n` +
+        `שלום ליותם כהן (CODE92)! 👋\n` +
         `פנייה חדשה מאת נציג/ה: ${activeRep.name}\n` +
         `תחום: ${chatState.category || 'כללי'}\n` +
         `פירוט: ${chatState.specificDetails || '-'}\n` +
@@ -1015,8 +998,8 @@ function initContactForm() {
     }
 
     const text = encodeURIComponent(
-      `שלום ליותם כהן (Code92)! 👋\n\n` +
-      `פנייה חדשה מאתר Code92:\n` +
+      `שלום ליותם כהן (CODE92)! 👋\n\n` +
+      `פנייה חדשה מאתר CODE92:\n` +
       `👤 שם: ${name}\n` +
       `📞 טלפון: ${phone}\n` +
       `✉️ אימייל: ${email}\n` +
@@ -1032,7 +1015,7 @@ function initContactForm() {
    INITIALIZATION
    ═══════════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  coreEngine = new DigitalSingularityEngine();
+  coreEngine = new CodeCompilerEngine();
 
   document.getElementById('langToggleBtn')?.addEventListener('click', (e) => {
     e.preventDefault();

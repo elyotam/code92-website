@@ -1,7 +1,7 @@
 /* ================================================================
-   Code92 — THE DIGITAL SINGULARITY Spatial System v7.0
+   CODE92 — CODE BECOMES REALITY Spatial System v8.0
    Brand Owner: יותם כהן (Yotam Cohen) | 052-2057074
-   Visual Universe: Living 3D Machine, 5 Systems & Spatial Penetration
+   Visual Narrative: SOURCE -> COMPILE -> BUILD -> DEPLOY -> SCALE
    ================================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -9,12 +9,12 @@
 /* ── Root Design Tokens ────────────────────────────────────────── */
 :root {
   /* Atmosphere */
-  --bg-singularity: #000003;
+  --bg-source:      #000003;
   --bg-deep:        #020206;
   --bg-warm:        #06060a;
   --bg-glass-card:  rgba(255, 255, 255, 0.02);
 
-  /* Brand Core Colors */
+  /* CODE92 Core Colors */
   --emerald:       #00e676;
   --emerald-dim:   #00c853;
   --emerald-glow:  rgba(0, 230, 118, 0.5);
@@ -63,12 +63,12 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
-  background: var(--bg-singularity);
+  background: var(--bg-source);
 }
 
 body {
   font-family: var(--font-hebrew);
-  background: var(--bg-singularity);
+  background: var(--bg-source);
   color: var(--text-bright);
   line-height: 1.6;
   overflow-x: hidden;
@@ -81,13 +81,13 @@ img, video { max-width: 100%; display: block; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-singularity); }
+::-webkit-scrollbar-track { background: var(--bg-source); }
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 230, 118, 0.3);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--emerald); }
-html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-singularity); }
+html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-source); }
 
 .container {
   width: 100%;
@@ -109,7 +109,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   z-index: 1;
 }
 
-/* ── 2. Cursor Glow & Ring ─────────────────────────────────────── */
+/* ── 2. Cursor Glow & Inspection Ring ──────────────────────────── */
 .cursor-glow {
   position: fixed;
   top: 0;
@@ -132,20 +132,31 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   position: fixed;
   top: 0;
   left: 0;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border: 1px solid var(--emerald);
   border-radius: 50%;
   pointer-events: none;
   z-index: 999;
   opacity: 0;
-  transform: translate(-12px, -12px);
-  transition: transform 0.1s linear, opacity 0.4s;
+  transform: translate(-16px, -16px);
+  transition: transform 0.08s linear, opacity 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cursor-ring.active { opacity: 0.6; }
+.cursor-ring.active { opacity: 0.7; }
 
-/* ── 3. HUD Telemetry Bar (Signature Readout) ──────────────────── */
+.cursor-state {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: var(--emerald);
+  display: none;
+}
+
+/* ── 3. HUD Telemetry Bar (Compiler Readout) ───────────────────── */
 .hud-telemetry {
   position: fixed;
   bottom: 20px;
@@ -168,7 +179,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
 .tel-divider { color: var(--border-subtle); }
 .tel-item.accent { color: var(--emerald); }
 
-/* ── 4. Mechanical Assembly Loader ─────────────────────────────── */
+/* ── 4. C92://INITIALIZING Loader ──────────────────────────────── */
 .loader {
   position: fixed;
   inset: 0;
@@ -181,30 +192,26 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   gap: 16px;
 }
 
-.loader-core-preview {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--emerald);
-  box-shadow:
-    0 0 40px 15px var(--emerald-glow),
-    0 0 100px 40px rgba(0, 230, 118, 0.2),
-    0 0 200px 80px rgba(0, 230, 118, 0.05);
+.loader-terminal-prefix {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--emerald);
   opacity: 0;
 }
 
 .loader-wordmark {
   font-family: var(--font-body);
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: -1px;
   color: #ffffff;
   opacity: 0;
 }
 
 .loader-wordmark .dot {
   color: var(--emerald);
-  font-size: 44px;
+  font-size: 50px;
   line-height: 0;
 }
 
@@ -212,8 +219,23 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 3px;
-  color: var(--emerald);
+  color: var(--text-mid);
   opacity: 0;
+}
+
+.loader-bar-track {
+  width: 200px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loader-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--emerald);
+  box-shadow: 0 0 12px var(--emerald-glow);
 }
 
 /* ── 5. HUD Header ─────────────────────────────────────────────── */
@@ -224,7 +246,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   right: 0;
   z-index: 100;
   height: 72px;
-  background: rgba(0, 0, 3, 0.75);
+  background: rgba(0, 0, 3, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-ghost);
@@ -251,7 +273,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
 .logo {
   font-family: var(--font-body);
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.5px;
   color: #ffffff;
 }
@@ -368,7 +390,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   z-index: 90;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   opacity: 0;
   transition: opacity 0.5s;
 }
@@ -571,12 +593,12 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   color: var(--text-dim);
 }
 
-/* ── 5 SYSTEM WORLDS STYLING ───────────────────────────────────── */
-.world-scene {
+/* ── 5 EXECUTABLE MODULE SCENES STYLING ────────────────────────── */
+.module-scene {
   text-align: center;
 }
 
-.world-hud-badge {
+.module-code-badge {
   display: inline-block;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -589,16 +611,16 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   margin-bottom: 24px;
 }
 
-.world-title {
+.module-title {
   font-family: var(--font-mono);
-  font-size: clamp(36px, 6vw, 64px);
+  font-size: clamp(34px, 5.8vw, 62px);
   font-weight: 700;
   color: var(--text-bright);
   letter-spacing: -1px;
   margin-bottom: 20px;
 }
 
-.world-desc {
+.module-desc {
   font-size: clamp(16px, 2.2vw, 20px);
   font-weight: 300;
   color: var(--text-mid);
@@ -656,7 +678,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   color: var(--text-mid);
 }
 
-/* ── CONTAINMENT PORTAL (CONTACT) ──────────────────────────────── */
+/* ── STABILIZED DEPLOYMENT PORTAL (CONTACT) ────────────────────── */
 .contact-scene {
   background: var(--bg-warm);
 }
@@ -785,7 +807,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-s
   position: relative;
   z-index: 2;
   padding: 32px 0;
-  background: var(--bg-singularity);
+  background: var(--bg-source);
   border-top: 1px solid var(--border-ghost);
   text-align: center;
 }
