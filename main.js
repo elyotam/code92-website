@@ -144,14 +144,14 @@ const DICT = {
 
 let currentLang = 'he';
 
-// Human Representatives Pool
+// Human Representatives Pool (Male & Female Icons)
 const SALES_REPS = [
-  { name: 'ענבל', initial: 'ע', enName: 'Inbal' },
-  { name: 'דניאל', initial: 'ד', enName: 'Daniel' },
-  { name: 'רוני', initial: 'ר', enName: 'Roni' },
-  { name: 'אלון', initial: 'א', enName: 'Alon' },
-  { name: 'שירה', initial: 'ש', enName: 'Shira' },
-  { name: 'עידו', initial: 'ע', enName: 'Ido' }
+  { name: 'ענבל', gender: 'female', icon: '👩‍💼', enName: 'Inbal' },
+  { name: 'עידו', gender: 'male', icon: '👨‍💼', enName: 'Ido' },
+  { name: 'שירה', gender: 'female', icon: '👩‍💼', enName: 'Shira' },
+  { name: 'דניאל', gender: 'male', icon: '👨‍💼', enName: 'Daniel' },
+  { name: 'רוני', gender: 'female', icon: '👩‍💼', enName: 'Roni' },
+  { name: 'אלון', gender: 'male', icon: '👨‍💼', enName: 'Alon' }
 ];
 
 let activeRep = null;
@@ -230,7 +230,11 @@ function initHumanSalesBot() {
 
   function renderRepInfo() {
     const isHe = currentLang === 'he';
-    if (avatar) avatar.textContent = activeRep.initial;
+    if (avatar) {
+      avatar.innerHTML = activeRep.icon;
+      avatar.style.fontSize = '1.35rem';
+      avatar.style.backgroundColor = activeRep.gender === 'female' ? '#db2777' : 'var(--brand-red)';
+    }
     if (nameEl) nameEl.textContent = isHe ? `${activeRep.name} מ-Code92` : `${activeRep.enName} from Code92`;
     if (statusEl) statusEl.textContent = DICT[currentLang].botStatus;
     if (input) input.placeholder = DICT[currentLang].botPlaceholder;
@@ -534,25 +538,16 @@ function initHumanSalesBot() {
     // 6. Generic Text Input Handling through flow steps
     if (chatState.step === 'INIT') {
       chatState.specificDetails = val;
-      chatState.step = 'SPECIFIC_ANSWERED';
+      chatState.step = 'INIT_RESPONSE_SENT';
 
-      const askTimeline = isHe
-        ? `תודה! רשמתי את פנייתך לגבי: "${val}".\nמה לוח הזמנים המועדף עליך לעלייה לאוויר?`
-        : `Thank you! Noted your request regarding: "${val}".\nWhat is your target timeline to launch?`;
+      const ackMsg = isHe
+        ? `תודה! קיבלתי את הודעתך: "${val}" 👍\nבאיזה תחום מדובר? אפשר לבחור באחת האפשרויות למטה:`
+        : `Thank you! Received your message: "${val}" 👍\nWhich category fits your project best? Choose below:`;
 
-      replyWithTyping(askTimeline, () => {
-        const timelineOpts = isHe ? [
-          { label: '⚡ מיידי (1-2 שבועות)' },
-          { label: '📅 במהלך החודש הקרוב' },
-          { label: '🔍 בודק/ת אפשרויות' }
-        ] : [
-          { label: '⚡ Immediate (1-2 weeks)' },
-          { label: '📅 Within next month' },
-          { label: '🔍 Exploring options' }
-        ];
-        setOptions(timelineOpts);
+      replyWithTyping(ackMsg, () => {
+        setOptions(DICT[currentLang].botServices);
       });
-    } else if (chatState.step === 'CATEGORY_SELECTED') {
+    } else if (chatState.step === 'INIT_RESPONSE_SENT' || chatState.step === 'CATEGORY_SELECTED') {
       chatState.specificDetails = val;
       chatState.step = 'SPECIFIC_ANSWERED';
 
@@ -619,7 +614,7 @@ function initHumanSalesBot() {
     };
     const name = currentLang === 'he' ? activeRep.name : activeRep.enName;
     addMsg(DICT[currentLang].botGreeting(name));
-    setOptions(DICT[currentLang].botServices);
+    setOptions([]); // DO NOT display options initially!
   }
 
   updateBotUiFn = () => {
