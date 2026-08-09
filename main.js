@@ -1,15 +1,15 @@
 /**
- * Code92 — main.js v6.0
- * The Quantum Matrix: Signature Mechanisms, HUD Telemetry & Decipher Systems
+ * Code92 — main.js v7.0
+ * THE DIGITAL SINGULARITY: 3D Living Core Machine & 5 System Worlds Engine
  * Owner: יותם כהן (Yotam Cohen) | 052-2057074
  * 
- * Signature Systems:
- * 1. Quantum Core WebGL Engine & Impulse Matrix (Click shockwaves)
- * 2. Real-Time HUD Telemetry Readout (Depth, FPS, Coords, System Status)
- * 3. Cybernetic Decipher Text Engine (Binary/Hex kinetic resolution)
- * 4. Doppler Velocity Warp Timeline (Scroll-controlled particle stretch)
- * 5. 3D Orbital Satellite Interactive Deck
- * 6. Preserved Dual-Language Engine & Human Sales Bot
+ * Systems:
+ * 1. Three.js DigitalCoreApp (5 Procedural Layers: AI Nucleus, DevOps Rings, Commerce Torus, Apps Matrix, Web Shell)
+ * 2. Signature Deconstruction Engine: Pointer X position explodes Core layers in 3D spatial space
+ * 3. Spatial Penetration Scroll Timeline: Camera Z moves into & through the 5 worlds (WEB -> APPS -> COMMERCE -> DEVOPS -> AI -> Recombination)
+ * 4. 5-Second Mechanical Assembly Opening Sequence
+ * 5. Cybernetic Decipher Animation Engine
+ * 6. Preserved Dual-Language Dictionary & Human Sales Bot Widget
  */
 'use strict';
 
@@ -21,30 +21,30 @@ const WA_NUMBER = '972522057074';
 const DICT = {
   he: {
     langBtn: 'EN',
-    navContactBtnText: 'צרו קשר',
-    hudSystemStatus: 'CORE ONLINE',
+    navContactBtnText: 'מתחילים פרויקט',
+    hudSystemStatus: 'SINGULARITY ONLINE',
     heroLine1: 'פתרונות דיגיטליים',
-    heroLine2: 'לאנשים שרוצים',
-    heroLine3: 'לייצר תוצאות',
-    heroSub: 'בניית אתרים, חנויות אונליין, אפליקציות, מערכות ואוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.',
-    heroCtaText: 'צרו איתנו קשר',
-    scrollTxt: 'CLICK CORE TO IMPULSE // SCROLL TO WARP',
-    servicesLabel: 'ORBITAL SATELLITES // 04',
-    servicesTitle: 'איך אנחנו הופכים רעיון<br><strong>לפתרון שמייצר תוצאות</strong>',
-    svcTitle1: 'אסטרטגיה ואפיון',
-    svcDesc1: 'איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים.',
-    svcTitle2: 'פיתוח אתרים ומערכות Web',
-    svcDesc2: 'בניית אתרים יוקרתיים, חנויות E-commerce ומערכות Web מתקדמות ברמה בינלאומית עם ביצועים יוצאי דופן.',
-    svcTitle3: 'אוטומציות AI ואפליקציות',
-    svcDesc3: 'פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7.',
-    svcTitle4: 'Cloud, אבטחה וצמיחה',
-    svcDesc4: 'תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן — המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן.',
+    heroLine2: 'שבונים את העתיד',
+    heroLine3: 'של העסק שלכם',
+    heroSub: 'מערכת אקולוגית דיגיטלית אחת: אתרים מתקדמים, אפליקציות, חנויות E-commerce, תשתיות ענן וסוכני AI <strong>שמקדמים אותכם כמה צעדים לפני המתחרים</strong>.',
+    heroCtaText: 'מתחילים פרויקט',
+    scrollTxt: 'MOVE CURSOR HORIZONTALLY TO EXPLODE CORE // SCROLL TO ENTER MACHINE',
+    webTitle: 'WEB ARCHITECTURE',
+    webDesc: 'בניית אתרי פרימיום, חנויות אונליין וממשקי Web מתקדמים ברמה בינלאומית עם ביצועים יוצאי דופן.',
+    appsTitle: 'MODULAR APPLICATIONS',
+    appsDesc: 'ארכיטקטורת תוכנה, מערכות SaaS ואפליקציות מובייל מותאמות אישית המציגות ממשקי משתמש עוצמתיים.',
+    commerceTitle: 'TRANSACTIONAL COMMERCE',
+    commerceDesc: 'רשתות מסחר דיגיטליות, סליקה מתקדמת וחנויות E-commerce שנבנות להמרה מקסימלית בטכנולוגיות Next.js.',
+    devopsTitle: 'CLOUD INFRASTRUCTURE & DEVOPS',
+    devopsDesc: 'טופולוגיות ענן מורכבות (AWS/GCP), ניהול Kubernetes, אבטחת מידע קפדנית ורמת זמינות של 99.99% Uptime SLA.',
+    aiTitle: 'COMPUTATIONAL AI INTELLIGENCE',
+    aiDesc: 'סוכני AI חכמים, אוטומציות עסקיות ואלגוריתמים המייעלים את מערך המכירות והשירות 24/7 וחוסכים 80% מזמן העבודה.',
     metricLabel1: 'פרויקטים שהושלמו',
     metricLabel2: 'Uptime SLA',
     metricLabel3: 'תמיכה וניטור',
     metricLabel4: 'חיסכון בזמן עם AI',
-    contactTitle: 'רוצים לשמוע עוד?',
-    contactTitleStrong: 'צרו איתנו קשר',
+    contactTitle: 'יש לכם רעיון?',
+    contactTitleStrong: 'אנחנו נהפוך אותו למערכת שעובדת.',
     contactSub: 'השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.',
     lblFullname: 'שם מלא *',
     lblPhone: 'טלפון *',
@@ -54,11 +54,14 @@ const DICT = {
     placeholderPhone: '052-2057074',
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'איך נוכל לעזור?',
-    btnSubmitTxt: 'שליחה',
+    btnSubmitTxt: 'מתחילים פרויקט',
     copyright: '© Code92 · כל הזכויות שמורות ליותם כהן',
     navLabelHero: 'הליבה',
-    navLabelServices: 'ממשקים',
-    navLabelMetrics: 'אימפקט',
+    navLabelWeb: 'WEB',
+    navLabelApps: 'APPS',
+    navLabelCommerce: 'COMMERCE',
+    navLabelDevops: 'DEVOPS',
+    navLabelAi: 'AI',
     navLabelContact: 'חיבור',
     // Bot
     botStatus: 'מחובר/ת כעת לשיחה',
@@ -76,30 +79,30 @@ const DICT = {
   },
   en: {
     langBtn: 'HE',
-    navContactBtnText: 'Contact',
-    hudSystemStatus: 'CORE ONLINE',
+    navContactBtnText: 'Start Project',
+    hudSystemStatus: 'SINGULARITY ONLINE',
     heroLine1: 'Digital Solutions',
-    heroLine2: 'For People Who Want',
-    heroLine3: 'To Generate Results',
-    heroSub: 'Building websites, online stores, apps, custom systems and AI automations <strong>that keep you steps ahead of your competitors</strong>.',
-    heroCtaText: 'Contact Us',
-    scrollTxt: 'CLICK CORE TO IMPULSE // SCROLL TO WARP',
-    servicesLabel: 'ORBITAL SATELLITES // 04',
-    servicesTitle: 'How We Turn An Idea<br><strong>Into A Solution That Drives Results</strong>',
-    svcTitle1: 'Strategy & UX Architecture',
-    svcDesc1: 'Precise architecture and market research identifying your exact growth engines to convert visitors into paying clients.',
-    svcTitle2: 'Websites & Web Systems',
-    svcDesc2: 'Building luxury websites, E-commerce stores and advanced Web systems at an international standard with exceptional performance.',
-    svcTitle3: 'AI Automations & Custom Apps',
-    svcDesc3: 'Custom mobile apps and intelligent AI agents saving up to 80% manual work while boosting sales and 24/7 support.',
-    svcTitle4: 'Cloud, Security & Growth',
-    svcDesc4: 'Enterprise cloud, cyber security and ongoing personal management by Yotam Cohen ensuring continuous revenue growth.',
+    heroLine2: 'Building The Future',
+    heroLine3: 'Of Your Business',
+    heroSub: 'One complete digital ecosystem: advanced websites, mobile apps, E-commerce stores, cloud DevOps infrastructure and AI agents.',
+    heroCtaText: 'Start Project',
+    scrollTxt: 'MOVE CURSOR HORIZONTALLY TO EXPLODE CORE // SCROLL TO ENTER MACHINE',
+    webTitle: 'WEB ARCHITECTURE',
+    webDesc: 'Building luxury websites, E-commerce stores and advanced Web applications at international standards with exceptional performance.',
+    appsTitle: 'MODULAR APPLICATIONS',
+    appsDesc: 'Software architecture, custom SaaS platforms and native mobile apps engineered for powerful user experiences.',
+    commerceTitle: 'TRANSACTIONAL COMMERCE',
+    commerceDesc: 'Digital commerce networks, payment routing and high-conversion E-commerce built with Next.js.',
+    devopsTitle: 'CLOUD INFRASTRUCTURE & DEVOPS',
+    devopsDesc: 'Complex cloud topologies (AWS/GCP), Kubernetes orchestration, cyber security, and 99.99% Uptime SLA.',
+    aiTitle: 'COMPUTATIONAL AI INTELLIGENCE',
+    aiDesc: 'Intelligent AI agents, business automations and algorithms saving up to 80% manual work with 24/7 reliability.',
     metricLabel1: 'Projects Delivered',
     metricLabel2: 'Uptime SLA',
     metricLabel3: 'Support & Monitoring',
     metricLabel4: 'Time Saved with AI',
-    contactTitle: 'Want to hear more?',
-    contactTitleStrong: 'Contact Us',
+    contactTitle: 'Have an Idea?',
+    contactTitleStrong: 'We Engineer Systems That Work.',
     contactSub: 'Leave your details and we will get back to you shortly with full answers.',
     lblFullname: 'Full Name *',
     lblPhone: 'Phone *',
@@ -109,11 +112,14 @@ const DICT = {
     placeholderPhone: '052-2057074',
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'How can we help?',
-    btnSubmitTxt: 'Submit',
+    btnSubmitTxt: 'Start Project',
     copyright: '© Code92 · All Rights Reserved to Yotam Cohen',
     navLabelHero: 'Core',
-    navLabelServices: 'Nodes',
-    navLabelMetrics: 'Impact',
+    navLabelWeb: 'WEB',
+    navLabelApps: 'APPS',
+    navLabelCommerce: 'COMMERCE',
+    navLabelDevops: 'DEVOPS',
+    navLabelAi: 'AI',
     navLabelContact: 'Connect',
     // Bot
     botStatus: 'Online Now',
@@ -149,16 +155,16 @@ let activeRep = null;
 let updateBotUiFn = null;
 
 /* ═══════════════════════════════════════════════════════════════════
-   1. QUANTUM CORE ENGINE & IMPULSE MATRIX (Signature 3D Engine)
+   1. THREE.JS DIGITAL SINGULARITY ENGINE (The Living Core Machine)
    ═══════════════════════════════════════════════════════════════════ */
-class QuantumCoreEngine {
+class DigitalSingularityEngine {
   constructor() {
     this.canvas = document.getElementById('webglCanvas');
     if (!this.canvas || typeof THREE === 'undefined') return;
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.camera.position.set(0, 0, 18);
+    this.camera.position.set(0, 0, 20);
 
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
@@ -171,132 +177,133 @@ class QuantumCoreEngine {
 
     this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
     this.scrollProgress = 0;
+    this.deconstructionFactor = 0;
     this.lastFrameTime = performance.now();
     this.frameCount = 0;
     this.fps = 60;
-    this.impulsePower = 0;
 
     this.initLights();
-    this.createCoreGeometry();
-    this.createParticleCloud();
-    this.createEnergyRings();
+    this.create5LayerDigitalCore();
+    this.createParticleUniverse();
     this.bindEvents();
     this.animate();
   }
 
   initLights() {
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
     this.scene.add(ambientLight);
 
-    this.emeraldLight = new THREE.PointLight(0x00e676, 3, 50);
-    this.emeraldLight.position.set(5, 5, 10);
+    this.emeraldLight = new THREE.PointLight(0x00e676, 3.5, 60);
+    this.emeraldLight.position.set(6, 6, 12);
     this.scene.add(this.emeraldLight);
 
-    this.cyanLight = new THREE.PointLight(0x00e5ff, 2.5, 50);
-    this.cyanLight.position.set(-5, -5, -5);
+    this.cyanLight = new THREE.PointLight(0x00e5ff, 3, 60);
+    this.cyanLight.position.set(-6, -6, -6);
     this.scene.add(this.cyanLight);
   }
 
-  createCoreGeometry() {
-    this.coreGroup = new THREE.Group();
+  create5LayerDigitalCore() {
+    this.coreMaster = new THREE.Group();
 
-    // Inner Wireframe Core
-    const innerGeo = new THREE.IcosahedronGeometry(2.8, 2);
-    const innerMat = new THREE.MeshBasicMaterial({
-      color: 0x00e676,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.4
-    });
-    this.innerMesh = new THREE.Mesh(innerGeo, innerMat);
-    this.coreGroup.add(this.innerMesh);
-
-    // Outer Glass Dodecahedron Hull
-    const outerGeo = new THREE.DodecahedronGeometry(3.6, 1);
-    const outerMat = new THREE.MeshPhongMaterial({
-      color: 0x00e676,
-      emissive: 0x002211,
-      specular: 0x00e5ff,
-      shininess: 90,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.18
-    });
-    this.outerMesh = new THREE.Mesh(outerGeo, outerMat);
-    this.coreGroup.add(this.outerMesh);
-
-    // Center Nucleus Sphere
-    const nucleusGeo = new THREE.SphereGeometry(1.2, 32, 32);
+    // ── Layer 1: AI Nucleus (Generative Node Matrix)
+    this.layerAi = new THREE.Group();
+    const nucleusGeo = new THREE.IcosahedronGeometry(2.2, 3);
     const nucleusMat = new THREE.MeshBasicMaterial({
       color: 0x00e676,
+      wireframe: true,
       transparent: true,
-      opacity: 0.85
+      opacity: 0.75
     });
-    this.nucleusMesh = new THREE.Mesh(nucleusGeo, nucleusMat);
-    this.coreGroup.add(this.nucleusMesh);
+    this.layerAi.add(new THREE.Mesh(nucleusGeo, nucleusMat));
+    this.coreMaster.add(this.layerAi);
 
-    this.scene.add(this.coreGroup);
+    // ── Layer 2: DevOps Ring Topology
+    this.layerDevops = new THREE.Group();
+    const ringGeo = new THREE.TorusGeometry(3.6, 0.04, 16, 80);
+    const ringMat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, transparent: true, opacity: 0.5 });
+    for (let i = 0; i < 3; i++) {
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI * (i * 0.33);
+      ring.rotation.y = Math.PI * (i * 0.25);
+      this.layerDevops.add(ring);
+    }
+    this.coreMaster.add(this.layerDevops);
+
+    // ── Layer 3: Commerce Transaction Torus
+    this.layerCommerce = new THREE.Group();
+    const commerceGeo = new THREE.TorusGeometry(4.8, 0.06, 16, 100);
+    const commerceMat = new THREE.MeshPhongMaterial({
+      color: 0x00e676,
+      emissive: 0x002211,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.35
+    });
+    this.commerceMesh = new THREE.Mesh(commerceGeo, commerceMat);
+    this.layerCommerce.add(this.commerceMesh);
+    this.coreMaster.add(this.layerCommerce);
+
+    // ── Layer 4: Modular Apps Panel Matrix
+    this.layerApps = new THREE.Group();
+    const panelGeo = new THREE.BoxGeometry(0.8, 0.8, 0.08);
+    const panelMat = new THREE.MeshPhongMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.4 });
+    for (let i = 0; i < 12; i++) {
+      const panel = new THREE.Mesh(panelGeo, panelMat);
+      const angle = (i / 12) * Math.PI * 2;
+      panel.position.set(Math.cos(angle) * 5.8, Math.sin(angle) * 5.8, (Math.random() - 0.5) * 2);
+      this.layerApps.add(panel);
+    }
+    this.coreMaster.add(this.layerApps);
+
+    // ── Layer 5: Web Outer Shell
+    this.layerWeb = new THREE.Group();
+    const shellGeo = new THREE.DodecahedronGeometry(6.6, 1);
+    const shellMat = new THREE.MeshPhongMaterial({
+      color: 0x00e676,
+      emissive: 0x001100,
+      specular: 0x00e5ff,
+      shininess: 100,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.15
+    });
+    this.shellMesh = new THREE.Mesh(shellGeo, shellMat);
+    this.layerWeb.add(this.shellMesh);
+    this.coreMaster.add(this.layerWeb);
+
+    this.scene.add(this.coreMaster);
   }
 
-  createParticleCloud() {
+  createParticleUniverse() {
     const isMobile = window.innerWidth < 768;
-    const count = isMobile ? 900 : 2000;
+    const count = isMobile ? 1000 : 2500;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
-    const originalPositions = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
       const u = Math.random();
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const r = Math.cbrt(Math.random()) * 24 + 4;
+      const r = Math.cbrt(Math.random()) * 30 + 4;
 
-      const x = r * Math.sin(phi) * Math.cos(theta);
-      const y = r * Math.sin(phi) * Math.sin(theta);
-      const z = r * Math.cos(phi);
-
-      positions[i * 3] = x;
-      positions[i * 3 + 1] = y;
-      positions[i * 3 + 2] = z;
-
-      originalPositions[i * 3] = x;
-      originalPositions[i * 3 + 1] = y;
-      originalPositions[i * 3 + 2] = z;
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = r * Math.cos(phi);
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    this.originalPositions = originalPositions;
 
     const material = new THREE.PointsMaterial({
       color: 0x00e676,
-      size: 0.08,
+      size: 0.075,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.4,
       blending: THREE.AdditiveBlending
     });
 
     this.particleSystem = new THREE.Points(geometry, material);
     this.scene.add(this.particleSystem);
-  }
-
-  createEnergyRings() {
-    this.ringGroup = new THREE.Group();
-    const ringGeo = new THREE.TorusGeometry(5.4, 0.025, 16, 100);
-    const ringMat = new THREE.MeshBasicMaterial({
-      color: 0x00e5ff,
-      transparent: true,
-      opacity: 0.35
-    });
-
-    for (let i = 0; i < 3; i++) {
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI * (i * 0.3);
-      ring.rotation.y = Math.PI * (i * 0.25);
-      this.ringGroup.add(ring);
-    }
-
-    this.scene.add(this.ringGroup);
   }
 
   bindEvents() {
@@ -311,47 +318,27 @@ class QuantumCoreEngine {
       this.mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
     });
 
-    // Signature Mechanism: Click Shockwave Impulse
+    // Impulse trigger on viewport click
     window.addEventListener('click', (e) => {
       if (e.target.closest('#salesChatPanel') || e.target.closest('.lang-toggle') || e.target.closest('input')) return;
       this.triggerCoreImpulse();
     });
   }
 
-  // Signature Interaction: Shockwave Energy Pulse
   triggerCoreImpulse() {
-    this.impulsePower = 1.0;
-
-    const telStatus = document.getElementById('telStatus');
-    if (telStatus) {
-      telStatus.textContent = 'CORE: IMPULSE DISCHARGED';
-      setTimeout(() => { telStatus.textContent = 'CORE: IMPULSE READY'; }, 1500);
-    }
-
-    // Shockwave timeline on geometry and particles
-    gsap.to(this.coreGroup.scale, {
-      x: 1.4, y: 1.4, z: 1.4,
-      duration: 0.2,
+    gsap.to(this.coreMaster.scale, {
+      x: 1.35, y: 1.35, z: 1.35,
+      duration: 0.25,
       yoyo: true,
       repeat: 1,
       ease: 'power2.out'
     });
-
-    if (this.particleSystem) {
-      gsap.to(this.particleSystem.material, {
-        size: 0.18,
-        opacity: 0.85,
-        duration: 0.3,
-        yoyo: true,
-        repeat: 1
-      });
-    }
   }
 
   animate() {
     requestAnimationFrame(() => this.animate());
 
-    // Compute real-time FPS
+    // FPS calculation
     const now = performance.now();
     this.frameCount++;
     if (now > this.lastFrameTime + 1000) {
@@ -365,58 +352,72 @@ class QuantumCoreEngine {
     this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.05;
     this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.05;
 
-    // Core Rotations
-    if (this.coreGroup) {
-      this.innerMesh.rotation.x += 0.003;
-      this.innerMesh.rotation.y += 0.005;
+    // Horizontal Pointer Deconstruction Signature Mechanism
+    // Moving mouse horizontally explodes core layers in 3D spatial space
+    const targetDeconstruct = Math.abs(this.mouse.x);
+    this.deconstructionFactor += (targetDeconstruct - this.deconstructionFactor) * 0.06;
 
-      this.outerMesh.rotation.x -= 0.002;
-      this.outerMesh.rotation.y -= 0.004;
+    // Apply 3D Spatial Deconstruction offsets
+    if (this.layerAi) this.layerAi.position.x = -this.deconstructionFactor * 2.5;
+    if (this.layerDevops) this.layerDevops.position.x = this.deconstructionFactor * 2.5;
+    if (this.layerCommerce) this.layerCommerce.position.y = this.deconstructionFactor * 2.0;
+    if (this.layerApps) this.layerApps.position.y = -this.deconstructionFactor * 2.0;
+    if (this.layerWeb) this.layerWeb.position.z = this.deconstructionFactor * 3.0;
 
-      this.coreGroup.rotation.y = this.mouse.x * 0.45;
-      this.coreGroup.rotation.x = -this.mouse.y * 0.45;
+    // Rotate core elements
+    if (this.coreMaster) {
+      this.coreMaster.rotation.y += 0.003;
+      this.coreMaster.rotation.x = -this.mouse.y * 0.35;
     }
 
-    // Particle Cloud Drift
     if (this.particleSystem) {
-      this.particleSystem.rotation.y += 0.0006;
-    }
-
-    // Ring Accelerators
-    if (this.ringGroup) {
-      this.ringGroup.rotation.z += 0.0025;
-      this.ringGroup.rotation.x += 0.0015;
+      this.particleSystem.rotation.y += 0.0004;
     }
 
     this.renderer.render(this.scene, this.camera);
   }
 
+  // Camera Spatial Penetration trajectory through the 5 systems
   setCameraSpatialState(progress) {
     this.scrollProgress = progress;
 
-    if (this.camera && this.coreGroup) {
-      this.camera.position.z = 18 - progress * 10;
-      this.camera.position.y = -progress * 4;
-      this.coreGroup.scale.setScalar(1 + progress * 0.35);
+    if (this.camera && this.coreMaster) {
+      // Camera Z enters the core: 20m -> -15m
+      this.camera.position.z = 20 - progress * 35;
+      this.camera.position.y = -progress * 6;
+      this.coreMaster.rotation.z = progress * Math.PI;
     }
   }
 
   updateHUDTelemetry() {
     const telDepth = document.getElementById('telDepth');
     const telFps = document.getElementById('telFps');
-    const telCoords = document.getElementById('telCoords');
+    const telDeconstruct = document.getElementById('telDeconstruct');
+    const telWorld = document.getElementById('telWorld');
 
-    const depthVal = (18 - this.scrollProgress * 10).toFixed(1);
-    if (telDepth) telDepth.textContent = `DEPTH: ${depthVal}m`;
+    const depthVal = (20 - this.scrollProgress * 35).toFixed(1);
+    if (telDepth) telDepth.textContent = `Z-DEPTH: ${depthVal}m`;
     if (telFps) telFps.textContent = `${this.fps} FPS`;
-    if (telCoords) telCoords.textContent = `X: ${this.mouse.x.toFixed(2)} Y: ${this.mouse.y.toFixed(2)}`;
+
+    const pct = Math.round(this.deconstructionFactor * 100);
+    if (telDeconstruct) telDeconstruct.textContent = `DECONSTRUCT: ${pct}%`;
+
+    // Dynamic System World Label
+    if (telWorld) {
+      if (this.scrollProgress < 0.15) telWorld.textContent = 'SYSTEM: THE DIGITAL CORE';
+      else if (this.scrollProgress < 0.32) telWorld.textContent = 'WORLD 1: WEB ARCHITECTURE';
+      else if (this.scrollProgress < 0.48) telWorld.textContent = 'WORLD 2: MODULAR APPS';
+      else if (this.scrollProgress < 0.64) telWorld.textContent = 'WORLD 3: COMMERCE NET';
+      else if (this.scrollProgress < 0.80) telWorld.textContent = 'WORLD 4: CLOUD DEVOPS';
+      else telWorld.textContent = 'WORLD 5: AI SINGULARITY';
+    }
   }
 }
 
 let coreEngine = null;
 
 /* ═══════════════════════════════════════════════════════════════════
-   2. CYBERNETIC DECIPHER TEXT ENGINE (Kinetic Text Resolution)
+   2. CYBERNETIC DECIPHER TEXT ENGINE
    ═══════════════════════════════════════════════════════════════════ */
 function runDecipherEffect(element, targetText) {
   if (!element) return;
@@ -446,24 +447,17 @@ function runDecipherEffect(element, targetText) {
   }, 25);
 }
 
-function initDecipherTextOnScroll() {
-  const elements = document.querySelectorAll('[data-decipher]');
-  elements.forEach(el => {
-    runDecipherEffect(el);
-  });
-}
-
 /* ═══════════════════════════════════════════════════════════════════
-   3. SYSTEM IGNITION LOADER
+   3. MECHANICAL ASSEMBLY OPENING SEQUENCE (First 5 Seconds)
    ═══════════════════════════════════════════════════════════════════ */
 function initLoadingSequence() {
   const loader = document.getElementById('loader');
-  const flare = document.getElementById('loaderFlare');
+  const preview = document.getElementById('loaderCorePreview');
   const wordmark = document.getElementById('loaderWordmark');
   const status = document.getElementById('loaderStatus');
   if (!loader) return;
 
-  runDecipherEffect(status, 'INITIALIZING QUANTUM CORE...');
+  runDecipherEffect(status, 'ASSEMBLING DIGITAL CORE...');
 
   const tl = gsap.timeline({
     onComplete: () => {
@@ -472,11 +466,11 @@ function initLoadingSequence() {
     }
   });
 
-  tl.to(flare, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.2)
-    .to(flare, { width: '85vw', height: '3px', duration: 0.8, ease: 'power3.out' }, 0.5)
+  tl.to(preview, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.2)
+    .to(preview, { width: '80vw', height: '3px', borderRadius: '2px', duration: 0.8, ease: 'power3.out' }, 0.5)
     .to(wordmark, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0)
     .to(status, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 1.2)
-    .to(flare, { opacity: 0, width: '140vw', height: '140vh', duration: 0.7, ease: 'power2.in' }, 1.8)
+    .to(preview, { opacity: 0, width: '140vw', height: '140vh', duration: 0.7, ease: 'power2.in' }, 1.8)
     .to(wordmark, { opacity: 0, y: -20, duration: 0.5 }, 1.8)
     .to(status, { opacity: 0 }, 1.8)
     .to(loader, { opacity: 0, duration: 0.6 }, 2.2)
@@ -484,7 +478,7 @@ function initLoadingSequence() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   4. HERO ENTRANCE & KINETIC TYPOGRAPHY
+   4. HERO ENTRANCE & KINETIC TYPOGRAPHY OCCLUSION
    ═══════════════════════════════════════════════════════════════════ */
 function initHeroEntrance() {
   const lines = document.querySelectorAll('.title-line');
@@ -512,7 +506,7 @@ function initHeroEntrance() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   5. GSAP SPATIAL SCROLL TIMELINE
+   5. GSAP SPATIAL PENETRATION SCROLL TIMELINE
    ═══════════════════════════════════════════════════════════════════ */
 function initScrollTimeline() {
   gsap.registerPlugin(ScrollTrigger);
@@ -521,7 +515,7 @@ function initScrollTimeline() {
   const navDots = document.getElementById('navDots');
 
   ScrollTrigger.create({
-    trigger: '#services',
+    trigger: '#world-web',
     start: 'top 80%',
     onEnter: () => {
       header?.classList.add('visible');
@@ -533,6 +527,7 @@ function initScrollTimeline() {
     }
   });
 
+  // Spatial Camera Penetration Timeline
   ScrollTrigger.create({
     trigger: 'body',
     start: 'top top',
@@ -545,21 +540,18 @@ function initScrollTimeline() {
     }
   });
 
-  // Orbital Satellites Reveal
-  gsap.to('.hud-tag', {
-    opacity: 1, y: 0, duration: 0.7,
-    scrollTrigger: { trigger: '#services', start: 'top 75%' }
-  });
+  // Reveal System Worlds
+  document.querySelectorAll('.world-scene').forEach(world => {
+    const title = world.querySelector('.world-title');
+    const badge = world.querySelector('.world-hud-badge');
 
-  gsap.to('.section-title', {
-    opacity: 1, y: 0, duration: 0.8,
-    scrollTrigger: { trigger: '#services', start: 'top 70%' }
-  });
-
-  gsap.to('.satellite-card', {
-    opacity: 1, y: 0, duration: 0.85, stagger: 0.15, ease: 'power2.out',
-    clearProps: 'transform',
-    scrollTrigger: { trigger: '.orbital-satellites-deck', start: 'top 75%' }
+    if (title) {
+      ScrollTrigger.create({
+        trigger: world,
+        start: 'top 70%',
+        onEnter: () => runDecipherEffect(title)
+      });
+    }
   });
 
   // Metrics Reveal & Counter Animation
@@ -611,7 +603,7 @@ function animateMetrics() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   7. MOUSE LIGHTING & CURSOR RING
+   7. MOUSE LIGHTING & CURSOR TARGET RING
    ═══════════════════════════════════════════════════════════════════ */
 function initMouseLighting() {
   const cursorGlow = document.getElementById('cursorGlow');
@@ -644,7 +636,7 @@ function initMouseLighting() {
 
 function initVerticalNav() {
   const dots = document.querySelectorAll('.nav-dot');
-  const sections = ['hero', 'services', 'metrics', 'contact'];
+  const sections = ['hero', 'world-web', 'world-apps', 'world-commerce', 'world-devops', 'world-ai', 'contact'];
 
   dots.forEach(dot => {
     dot.addEventListener('click', (e) => {
@@ -683,9 +675,7 @@ function toggleLanguage() {
 
   const setText = (id, v) => {
     const el = document.getElementById(id);
-    if (el) {
-      runDecipherEffect(el, v);
-    }
+    if (el) runDecipherEffect(el, v);
   };
   const setHtml = (id, v) => { const el = document.getElementById(id); if (el) el.innerHTML = v; };
   const setPlc = (id, v) => { const el = document.getElementById(id); if (el) el.placeholder = v; };
@@ -702,13 +692,12 @@ function toggleLanguage() {
   setText('heroCtaText', d.heroCtaText);
   setText('scrollTxt', d.scrollTxt);
 
-  // Services
-  setText('servicesLabel', d.servicesLabel);
-  setHtml('servicesTitle', d.servicesTitle);
-  setText('svcTitle1', d.svcTitle1); setText('svcDesc1', d.svcDesc1);
-  setText('svcTitle2', d.svcTitle2); setText('svcDesc2', d.svcDesc2);
-  setText('svcTitle3', d.svcTitle3); setText('svcDesc3', d.svcDesc3);
-  setText('svcTitle4', d.svcTitle4); setText('svcDesc4', d.svcDesc4);
+  // System Worlds
+  setText('webTitle', d.webTitle); setText('webDesc', d.webDesc);
+  setText('appsTitle', d.appsTitle); setText('appsDesc', d.appsDesc);
+  setText('commerceTitle', d.commerceTitle); setText('commerceDesc', d.commerceDesc);
+  setText('devopsTitle', d.devopsTitle); setText('devopsDesc', d.devopsDesc);
+  setText('aiTitle', d.aiTitle); setText('aiDesc', d.aiDesc);
 
   // Metrics
   setText('metricLabel1', d.metricLabel1);
@@ -735,8 +724,11 @@ function toggleLanguage() {
 
   // Nav dots
   setText('navLabelHero', d.navLabelHero);
-  setText('navLabelServices', d.navLabelServices);
-  setText('navLabelMetrics', d.navLabelMetrics);
+  setText('navLabelWeb', d.navLabelWeb);
+  setText('navLabelApps', d.navLabelApps);
+  setText('navLabelCommerce', d.navLabelCommerce);
+  setText('navLabelDevops', d.navLabelDevops);
+  setText('navLabelAi', d.navLabelAi);
   setText('navLabelContact', d.navLabelContact);
 
   if (typeof updateBotUiFn === 'function') updateBotUiFn();
@@ -1040,7 +1032,7 @@ function initContactForm() {
    INITIALIZATION
    ═══════════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  coreEngine = new QuantumCoreEngine();
+  coreEngine = new DigitalSingularityEngine();
 
   document.getElementById('langToggleBtn')?.addEventListener('click', (e) => {
     e.preventDefault();

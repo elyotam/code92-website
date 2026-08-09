@@ -1,7 +1,7 @@
 /* ================================================================
-   Code92 — Quantum Matrix Spatial System v6.0
+   Code92 — THE DIGITAL SINGULARITY Spatial System v7.0
    Brand Owner: יותם כהן (Yotam Cohen) | 052-2057074
-   Visual Universe: 3D Quantum Core, Telemetry & Orbital Satellites
+   Visual Universe: Living 3D Machine, 5 Systems & Spatial Penetration
    ================================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -9,18 +9,16 @@
 /* ── Root Design Tokens ────────────────────────────────────────── */
 :root {
   /* Atmosphere */
-  --bg-void:       #000002;
-  --bg-deep:       #030308;
-  --bg-warm:       #07070b;
-  --bg-glass:      rgba(10, 10, 20, 0.4);
-  --bg-glass-card: rgba(255, 255, 255, 0.02);
+  --bg-singularity: #000003;
+  --bg-deep:        #020206;
+  --bg-warm:        #06060a;
+  --bg-glass-card:  rgba(255, 255, 255, 0.02);
 
-  /* Brand Signature Colors */
+  /* Brand Core Colors */
   --emerald:       #00e676;
   --emerald-dim:   #00c853;
   --emerald-glow:  rgba(0, 230, 118, 0.5);
   --emerald-soft:  rgba(0, 230, 118, 0.08);
-  --emerald-ghost: rgba(0, 230, 118, 0.02);
 
   --cyan-accent:   #00e5ff;
   --cyan-glow:     rgba(0, 229, 255, 0.4);
@@ -65,12 +63,12 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
-  background: var(--bg-void);
+  background: var(--bg-singularity);
 }
 
 body {
   font-family: var(--font-hebrew);
-  background: var(--bg-void);
+  background: var(--bg-singularity);
   color: var(--text-bright);
   line-height: 1.6;
   overflow-x: hidden;
@@ -83,15 +81,13 @@ img, video { max-width: 100%; display: block; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-track { background: var(--bg-singularity); }
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 230, 118, 0.3);
   border-radius: 2px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--emerald);
-}
-html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-void); }
+::-webkit-scrollbar-thumb:hover { background: var(--emerald); }
+html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-singularity); }
 
 .container {
   width: 100%;
@@ -149,7 +145,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
 
 .cursor-ring.active { opacity: 0.6; }
 
-/* ── 3. HUD Telemetry Bar (Signature Technical Readout) ────────── */
+/* ── 3. HUD Telemetry Bar (Signature Readout) ──────────────────── */
 .hud-telemetry {
   position: fixed;
   bottom: 20px;
@@ -159,7 +155,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
   align-items: center;
   gap: 10px;
   padding: 6px 14px;
-  background: rgba(0, 0, 2, 0.8);
+  background: rgba(0, 0, 3, 0.85);
   border: 1px solid var(--border-ghost);
   border-radius: 20px;
   backdrop-filter: blur(12px);
@@ -172,7 +168,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
 .tel-divider { color: var(--border-subtle); }
 .tel-item.accent { color: var(--emerald); }
 
-/* ── 4. System Ignition Loader ─────────────────────────────────── */
+/* ── 4. Mechanical Assembly Loader ─────────────────────────────── */
 .loader {
   position: fixed;
   inset: 0;
@@ -185,15 +181,15 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
   gap: 16px;
 }
 
-.loader-flare {
-  width: 2px;
-  height: 2px;
+.loader-core-preview {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--emerald);
   box-shadow:
-    0 0 30px 10px var(--emerald-glow),
-    0 0 80px 30px rgba(0, 230, 118, 0.2),
-    0 0 160px 60px rgba(0, 230, 118, 0.05);
+    0 0 40px 15px var(--emerald-glow),
+    0 0 100px 40px rgba(0, 230, 118, 0.2),
+    0 0 200px 80px rgba(0, 230, 118, 0.05);
   opacity: 0;
 }
 
@@ -228,7 +224,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
   right: 0;
   z-index: 100;
   height: 72px;
-  background: rgba(0, 0, 2, 0.7);
+  background: rgba(0, 0, 3, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-ghost);
@@ -372,7 +368,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
   z-index: 90;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   opacity: 0;
   transition: opacity 0.5s;
 }
@@ -443,7 +439,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
   padding: 120px 0;
 }
 
-/* ── SCENE 1: HERO ─────────────────────────────────────────────── */
+/* HERO SCENE */
 .hero-scene {
   min-height: 100vh;
   text-align: center;
@@ -575,148 +571,43 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
   color: var(--text-dim);
 }
 
-/* ── SCENE 2: 3D ORBITAL SATELLITES DECK (Services Rethought) ──── */
-.hud-tag {
-  display: block;
+/* ── 5 SYSTEM WORLDS STYLING ───────────────────────────────────── */
+.world-scene {
+  text-align: center;
+}
+
+.world-hud-badge {
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 3px;
   color: var(--emerald);
-  margin-bottom: 16px;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.section-title {
-  font-family: var(--font-hebrew);
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 300;
-  line-height: 1.2;
-  color: var(--text-bright);
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-[dir="ltr"] .section-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-}
-
-.section-title strong {
-  font-weight: 700;
-  color: var(--emerald);
-}
-
-.orbital-satellites-deck {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  margin-top: 64px;
-}
-
-.satellite-card {
-  position: relative;
-  background: rgba(8, 8, 18, 0.6);
-  border: 1px solid var(--border-ghost);
+  padding: 4px 14px;
   border-radius: 20px;
-  padding: 44px 36px;
-  overflow: hidden;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: all 0.45s var(--ease-quantum);
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.satellite-card:hover {
-  border-color: var(--border-emerald);
-  background: rgba(0, 230, 118, 0.04);
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 230, 118, 0.12);
-}
-
-.sat-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  background: rgba(0, 230, 118, 0.05);
+  border: 1px solid rgba(0, 230, 118, 0.15);
   margin-bottom: 24px;
 }
 
-.sat-code {
+.world-title {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: var(--emerald);
-}
-
-.sat-ping {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--emerald);
-  box-shadow: 0 0 10px var(--emerald-glow);
-}
-
-.sat-icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 24px;
-  color: var(--emerald);
-  transition: transform var(--dur);
-}
-
-.satellite-card:hover .sat-icon {
-  transform: scale(1.1) rotate(5deg);
-}
-
-.sat-title {
-  font-size: 23px;
-  font-weight: 600;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 700;
   color: var(--text-bright);
-  margin-bottom: 14px;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
 }
 
-.sat-desc {
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.7;
+.world-desc {
+  font-size: clamp(16px, 2.2vw, 20px);
+  font-weight: 300;
   color: var(--text-mid);
-  margin-bottom: 28px;
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.7;
 }
 
-.sat-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 20px;
-  border-top: 1px solid var(--border-ghost);
-}
-
-.sat-status {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  color: var(--text-dim);
-}
-
-.satellite-card:hover .sat-status { color: var(--emerald); }
-
-.sat-arrow {
-  font-size: 16px;
-  color: var(--text-dim);
-  transition: transform var(--dur), color var(--dur);
-}
-
-.satellite-card:hover .sat-arrow {
-  color: var(--emerald);
-  transform: translateX(4px);
-}
-
-[dir="rtl"] .satellite-card:hover .sat-arrow {
-  transform: translateX(-4px);
-}
-
-/* ── SCENE 3: ENERGY ACCELERATOR (METRICS) ─────────────────────── */
+/* ── METRICS ACCELERATOR ───────────────────────────────────────── */
 .metrics-scene {
   background: radial-gradient(circle at 50% 50%, rgba(0, 230, 118, 0.03) 0%, transparent 70%);
   border-top: 1px solid var(--border-ghost);
@@ -765,7 +656,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
   color: var(--text-mid);
 }
 
-/* ── SCENE 4: CONTAINMENT PORTAL (CONTACT) ─────────────────────── */
+/* ── CONTAINMENT PORTAL (CONTACT) ──────────────────────────────── */
 .contact-scene {
   background: var(--bg-warm);
 }
@@ -894,7 +785,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
   position: relative;
   z-index: 2;
   padding: 32px 0;
-  background: var(--bg-void);
+  background: var(--bg-singularity);
   border-top: 1px solid var(--border-ghost);
   text-align: center;
 }
@@ -1182,7 +1073,6 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
 
 /* ── 10. Responsive Breakpoints ────────────────────────────────── */
 @media (max-width: 1024px) {
-  .orbital-satellites-deck { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .metric-card { border-bottom: 1px solid var(--border-ghost); }
   .metric-card:nth-child(2) { border-inline-end: none; }
@@ -1194,7 +1084,6 @@ html { scrollbar-width: thin; scrollbar-color: rgba(0, 230, 118, 0.3) var(--bg-v
 @media (max-width: 768px) {
   .title-line { font-size: clamp(34px, 8.5vw, 48px) !important; }
   .hero-sub { font-size: 16px; }
-  .orbital-satellites-deck { grid-template-columns: 1fr; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .metric-val { font-size: 38px !important; }
   .metric-suf { font-size: 30px !important; }

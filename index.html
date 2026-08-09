@@ -3,56 +3,56 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Code92 | פתרונות דיגיטליים ברמה בינלאומית</title>
-  <meta name="description" content="Code92 מספקים פתרונות דיגיטליים מתקדמים – אתרים, חנויות, אפליקציות, מערכות ואוטומציות AI שמקדמות אותכם כמה צעדים לפני המתחרים." />
+  <title>Code92 | פתרונות דיגיטליים שבונים את העתיד</title>
+  <meta name="description" content="Code92 — מערכת אקולוגית דיגיטלית מלאה: אתרים מתקדמים, אפליקציות, חנויות E-commerce, תשתיות DevOps וסוכני AI." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="style.css?v=6.0" />
+  <link rel="stylesheet" href="style.css?v=7.0" />
 </head>
 <body>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       1. SYSTEM IGNITION LOADER
+       1. MECHANICAL ASSEMBLY OPENING SEQUENCE
        ═══════════════════════════════════════════════════════════════ -->
   <div class="loader" id="loader">
-    <div class="loader-flare" id="loaderFlare"></div>
+    <div class="loader-core-preview" id="loaderCorePreview"></div>
     <div class="loader-wordmark" id="loaderWordmark">Code92<span class="dot">.</span></div>
-    <div class="loader-status" id="loaderStatus" data-decipher="INITIALIZING QUANTUM CORE...">INITIALIZING QUANTUM CORE...</div>
+    <div class="loader-status" id="loaderStatus" data-decipher="ASSEMBLING DIGITAL CORE...">ASSEMBLING DIGITAL CORE...</div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       2. THREE.JS WEBGL CANVAS (The Central 3D Visual Universe)
+       2. THREE.JS WEBGL CANVAS (The Living Digital Core Universe)
        ═══════════════════════════════════════════════════════════════ -->
   <canvas id="webglCanvas" class="webgl-canvas"></canvas>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       3. AMBIENT CURSOR GLOW & INTERACTION RING
+       3. AMBIENT CURSOR TARGET & LIGHT RING
        ═══════════════════════════════════════════════════════════════ -->
   <div class="cursor-glow" id="cursorGlow"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       4. REAL-TIME HUD TELEMETRY BAR (Signature Technical Detail)
+       4. REAL-TIME HUD TELEMETRY BAR
        ═══════════════════════════════════════════════════════════════ -->
   <div class="hud-telemetry" id="hudTelemetry">
-    <span class="tel-item" id="telDepth">DEPTH: 18.0m</span>
+    <span class="tel-item" id="telWorld">SYSTEM: THE DIGITAL CORE</span>
+    <span class="tel-divider">|</span>
+    <span class="tel-item" id="telDepth">Z-DEPTH: 20.0m</span>
     <span class="tel-divider">|</span>
     <span class="tel-item" id="telFps">60 FPS</span>
     <span class="tel-divider">|</span>
-    <span class="tel-item" id="telCoords">X: 0.00 Y: 0.00</span>
-    <span class="tel-divider">|</span>
-    <span class="tel-item accent" id="telStatus">CORE: IMPULSE READY</span>
+    <span class="tel-item accent" id="telDeconstruct">DECONSTRUCT: 0%</span>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       5. HUD HEADER
+       5. HUD HEADER (Minimalist Integrated Controls)
        ═══════════════════════════════════════════════════════════════ -->
   <header class="hud-header" id="mainHeader">
     <div class="header-inner">
       <a class="logo" href="#">Code92<span class="dot">.</span></a>
       <div class="hud-status-indicator">
         <span class="pulse-dot"></span>
-        <span class="hud-status-text" id="hudSystemStatus" data-decipher="CORE ONLINE">CORE ONLINE</span>
+        <span class="hud-status-text" id="hudSystemStatus" data-decipher="SINGULARITY ONLINE">SINGULARITY ONLINE</span>
       </div>
       <div class="header-actions">
         <button id="langToggleBtn" class="lang-toggle" aria-label="Toggle Language">EN</button>
@@ -60,24 +60,33 @@
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.892c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652a12.062 12.062 0 005.71 1.447h.005c6.582 0 11.945-5.335 11.948-11.892a11.821 11.821 0 00-3.48-8.413z"></path></svg>
         </a>
         <a class="btn-cta" href="#contact" id="navContactBtn">
-          <span id="navContactBtnText" data-decipher="צרו קשר">צרו קשר</span>
+          <span id="navContactBtnText" data-decipher="מתחילים פרויקט">מתחילים פרויקט</span>
         </a>
       </div>
     </div>
   </header>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       6. HUD SPATIAL NAVIGATION DOTS
+       6. HUD SPATIAL WORLD INDICATOR DOTS
        ═══════════════════════════════════════════════════════════════ -->
-  <nav class="nav-dots" id="navDots" aria-label="Section navigation">
+  <nav class="nav-dots" id="navDots" aria-label="System navigation">
     <a href="#hero" class="nav-dot active" data-section="hero">
       <span class="nav-dot-label" id="navLabelHero">הליבה</span>
     </a>
-    <a href="#services" class="nav-dot" data-section="services">
-      <span class="nav-dot-label" id="navLabelServices">ממשקים</span>
+    <a href="#world-web" class="nav-dot" data-section="world-web">
+      <span class="nav-dot-label" id="navLabelWeb">WEB</span>
     </a>
-    <a href="#metrics" class="nav-dot" data-section="metrics">
-      <span class="nav-dot-label" id="navLabelMetrics">אימפקט</span>
+    <a href="#world-apps" class="nav-dot" data-section="world-apps">
+      <span class="nav-dot-label" id="navLabelApps">APPS</span>
+    </a>
+    <a href="#world-commerce" class="nav-dot" data-section="world-commerce">
+      <span class="nav-dot-label" id="navLabelCommerce">COMMERCE</span>
+    </a>
+    <a href="#world-devops" class="nav-dot" data-section="world-devops">
+      <span class="nav-dot-label" id="navLabelDevops">DEVOPS</span>
+    </a>
+    <a href="#world-ai" class="nav-dot" data-section="world-ai">
+      <span class="nav-dot-label" id="navLabelAi">AI</span>
     </a>
     <a href="#contact" class="nav-dot" data-section="contact">
       <span class="nav-dot-label" id="navLabelContact">חיבור</span>
@@ -85,22 +94,22 @@
   </nav>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       7. SPATIAL CONTENT SCENES
+       7. CONTINUOUS SPATIAL MACHINE WORLDS
        ═══════════════════════════════════════════════════════════════ -->
-  <main class="spatial-world">
+  <main class="spatial-world" id="spatialWorld">
 
-    <!-- ── SCENE 1: THE QUANTUM HERO ───────────────────────────── -->
+    <!-- ── STAGE 0: THE DIGITAL CORE HERO ─────────────────────── -->
     <section id="hero" class="spatial-scene hero-scene">
       <div class="scene-content">
         <h1 class="kinetic-title" id="heroTitle">
           <span class="title-line line-1" id="heroLine1" data-decipher="פתרונות דיגיטליים">פתרונות דיגיטליים</span>
-          <span class="title-line line-2" id="heroLine2" data-decipher="לאנשים שרוצים">לאנשים שרוצים</span>
-          <span class="title-line line-3 accent" id="heroLine3" data-decipher="לייצר תוצאות">לייצר תוצאות</span>
+          <span class="title-line line-2" id="heroLine2" data-decipher="שבונים את העתיד">שבונים את העתיד</span>
+          <span class="title-line line-3 accent" id="heroLine3" data-decipher="של העסק שלכם">של העסק שלכם</span>
         </h1>
-        <p class="hero-sub" id="heroSub">בניית אתרים, חנויות אונליין, אפליקציות, מערכות ואוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.</p>
+        <p class="hero-sub" id="heroSub">מערכת אקולוגית דיגיטלית אחת: אתרים מתקדמים, אפליקציות, חנויות E-commerce, תשתיות ענן וסוכני AI <strong>שמקדמים אותכם כמה צעדים לפני המתחרים</strong>.</p>
         <div class="hero-cta-wrap">
           <a class="hero-cta" href="#contact" id="heroCta">
-            <span id="heroCtaText">צרו איתנו קשר</span>
+            <span id="heroCtaText" data-decipher="מתחילים פרויקט">מתחילים פרויקט</span>
             <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.75 9H2.25M8.25 15L2.25 9l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -109,112 +118,56 @@
       <div class="scroll-indicator" id="scrollIndicator">
         <div class="scroll-dot"></div>
         <div class="scroll-line"></div>
-        <span class="scroll-txt" id="scrollTxt" data-decipher="CLICK CORE TO IMPULSE // SCROLL TO WARP">CLICK CORE TO IMPULSE // SCROLL TO WARP</span>
+        <span class="scroll-txt" id="scrollTxt" data-decipher="MOVE CURSOR HORIZONTALLY TO EXPLODE CORE // SCROLL TO ENTER MACHINE">MOVE CURSOR HORIZONTALLY TO EXPLODE CORE // SCROLL TO ENTER MACHINE</span>
       </div>
     </section>
 
-    <!-- ── SCENE 2: SPATIAL CORE SATELLITE EXPLORER (Services) ── -->
-    <section id="services" class="spatial-scene services-scene">
+    <!-- ── SYSTEM WORLD 1: WEB ─────────────────────────────────── -->
+    <section id="world-web" class="spatial-scene world-scene">
       <div class="container">
-        <div class="section-header text-center">
-          <span class="hud-tag" id="servicesLabel" data-decipher="ORBITAL SATELLITES // 04">ORBITAL SATELLITES // 04</span>
-          <h2 class="section-title" id="servicesTitle">איך אנחנו הופכים רעיון<br><strong>לפתרון שמייצר תוצאות</strong></h2>
-        </div>
-
-        <!-- 3D Orbital Satellites Deck -->
-        <div class="orbital-satellites-deck" id="satellitesDeck">
-          <!-- Satellite 1 -->
-          <article class="satellite-card" data-node="1" id="node1">
-            <div class="sat-header">
-              <span class="sat-code">SAT // 01</span>
-              <span class="sat-ping"></span>
-            </div>
-            <div class="sat-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M24 4L44 16V32L24 44L4 32V16L24 4Z"/>
-                <path d="M24 4V44M4 16L44 16M4 32L24 20L44 32"/>
-              </svg>
-            </div>
-            <h3 class="sat-title" id="svcTitle1" data-decipher="אסטרטגיה ואפיון">אסטרטגיה ואפיון</h3>
-            <p class="sat-desc" id="svcDesc1">איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים.</p>
-            <div class="sat-footer">
-              <span class="sat-status">ACTIVE NODE</span>
-              <span class="sat-arrow">→</span>
-            </div>
-          </article>
-
-          <!-- Satellite 2 -->
-          <article class="satellite-card" data-node="2" id="node2">
-            <div class="sat-header">
-              <span class="sat-code">SAT // 02</span>
-              <span class="sat-ping"></span>
-            </div>
-            <div class="sat-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="4" y="8" width="40" height="32" rx="4"/>
-                <line x1="4" y1="16" x2="44" y2="16"/>
-                <path d="M18 26L14 30L18 34M30 26L34 30L30 34"/>
-              </svg>
-            </div>
-            <h3 class="sat-title" id="svcTitle2" data-decipher="פיתוח אתרים ומערכות Web">פיתוח אתרים ומערכות Web</h3>
-            <p class="sat-desc" id="svcDesc2">בניית אתרים יוקרתיים, חנויות E-commerce ומערכות Web מתקדמות ברמה בינלאומית עם ביצועים יוצאי דופן.</p>
-            <div class="sat-footer">
-              <span class="sat-status">ACTIVE NODE</span>
-              <span class="sat-arrow">→</span>
-            </div>
-          </article>
-
-          <!-- Satellite 3 -->
-          <article class="satellite-card" data-node="3" id="node3">
-            <div class="sat-header">
-              <span class="sat-code">SAT // 03</span>
-              <span class="sat-ping"></span>
-            </div>
-            <div class="sat-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="24" cy="24" r="8"/>
-                <circle cx="24" cy="6" r="3"/>
-                <circle cx="24" cy="42" r="3"/>
-                <circle cx="6" cy="24" r="3"/>
-                <circle cx="42" cy="24" r="3"/>
-                <line x1="24" y1="9" x2="24" y2="16"/>
-                <line x1="24" y1="32" x2="24" y2="39"/>
-                <line x1="9" y1="24" x2="16" y2="24"/>
-                <line x1="32" y1="24" x2="39" y2="24"/>
-              </svg>
-            </div>
-            <h3 class="sat-title" id="svcTitle3" data-decipher="אוטומציות AI ואפליקציות">אוטומציות AI ואפליקציות</h3>
-            <p class="sat-desc" id="svcDesc3">פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7.</p>
-            <div class="sat-footer">
-              <span class="sat-status">ACTIVE NODE</span>
-              <span class="sat-arrow">→</span>
-            </div>
-          </article>
-
-          <!-- Satellite 4 -->
-          <article class="satellite-card" data-node="4" id="node4">
-            <div class="sat-header">
-              <span class="sat-code">SAT // 04</span>
-              <span class="sat-ping"></span>
-            </div>
-            <div class="sat-icon">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M24 12L36 20V36C36 40 24 44 24 44C24 44 12 40 12 36V20L24 12Z"/>
-                <path d="M18 28L22 32L30 24"/>
-              </svg>
-            </div>
-            <h3 class="sat-title" id="svcTitle4" data-decipher="Cloud, אבטחה וצמיחה">Cloud, אבטחה וצמיחה</h3>
-            <p class="sat-desc" id="svcDesc4">תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן — המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן.</p>
-            <div class="sat-footer">
-              <span class="sat-status">ACTIVE NODE</span>
-              <span class="sat-arrow">→</span>
-            </div>
-          </article>
-        </div>
+        <div class="world-hud-badge">SYSTEM // 01</div>
+        <h2 class="world-title" id="webTitle" data-decipher="WEB ARCHITECTURE">WEB ARCHITECTURE</h2>
+        <p class="world-desc" id="webDesc">בניית אתרי פרימיום, חנויות אונליין וממשקי Web מתקדמים ברמה בינלאומית עם ביצועים יוצאי דופן.</p>
       </div>
     </section>
 
-    <!-- ── SCENE 3: ENERGY ACCELERATOR (Metrics) ───────────────── -->
+    <!-- ── SYSTEM WORLD 2: APPLICATIONS ────────────────────────── -->
+    <section id="world-apps" class="spatial-scene world-scene">
+      <div class="container">
+        <div class="world-hud-badge">SYSTEM // 02</div>
+        <h2 class="world-title" id="appsTitle" data-decipher="MODULAR APPLICATIONS">MODULAR APPLICATIONS</h2>
+        <p class="world-desc" id="appsDesc">ארכיטקטורת תוכנה, מערכות SaaS ואפליקציות מובייל מותאמות אישית המציגות ממשקי משתמש עוצמתיים.</p>
+      </div>
+    </section>
+
+    <!-- ── SYSTEM WORLD 3: COMMERCE ────────────────────────────── -->
+    <section id="world-commerce" class="spatial-scene world-scene">
+      <div class="container">
+        <div class="world-hud-badge">SYSTEM // 03</div>
+        <h2 class="world-title" id="commerceTitle" data-decipher="TRANSACTIONAL COMMERCE">TRANSACTIONAL COMMERCE</h2>
+        <p class="world-desc" id="commerceDesc">רשתות מסחר דיגיטליות, סליקה מתקדמת וחנויות E-commerce שנבנות להמרה מקסימלית בטכנולוגיות Next.js.</p>
+      </div>
+    </section>
+
+    <!-- ── SYSTEM WORLD 4: DEVOPS ──────────────────────────────── -->
+    <section id="world-devops" class="spatial-scene world-scene">
+      <div class="container">
+        <div class="world-hud-badge">SYSTEM // 04</div>
+        <h2 class="world-title" id="devopsTitle" data-decipher="CLOUD INFRASTRUCTURE & DEVOPS">CLOUD INFRASTRUCTURE & DEVOPS</h2>
+        <p class="world-desc" id="devopsDesc">טופולוגיות ענן מורכבות (AWS/GCP), ניהול Kubernetes, אבטחת מידע קפדנית ורמת זמינות של 99.99% Uptime SLA.</p>
+      </div>
+    </section>
+
+    <!-- ── SYSTEM WORLD 5: AI ──────────────────────────────────── -->
+    <section id="world-ai" class="spatial-scene world-scene">
+      <div class="container">
+        <div class="world-hud-badge">SYSTEM // 05</div>
+        <h2 class="world-title" id="aiTitle" data-decipher="COMPUTATIONAL AI INTELLIGENCE">COMPUTATIONAL AI INTELLIGENCE</h2>
+        <p class="world-desc" id="aiDesc">סוכני AI חכמים, אוטומציות עסקיות ואלגוריתמים המייעלים את מערך המכירות והשירות 24/7 וחוסכים 80% מזמן העבודה.</p>
+      </div>
+    </section>
+
+    <!-- ── METRICS ACCELERATOR ─────────────────────────────────── -->
     <section id="metrics" class="spatial-scene metrics-scene">
       <div class="container">
         <div class="metrics-grid">
@@ -238,12 +191,12 @@
       </div>
     </section>
 
-    <!-- ── SCENE 4: CONTAINMENT PORTAL (Contact) ───────────────── -->
+    <!-- ── STABILIZED CONTAINMENT PORTAL (Contact) ─────────────── -->
     <section id="contact" class="spatial-scene contact-scene">
       <div class="container">
         <div class="contact-layout">
           <div class="contact-text">
-            <h2 class="contact-title" id="contactTitle">רוצים לשמוע עוד?<br><strong id="contactTitleStrong">צרו איתנו קשר</strong></h2>
+            <h2 class="contact-title" id="contactTitle">יש לכם רעיון?<br><strong id="contactTitleStrong">אנחנו נהפוך אותו למערכת שעובדת.</strong></h2>
             <p class="contact-subtitle" id="contactSubtitle">השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.</p>
           </div>
 
@@ -266,7 +219,7 @@
                 <textarea id="message" rows="4" placeholder="איך נוכל לעזור?"></textarea>
               </div>
               <button type="submit" class="btn-submit">
-                <span id="btnSubmitTxt">שליחה</span>
+                <span id="btnSubmitTxt" data-decipher="מתחילים פרויקט">מתחילים פרויקט</span>
                 <svg viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 5H1M5 9L1 5l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
             </form>
@@ -328,6 +281,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="main.js?v=6.0"></script>
+  <script src="main.js?v=7.0"></script>
 </body>
 </html>
