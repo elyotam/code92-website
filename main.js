@@ -1,52 +1,35 @@
 /**
- * CODE92 — main.js v9.0
- * BENEATH THE SURFACE Engine — Digital Matter Spatial System
+ * Code92 — main.js v35.0
+ * Company: Code92
  * Owner: יותם כהן (Yotam Cohen) | 052-2057074
- * 
- * Signature Mechanics:
- * 1. DigitalMatterEngine (Three.js WebGL procedural Digital Matter)
- * 2. Mouse Pointer State Scrubbing: Horizontal mouse X scrubs Digital Matter across WEB <-> APPS <-> COMMERCE <-> DEVOPS <-> AI
- * 3. Signature DIGITAL X-RAY Interaction: Hovering elements triggers 250ms wireframe & API connection skeleton reveal
- * 4. 5 Depth Layers: SURFACE (WEB) -> PRODUCT (APPS) -> COMMERCE -> DEVOPS -> AI -> THE CODE92 BIG REVEAL
- * 5. C92://BENEATH_THE_SURFACE Opening Sequence (5s)
- * 6. Cybernetic Decipher Text Engine
- * 7. Preserved Dual-Language Engine & Human Sales Bot Widget
+ * Dual Language Translation & Human Sales Representative Chatbot (5 Core Services + Live Typing Indicator)
  */
 'use strict';
 
 const WA_NUMBER = '972522057074';
 
-/* ═══════════════════════════════════════════════════════════════════
-   LANGUAGE DICTIONARY — Complete Hebrew / English
-   ═══════════════════════════════════════════════════════════════════ */
+// 100% Complete Dual Language Dictionary
 const DICT = {
   he: {
     langBtn: 'EN',
-    navContactBtnText: 'מתחילים פרויקט',
-    hudSystemStatus: 'SYSTEM // ACTIVE',
-    heroLine1: 'מה שאתם רואים',
-    heroLine2: 'זה רק השכבה',
-    heroLine3: 'הראשונה.',
-    heroSub: 'אנחנו בונים את מה שרואים. ואת כל מה שמתחת: אתרים, אפליקציות, מסחר דיגיטלי, תשתיות DevOps ופתרונות AI מתקדמים <strong>הפועלים בהרמוניה מלאה</strong>.',
-    heroCtaText: 'מתחילים פרויקט',
-    scrollTxt: 'SCRUB HORIZONTALLY: TRANSFORMS DIGITAL MATTER // SCROLL TO PENETRATE SURFACE',
-    webTitle: 'WEBSITES & EXPERIENCES',
-    webDesc: 'בניית אתרי פרימיום, חנויות אונליין וממשקי Web מתקדמים ברמה בינלאומית עם ביצועים יוצאי דופן.',
-    appsTitle: 'SOFTWARE ARCHITECTURE & SAAS',
-    appsDesc: 'ארכיטקטורת תוכנה, מערכות SaaS ואפליקציות מובייל מותאמות אישית המציגות ממשקי משתמש עוצמתיים.',
-    commerceTitle: 'TRANSACTIONAL ECOSYSTEMS',
-    commerceDesc: 'רשתות מסחר דיגיטליות, סליקה מתקדמת וחנויות E-commerce שנבנות להמרה מקסימלית בטכנולוגיות Next.js.',
-    devopsTitle: 'CLOUD DEVOPS & CLUSTERS',
-    devopsDesc: 'טופולוגיות ענן מורכבות (AWS/GCP), ניהול Kubernetes, אבטחת מידע קפדנית ורמת זמינות של 99.99% Uptime SLA.',
-    aiTitle: 'COMPUTATIONAL AI ENGINE',
-    aiDesc: 'סוכני AI חכמים, אוטומציות עסקיות ואלגוריתמים המייעלים את מערך המכירות והשירות 24/7 וחוסכים 80% מזמן העבודה.',
-    metricLabel1: 'פרויקטים שהושלמו',
-    metricLabel2: 'Uptime SLA',
-    metricLabel3: 'תמיכה וניטור',
-    metricLabel4: 'חיסכון בזמן עם AI',
-    contactTitle: 'אנחנו לא בונים רק את מה שהלקוחות שלכם רואים.',
-    contactTitleStrong: 'אנחנו בונים את כל מה שגורם לזה לעבוד.',
-    contactSub: 'יש לכם רעיון? בואו נבנה את מה שנמצא מתחתיו.',
+    navContactBtnText: 'צרו איתנו קשר',
+    h1_line1: 'פתרונות דיגיטליים',
+    h1_line2: 'לאנשים שרוצים',
+    h1_line3: 'לייצר <span class="text-brand">תוצאות</span>',
+    heroDesc: 'בניית אתרים, חנויות אונליין, אפליקציות, מערכות ואוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.',
+    processTitle1: 'איך אנחנו הופכים רעיון',
+    processTitle2: 'לפתרון שמייצר תוצאות',
+    pCardNum1: '1', pCardHead1: 'אסטרטגיה ואפיון',
+    pCardDesc1: 'איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים',
+    pCardNum2: '2', pCardHead2: 'פיתוח אתרים ומערכות Web',
+    pCardDesc2: 'בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות',
+    pCardNum3: '3', pCardHead3: 'אוטומציות AI ואפליקציות מותאמות',
+    pCardDesc3: 'פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7',
+    pCardNum4: '4', pCardHead4: 'מעטפת Cloud אבטחה וצמיחה מתמדת',
+    pCardDesc4: 'תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן',
+    contactTitle1: 'רוצים לשמוע עוד?',
+    contactTitle2: 'צרו איתנו קשר',
+    contactSub: 'השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.',
     lblFullname: 'שם מלא *',
     lblPhone: 'טלפון *',
     lblEmail: 'אימייל *',
@@ -55,56 +38,63 @@ const DICT = {
     placeholderPhone: '052-2057074',
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'איך נוכל לעזור?',
-    btnSubmitTxt: 'מתחילים פרויקט',
-    copyright: '© CODE92 · כל הזכויות שמורות ליותם כהן',
-    navLabelHero: 'MATTER',
-    navLabelWeb: 'SURFACE',
-    navLabelApps: 'PRODUCT',
-    navLabelCommerce: 'COMMERCE',
-    navLabelDevops: 'DEVOPS',
-    navLabelAi: 'AI',
-    navLabelContact: 'REVEAL',
-    // Bot
+    btnSubmitTxt: 'שליחה',
+    copyright: '© Code92 · כל הזכויות שמורות ליותם כהן',
+
+    // Bot Translations
     botStatus: 'מחובר/ת כעת לשיחה',
-    botTyping: 'מקליד/ה...',
+    botTyping: 'מקליד/ה הודעה...',
     botPlaceholder: 'הקלד/י הודעה או מספר טלפון...',
-    botGreeting: (name) => `שלום! 👋 שמי ${name} מ-CODE92.\nבמה אוכל לסייע לך בפרויקט היום?`,
-    botRedirecting: `תודה רבה! העברתי את פנייתך ליותם כהן ב-CODE92.\nלחץ על הלחצן למטה לפתיחת שיחה ב-WhatsApp:`,
+    botGreeting: (name) => `שלום! 👋 שמי ${name} מ-Code92.\nבמה אוכל לסייע לך בפרויקט היום?`,
+    botRedirecting: `תודה רבה! העברתי את פנייתך ליותם כהן ב-Code92.\nלחץ על הלחצן למטה לפתיחת שיחה ב-WhatsApp:`,
     botServices: [
-      { id: 'ecommerce', label: '🛍️ חנויות E-commerce', response: `בחירה מעולה! חנויות E-commerce ב-CODE92 נבנות להמרה מקסימלית ב-Next.js 🚀\nאשמח לדעת: מדובר בחנות חדשה מאפס או שדרוג חנות קיימת, וכמה מוצרים מתוכננים בה בערך?` },
-      { id: 'ai', label: '🤖 אוטומציות עסקיות + AI', response: `בחירה מצוינת! סוכני AI ואוטומציות עסקיות ב-CODE92 חוסכים עד 80% מזמן העבודה 🤖\nאיזה תהליך בעסק היית רוצה לאוטמט? (סוכן מכירות, מענה ללקוחות, ניהול CRM או חשבוניות)` },
-      { id: 'web', label: '💻 בניית אתרים ומערכות Web לעסקים', response: `נפלא! אנחנו מתמחים בבניית אתרים ומערכות Web פרימיום ב-CODE92 ברמה בינלאומית 💻\nמה סוג הפרויקט שדרוש לך? (אתר תדמית יוקרתי, קטלוג מוצרים, או מערכת ניהול מותאמת)` },
-      { id: 'apps', label: '📱 פיתוח מערכות ואפליקציות מותאמות לעסק', response: `מעולה! ארכיטקטורת תוכנה, SaaS ואפליקציות מותאמות אישית ב-CODE92 📱\nבאיזו פלטפורמה מדובר? (אפליקציית מובייל iOS/Android, מערכת ענן SaaS, או תוכנה פנימית)` },
-      { id: 'cloud', label: '🛡️ תחזוקה, Cloud, אבטחה וניהול שוטף', response: `מצוין! תשתיות ענן, DevOps, אבטחת מידע וניהול שוטף עם 99.99% Uptime SLA ב-CODE92 🛡️\nבאיזה שירות מדובר? (אבטחת מידע, אחסון ענן AWS, או תחזוקה שוטפת)` }
+      { 
+        id: 'ecommerce',
+        label: '🛍️ חנויות E-commerce', 
+        response: `בחירה מעולה! חנויות E-commerce ב-Code92 נבנות להמרה מקסימלית ב-Next.js 🚀\nאשמח לדעת: מדובר בחנות חדשה מאפס או שדרוג חנות קיימת, וכמה מוצרים מתוכננים בה בערך?` 
+      },
+      { 
+        id: 'ai',
+        label: '🤖 אוטומציות עסקיות + AI', 
+        response: `בחירה מצוינת! סוכני AI ואוטומציות עסקיות ב-Code92 חוסכים עד 80% מזמן העבודה 🤖\nאיזה תהליך בעסק היית רוצה לאוטמט? (סוכן מכירות, מענה ללקוחות, ניהול CRM או חשבוניות)` 
+      },
+      { 
+        id: 'web',
+        label: '💻 בניית אתרים ומערכות Web לעסקים', 
+        response: `נפלא! אנחנו מתמחים בבניית אתרים ומערכות Web פרימיום ב-Code92 ברמה בינלאומית 💻\nמה סוג הפרויקט שדרוש לך? (אתר תדמית יוקרתי, קטלוג מוצרים, או מערכת ניהול מותאמת)` 
+      },
+      { 
+        id: 'apps',
+        label: '📱 פיתוח מערכות ואפליקציות מותאמות לעסק', 
+        response: `מעולה! ארכיטקטורת תוכנה, SaaS ואפליקציות מותאמות אישית ב-Code92 📱\nבאיזו פלטפורמה מדובר? (אפליקציית מובייל iOS/Android, מערכת ענן SaaS, או תוכנה פנימית)` 
+      },
+      { 
+        id: 'cloud',
+        label: '🛡️ תחזוקה, Cloud, אבטחה וניהול שוטף', 
+        response: `מצוין! תשתיות ענן, DevOps, אבטחת מידע וניהול שוטף עם 99.99% Uptime SLA ב-Code92 🛡️\nבאיזה שירות מדובר? (אבטחת מידע, אחסון ענן AWS, או תחזוקה שוטפת)` 
+      }
     ]
   },
   en: {
     langBtn: 'HE',
-    navContactBtnText: 'Start Project',
-    hudSystemStatus: 'SYSTEM // ACTIVE',
-    heroLine1: 'What You See Is Only',
-    heroLine2: 'The First Surface',
-    heroLine3: 'Layer.',
-    heroSub: 'We build what you see. And everything underneath: websites, mobile apps, E-commerce platforms, DevOps cloud infrastructure and AI systems operating in total harmony.',
-    heroCtaText: 'Start Project',
-    scrollTxt: 'SCRUB HORIZONTALLY: TRANSFORMS DIGITAL MATTER // SCROLL TO PENETRATE SURFACE',
-    webTitle: 'WEBSITES & EXPERIENCES',
-    webDesc: 'Building luxury websites, E-commerce stores and advanced Web applications at international standards with exceptional performance.',
-    appsTitle: 'SOFTWARE ARCHITECTURE & SAAS',
-    appsDesc: 'Software architecture, custom SaaS platforms and native mobile apps engineered for powerful user experiences.',
-    commerceTitle: 'TRANSACTIONAL ECOSYSTEMS',
-    commerceDesc: 'Digital commerce networks, payment routing and high-conversion E-commerce built with Next.js.',
-    devopsTitle: 'CLOUD DEVOPS & CLUSTERS',
-    devopsDesc: 'Complex cloud topologies (AWS/GCP), Kubernetes orchestration, cyber security, and 99.99% Uptime SLA.',
-    aiTitle: 'COMPUTATIONAL AI ENGINE',
-    aiDesc: 'Intelligent AI agents, business automations and algorithms saving up to 80% manual work with 24/7 reliability.',
-    metricLabel1: 'Projects Delivered',
-    metricLabel2: 'Uptime SLA',
-    metricLabel3: 'Support & Monitoring',
-    metricLabel4: 'Time Saved with AI',
-    contactTitle: 'We do not build only what your customers see.',
-    contactTitleStrong: 'We build everything that powers it.',
-    contactSub: 'Have an idea? Let us build what lies underneath.',
+    navContactBtnText: 'Contact Us',
+    h1_line1: 'Digital Solutions',
+    h1_line2: 'For People Who Want',
+    h1_line3: 'To Generate <span class="text-brand">Results</span>',
+    heroDesc: 'Building websites, online stores, apps, custom systems and AI automations <strong>that keep you steps ahead of your competitors</strong>.',
+    processTitle1: 'How We Turn An Idea',
+    processTitle2: 'Into A Solution That Drives Results',
+    pCardNum1: '1', pCardHead1: 'Strategy & UX Architecture',
+    pCardDesc1: 'Precise architecture and market research identifying your exact growth engines to convert visitors into paying clients',
+    pCardNum2: '2', pCardHead2: 'Websites & Web Systems Development',
+    pCardDesc2: 'Building luxury websites, E-commerce stores and advanced Web systems',
+    pCardNum3: '3', pCardHead3: 'AI Automations & Custom Apps',
+    pCardDesc3: 'Custom mobile apps and intelligent AI agents saving up to 80% manual work while boosting sales and 24/7 support',
+    pCardNum4: '4', pCardHead4: 'Cloud Infrastructure & Growth',
+    pCardDesc4: 'Enterprise cloud cyber security and ongoing personal management by Yotam Cohen ensuring continuous revenue growth',
+    contactTitle1: 'Want to hear more?',
+    contactTitle2: 'Contact Us',
+    contactSub: 'Leave your details and we will get back to you shortly with full answers.',
     lblFullname: 'Full Name *',
     lblPhone: 'Phone *',
     lblEmail: 'Email *',
@@ -113,36 +103,48 @@ const DICT = {
     placeholderPhone: '052-2057074',
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'How can we help?',
-    btnSubmitTxt: 'Start Project',
-    copyright: '© CODE92 · All Rights Reserved to Yotam Cohen',
-    navLabelHero: 'MATTER',
-    navLabelWeb: 'SURFACE',
-    navLabelApps: 'PRODUCT',
-    navLabelCommerce: 'COMMERCE',
-    navLabelDevops: 'DEVOPS',
-    navLabelAi: 'AI',
-    navLabelContact: 'REVEAL',
-    // Bot
+    btnSubmitTxt: 'Submit',
+    copyright: '© Code92 · All Rights Reserved to Yotam Cohen',
+
+    // Bot Translations
     botStatus: 'Online Now',
-    botTyping: 'typing...',
+    botTyping: 'typing a message...',
     botPlaceholder: 'Type a message or phone number...',
-    botGreeting: (name) => `Hello! 👋 My name is ${name} from CODE92.\nHow can I assist you with your project today?`,
-    botRedirecting: `Thank you! I forwarded your inquiry to Yotam Cohen at CODE92.\nClick the button below to start a WhatsApp chat:`,
+    botGreeting: (name) => `Hello! 👋 My name is ${name} from Code92.\nHow can I assist you with your project today?`,
+    botRedirecting: `Thank you! I forwarded your inquiry to Yotam Cohen at Code92.\nClick the button below to start a WhatsApp chat:`,
     botServices: [
-      { id: 'ecommerce', label: '🛍️ E-Commerce Online Stores', response: `Excellent choice! E-commerce stores by CODE92 built in Next.js for high conversion 🚀\nIs this a new store from scratch or an existing store upgrade? How many products are planned?` },
-      { id: 'ai', label: '🤖 Business Automation & AI', response: `Great choice! AI Agents & Automations by CODE92 saving up to 80% manual work 🤖\nWhich business process would you like to automate? (Sales agent, customer support, CRM)` },
-      { id: 'web', label: '💻 Website & Web System Development', response: `Great! At CODE92 we engineer world-class premium websites 💻\nWhat type of project do you need? (Luxury brand site, product catalog, or custom Web App)` },
-      { id: 'apps', label: '📱 Custom App & Software Engineering', response: `Enterprise software architecture, SaaS & custom mobile apps by CODE92 📱\nWhich platform? (iOS/Android mobile app, Cloud SaaS, or internal tool)` },
-      { id: 'cloud', label: '🛡️ Cloud, DevOps, Cyber & Maintenance', response: `Cloud infrastructure, DevOps, Cyber Security & ongoing management with 99.99% Uptime SLA by CODE92 🛡️\nWhich service? (Cyber security, AWS Cloud, or ongoing maintenance)` }
+      { 
+        id: 'ecommerce',
+        label: '🛍️ E-Commerce Online Stores', 
+        response: `Excellent choice! E-commerce stores by Code92 built in Next.js for high conversion 🚀\nIs this a new store from scratch or an existing store upgrade? How many products are planned?` 
+      },
+      { 
+        id: 'ai',
+        label: '🤖 Business Automation & AI', 
+        response: `Great choice! AI Agents & Automations by Code92 saving up to 80% manual work 🤖\nWhich business process would you like to automate? (Sales agent, customer support, CRM)` 
+      },
+      { 
+        id: 'web',
+        label: '💻 Website & Web System Development', 
+        response: `Great! At Code92 we engineer world-class premium websites 💻\nWhat type of project do you need? (Luxury brand site, product catalog, or custom Web App)` 
+      },
+      { 
+        id: 'apps',
+        label: '📱 Custom App & Software Engineering', 
+        response: `Enterprise software architecture, SaaS & custom mobile apps by Code92 📱\nWhich platform? (iOS/Android mobile app, Cloud SaaS, or internal tool)` 
+      },
+      { 
+        id: 'cloud',
+        label: '🛡️ Cloud, DevOps, Cyber & Maintenance', 
+        response: `Cloud infrastructure, DevOps, Cyber Security & ongoing management with 99.99% Uptime SLA by Code92 🛡️\nWhich service? (Cyber security, AWS Cloud, or ongoing maintenance)` 
+      }
     ]
   }
 };
 
 let currentLang = 'he';
 
-/* ═══════════════════════════════════════════════════════════════════
-   SALES REPRESENTATIVES POOL (Preserved)
-   ═══════════════════════════════════════════════════════════════════ */
+// Human Representatives Pool (Updated with Dana, Guy, Ahuvit, Ido, Aviv, Karin)
 const SALES_REPS = [
   { name: 'דנה', gender: 'female', img: 'assets/rep_dana.jpg', icon: '👩‍💼', enName: 'Dana' },
   { name: 'גיא', gender: 'male', img: 'assets/rep_guy.jpg', icon: '👨‍💼', enName: 'Guy' },
@@ -155,578 +157,50 @@ const SALES_REPS = [
 let activeRep = null;
 let updateBotUiFn = null;
 
-/* ═══════════════════════════════════════════════════════════════════
-   1. DIGITAL MATTER ENGINE (Three.js WebGL Architecture)
-   ═══════════════════════════════════════════════════════════════════ */
-class DigitalMatterEngine {
-  constructor() {
-    this.canvas = document.getElementById('webglCanvas');
-    if (!this.canvas || typeof THREE === 'undefined') return;
-
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.camera.position.set(0, 0, 20);
-
-    this.renderer = new THREE.WebGLRenderer({
-      canvas: this.canvas,
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
-    this.matterState = 0; // 0 = WEB, 0.25 = APPS, 0.50 = COMMERCE, 0.75 = DEVOPS, 1.0 = AI
-    this.scrollProgress = 0;
-    this.lastFrameTime = performance.now();
-    this.frameCount = 0;
-    this.fps = 60;
-    this.isXrayActive = false;
-
-    this.initLights();
-    this.createDigitalMatter();
-    this.createSpatialParticleField();
-    this.bindEvents();
-    this.animate();
-  }
-
-  initLights() {
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
-    this.scene.add(ambientLight);
-
-    this.emeraldLight = new THREE.PointLight(0x00e676, 3.5, 60);
-    this.emeraldLight.position.set(6, 6, 12);
-    this.scene.add(this.emeraldLight);
-
-    this.cyanLight = new THREE.PointLight(0x00e5ff, 3, 60);
-    this.cyanLight.position.set(-6, -6, -6);
-    this.scene.add(this.cyanLight);
-  }
-
-  createDigitalMatter() {
-    this.matterGroup = new THREE.Group();
-
-    // ── Core Architectural Wireframe Skeleton
-    this.wireframeSkeleton = new THREE.Group();
-    const innerGeo = new THREE.IcosahedronGeometry(2.8, 2);
-    const innerMat = new THREE.MeshBasicMaterial({
-      color: 0x00e676,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.8
-    });
-    this.wireframeSkeleton.add(new THREE.Mesh(innerGeo, innerMat));
-
-    const ringGeo = new THREE.TorusGeometry(4.2, 0.03, 16, 80);
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.6 });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.rotation.x = Math.PI * 0.35;
-    this.wireframeSkeleton.add(ring);
-
-    this.matterGroup.add(this.wireframeSkeleton);
-
-    // ── Translucent Polished Hull (The Surface)
-    this.surfaceHull = new THREE.Group();
-    const outerGeo = new THREE.DodecahedronGeometry(3.6, 1);
-    const outerMat = new THREE.MeshPhongMaterial({
-      color: 0x00e676,
-      emissive: 0x001100,
-      specular: 0x00e5ff,
-      shininess: 100,
-      wireframe: false,
-      transparent: true,
-      opacity: 0.15
-    });
-    this.hullMesh = new THREE.Mesh(outerGeo, outerMat);
-    this.surfaceHull.add(this.hullMesh);
-
-    this.matterGroup.add(this.surfaceHull);
-
-    this.scene.add(this.matterGroup);
-  }
-
-  createSpatialParticleField() {
-    const isMobile = window.innerWidth < 768;
-    const count = isMobile ? 1000 : 2500;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(count * 3);
-
-    for (let i = 0; i < count; i++) {
-      const u = Math.random();
-      const v = Math.random();
-      const theta = u * 2.0 * Math.PI;
-      const phi = Math.acos(2.0 * v - 1.0);
-      const r = Math.cbrt(Math.random()) * 28 + 4;
-
-      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      positions[i * 3 + 2] = r * Math.cos(phi);
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-    const material = new THREE.PointsMaterial({
-      color: 0x00e676,
-      size: 0.075,
-      transparent: true,
-      opacity: 0.4,
-      blending: THREE.AdditiveBlending
-    });
-
-    this.particleSystem = new THREE.Points(geometry, material);
-    this.scene.add(this.particleSystem);
-  }
-
-  bindEvents() {
-    window.addEventListener('resize', () => {
-      this.camera.aspect = window.innerWidth / window.innerHeight;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    document.addEventListener('mousemove', (e) => {
-      this.mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
-      this.mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
-    });
-
-    // Signature Interaction: DIGITAL X-RAY Hover Trigger
-    document.querySelectorAll('.layer-scene, .hero-cta, .btn-cta, .nav-dot').forEach(el => {
-      el.addEventListener('mouseenter', () => this.triggerXrayMode());
-    });
-  }
-
-  // Signature Mechanism: 250ms DIGITAL X-RAY Skeleton Reveal
-  triggerXrayMode() {
-    if (this.isXrayActive) return;
-    this.isXrayActive = true;
-
-    if (this.hullMesh) {
-      this.hullMesh.material.wireframe = true;
-      this.hullMesh.material.opacity = 0.85;
-    }
-
-    const cursorRing = document.getElementById('cursorRing');
-    const cursorState = document.getElementById('cursorState');
-    const telXray = document.getElementById('telXray');
-
-    if (cursorRing) cursorRing.classList.add('xray-mode');
-    if (cursorState) {
-      cursorState.style.display = 'block';
-      cursorState.textContent = 'X-RAY';
-    }
-    if (telXray) {
-      telXray.textContent = 'X-RAY: DISSOLVED';
-      telXray.style.color = 'var(--cyan-accent)';
-    }
-
-    setTimeout(() => {
-      if (this.hullMesh) {
-        this.hullMesh.material.wireframe = false;
-        this.hullMesh.material.opacity = 0.15;
-      }
-      if (cursorRing) cursorRing.classList.remove('xray-mode');
-      if (cursorState) cursorState.style.display = 'none';
-      if (telXray) {
-        telXray.textContent = 'X-RAY: READY';
-        telXray.style.color = 'var(--emerald)';
-      }
-      this.isXrayActive = false;
-    }, 250);
-  }
-
-  animate() {
-    requestAnimationFrame(() => this.animate());
-
-    // FPS calculation
-    const now = performance.now();
-    this.frameCount++;
-    if (now > this.lastFrameTime + 1000) {
-      this.fps = Math.round((this.frameCount * 1000) / (now - this.lastFrameTime));
-      this.frameCount = 0;
-      this.lastFrameTime = now;
-      this.updateHUDTelemetry();
-    }
-
-    // Smooth lerp mouse vector
-    this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.05;
-    this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.05;
-
-    // Desktop Horizontal Mouse Pointer State Scrubbing (0.0 to 1.0)
-    const targetState = Math.max(0, Math.min(1, (this.mouse.x + 1) / 2));
-    this.matterState += (targetState - this.matterState) * 0.06;
-
-    // Transform Digital Matter geometry based on matterState
-    if (this.wireframeSkeleton && this.surfaceHull) {
-      this.wireframeSkeleton.scale.setScalar(1 + (1 - this.matterState) * 0.4);
-      this.surfaceHull.scale.setScalar(1 + this.matterState * 0.3);
-    }
-
-    // Rotate Digital Matter Group
-    if (this.matterGroup) {
-      this.matterGroup.rotation.y += 0.003;
-      this.matterGroup.rotation.x = -this.mouse.y * 0.35;
-    }
-
-    if (this.particleSystem) {
-      this.particleSystem.rotation.y += 0.0004;
-    }
-
-    this.renderer.render(this.scene, this.camera);
-  }
-
-  setCameraSpatialState(progress) {
-    this.scrollProgress = progress;
-
-    if (this.camera && this.matterGroup) {
-      // Camera Z penetration: 20m -> -15m
-      this.camera.position.z = 20 - progress * 35;
-      this.camera.position.y = -progress * 6;
-      this.matterGroup.rotation.z = progress * Math.PI;
-    }
-  }
-
-  updateHUDTelemetry() {
-    const telDepth = document.getElementById('telDepth');
-    const telFps = document.getElementById('telFps');
-    const telState = document.getElementById('telState');
-
-    const depthVal = (20 - this.scrollProgress * 35).toFixed(1);
-    if (telDepth) telDepth.textContent = `DEPTH: ${depthVal}m`;
-    if (telFps) telFps.textContent = `${this.fps} FPS`;
-
-    if (telState) {
-      if (this.matterState < 0.2) telState.textContent = 'STATE: WEB SURFACE';
-      else if (this.matterState < 0.4) telState.textContent = 'STATE: APPLICATIONS';
-      else if (this.matterState < 0.6) telState.textContent = 'STATE: COMMERCE FLOW';
-      else if (this.matterState < 0.8) telState.textContent = 'STATE: DEVOPS CLOUDS';
-      else telState.textContent = 'STATE: AI INTELLIGENCE';
-    }
-  }
-}
-
-let coreEngine = null;
-
-/* ═══════════════════════════════════════════════════════════════════
-   2. CYBERNETIC DECIPHER TEXT ENGINE
-   ═══════════════════════════════════════════════════════════════════ */
-function runDecipherEffect(element, targetText) {
-  if (!element) return;
-
-  const chars = '0123456789ABCDEF!@#$%^&*()_+-=[]{}|;:,.<>?';
-  const text = targetText || element.getAttribute('data-decipher') || element.textContent;
-  const length = text.length;
-
-  let iteration = 0;
-  clearInterval(element._decipherInterval);
-
-  element._decipherInterval = setInterval(() => {
-    element.textContent = text
-      .split('')
-      .map((char, index) => {
-        if (index < iteration) return text[index];
-        return chars[Math.floor(Math.random() * chars.length)];
-      })
-      .join('');
-
-    if (iteration >= length) {
-      clearInterval(element._decipherInterval);
-      element.textContent = text;
-    }
-
-    iteration += 1 / 2;
-  }, 25);
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   3. C92://BENEATH_THE_SURFACE OPENING SEQUENCE (First 5 Seconds)
-   ═══════════════════════════════════════════════════════════════════ */
-function initLoadingSequence() {
-  const loader = document.getElementById('loader');
-  const bar = document.getElementById('loaderBarFill');
-  const wordmark = document.getElementById('loaderWordmark');
-  const status = document.getElementById('loaderStatus');
-  const prefix = document.querySelector('.loader-terminal-prefix');
-  if (!loader) return;
-
-  runDecipherEffect(status, 'INITIALIZING DIGITAL MATTER ENGINE...');
-
-  const tl = gsap.timeline({
-    onComplete: () => {
-      loader.style.pointerEvents = 'none';
-      initHeroEntrance();
-    }
-  });
-
-  tl.to(prefix, { opacity: 1, duration: 0.4 }, 0.2)
-    .to(bar, { width: '100%', duration: 1.2, ease: 'power2.inOut' }, 0.4)
-    .to(wordmark, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.8)
-    .to(status, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 1.0)
-    .to(wordmark, { opacity: 0, y: -20, duration: 0.5 }, 2.0)
-    .to(status, { opacity: 0 }, 2.0)
-    .to(prefix, { opacity: 0 }, 2.0)
-    .to(loader, { opacity: 0, duration: 0.6 }, 2.4)
-    .set(loader, { display: 'none' }, 3.0);
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   4. HERO ENTRANCE & HEBREW TYPOGRAPHY OCCLUSION
-   ═══════════════════════════════════════════════════════════════════ */
-function initHeroEntrance() {
-  const lines = document.querySelectorAll('.title-line');
-  const sub = document.querySelector('.hero-sub');
-  const ctaWrap = document.querySelector('.hero-cta-wrap');
-  const scrollInd = document.getElementById('scrollIndicator');
-  const cursorGlow = document.getElementById('cursorGlow');
-
-  lines.forEach(line => runDecipherEffect(line));
-
-  const tl = gsap.timeline();
-
-  tl.to(lines, {
-    opacity: 1,
-    y: 0,
-    duration: 0.9,
-    stagger: 0.15,
-    ease: 'power3.out'
-  }, 0)
-  .to(sub, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.5)
-  .to(ctaWrap, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.7)
-  .to(scrollInd, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0);
-
-  if (cursorGlow) setTimeout(() => cursorGlow.classList.add('active'), 600);
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   5. GSAP SPATIAL SCROLL TIMELINE (Penetrating Beneath Surface)
-   ═══════════════════════════════════════════════════════════════════ */
-function initScrollTimeline() {
-  gsap.registerPlugin(ScrollTrigger);
-
-  const header = document.getElementById('mainHeader');
-  const navDots = document.getElementById('navDots');
-
-  ScrollTrigger.create({
-    trigger: '#layer-web',
-    start: 'top 80%',
-    onEnter: () => {
-      header?.classList.add('visible');
-      navDots?.classList.add('visible');
-    },
-    onLeaveBack: () => {
-      header?.classList.remove('visible');
-      navDots?.classList.remove('visible');
-    }
-  });
-
-  // Spatial Camera Penetration Timeline
-  ScrollTrigger.create({
-    trigger: 'body',
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: 1,
-    onUpdate: (self) => {
-      if (coreEngine) {
-        coreEngine.setCameraSpatialState(self.progress);
-      }
-    }
-  });
-
-  // Reveal Depth Layers
-  document.querySelectorAll('.layer-scene').forEach(layer => {
-    const title = layer.querySelector('.layer-title');
-    if (title) {
-      ScrollTrigger.create({
-        trigger: layer,
-        start: 'top 70%',
-        onEnter: () => runDecipherEffect(title)
-      });
-    }
-  });
-
-  // Metrics Reveal & Counter Animation
-  gsap.to('.metric-card', {
-    opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '.metrics-grid', start: 'top 80%',
-      onEnter: () => animateMetrics()
-    }
-  });
-
-  // Contact Form Reveal
-  gsap.to('.contact-text', {
-    opacity: 1, y: 0, duration: 0.8,
-    scrollTrigger: { trigger: '#contact', start: 'top 75%' }
-  });
-
-  gsap.to('.form-box', {
-    opacity: 1, y: 0, duration: 0.8, delay: 0.1,
-    scrollTrigger: { trigger: '#contact', start: 'top 70%' }
-  });
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   6. ANIMATED METRICS COUNTER ENGINE
-   ═══════════════════════════════════════════════════════════════════ */
-let metricsDone = false;
-
-function animateMetrics() {
-  if (metricsDone) return;
-  metricsDone = true;
-
-  document.querySelectorAll('.metric-card').forEach(card => {
-    const valEl = card.querySelector('.metric-val');
-    if (!valEl) return;
-
-    const target = parseFloat(card.dataset.target) || 0;
-    const decimals = parseInt(card.dataset.decimals) || 0;
-
-    gsap.to({ v: 0 }, {
-      v: target,
-      duration: 2.2,
-      ease: 'power2.out',
-      onUpdate: function() {
-        valEl.textContent = this.targets()[0].v.toFixed(decimals);
-      }
-    });
-  });
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   7. MOUSE LIGHTING & DIGITAL X-RAY CURSOR
-   ═══════════════════════════════════════════════════════════════════ */
-function initMouseLighting() {
-  const cursorGlow = document.getElementById('cursorGlow');
-  const cursorRing = document.getElementById('cursorRing');
-
-  let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    targetX = e.clientX;
-    targetY = e.clientY;
-    if (cursorRing) cursorRing.classList.add('active');
-  });
-
-  function update() {
-    currentX += (targetX - currentX) * 0.08;
-    currentY += (targetY - currentY) * 0.08;
-
-    if (cursorGlow) {
-      cursorGlow.style.transform = `translate(${currentX - 350}px, ${currentY - 350}px)`;
-    }
-
-    if (cursorRing) {
-      cursorRing.style.transform = `translate(${targetX - 16}px, ${targetY - 16}px)`;
-    }
-
-    requestAnimationFrame(update);
-  }
-  update();
-}
-
-function initVerticalNav() {
-  const dots = document.querySelectorAll('.nav-dot');
-  const sections = ['hero', 'layer-web', 'layer-apps', 'layer-commerce', 'layer-devops', 'layer-ai', 'contact'];
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      e.preventDefault();
-      const sectionId = dot.getAttribute('data-section');
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  function updateNav() {
-    const scrollY = window.scrollY + window.innerHeight / 2;
-    let currentSection = 'hero';
-
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && el.offsetTop <= scrollY) currentSection = id;
-    });
-
-    dots.forEach(d => {
-      d.classList.toggle('active', d.dataset.section === currentSection);
-    });
-  }
-
-  window.addEventListener('scroll', updateNav, { passive: true });
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   8. LANGUAGE TOGGLE (RTL/LTR) WITH DECIPHER RESOLUTION
-   ═══════════════════════════════════════════════════════════════════ */
 function toggleLanguage() {
   currentLang = currentLang === 'he' ? 'en' : 'he';
-  const d = DICT[currentLang];
+  const data = DICT[currentLang];
 
   document.documentElement.dir = currentLang === 'he' ? 'rtl' : 'ltr';
   document.documentElement.lang = currentLang;
 
-  const setText = (id, v) => {
-    const el = document.getElementById(id);
-    if (el) runDecipherEffect(el, v);
-  };
-  const setHtml = (id, v) => { const el = document.getElementById(id); if (el) el.innerHTML = v; };
-  const setPlc = (id, v) => { const el = document.getElementById(id); if (el) el.placeholder = v; };
+  const btn = document.getElementById('langToggleBtn');
+  if (btn) btn.textContent = data.langBtn;
 
-  setText('langToggleBtn', d.langBtn);
-  setText('navContactBtnText', d.navContactBtnText);
-  setText('hudSystemStatus', d.hudSystemStatus);
+  const setHtml = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+  const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  const setPlaceholder = (id, val) => { const el = document.getElementById(id); if (el) el.placeholder = val; };
 
-  // Hero
-  setText('heroLine1', d.heroLine1);
-  setText('heroLine2', d.heroLine2);
-  setText('heroLine3', d.heroLine3);
-  setHtml('heroSub', d.heroSub);
-  setText('heroCtaText', d.heroCtaText);
-  setText('scrollTxt', d.scrollTxt);
+  setText('navContactBtnText', data.navContactBtnText);
+  setHtml('heroHeadline', `<span class="border-b-line">${data.h1_line1}</span><span class="border-b-line">${data.h1_line2}</span><span class="border-b-line">${data.h1_line3}</span>`);
+  setHtml('heroSubtitle', data.heroDesc);
+  setHtml('processTitle', `<p class="border-b-line" style="color:#cfcfcf;font-weight:300">${data.processTitle1}</p><p class="border-b-line text-brand">${data.processTitle2}</p>`);
 
-  // Layers
-  setText('webTitle', d.webTitle); setText('webDesc', d.webDesc);
-  setText('appsTitle', d.appsTitle); setText('appsDesc', d.appsDesc);
-  setText('commerceTitle', d.commerceTitle); setText('commerceDesc', d.commerceDesc);
-  setText('devopsTitle', d.devopsTitle); setText('devopsDesc', d.devopsDesc);
-  setText('aiTitle', d.aiTitle); setText('aiDesc', d.aiDesc);
+  setText('pCardNum1', data.pCardNum1); setText('pCardHead1', data.pCardHead1); setText('pCardDesc1', data.pCardDesc1);
+  setText('pCardNum2', data.pCardNum2); setText('pCardHead2', data.pCardHead2); setText('pCardDesc2', data.pCardDesc2);
+  setText('pCardNum3', data.pCardNum3); setText('pCardHead3', data.pCardHead3); setText('pCardDesc3', data.pCardDesc3);
+  setText('pCardNum4', data.pCardNum4); setText('pCardHead4', data.pCardHead4); setText('pCardDesc4', data.pCardDesc4);
 
-  // Metrics
-  setText('metricLabel1', d.metricLabel1);
-  setText('metricLabel2', d.metricLabel2);
-  setText('metricLabel3', d.metricLabel3);
-  setText('metricLabel4', d.metricLabel4);
+  setHtml('contactTitle', `<span class="border-b-line">${data.contactTitle1}</span><span class="border-b-line text-brand">${data.contactTitle2}</span>`);
+  setText('contactSubtitle', data.contactSub);
 
-  // Contact
-  const titleEl = document.getElementById('contactTitle');
-  if (titleEl) titleEl.innerHTML = `${d.contactTitle}<br><strong id="contactTitleStrong">${d.contactTitleStrong}</strong>`;
-  setText('contactSubtitle', d.contactSub);
+  setText('lblFullname', data.lblFullname); setText('lblPhone', data.lblPhone);
+  setText('lblEmail', data.lblEmail); setText('lblMsg', data.lblMsg);
 
-  // Form
-  setText('lblFullname', d.lblFullname);
-  setText('lblPhone', d.lblPhone);
-  setText('lblEmail', d.lblEmail);
-  setText('lblMsg', d.lblMsg);
-  setPlc('name', d.placeholderName);
-  setPlc('phone', d.placeholderPhone);
-  setPlc('email', d.placeholderEmail);
-  setPlc('message', d.placeholderMsg);
-  setText('btnSubmitTxt', d.btnSubmitTxt);
-  setText('copyrightBar', d.copyright);
+  setPlaceholder('name', data.placeholderName);
+  setPlaceholder('phone', data.placeholderPhone);
+  setPlaceholder('email', data.placeholderEmail);
+  setPlaceholder('message', data.placeholderMsg);
 
-  // Nav dots
-  setText('navLabelHero', d.navLabelHero);
-  setText('navLabelWeb', d.navLabelWeb);
-  setText('navLabelApps', d.navLabelApps);
-  setText('navLabelCommerce', d.navLabelCommerce);
-  setText('navLabelDevops', d.navLabelDevops);
-  setText('navLabelAi', d.navLabelAi);
-  setText('navLabelContact', d.navLabelContact);
+  setText('btnSubmitTxt', data.btnSubmitTxt);
+  setText('copyrightBar', data.copyright);
 
-  if (typeof updateBotUiFn === 'function') updateBotUiFn();
+  if (typeof updateBotUiFn === 'function') {
+    updateBotUiFn();
+  }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   9. SALES CHATBOT (100% Preserved Logic)
-   ═══════════════════════════════════════════════════════════════════ */
+// ================= CODE92 SMART AI SALES BOT =================
 function initHumanSalesBot() {
   activeRep = SALES_REPS[Math.floor(Math.random() * SALES_REPS.length)];
 
@@ -743,9 +217,15 @@ function initHumanSalesBot() {
 
   let isOpen = false;
 
+  // Bot State Management
   let chatState = {
-    step: 'INIT', category: '', categoryId: '',
-    specificDetails: '', timeline: '', userName: '', userPhone: ''
+    step: 'INIT', // 'INIT', 'CATEGORY_SELECTED', 'SPECIFIC_ANSWERED', 'TIMELINE_ANSWERED', 'DONE'
+    category: '',
+    categoryId: '',
+    specificDetails: '',
+    timeline: '',
+    userName: '',
+    userPhone: ''
   };
 
   function renderRepInfo() {
@@ -757,10 +237,10 @@ function initHumanSalesBot() {
       } else {
         avatar.innerHTML = activeRep.icon;
         avatar.style.fontSize = '1.35rem';
-        avatar.style.backgroundColor = activeRep.gender === 'female' ? '#db2777' : 'var(--emerald)';
+        avatar.style.backgroundColor = activeRep.gender === 'female' ? '#db2777' : 'var(--brand-red)';
       }
     }
-    if (nameEl) nameEl.textContent = isHe ? `${activeRep.name} מ-CODE92` : `${activeRep.enName} from CODE92`;
+    if (nameEl) nameEl.textContent = isHe ? `${activeRep.name} מ-Code92` : `${activeRep.enName} from Code92`;
     if (statusEl) statusEl.textContent = DICT[currentLang].botStatus;
     if (input) input.placeholder = DICT[currentLang].botPlaceholder;
   }
@@ -777,7 +257,12 @@ function initHumanSalesBot() {
     const row = document.createElement('div');
     row.className = 'typing-row';
     row.id = 'typingIndicatorRow';
-    row.innerHTML = `<div class="typing-bubble"><span style="font-size:0.72rem;color:#666">${DICT[currentLang].botTyping}</span><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+    row.innerHTML = `
+      <div class="typing-bubble">
+        <span style="font-size:0.75rem;color:#878787">${DICT[currentLang].botTyping}</span>
+        <div class="typing-dots"><span></span><span></span><span></span></div>
+      </div>
+    `;
     msgs.appendChild(row);
     msgs.scrollTop = msgs.scrollHeight;
   }
@@ -799,6 +284,7 @@ function initHumanSalesBot() {
   function setOptions(optionsList) {
     opts.innerHTML = '';
     if (!optionsList || !optionsList.length) return;
+
     optionsList.forEach(opt => {
       const btn = document.createElement('button');
       btn.className = 'chip-btn';
@@ -812,16 +298,59 @@ function initHumanSalesBot() {
     });
   }
 
+  // AI & NLP: Detect gibberish / unreadable inputs
+  function isGibberish(text) {
+    const clean = text.trim();
+    if (clean.length < 3) return false;
+
+    // 1. Repeated character mash (e.g. "חחחחחח", "אאאאא", "ssssss")
+    if (/([a-zA-Zא-ת])\1{4,}/.test(clean)) return true;
+
+    // 2. Keyboard rows / Mash patterns (e.g. "asdfghjkl", "qwertyuiop", "זסדגכע")
+    const mashes = ['asdfg', 'dfghj', 'fghjk', 'ghjkl', 'qwerty', 'werty', 'zxcvb', 'xcvbn', 'שדגכע', 'דגכעי', 'גכעיח'];
+    const lower = clean.toLowerCase();
+    if (mashes.some(m => lower.includes(m))) return true;
+
+    // 3. Low character diversity in long strings (e.g. "בלחלגחכלחגכלג")
+    const uniqueChars = new Set(clean.toLowerCase()).size;
+    if (clean.length > 8 && (uniqueChars / clean.length) < 0.3) return true;
+
+    // 4. Random consonant mashes without vowels or space
+    if (/^[bcdfghjklmnpqrstvwxzBCDFGHJKLMNPQRSTVWXZ]{7,}$/.test(clean)) return true;
+
+    return false;
+  }
+
+  // AI & NLP: Intent Detection Engine
   function detectIntent(text) {
     const lower = text.toLowerCase();
+
+    // Check Phone Number
     const phoneMatch = text.match(/\b05\d[-]?\d{7}\b/) || text.match(/\b0\d[-]?\d{7,8}\b/);
     if (phoneMatch) return { intent: 'PHONE', val: phoneMatch[0] };
-    if (/(מחיר|עלות|כמה עולה|תמחור|הצעה|cost|price|budget|quote)/i.test(lower)) return { intent: 'PRICING' };
-    if (/(כמה זמן|זמנים|לוח זמנים|מהיר|mti|timeline|how long)/i.test(lower)) return { intent: 'TIMELINE' };
-    if (/(שפות|טכנולוגיה|react|next|python|node|aws)/i.test(lower)) return { intent: 'TECH' };
+
+    // Check Gibberish
+    if (isGibberish(text)) return { intent: 'GIBBERISH' };
+
+    // Check Price Inquiry
+    if (/(מחיר|עלות|כמה עולה|תמחור|הצעה|הצעת מחיר|תקציב|cost|price|budget|quote)/i.test(lower)) {
+      return { intent: 'PRICING' };
+    }
+
+    // Check Timeline Inquiry
+    if (/(כמה זמן|זמנים|לוח זמנים|דחיפות|מהיר|מתי|timeline|how long|duration)/i.test(lower)) {
+      return { intent: 'TIMELINE' };
+    }
+
+    // Check Tech Stack Inquiry
+    if (/(שפות|טכנולוגיה|איך בונים|react|next|python|node|vue|tailwind|aws|cloud)/i.test(lower)) {
+      return { intent: 'TECH' };
+    }
+
     return { intent: 'GENERAL' };
   }
 
+  // Category specific follow-up options
   function getCategorySubOptions(catId) {
     const isHe = currentLang === 'he';
     switch (catId) {
@@ -879,6 +408,7 @@ function initHumanSalesBot() {
     }
   }
 
+  // Handle Category Option Selection
   function handleOptionSelection(opt) {
     const isHe = currentLang === 'he';
 
@@ -886,13 +416,105 @@ function initHumanSalesBot() {
       chatState.category = opt.label;
       chatState.categoryId = opt.id || 'web';
       chatState.step = 'CATEGORY_SELECTED';
-      replyWithTyping(opt.response, () => setOptions(getCategorySubOptions(chatState.categoryId)));
+
+      const categoryResponse = opt.response;
+
+      replyWithTyping(categoryResponse, () => {
+        const subOpts = getCategorySubOptions(chatState.categoryId);
+        setOptions(subOpts);
+      });
     } else if (chatState.step === 'CATEGORY_SELECTED') {
       chatState.specificDetails = opt.label;
       chatState.step = 'SPECIFIC_ANSWERED';
-      const prompt = isHe ? `רשמתי! 👍 מה לוח הזמנים המועדף עליך לעלייה לאוויר?` : `Noted! 👍 What is your target timeline?`;
-      replyWithTyping(prompt, () => {
-        const tOpts = isHe ? [
+
+      const timelinePrompt = isHe
+        ? `רשמתי! 👍 מה לוח הזמנים המועדף עליך לעלייה לאוויר?`
+        : `Noted! 👍 What is your target timeline to go live?`;
+
+      replyWithTyping(timelinePrompt, () => {
+        const timelineOpts = isHe ? [
+          { label: '⚡ מיידי (1-2 שבועות)' },
+          { label: '📅 במהלך החודש הקרוב' },
+          { label: '🔍 בודק/ת אפשרויות ותקציב' }
+        ] : [
+          { label: '⚡ Immediate (1-2 weeks)' },
+          { label: '📅 Within next month' },
+          { label: '🔍 Exploring options' }
+        ];
+        setOptions(timelineOpts);
+      });
+    } else if (chatState.step === 'SPECIFIC_ANSWERED') {
+      chatState.timeline = opt.label;
+      chatState.step = 'TIMELINE_ANSWERED';
+
+      const askContactPrompt = isHe
+        ? `מעולה! קיבלתי את כל הנתונים 👍\nכדי ששיחה תועבר לטיפול אישי של יותם כהן ב-Code92 — נא להקליד שם מלא ומספר טלפון לחזרה:`
+        : `Great! Received all details 👍\nPlease type your Full Name and Phone Number so Yotam Cohen at Code92 can contact you:`;
+
+      replyWithTyping(askContactPrompt, () => {
+        setOptions([]);
+      });
+    }
+  }
+
+  // Handle Free Text User Input
+  function handleUserInput() {
+    const val = input.value.trim();
+    if (!val) return;
+
+    addMsg(val, false);
+    input.value = '';
+    opts.innerHTML = '';
+
+    const isHe = currentLang === 'he';
+    const analysis = detectIntent(val);
+
+    // 1. Gibberish Response
+    if (analysis.intent === 'GIBBERISH') {
+      const gibberishMsg = isHe
+        ? `אופס, ההודעה שכתבת לא כל כך מובנת לי 😅\nאפשר לנסות לנסח מחדש או לבחור באחת האפשרויות למטה:`
+        : `Oops, I couldn't quite understand that 😅\nPlease try rephrasing or choose one of the options below:`;
+
+      replyWithTyping(gibberishMsg, () => {
+        if (chatState.step === 'INIT') {
+          setOptions(DICT[currentLang].botServices);
+        } else if (chatState.step === 'CATEGORY_SELECTED') {
+          setOptions(getCategorySubOptions(chatState.categoryId));
+        }
+      });
+      return;
+    }
+
+    // 2. Phone / Contact Info Detected
+    if (analysis.intent === 'PHONE' || chatState.step === 'TIMELINE_ANSWERED' || chatState.step === 'DONE') {
+      chatState.userPhone = analysis.val || val;
+      if (!chatState.userName) chatState.userName = val.replace(analysis.val || '', '').trim() || 'לקוח יקר';
+      chatState.step = 'DONE';
+
+      finishLeadCapture();
+      return;
+    }
+
+    // 3. Pricing Query Handling
+    if (analysis.intent === 'PRICING') {
+      const priceMsg = isHe
+        ? `מחירי הפרויקטים ב-Code92 נגזרים מאפיון מדויק והיקף העבודה. אנו מציעים הצעת מחיר שקופה ומותאמת אישית 💎\nבאיזה תחום מדובר? אפשר לבחור קטגוריה למטה:`
+        : `Project pricing at Code92 depends on scope and technical architecture. We provide transparent, custom quotes 💎\nWhich category fits your project? Choose below:`;
+
+      replyWithTyping(priceMsg, () => {
+        setOptions(DICT[currentLang].botServices);
+      });
+      return;
+    }
+
+    // 4. Timeline Query Handling
+    if (analysis.intent === 'TIMELINE') {
+      const timelineMsg = isHe
+        ? `אתרי תדמית ומערכות בסיסיות נבנים בדרך כלל תוך 1-2 שבועות. מערכות מורכבות וסוכני AI מפותחים תוך 3-4 שבועות ⚡\nמה לוח הזמנים המועדף עליך?`
+        : `Websites and core solutions are delivered within 1-2 weeks. Custom apps & AI agents take 3-4 weeks ⚡\nWhat is your target timeline?`;
+
+      replyWithTyping(timelineMsg, () => {
+        const timelineOpts = isHe ? [
           { label: '⚡ מיידי (1-2 שבועות)' },
           { label: '📅 במהלך החודש הקרוב' },
           { label: '🔍 בודק/ת אפשרויות' }
@@ -901,74 +523,110 @@ function initHumanSalesBot() {
           { label: '📅 Within next month' },
           { label: '🔍 Exploring options' }
         ];
-        setOptions(tOpts);
+        setOptions(timelineOpts);
       });
-    } else if (chatState.step === 'SPECIFIC_ANSWERED') {
-      chatState.timeline = opt.label;
-      chatState.step = 'TIMELINE_ANSWERED';
-      const ask = isHe ? `מעולה! קיבלתי את כל הנתונים 👍\nכדי ששיחה תועבר לטיפול אישי של יותם כהן ב-CODE92 — נא להקליד שם מלא ומספר טלפון לחזרה:` : `Great! Received all details 👍\nPlease type your Full Name and Phone Number for Yotam Cohen at CODE92:`;
-      replyWithTyping(ask, () => setOptions([]));
-    }
-  }
-
-  function handleUserInput() {
-    const val = input.value.trim();
-    if (!val) return;
-    addMsg(val, false);
-    input.value = '';
-    opts.innerHTML = '';
-    const isHe = currentLang === 'he';
-    const analysis = detectIntent(val);
-
-    if (analysis.intent === 'PHONE' || chatState.step === 'TIMELINE_ANSWERED' || chatState.step === 'DONE') {
-      chatState.userPhone = analysis.val || val;
-      if (!chatState.userName) chatState.userName = val.replace(analysis.val || '', '').trim() || 'לקוח יקר';
-      chatState.step = 'DONE';
-      finishLeadCapture();
       return;
     }
 
+    // 5. Tech Stack Query Handling
+    if (analysis.intent === 'TECH') {
+      const techMsg = isHe
+        ? `אנחנו ב-Code92 מפתחים בטכנולוגיות המתקדמות בעולם: React, Next.js, Node.js, Python, Tailwind, ותשתיות AWS/Cloud 🚀\nאיזה סוג פרויקט תרצה שנבנה עבורך?`
+        : `At Code92 we build with modern tech: React, Next.js, Node.js, Python, Tailwind, and AWS Cloud 🚀\nWhat type of project would you like us to engineer?`;
+
+      replyWithTyping(techMsg, () => {
+        setOptions(DICT[currentLang].botServices);
+      });
+      return;
+    }
+
+    // 6. Generic Text Input Handling through flow steps
     if (chatState.step === 'INIT') {
       chatState.specificDetails = val;
       chatState.step = 'INIT_RESPONSE_SENT';
-      const ack = isHe ? `תודה! קיבלתי את הודעתך 👍\nבאיזה תחום מדובר? אפשר לבחור באחת האפשרויות למטה:` : `Thank you! Received your message 👍\nWhich category fits your project best? Choose below:`;
-      replyWithTyping(ack, () => setOptions(DICT[currentLang].botServices));
+
+      const ackMsg = isHe
+        ? `תודה! קיבלתי את הודעתך: "${val}" 👍\nבאיזה תחום מדובר? אפשר לבחור באחת האפשרויות למטה:`
+        : `Thank you! Received your message: "${val}" 👍\nWhich category fits your project best? Choose below:`;
+
+      replyWithTyping(ackMsg, () => {
+        setOptions(DICT[currentLang].botServices);
+      });
+    } else if (chatState.step === 'INIT_RESPONSE_SENT' || chatState.step === 'CATEGORY_SELECTED') {
+      chatState.specificDetails = val;
+      chatState.step = 'SPECIFIC_ANSWERED';
+
+      const askContact = isHe
+        ? `מצויין! מה לוח הזמנים הרצוי עליך?`
+        : `Excellent! What is your target timeline?`;
+
+      replyWithTyping(askContact, () => {
+        const timelineOpts = isHe ? [
+          { label: '⚡ מיידי (1-2 שבועות)' },
+          { label: '📅 במהלך החודש הקרוב' },
+          { label: '🔍 בודק/ת אפשרויות' }
+        ] : [
+          { label: '⚡ Immediate (1-2 weeks)' },
+          { label: '📅 Within next month' },
+          { label: '🔍 Exploring options' }
+        ];
+        setOptions(timelineOpts);
+      });
+    } else if (chatState.step === 'SPECIFIC_ANSWERED') {
+      chatState.userPhone = val;
+      chatState.step = 'DONE';
+
+      finishLeadCapture();
     }
   }
 
+  // Complete Intake & Bridge to WhatsApp
   function finishLeadCapture() {
     const isHe = currentLang === 'he';
-    const summary = isHe
-      ? `תודה רבה! 🙏\nפנייתך נקלטה בהצלחה במערכת CODE92:\n• תחום: ${chatState.category || 'פנייה כללית'}\n• פרטים: ${chatState.specificDetails || '-'}\n• לוח זמנים: ${chatState.timeline || '-'}\n• איש קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nנציג מ-CODE92 (ניהול יותם כהן) יחזור אליך בהקדם!`
-      : `Thank you! 🙏\nYour inquiry is submitted to CODE92:\n• Category: ${chatState.category || 'General'}\n• Details: ${chatState.specificDetails || '-'}\n• Timeline: ${chatState.timeline || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nA representative from CODE92 will contact you shortly!`;
 
-    replyWithTyping(summary, () => {
+    const summaryText = isHe
+      ? `תודה רבה! 🙏\nפנייתך נקלטה בהצלחה במערכת Code92:\n• תחום: ${chatState.category || 'פנייה כללית'}\n• פרטים: ${chatState.specificDetails || '-'}\n• לוח זמנים: ${chatState.timeline || '-'}\n• איש קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nנציג מ-Code92 (ניהול יותם כהן) יחזור אליך בהקדם!`
+      : `Thank you! 🙏\nYour inquiry is submitted to Code92:\n• Category: ${chatState.category || 'General'}\n• Details: ${chatState.specificDetails || '-'}\n• Timeline: ${chatState.timeline || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nA representative from Code92 will contact you shortly!`;
+
+    replyWithTyping(summaryText, () => {
       const waNote = isHe ? 'מעדיף/ה להמשיך את השיחה ב-WhatsApp כעת?' : 'Prefer to continue on WhatsApp now?';
-      const btnLabel = isHe ? '📲 לחץ/י כאן לפתיחת שיחה ב-WhatsApp' : '📲 Click to open WhatsApp chat with CODE92';
-      const text = encodeURIComponent(
-        `שלום ליותם כהן (CODE92)! 👋\n` +
-        `פנייה חדשה מאת נציג/ה: ${activeRep.name}\n` +
+      const btnLabel = isHe ? '📲 לחץ/י כאן לפתיחת שיחה ב-WhatsApp מול Code92' : '📲 Click to open WhatsApp chat with Code92';
+      
+      const waMessageText = encodeURIComponent(
+        `שלום ליותם כהן (Code92)! 👋\n` +
+        `פנייה חדשה מאת פנייה מנציג/ה: ${activeRep.name}\n` +
         `תחום: ${chatState.category || 'כללי'}\n` +
         `פירוט: ${chatState.specificDetails || '-'}\n` +
         `לוח זמנים: ${chatState.timeline || '-'}\n` +
         `איש קשר: ${chatState.userPhone || chatState.userName}`
       );
-      const url = `https://wa.me/${WA_NUMBER}?text=${text}`;
-      addMsg(`${waNote}<br><br><a href="${url}" target="_blank" rel="noopener" class="chat-wa-direct-btn">${btnLabel}</a>`);
+      const waUrl = `https://wa.me/${WA_NUMBER}?text=${waMessageText}`;
+
+      addMsg(`${waNote}<br><br><a href="${waUrl}" target="_blank" rel="noopener" class="chat-wa-direct-btn">${btnLabel}</a>`);
     });
   }
 
   function startSalesFunnel() {
     msgs.innerHTML = '';
-    chatState = { step: 'INIT', category: '', categoryId: '', specificDetails: '', timeline: '', userName: '', userPhone: '' };
+    chatState = {
+      step: 'INIT',
+      category: '',
+      categoryId: '',
+      specificDetails: '',
+      timeline: '',
+      userName: '',
+      userPhone: ''
+    };
     const name = currentLang === 'he' ? activeRep.name : activeRep.enName;
     addMsg(DICT[currentLang].botGreeting(name));
-    setOptions([]);
+    setOptions([]); // DO NOT display options initially!
   }
 
   updateBotUiFn = () => {
     renderRepInfo();
-    if (isOpen) startSalesFunnel();
+    if (isOpen) {
+      startSalesFunnel();
+    }
   };
 
   renderRepInfo();
@@ -976,63 +634,235 @@ function initHumanSalesBot() {
   function toggleChat(state) {
     isOpen = state !== undefined ? state : !isOpen;
     panel.classList.toggle('open', isOpen);
-    if (isOpen && msgs.children.length === 0) startSalesFunnel();
+    if (isOpen && msgs.children.length === 0) {
+      startSalesFunnel();
+    }
   }
 
   fab?.addEventListener('click', () => toggleChat());
   close?.addEventListener('click', () => toggleChat(false));
+
   send?.addEventListener('click', handleUserInput);
   input?.addEventListener('keydown', e => { if (e.key === 'Enter') handleUserInput(); });
-}
 
-/* ═══════════════════════════════════════════════════════════════════
-   10. CONTACT FORM HANDLER (Preserved)
-   ═══════════════════════════════════════════════════════════════════ */
-function initContactForm() {
-  const form = document.getElementById('rubiconContactForm');
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message')?.value.trim() || '';
-
-    if (!name || !phone || !email) {
-      alert(currentLang === 'he' ? 'נא למלא את כל שדות החובה (*)' : 'Please fill all required fields (*)');
-      return;
+  // Automatic Pop-Up after 3 seconds
+  setTimeout(() => {
+    if (!isOpen) {
+      toggleChat(true);
     }
-
-    const text = encodeURIComponent(
-      `שלום ליותם כהן (CODE92)! 👋\n\n` +
-      `פנייה חדשה מאתר CODE92:\n` +
-      `👤 שם: ${name}\n` +
-      `📞 טלפון: ${phone}\n` +
-      `✉️ אימייל: ${email}\n` +
-      (message ? `📝 הודעה: ${message}\n` : '')
-    );
-
-    window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, '_blank');
-    form.reset();
-  });
+  }, 3000);
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   INITIALIZATION
-   ═══════════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  coreEngine = new DigitalMatterEngine();
-
   document.getElementById('langToggleBtn')?.addEventListener('click', (e) => {
     e.preventDefault();
     toggleLanguage();
   });
 
-  initLoadingSequence();
-  initMouseLighting();
-  initScrollTimeline();
-  initVerticalNav();
+  const form = document.getElementById('rubiconContactForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message')?.value.trim() || '';
+
+      if (!name || !phone || !email) {
+        alert('נא למלא את כל שדות החובה (*)');
+        return;
+      }
+
+      const text = encodeURIComponent(
+        `שלום ליותם כהן (Code92)! 👋\n\n` +
+        `פנייה חדשה מאתר Code92:\n` +
+        `👤 שם: ${name}\n` +
+        `📞 טלפון: ${phone}\n` +
+        `✉️ אימייל: ${email}\n` +
+        (message ? `📝 הודעה: ${message}\n` : '')
+      );
+
+      window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, '_blank');
+      form.reset();
+    });
+  }
+
   initHumanSalesBot();
-  initContactForm();
+  initHeroParticlesCanvas();
+  initProcessCardTypewriter();
 });
+
+// Dynamic Real-Time Typewriter Effect for Process Cards
+let typingTimers = {};
+
+function initProcessCardTypewriter() {
+  const cards = document.querySelectorAll('.process-card');
+
+  cards.forEach(card => {
+    const cardId = card.getAttribute('data-card');
+    const descEl = card.querySelector('.card-desc');
+    if (!descEl || !cardId) return;
+
+    function getTargetText() {
+      const dictKey = `pCardDesc${cardId}`;
+      return DICT[currentLang]?.[dictKey] || descEl.getAttribute('data-fulltext') || descEl.textContent.trim();
+    }
+
+    function startTyping() {
+      if (typingTimers[cardId]) {
+        clearInterval(typingTimers[cardId]);
+      }
+
+      const fullText = getTargetText();
+      descEl.setAttribute('data-fulltext', fullText);
+      
+      descEl.style.opacity = '1';
+      descEl.style.transform = 'translateY(0)';
+
+      let charIndex = 0;
+      descEl.innerHTML = '<span class="typed-content"></span><span class="typing-cursor">|</span>';
+      const typedSpan = descEl.querySelector('.typed-content');
+
+      typingTimers[cardId] = setInterval(() => {
+        if (charIndex < fullText.length) {
+          typedSpan.textContent += fullText.charAt(charIndex);
+          charIndex++;
+        } else {
+          clearInterval(typingTimers[cardId]);
+          const cursor = descEl.querySelector('.typing-cursor');
+          if (cursor) cursor.style.display = 'none';
+        }
+      }, 16);
+    }
+
+    function stopTyping() {
+      if (typingTimers[cardId]) {
+        clearInterval(typingTimers[cardId]);
+      }
+      descEl.style.opacity = '0';
+      descEl.style.transform = 'translateY(12px)';
+      const fullText = descEl.getAttribute('data-fulltext') || getTargetText();
+      descEl.textContent = fullText;
+    }
+
+    // Desktop Mouse Hover
+    card.addEventListener('mouseenter', startTyping);
+    card.addEventListener('mouseleave', stopTyping);
+
+    // Mobile Tap / Click
+    card.addEventListener('click', () => {
+      const isActive = card.classList.contains('active');
+      
+      cards.forEach(c => {
+        c.classList.remove('active');
+        const cId = c.getAttribute('data-card');
+        const cDesc = c.querySelector('.card-desc');
+        if (cDesc && typingTimers[cId]) {
+          clearInterval(typingTimers[cId]);
+          cDesc.style.opacity = '0';
+          cDesc.style.transform = 'translateY(12px)';
+        }
+      });
+
+      if (!isActive) {
+        card.classList.add('active');
+        startTyping();
+      }
+    });
+  });
+}
+
+// Dynamic Cyber Particle Matrix Canvas
+function initHeroParticlesCanvas() {
+  const canvas = document.getElementById('heroParticlesCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let width = canvas.width = canvas.offsetWidth || window.innerWidth;
+  let height = canvas.height = canvas.offsetHeight || 940;
+
+  window.addEventListener('resize', () => {
+    if (!canvas) return;
+    width = canvas.width = canvas.offsetWidth || window.innerWidth;
+    height = canvas.height = canvas.offsetHeight || 940;
+  });
+
+  const particles = [];
+  const particleCount = 45;
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      radius: Math.random() * 2 + 1,
+      color: Math.random() > 0.4 ? '#00e676' : '#ffffff',
+      alpha: Math.random() * 0.6 + 0.2
+    });
+  }
+
+  let mouseX = width / 2;
+  let mouseY = height / 2;
+
+  const heroSection = document.getElementById('hero');
+  heroSection?.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw connecting lines
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 140) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.strokeStyle = `rgba(0, 230, 118, ${(1 - dist / 140) * 0.35})`;
+          ctx.lineWidth = 1;
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw and update particles
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      // Mouse attraction
+      const mdx = mouseX - p.x;
+      const mdy = mouseY - p.y;
+      const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+      if (mdist < 180) {
+        p.x += (mdx / mdist) * 0.3;
+        p.y += (mdy / mdist) * 0.3;
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = p.color;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1;
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
