@@ -148,8 +148,8 @@ let currentLang = 'he';
 const SALES_REPS = [
   { name: 'דנה', gender: 'female', img: 'assets/rep_dana.png', icon: '👩‍💼', enName: 'Dana' },
   { name: 'גיא', gender: 'male', img: 'assets/rep_guy.jpg', icon: '👨‍💼', enName: 'Guy' },
-  { name: 'אהובית', gender: 'female', img: 'assets/rep_ahuvit.png', icon: '👩‍💼', enName: 'Ahuvit' },
-  { name: 'עידו', gender: 'male', icon: '👨‍💼', enName: 'Ido' },
+  { name: 'אהובית', gender: 'female', img: 'assets/rep_ahuvit.jpg', icon: '👩‍💼', enName: 'Ahuvit' },
+  { name: 'עידו', gender: 'male', img: 'assets/rep_ido.png', icon: '👨‍💼', enName: 'Ido' },
   { name: 'אביב', gender: 'male', img: 'assets/rep_aviv.png', icon: '👨‍💼', enName: 'Aviv' },
   { name: 'קארין', gender: 'female', img: 'assets/rep_karin.png', icon: '👩‍💼', enName: 'Karin' }
 ];
