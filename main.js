@@ -45,28 +45,33 @@ const DICT = {
     botStatus: 'מחובר/ת כעת לשיחה',
     botTyping: 'מקליד/ה הודעה...',
     botPlaceholder: 'הקלד/י הודעה או מספר טלפון...',
-    botGreeting: (name) => `שלום! 👋 שמי ${name} מ-ELYOTAM.\nבמה אוכל לסייע לך בפרויקט היום?`,
-    botRedirecting: `תודה רבה! העברתי את פנייתך ישירות ליותם כהן ב-WhatsApp (052-2057074).\nפותח כעת שיחה...`,
+    botGreeting: (name) => `שלום! 👋 שמי ${name} מ-Code92.\nבמה אוכל לסייע לך בפרויקט היום?`,
+    botRedirecting: `תודה רבה! העברתי את פנייתך ליותם כהן ב-Code92.\nלחץ על הלחצן למטה לפתיחת שיחה ב-WhatsApp:`,
     botServices: [
       { 
-        label: '🤖 אוטומציות עסקיות + AI', 
-        response: `בחירה מעולה! סוכני AI ואוטומציות עסקיות ב-ELYOTAM שחוסכות 80% מזמן העבודה. השאירו שם וטלפון ונחזור אליכם מיידית!` 
-      },
-      { 
-        label: '💻 בניית אתרים ומערכות Web לעסקים', 
-        response: `מעולה! אנחנו בוראים אתרים ומערכות Web פרימיום ב-ELYOTAM ברמה בינלאומית. יש לנו הטבה מיוחדת של 15% הנחה לפונים היום!\nאשמח לדעת מה שמך ומספר הטלפון שלך לחזרה?` 
-      },
-      { 
+        id: 'ecommerce',
         label: '🛍️ חנויות E-commerce', 
-        response: `בחירה מעולה! חנויות E-commerce ב-ELYOTAM שמגדילות מכירות ב-Next.js. השאירו שם וטלפון ונחזור אליכם מיידית!` 
+        response: `בחירה מעולה! חנויות E-commerce ב-Code92 נבנות להמרה מקסימלית ב-Next.js 🚀\nאשמח לדעת: מדובר בחנות חדשה מאפס או שדרוג חנות קיימת, וכמה מוצרים מתוכננים בה בערך?` 
       },
       { 
+        id: 'ai',
+        label: '🤖 אוטומציות עסקיות + AI', 
+        response: `בחירה מצוינת! סוכני AI ואוטומציות עסקיות ב-Code92 חוסכים עד 80% מזמן העבודה 🤖\nאיזה תהליך בעסק היית רוצה לאוטמט? (סוכן מכירות, מענה ללקוחות, ניהול CRM או חשבוניות)` 
+      },
+      { 
+        id: 'web',
+        label: '💻 בניית אתרים ומערכות Web לעסקים', 
+        response: `נפלא! אנחנו מתמחים בבניית אתרים ומערכות Web פרימיום ב-Code92 ברמה בינלאומית 💻\nמה סוג הפרויקט שדרוש לך? (אתר תדמית יוקרתי, קטלוג מוצרים, או מערכת ניהול מותאמת)` 
+      },
+      { 
+        id: 'apps',
         label: '📱 פיתוח מערכות ואפליקציות מותאמות לעסק', 
-        response: `ארכיטקטורת תוכנה, SaaS ואפליקציות מותאמות ב-ELYOTAM בניהול יותם כהן. השאירו פרטים ליצירת קשר מהירה!` 
+        response: `מעולה! ארכיטקטורת תוכנה, SaaS ואפליקציות מותאמות אישית ב-Code92 📱\nבאיזו פלטפורמה מדובר? (אפליקציית מובייל iOS/Android, מערכת ענן SaaS, או תוכנה פנימית)` 
       },
       { 
+        id: 'cloud',
         label: '🛡️ תחזוקה, Cloud, אבטחה וניהול שוטף', 
-        response: `תשתיות ענן, DevOps, אבטחת מידע וניהול שוטף עם 99.99% Uptime SLA. השאירו שם וטלפון ונחזור אליכם מיידית!` 
+        response: `מצוין! תשתיות ענן, DevOps, אבטחת מידע וניהול שוטף עם 99.99% Uptime SLA ב-Code92 🛡️\nבאיזה שירות מדובר? (אבטחת מידע, אחסון ענן AWS, או תחזוקה שוטפת)` 
       }
     ]
   },
@@ -99,34 +104,39 @@ const DICT = {
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'How can we help?',
     btnSubmitTxt: 'Submit',
-    copyright: '© ELYOTAM · All Rights Reserved to Yotam Cohen',
+    copyright: '© Code92 · All Rights Reserved to Yotam Cohen',
 
     // Bot Translations
     botStatus: 'Online Now',
     botTyping: 'typing a message...',
     botPlaceholder: 'Type a message or phone number...',
-    botGreeting: (name) => `Hello! 👋 My name is ${name} from ELYOTAM.\nHow can I assist you with your project today?`,
-    botRedirecting: `Thank you! I forwarded your request directly to Yotam Cohen on WhatsApp (052-2057074).\nOpening chat now...`,
+    botGreeting: (name) => `Hello! 👋 My name is ${name} from Code92.\nHow can I assist you with your project today?`,
+    botRedirecting: `Thank you! I forwarded your inquiry to Yotam Cohen at Code92.\nClick the button below to start a WhatsApp chat:`,
     botServices: [
       { 
-        label: '🤖 Business Automation & AI', 
-        response: `Great choice! AI Agents & Automations by ELYOTAM saving up to 80% manual work. Leave your name and phone number for immediate contact!` 
-      },
-      { 
-        label: '💻 Website & Web System Development', 
-        response: `Great! At ELYOTAM we engineer world-class premium websites. We offer a special 15% discount for inquiries today!\nPlease share your name and phone number so we can reach out.` 
-      },
-      { 
+        id: 'ecommerce',
         label: '🛍️ E-Commerce Online Stores', 
-        response: `Excellent choice! E-commerce stores built to maximize revenue. Leave your name and phone number for immediate contact!` 
+        response: `Excellent choice! E-commerce stores by Code92 built in Next.js for high conversion 🚀\nIs this a new store from scratch or an existing store upgrade? How many products are planned?` 
       },
       { 
+        id: 'ai',
+        label: '🤖 Business Automation & AI', 
+        response: `Great choice! AI Agents & Automations by Code92 saving up to 80% manual work 🤖\nWhich business process would you like to automate? (Sales agent, customer support, CRM)` 
+      },
+      { 
+        id: 'web',
+        label: '💻 Website & Web System Development', 
+        response: `Great! At Code92 we engineer world-class premium websites 💻\nWhat type of project do you need? (Luxury brand site, product catalog, or custom Web App)` 
+      },
+      { 
+        id: 'apps',
         label: '📱 Custom App & Software Engineering', 
-        response: `Enterprise software architecture led personally by Yotam Cohen. Leave your contact details for quick dispatch!` 
+        response: `Enterprise software architecture, SaaS & custom mobile apps by Code92 📱\nWhich platform? (iOS/Android mobile app, Cloud SaaS, or internal tool)` 
       },
       { 
+        id: 'cloud',
         label: '🛡️ Cloud, DevOps, Cyber & Maintenance', 
-        response: `Cloud infrastructure, DevOps, Cyber Security and ongoing management with 99.99% Uptime SLA. Leave your phone number for priority callback!` 
+        response: `Cloud infrastructure, DevOps, Cyber Security & ongoing management with 99.99% Uptime SLA by Code92 🛡️\nWhich service? (Cyber security, AWS Cloud, or ongoing maintenance)` 
       }
     ]
   }
@@ -190,7 +200,7 @@ function toggleLanguage() {
   }
 }
 
-// ================= HUMAN SALES REPRESENTATIVE BOT =================
+// ================= CODE92 SMART AI SALES BOT =================
 function initHumanSalesBot() {
   activeRep = SALES_REPS[Math.floor(Math.random() * SALES_REPS.length)];
 
@@ -206,17 +216,22 @@ function initHumanSalesBot() {
   const send = document.getElementById('salesChatSend');
 
   let isOpen = false;
+
+  // Bot State Management
   let chatState = {
-    step: 'INIT', // 'INIT', 'SERVICE_SELECTED', 'DETAILS_PROVIDED', 'DONE'
-    service: '',
-    details: '',
-    contactInfo: ''
+    step: 'INIT', // 'INIT', 'CATEGORY_SELECTED', 'SPECIFIC_ANSWERED', 'TIMELINE_ANSWERED', 'DONE'
+    category: '',
+    categoryId: '',
+    specificDetails: '',
+    timeline: '',
+    userName: '',
+    userPhone: ''
   };
 
   function renderRepInfo() {
     const isHe = currentLang === 'he';
     if (avatar) avatar.textContent = activeRep.initial;
-    if (nameEl) nameEl.textContent = isHe ? `${activeRep.name} מ-ELYOTAM` : `${activeRep.enName} from ELYOTAM`;
+    if (nameEl) nameEl.textContent = isHe ? `${activeRep.name} מ-Code92` : `${activeRep.enName} from Code92`;
     if (statusEl) statusEl.textContent = DICT[currentLang].botStatus;
     if (input) input.placeholder = DICT[currentLang].botPlaceholder;
   }
@@ -254,7 +269,7 @@ function initHumanSalesBot() {
       removeTypingIndicator();
       addMsg(responseText);
       if (callback) callback();
-    }, 1000);
+    }, 900);
   }
 
   function setOptions(optionsList) {
@@ -274,52 +289,166 @@ function initHumanSalesBot() {
     });
   }
 
+  // AI & NLP: Detect gibberish / unreadable inputs
+  function isGibberish(text) {
+    const clean = text.trim();
+    if (clean.length < 3) return false;
+
+    // 1. Repeated character mash (e.g. "חחחחחח", "אאאאא", "ssssss")
+    if (/([a-zA-Zא-ת])\1{4,}/.test(clean)) return true;
+
+    // 2. Keyboard rows / Mash patterns (e.g. "asdfghjkl", "qwertyuiop", "זסדגכע")
+    const mashes = ['asdfg', 'dfghj', 'fghjk', 'ghjkl', 'qwerty', 'werty', 'zxcvb', 'xcvbn', 'שדגכע', 'דגכעי', 'גכעיח'];
+    const lower = clean.toLowerCase();
+    if (mashes.some(m => lower.includes(m))) return true;
+
+    // 3. Low character diversity in long strings (e.g. "בלחלגחכלחגכלג")
+    const uniqueChars = new Set(clean.toLowerCase()).size;
+    if (clean.length > 8 && (uniqueChars / clean.length) < 0.3) return true;
+
+    // 4. Random consonant mashes without vowels or space
+    if (/^[bcdfghjklmnpqrstvwxzBCDFGHJKLMNPQRSTVWXZ]{7,}$/.test(clean)) return true;
+
+    return false;
+  }
+
+  // AI & NLP: Intent Detection Engine
+  function detectIntent(text) {
+    const lower = text.toLowerCase();
+
+    // Check Phone Number
+    const phoneMatch = text.match(/\b05\d[-]?\d{7}\b/) || text.match(/\b0\d[-]?\d{7,8}\b/);
+    if (phoneMatch) return { intent: 'PHONE', val: phoneMatch[0] };
+
+    // Check Gibberish
+    if (isGibberish(text)) return { intent: 'GIBBERISH' };
+
+    // Check Price Inquiry
+    if (/(מחיר|עלות|כמה עולה|תמחור|הצעה|הצעת מחיר|תקציב|cost|price|budget|quote)/i.test(lower)) {
+      return { intent: 'PRICING' };
+    }
+
+    // Check Timeline Inquiry
+    if (/(כמה זמן|זמנים|לוח זמנים|דחיפות|מהיר|מתי|timeline|how long|duration)/i.test(lower)) {
+      return { intent: 'TIMELINE' };
+    }
+
+    // Check Tech Stack Inquiry
+    if (/(שפות|טכנולוגיה|איך בונים|react|next|python|node|vue|tailwind|aws|cloud)/i.test(lower)) {
+      return { intent: 'TECH' };
+    }
+
+    return { intent: 'GENERAL' };
+  }
+
+  // Category specific follow-up options
+  function getCategorySubOptions(catId) {
+    const isHe = currentLang === 'he';
+    switch (catId) {
+      case 'ecommerce':
+        return isHe ? [
+          { label: '🆕 חנות חדשה מאפס (עד 50 מוצרים)' },
+          { label: '🚀 חנות גדולה / מורכבת (100+ מוצרים)' },
+          { label: '🔄 שדרוג חנות קיימת / מעבר מערכת' }
+        ] : [
+          { label: '🆕 New Store from Scratch (Up to 50 items)' },
+          { label: '🚀 Large Enterprise Store (100+ items)' },
+          { label: '🔄 Existing Store Redesign / Migration' }
+        ];
+      case 'ai':
+        return isHe ? [
+          { label: '🤖 סוכן AI למכירות ושירות 24/7' },
+          { label: '⚡ אוטומציית לידים, WhatsApp ו-CRM' },
+          { label: '🔗 חיבור וסנכרון מערכות עסקיות' }
+        ] : [
+          { label: '🤖 24/7 Sales & Support AI Agent' },
+          { label: '⚡ Leads, WhatsApp & CRM Automations' },
+          { label: '🔗 Business Systems Integration' }
+        ];
+      case 'web':
+        return isHe ? [
+          { label: '✨ אתר תדמית יוקרתי לעסק' },
+          { label: '🖥️ מערכת ניהול / Web App מותאם' },
+          { label: '🛠️ שדרוג וחידוש אתר קיים' }
+        ] : [
+          { label: '✨ Luxury Corporate Website' },
+          { label: '🖥️ Custom Web Application / Portal' },
+          { label: '🛠️ Existing Website Overhaul' }
+        ];
+      case 'apps':
+        return isHe ? [
+          { label: '📱 אפליקציית מובייל (iOS / Android)' },
+          { label: '☁️ מערכת SaaS בענן' },
+          { label: '🏢 תוכנה פנימית וארגונית לעסק' }
+        ] : [
+          { label: '📱 Mobile App (iOS / Android)' },
+          { label: '☁️ Cloud SaaS Product' },
+          { label: '🏢 Internal Enterprise Software' }
+        ];
+      case 'cloud':
+      default:
+        return isHe ? [
+          { label: '☁️ תשתיות ענן, AWS ו-DevOps' },
+          { label: '🔒 אבטחת מידע וסייבר' },
+          { label: '⚙️ תחזוקה וניהול שוטף' }
+        ] : [
+          { label: '☁️ Cloud Infrastructure, AWS & DevOps' },
+          { label: '🔒 Cyber & Information Security' },
+          { label: '⚙️ Maintenance & Managed Services' }
+        ];
+    }
+  }
+
+  // Handle Category Option Selection
   function handleOptionSelection(opt) {
     const isHe = currentLang === 'he';
 
     if (chatState.step === 'INIT') {
-      chatState.service = opt.label;
-      chatState.step = 'SERVICE_SELECTED';
+      chatState.category = opt.label;
+      chatState.categoryId = opt.id || 'web';
+      chatState.step = 'CATEGORY_SELECTED';
 
-      const responseText = opt.response;
-      const followUpQuestion = isHe 
-        ? `אשמח לדעת: מה לוח הזמנים המועדף עליך לעלייה לאוויר?`
-        : `What is your preferred timeline to launch this project?`;
+      const categoryResponse = opt.response;
 
-      replyWithTyping(responseText, () => {
-        setTimeout(() => {
-          replyWithTyping(followUpQuestion, () => {
-            const timelineOpts = isHe ? [
-              { label: '⚡ מיידי (1-2 שבועות)', val: 'מיידי' },
-              { label: '📅 במהלך החודש הקרוב', val: 'חודש' },
-              { label: '🔍 בודק/ת אפשרויות ותקציב', val: 'בדיקה' }
-            ] : [
-              { label: '⚡ Immediate (1-2 weeks)', val: 'Immediate' },
-              { label: '📅 Within next month', val: '1 Month' },
-              { label: '🔍 Exploring options', val: 'Exploring' }
-            ];
-
-            setOptions(timelineOpts.map(t => ({
-              label: t.label,
-              val: t.val
-            })));
-          });
-        }, 500);
+      replyWithTyping(categoryResponse, () => {
+        const subOpts = getCategorySubOptions(chatState.categoryId);
+        setOptions(subOpts);
       });
-    } else if (chatState.step === 'SERVICE_SELECTED') {
-      chatState.details = opt.label;
-      chatState.step = 'DETAILS_PROVIDED';
+    } else if (chatState.step === 'CATEGORY_SELECTED') {
+      chatState.specificDetails = opt.label;
+      chatState.step = 'SPECIFIC_ANSWERED';
 
-      const askContactMsg = isHe
-        ? `מעולה! קיבלתי את הנתונים 👍\nכדי שיותם כהן יוכל לחזור אליך עם הצעת מחיר ופתרון מותאם אישית — נא להקליד שם ומספר טלפון לחזרה:`
-        : `Great! Got the details 👍\nPlease type your Full Name and Phone Number so Yotam Cohen can get back to you with a custom proposal:`;
+      const timelinePrompt = isHe
+        ? `רשמתי! 👍 מה לוח הזמנים המועדף עליך לעלייה לאוויר?`
+        : `Noted! 👍 What is your target timeline to go live?`;
 
-      replyWithTyping(askContactMsg, () => {
+      replyWithTyping(timelinePrompt, () => {
+        const timelineOpts = isHe ? [
+          { label: '⚡ מיידי (1-2 שבועות)' },
+          { label: '📅 במהלך החודש הקרוב' },
+          { label: '🔍 בודק/ת אפשרויות ותקציב' }
+        ] : [
+          { label: '⚡ Immediate (1-2 weeks)' },
+          { label: '📅 Within next month' },
+          { label: '🔍 Exploring options' }
+        ];
+        setOptions(timelineOpts);
+      });
+    } else if (chatState.step === 'SPECIFIC_ANSWERED') {
+      chatState.timeline = opt.label;
+      chatState.step = 'TIMELINE_ANSWERED';
+
+      const askContactPrompt = isHe
+        ? `מעולה! קיבלתי את כל הנתונים 👍\nכדי ששיחה תועבר לטיפול אישי של יותם כהן ב-Code92 — נא להקליד שם מלא ומספר טלפון לחזרה:`
+        : `Great! Received all details 👍\nPlease type your Full Name and Phone Number so Yotam Cohen at Code92 can contact you:`;
+
+      replyWithTyping(askContactPrompt, () => {
         setOptions([]);
       });
     }
   }
 
+  // Handle Free Text User Input
   function handleUserInput() {
     const val = input.value.trim();
     if (!val) return;
@@ -329,57 +458,164 @@ function initHumanSalesBot() {
     opts.innerHTML = '';
 
     const isHe = currentLang === 'he';
+    const analysis = detectIntent(val);
 
-    if (chatState.step === 'INIT') {
-      chatState.details = val;
-      chatState.step = 'DETAILS_PROVIDED';
+    // 1. Gibberish Response
+    if (analysis.intent === 'GIBBERISH') {
+      const gibberishMsg = isHe
+        ? `אופס, ההודעה שכתבת לא כל כך מובנת לי 😅\nאפשר לנסות לנסח מחדש או לבחור באחת האפשרויות למטה:`
+        : `Oops, I couldn't quite understand that 😅\nPlease try rephrasing or choose one of the options below:`;
 
-      const askContactMsg = isHe
-        ? `תודה! רשמתי את פנייתך לגבי: "${val}".\nמה מספר הטלפון והשם שלך כדי שיותם כהן יחזור אליך בהקדם?`
-        : `Thank you! Noted your request regarding: "${val}".\nPlease provide your Name and Phone Number so Yotam Cohen can contact you:`;
+      replyWithTyping(gibberishMsg, () => {
+        if (chatState.step === 'INIT') {
+          setOptions(DICT[currentLang].botServices);
+        } else if (chatState.step === 'CATEGORY_SELECTED') {
+          setOptions(getCategorySubOptions(chatState.categoryId));
+        }
+      });
+      return;
+    }
 
-      replyWithTyping(askContactMsg);
-    } else if (chatState.step === 'SERVICE_SELECTED') {
-      chatState.details = val;
-      chatState.step = 'DETAILS_PROVIDED';
-
-      const askContact = isHe
-        ? `מצויין! מה מספר הטלפון והשם המלא שלך לחזרה?`
-        : `Excellent! What is your full name and phone number for callback?`;
-
-      replyWithTyping(askContact);
-    } else if (chatState.step === 'DETAILS_PROVIDED' || chatState.step === 'DONE') {
-      chatState.contactInfo = val;
+    // 2. Phone / Contact Info Detected
+    if (analysis.intent === 'PHONE' || chatState.step === 'TIMELINE_ANSWERED' || chatState.step === 'DONE') {
+      chatState.userPhone = analysis.val || val;
+      if (!chatState.userName) chatState.userName = val.replace(analysis.val || '', '').trim() || 'לקוח יקר';
       chatState.step = 'DONE';
 
-      const summaryText = isHe
-        ? `תודה רבה! 🙏\nהפרטים שלך נקלטו בהצלחה:\n• נושא: ${chatState.service || 'פנייה כללית'}\n• פרטים: ${chatState.details || '-'}\n• איש קשר: ${val}\n\nנציג מ-ELYOTAM (ניהול יותם כהן) יחזור אליך בהקדם!`
-        : `Thank you! 🙏\nYour details have been submitted successfully:\n• Subject: ${chatState.service || 'General Inquiry'}\n• Details: ${chatState.details || '-'}\n• Contact: ${val}\n\nA representative from ELYOTAM will get back to you shortly!`;
-
-      replyWithTyping(summaryText, () => {
-        const waNote = isHe ? 'מעדיף/ה לפנות ב-WhatsApp במידי?' : 'Prefer to chat on WhatsApp immediately?';
-        const btnLabel = isHe ? '📲 לחץ/י כאן לפתיחת שיחה ב-WhatsApp (רשות)' : '📲 Click here to open WhatsApp (Optional)';
-        const waMessageText = encodeURIComponent(
-          `שלום ליותם כהן (ELYOTAM)! 👋\n` +
-          `פנייה מנציג/ה: ${activeRep.name}\n` +
-          `נושא: ${chatState.service || 'כללי'}\n` +
-          `פרטים: ${chatState.details || '-'}\n` +
-          `איש קשר: ${val}`
-        );
-        const waUrl = `https://wa.me/${WA_NUMBER}?text=${waMessageText}`;
-
-        addMsg(`${waNote}<br><br><a href="${waUrl}" target="_blank" rel="noopener" class="chat-wa-direct-btn">${btnLabel}</a>`);
-      });
+      finishLeadCapture();
+      return;
     }
+
+    // 3. Pricing Query Handling
+    if (analysis.intent === 'PRICING') {
+      const priceMsg = isHe
+        ? `מחירי הפרויקטים ב-Code92 נגזרים מאפיון מדויק והיקף העבודה. אנו מציעים הצעת מחיר שקופה ומותאמת אישית 💎\nבאיזה תחום מדובר? אפשר לבחור קטגוריה למטה:`
+        : `Project pricing at Code92 depends on scope and technical architecture. We provide transparent, custom quotes 💎\nWhich category fits your project? Choose below:`;
+
+      replyWithTyping(priceMsg, () => {
+        setOptions(DICT[currentLang].botServices);
+      });
+      return;
+    }
+
+    // 4. Timeline Query Handling
+    if (analysis.intent === 'TIMELINE') {
+      const timelineMsg = isHe
+        ? `אתרי תדמית ומערכות בסיסיות נבנים בדרך כלל תוך 1-2 שבועות. מערכות מורכבות וסוכני AI מפותחים תוך 3-4 שבועות ⚡\nמה לוח הזמנים המועדף עליך?`
+        : `Websites and core solutions are delivered within 1-2 weeks. Custom apps & AI agents take 3-4 weeks ⚡\nWhat is your target timeline?`;
+
+      replyWithTyping(timelineMsg, () => {
+        const timelineOpts = isHe ? [
+          { label: '⚡ מיידי (1-2 שבועות)' },
+          { label: '📅 במהלך החודש הקרוב' },
+          { label: '🔍 בודק/ת אפשרויות' }
+        ] : [
+          { label: '⚡ Immediate (1-2 weeks)' },
+          { label: '📅 Within next month' },
+          { label: '🔍 Exploring options' }
+        ];
+        setOptions(timelineOpts);
+      });
+      return;
+    }
+
+    // 5. Tech Stack Query Handling
+    if (analysis.intent === 'TECH') {
+      const techMsg = isHe
+        ? `אנחנו ב-Code92 מפתחים בטכנולוגיות המתקדמות בעולם: React, Next.js, Node.js, Python, Tailwind, ותשתיות AWS/Cloud 🚀\nאיזה סוג פרויקט תרצה שנבנה עבורך?`
+        : `At Code92 we build with modern tech: React, Next.js, Node.js, Python, Tailwind, and AWS Cloud 🚀\nWhat type of project would you like us to engineer?`;
+
+      replyWithTyping(techMsg, () => {
+        setOptions(DICT[currentLang].botServices);
+      });
+      return;
+    }
+
+    // 6. Generic Text Input Handling through flow steps
+    if (chatState.step === 'INIT') {
+      chatState.specificDetails = val;
+      chatState.step = 'SPECIFIC_ANSWERED';
+
+      const askTimeline = isHe
+        ? `תודה! רשמתי את פנייתך לגבי: "${val}".\nמה לוח הזמנים המועדף עליך לעלייה לאוויר?`
+        : `Thank you! Noted your request regarding: "${val}".\nWhat is your target timeline to launch?`;
+
+      replyWithTyping(askTimeline, () => {
+        const timelineOpts = isHe ? [
+          { label: '⚡ מיידי (1-2 שבועות)' },
+          { label: '📅 במהלך החודש הקרוב' },
+          { label: '🔍 בודק/ת אפשרויות' }
+        ] : [
+          { label: '⚡ Immediate (1-2 weeks)' },
+          { label: '📅 Within next month' },
+          { label: '🔍 Exploring options' }
+        ];
+        setOptions(timelineOpts);
+      });
+    } else if (chatState.step === 'CATEGORY_SELECTED') {
+      chatState.specificDetails = val;
+      chatState.step = 'SPECIFIC_ANSWERED';
+
+      const askContact = isHe
+        ? `מצויין! מה לוח הזמנים הרצוי עליך?`
+        : `Excellent! What is your target timeline?`;
+
+      replyWithTyping(askContact, () => {
+        const timelineOpts = isHe ? [
+          { label: '⚡ מיידי (1-2 שבועות)' },
+          { label: '📅 במהלך החודש הקרוב' },
+          { label: '🔍 בודק/ת אפשרויות' }
+        ] : [
+          { label: '⚡ Immediate (1-2 weeks)' },
+          { label: '📅 Within next month' },
+          { label: '🔍 Exploring options' }
+        ];
+        setOptions(timelineOpts);
+      });
+    } else if (chatState.step === 'SPECIFIC_ANSWERED') {
+      chatState.userPhone = val;
+      chatState.step = 'DONE';
+
+      finishLeadCapture();
+    }
+  }
+
+  // Complete Intake & Bridge to WhatsApp
+  function finishLeadCapture() {
+    const isHe = currentLang === 'he';
+
+    const summaryText = isHe
+      ? `תודה רבה! 🙏\nפנייתך נקלטה בהצלחה במערכת Code92:\n• תחום: ${chatState.category || 'פנייה כללית'}\n• פרטים: ${chatState.specificDetails || '-'}\n• לוח זמנים: ${chatState.timeline || '-'}\n• איש קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nנציג מ-Code92 (ניהול יותם כהן) יחזור אליך בהקדם!`
+      : `Thank you! 🙏\nYour inquiry is submitted to Code92:\n• Category: ${chatState.category || 'General'}\n• Details: ${chatState.specificDetails || '-'}\n• Timeline: ${chatState.timeline || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nA representative from Code92 will contact you shortly!`;
+
+    replyWithTyping(summaryText, () => {
+      const waNote = isHe ? 'מעדיף/ה להמשיך את השיחה ב-WhatsApp כעת?' : 'Prefer to continue on WhatsApp now?';
+      const btnLabel = isHe ? '📲 לחץ/י כאן לפתיחת שיחה ב-WhatsApp מול Code92' : '📲 Click to open WhatsApp chat with Code92';
+      
+      const waMessageText = encodeURIComponent(
+        `שלום ליותם כהן (Code92)! 👋\n` +
+        `פנייה חדשה מאת פנייה מנציג/ה: ${activeRep.name}\n` +
+        `תחום: ${chatState.category || 'כללי'}\n` +
+        `פירוט: ${chatState.specificDetails || '-'}\n` +
+        `לוח זמנים: ${chatState.timeline || '-'}\n` +
+        `איש קשר: ${chatState.userPhone || chatState.userName}`
+      );
+      const waUrl = `https://wa.me/${WA_NUMBER}?text=${waMessageText}`;
+
+      addMsg(`${waNote}<br><br><a href="${waUrl}" target="_blank" rel="noopener" class="chat-wa-direct-btn">${btnLabel}</a>`);
+    });
   }
 
   function startSalesFunnel() {
     msgs.innerHTML = '';
     chatState = {
       step: 'INIT',
-      service: '',
-      details: '',
-      contactInfo: ''
+      category: '',
+      categoryId: '',
+      specificDetails: '',
+      timeline: '',
+      userName: '',
+      userPhone: ''
     };
     const name = currentLang === 'he' ? activeRep.name : activeRep.enName;
     addMsg(DICT[currentLang].botGreeting(name));
