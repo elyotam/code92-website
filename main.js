@@ -206,6 +206,12 @@ function initHumanSalesBot() {
   const send = document.getElementById('salesChatSend');
 
   let isOpen = false;
+  let chatState = {
+    step: 'INIT', // 'INIT', 'SERVICE_SELECTED', 'DETAILS_PROVIDED', 'DONE'
+    service: '',
+    details: '',
+    contactInfo: ''
+  };
 
   function renderRepInfo() {
     const isHe = currentLang === 'he';
@@ -248,21 +254,13 @@ function initHumanSalesBot() {
       removeTypingIndicator();
       addMsg(responseText);
       if (callback) callback();
-    }, 1200);
-  }
-
-  function openWhatsApp(customText) {
-    const waText = encodeURIComponent(`שלום ליותם כהן (ELYOTAM)! 👋\nפנייה מנציג/ה: ${activeRep.name}\n${customText}`);
-    const waUrl = `https://wa.me/${WA_NUMBER}?text=${waText}`;
-    try {
-      window.location.href = waUrl;
-    } catch (e) {
-      window.open(waUrl, '_blank');
-    }
+    }, 1000);
   }
 
   function setOptions(optionsList) {
     opts.innerHTML = '';
+    if (!optionsList || !optionsList.length) return;
+
     optionsList.forEach(opt => {
       const btn = document.createElement('button');
       btn.className = 'chip-btn';
@@ -270,25 +268,119 @@ function initHumanSalesBot() {
       btn.addEventListener('click', () => {
         addMsg(opt.label, false);
         opts.innerHTML = '';
-        replyWithTyping(opt.response, () => {
-          const redirectMsg = currentLang === 'he' ? 'מעביר אותך כעת ל-WhatsApp...' : 'Redirecting to WhatsApp...';
-          const btnLabel = currentLang === 'he' ? '📲 פתח שיחה ב-WhatsApp בלחיצה כאן' : '📲 Click to Open WhatsApp Chat';
-          const waText = encodeURIComponent(`שלום ליותם כהן (ELYOTAM)! 👋\nפנייה מנציג/ה: ${activeRep.name}\nנושא: ${opt.label}`);
-          const waUrl = `https://wa.me/${WA_NUMBER}?text=${waText}`;
-          
-          addMsg(`${redirectMsg}<br><br><a href="${waUrl}" target="_blank" rel="noopener" class="chat-wa-direct-btn">${btnLabel}</a>`);
-          
-          setTimeout(() => {
-            openWhatsApp(`נושא: ${opt.label}`);
-          }, 1400);
-        });
+        handleOptionSelection(opt);
       });
       opts.appendChild(btn);
     });
   }
 
+  function handleOptionSelection(opt) {
+    const isHe = currentLang === 'he';
+
+    if (chatState.step === 'INIT') {
+      chatState.service = opt.label;
+      chatState.step = 'SERVICE_SELECTED';
+
+      const responseText = opt.response;
+      const followUpQuestion = isHe 
+        ? `אשמח לדעת: מה לוח הזמנים המועדף עליך לעלייה לאוויר?`
+        : `What is your preferred timeline to launch this project?`;
+
+      replyWithTyping(responseText, () => {
+        setTimeout(() => {
+          replyWithTyping(followUpQuestion, () => {
+            const timelineOpts = isHe ? [
+              { label: '⚡ מיידי (1-2 שבועות)', val: 'מיידי' },
+              { label: '📅 במהלך החודש הקרוב', val: 'חודש' },
+              { label: '🔍 בודק/ת אפשרויות ותקציב', val: 'בדיקה' }
+            ] : [
+              { label: '⚡ Immediate (1-2 weeks)', val: 'Immediate' },
+              { label: '📅 Within next month', val: '1 Month' },
+              { label: '🔍 Exploring options', val: 'Exploring' }
+            ];
+
+            setOptions(timelineOpts.map(t => ({
+              label: t.label,
+              val: t.val
+            })));
+          });
+        }, 500);
+      });
+    } else if (chatState.step === 'SERVICE_SELECTED') {
+      chatState.details = opt.label;
+      chatState.step = 'DETAILS_PROVIDED';
+
+      const askContactMsg = isHe
+        ? `מעולה! קיבלתי את הנתונים 👍\nכדי שיותם כהן יוכל לחזור אליך עם הצעת מחיר ופתרון מותאם אישית — נא להקליד שם ומספר טלפון לחזרה:`
+        : `Great! Got the details 👍\nPlease type your Full Name and Phone Number so Yotam Cohen can get back to you with a custom proposal:`;
+
+      replyWithTyping(askContactMsg, () => {
+        setOptions([]);
+      });
+    }
+  }
+
+  function handleUserInput() {
+    const val = input.value.trim();
+    if (!val) return;
+
+    addMsg(val, false);
+    input.value = '';
+    opts.innerHTML = '';
+
+    const isHe = currentLang === 'he';
+
+    if (chatState.step === 'INIT') {
+      chatState.details = val;
+      chatState.step = 'DETAILS_PROVIDED';
+
+      const askContactMsg = isHe
+        ? `תודה! רשמתי את פנייתך לגבי: "${val}".\nמה מספר הטלפון והשם שלך כדי שיותם כהן יחזור אליך בהקדם?`
+        : `Thank you! Noted your request regarding: "${val}".\nPlease provide your Name and Phone Number so Yotam Cohen can contact you:`;
+
+      replyWithTyping(askContactMsg);
+    } else if (chatState.step === 'SERVICE_SELECTED') {
+      chatState.details = val;
+      chatState.step = 'DETAILS_PROVIDED';
+
+      const askContact = isHe
+        ? `מצויין! מה מספר הטלפון והשם המלא שלך לחזרה?`
+        : `Excellent! What is your full name and phone number for callback?`;
+
+      replyWithTyping(askContact);
+    } else if (chatState.step === 'DETAILS_PROVIDED' || chatState.step === 'DONE') {
+      chatState.contactInfo = val;
+      chatState.step = 'DONE';
+
+      const summaryText = isHe
+        ? `תודה רבה! 🙏\nהפרטים שלך נקלטו בהצלחה:\n• נושא: ${chatState.service || 'פנייה כללית'}\n• פרטים: ${chatState.details || '-'}\n• איש קשר: ${val}\n\nנציג מ-ELYOTAM (ניהול יותם כהן) יחזור אליך בהקדם!`
+        : `Thank you! 🙏\nYour details have been submitted successfully:\n• Subject: ${chatState.service || 'General Inquiry'}\n• Details: ${chatState.details || '-'}\n• Contact: ${val}\n\nA representative from ELYOTAM will get back to you shortly!`;
+
+      replyWithTyping(summaryText, () => {
+        const waNote = isHe ? 'מעדיף/ה לפנות ב-WhatsApp במידי?' : 'Prefer to chat on WhatsApp immediately?';
+        const btnLabel = isHe ? '📲 לחץ/י כאן לפתיחת שיחה ב-WhatsApp (רשות)' : '📲 Click here to open WhatsApp (Optional)';
+        const waMessageText = encodeURIComponent(
+          `שלום ליותם כהן (ELYOTAM)! 👋\n` +
+          `פנייה מנציג/ה: ${activeRep.name}\n` +
+          `נושא: ${chatState.service || 'כללי'}\n` +
+          `פרטים: ${chatState.details || '-'}\n` +
+          `איש קשר: ${val}`
+        );
+        const waUrl = `https://wa.me/${WA_NUMBER}?text=${waMessageText}`;
+
+        addMsg(`${waNote}<br><br><a href="${waUrl}" target="_blank" rel="noopener" class="chat-wa-direct-btn">${btnLabel}</a>`);
+      });
+    }
+  }
+
   function startSalesFunnel() {
     msgs.innerHTML = '';
+    chatState = {
+      step: 'INIT',
+      service: '',
+      details: '',
+      contactInfo: ''
+    };
     const name = currentLang === 'he' ? activeRep.name : activeRep.enName;
     addMsg(DICT[currentLang].botGreeting(name));
     setOptions(DICT[currentLang].botServices);
@@ -313,26 +405,6 @@ function initHumanSalesBot() {
 
   fab?.addEventListener('click', () => toggleChat());
   close?.addEventListener('click', () => toggleChat(false));
-
-  function handleUserInput() {
-    const val = input.value.trim();
-    if (!val) return;
-
-    addMsg(val, false);
-    input.value = '';
-
-    replyWithTyping(DICT[currentLang].botRedirecting, () => {
-      const btnLabel = currentLang === 'he' ? '📲 לחץ כאן למעבר מיידי ל-WhatsApp' : '📲 Click here for instant WhatsApp chat';
-      const waText = encodeURIComponent(`שלום ליותם כהן (ELYOTAM)! 👋\nפנייה מנציג/ה: ${activeRep.name}\nהודעת לקוח: ${val}`);
-      const waUrl = `https://wa.me/${WA_NUMBER}?text=${waText}`;
-      
-      addMsg(`<a href="${waUrl}" target="_blank" rel="noopener" class="chat-wa-direct-btn">${btnLabel}</a>`);
-
-      setTimeout(() => {
-        openWhatsApp(`הודעת לקוח: ${val}`);
-      }, 1400);
-    });
-  }
 
   send?.addEventListener('click', handleUserInput);
   input?.addEventListener('keydown', e => { if (e.key === 'Enter') handleUserInput(); });
