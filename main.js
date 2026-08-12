@@ -156,6 +156,7 @@ const SALES_REPS = [
 
 let activeRep = null;
 let updateBotUiFn = null;
+let lenisInstance = null;
 
 function toggleLanguage() {
   currentLang = currentLang === 'he' ? 'en' : 'he';
@@ -661,15 +662,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form = document.getElementById('rubiconContactForm');
   if (form) {
+    const requiredFields = ['name', 'phone', 'email'];
+    requiredFields.forEach((id) => {
+      const field = document.getElementById(id);
+      field?.addEventListener('input', () => clearFieldError(field));
+    });
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const email = document.getElementById('email').value.trim();
+      const nameField = document.getElementById('name');
+      const phoneField = document.getElementById('phone');
+      const emailField = document.getElementById('email');
       const message = document.getElementById('message')?.value.trim() || '';
 
-      if (!name || !phone || !email) {
-        alert('נא למלא את כל שדות החובה (*)');
+      const name = nameField.value.trim();
+      const phone = phoneField.value.trim();
+      const email = emailField.value.trim();
+
+      let firstInvalid = null;
+      [ [nameField, name], [phoneField, phone], [emailField, email] ].forEach(([field, value]) => {
+        if (!value) {
+          showFieldError(field, 'שדה חובה');
+          firstInvalid = firstInvalid || field;
+        }
+      });
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showFieldError(emailField, 'כתובת אימייל לא תקינה');
+        firstInvalid = firstInvalid || emailField;
+      }
+      if (firstInvalid) {
+        firstInvalid.focus();
         return;
       }
 
@@ -683,6 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
       );
 
       window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, '_blank');
+      showFormSuccess(form);
       form.reset();
     });
   }
@@ -690,6 +713,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initHumanSalesBot();
   initHeroParticlesCanvas();
   initProcessCardTypewriter();
+  initLenisSmoothScroll();
+  initScrollAnimations();
+  initMagneticCursor();
+  initMagneticButtons();
+  initScrollChrome();
+  initCardTilt();
+  initHeroScrollCue();
 });
 
 // Dynamic Real-Time Typewriter Effect for Process Cards
@@ -865,4 +895,326 @@ function initHeroParticlesCanvas() {
   }
 
   animate();
+}
+
+// ==========================================================================
+// Contact Form Feedback — inline field errors + visible success confirmation
+// ==========================================================================
+function showFieldError(field, message) {
+  field.setAttribute('aria-invalid', 'true');
+  const wrap = field.closest('.form-field');
+  if (!wrap) return;
+  let err = wrap.querySelector('.field-error');
+  if (!err) {
+    err = document.createElement('span');
+    err.className = 'field-error';
+    err.setAttribute('role', 'alert');
+    wrap.appendChild(err);
+  }
+  err.textContent = message;
+}
+
+function clearFieldError(field) {
+  field.removeAttribute('aria-invalid');
+  const err = field.closest('.form-field')?.querySelector('.field-error');
+  if (err) err.remove();
+}
+
+function showFormSuccess(form) {
+  let note = form.querySelector('.form-success-note');
+  if (!note) {
+    note = document.createElement('div');
+    note.className = 'form-success-note';
+    note.setAttribute('role', 'status');
+    form.appendChild(note);
+  }
+  note.textContent = currentLang === 'en'
+    ? 'Thanks! Your WhatsApp message is ready to send.'
+    : 'תודה! פתחנו לך הודעת WhatsApp מוכנה לשליחה.';
+  note.classList.add('is-visible');
+  clearTimeout(note._hideTimer);
+  note._hideTimer = setTimeout(() => note.classList.remove('is-visible'), 5000);
+}
+
+// ==========================================================================
+// Scroll-Driven Motion (GSAP + ScrollTrigger) — respects prefers-reduced-motion
+// ==========================================================================
+function initScrollAnimations() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return; // everything is visible by default in the base CSS — nothing to reveal
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero headline: line-by-line entrance on load (not scroll-gated — it's above the fold)
+  const headlineLines = document.querySelectorAll('#heroHeadline .border-b-line');
+  if (headlineLines.length) {
+    gsap.from(headlineLines, {
+      opacity: 0,
+      y: 28,
+      duration: 0.7,
+      stagger: 0.12,
+      ease: 'power3.out',
+      delay: 0.15,
+    });
+  }
+  const heroDesc = document.getElementById('heroSubtitle');
+  if (heroDesc) {
+    gsap.from(heroDesc, { opacity: 0, y: 20, duration: 0.7, ease: 'power3.out', delay: 0.55 });
+  }
+
+  // Subtle parallax on the hero video/gradient layer only — never on text (motion-sickness risk)
+  gsap.to('.hero-video', {
+    yPercent: 8,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.6 },
+  });
+
+  // Process section title: fade up on scroll into view
+  const processTitle = document.getElementById('processTitle');
+  if (processTitle) {
+    gsap.from(processTitle.children, {
+      opacity: 0,
+      y: 24,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: processTitle, start: 'top 85%', toggleActions: 'play none none reverse' },
+    });
+  }
+
+  // Process cards: grid stagger reveal, slight overshoot — reads as premium, not sluggish
+  gsap.from('.process-card', {
+    opacity: 0,
+    y: 40,
+    scale: 0.94,
+    duration: 0.6,
+    stagger: { each: 0.12, from: 'start' },
+    ease: 'back.out(1.4)',
+    scrollTrigger: { trigger: '.process-grid', start: 'top 80%', toggleActions: 'play none none reverse' },
+  });
+
+  // Contact section: title + form fade up together
+  const contactTitle = document.querySelector('.contact-title');
+  const formBox = document.querySelector('.form-box');
+  if (contactTitle && formBox) {
+    gsap.from([contactTitle, formBox], {
+      opacity: 0,
+      y: 30,
+      duration: 0.65,
+      stagger: 0.12,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.footer-contact-section', start: 'top 78%', toggleActions: 'play none none reverse' },
+    });
+  }
+}
+
+// ==========================================================================
+// Custom Magnetic/Glow Cursor — desktop (fine pointer) only, respects reduced-motion
+// ==========================================================================
+function initMagneticCursor() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+  document.documentElement.classList.add('has-custom-cursor');
+
+  let x = window.innerWidth / 2;
+  let y = window.innerHeight / 2;
+  let cx = x;
+  let cy = y;
+
+  window.addEventListener('mousemove', (e) => {
+    x = e.clientX;
+    y = e.clientY;
+  }, { passive: true });
+
+  function raf() {
+    cx += (x - cx) * 0.18;
+    cy += (y - cy) * 0.18;
+    cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+    requestAnimationFrame(raf);
+  }
+  raf();
+
+  const interactiveSelector = 'a, button, input, textarea, .process-card, [data-cursor-hover]';
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(interactiveSelector)) cursor.classList.add('is-active');
+  });
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(interactiveSelector)) cursor.classList.remove('is-active');
+  });
+}
+
+// ==========================================================================
+// Magnetic Buttons — CTA pulls slightly toward the cursor within its own bounds
+// ==========================================================================
+function initMagneticButtons() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  document.querySelectorAll('.btn-rubicon, .btn-wa-sq').forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const relX = e.clientX - rect.left - rect.width / 2;
+      const relY = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${relX * 0.25}px, ${relY * 0.3}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+}
+
+// ==========================================================================
+// Lenis Smooth Scroll — wired to GSAP's ticker + ScrollTrigger per the
+// documented integration pattern. Skipped entirely under reduced-motion,
+// so native (instant) scrolling is what those users get.
+// ==========================================================================
+function initLenisSmoothScroll() {
+  if (typeof Lenis === 'undefined' || typeof gsap === 'undefined') return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const lenis = new Lenis({
+    duration: 0.9,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    wheelMultiplier: 1,
+  });
+  lenisInstance = lenis;
+  window.lenisInstance = lenis; // optional hook for a11y-widget.js's reduce-motion toggle
+
+  if (typeof ScrollTrigger !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+  }
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  // Lenis doesn't intercept in-page anchor links on its own — wire it explicitly
+  // so header/skip-link jumps animate through the same smoothing, not a native jump
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href');
+      if (!id || id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -20 });
+    });
+  });
+}
+
+// ==========================================================================
+// Scroll Chrome — progress bar fill, header shrink/hide, back-to-top visibility
+// ==========================================================================
+function initScrollChrome() {
+  const header = document.querySelector('.header');
+  const progressBar = document.getElementById('scrollProgressBar');
+  const backToTop = document.getElementById('backToTopBtn');
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  function update() {
+    const y = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? Math.min(1, Math.max(0, y / docHeight)) : 0;
+
+    if (progressBar) progressBar.style.width = `${progress * 100}%`;
+
+    if (header) {
+      header.classList.toggle('is-scrolled', y > 40);
+      if (y > lastY && y > 160) {
+        header.classList.add('is-hidden');
+      } else {
+        header.classList.remove('is-hidden');
+      }
+    }
+
+    if (backToTop) backToTop.classList.toggle('is-visible', y > 600);
+
+    lastY = y;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  update();
+
+  backToTop?.addEventListener('click', () => {
+    if (lenisInstance) { lenisInstance.scrollTo(0); return; }
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+}
+
+// ==========================================================================
+// 3D Card Tilt — completes the perspective:1000px already set on .process-card
+// in the CSS; the card itself never actually tilted before this. Desktop only.
+// ==========================================================================
+function initCardTilt() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  document.querySelectorAll('.process-card').forEach((card) => {
+    let rafId = null;
+    let targetRotX = 0, targetRotY = 0;
+    let curRotX = 0, curRotY = 0;
+
+    function loop() {
+      curRotX += (targetRotX - curRotX) * 0.15;
+      curRotY += (targetRotY - curRotY) * 0.15;
+      card.style.transform = `rotateX(${curRotX}deg) rotateY(${curRotY}deg)`;
+      if (Math.abs(targetRotX - curRotX) > 0.05 || Math.abs(targetRotY - curRotY) > 0.05) {
+        rafId = requestAnimationFrame(loop);
+      } else {
+        rafId = null;
+      }
+    }
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      targetRotY = px * 10;
+      targetRotX = py * -10;
+      if (!rafId) rafId = requestAnimationFrame(loop);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      targetRotX = 0;
+      targetRotY = 0;
+      if (!rafId) rafId = requestAnimationFrame(loop);
+    });
+  });
+}
+
+// ==========================================================================
+// Hero Scroll Cue — small animated hint inviting the visitor to keep scrolling
+// ==========================================================================
+function initHeroScrollCue() {
+  const hero = document.getElementById('hero');
+  if (!hero) return;
+
+  const cue = document.createElement('button');
+  cue.className = 'hero-scroll-cue';
+  cue.setAttribute('aria-label', 'גללו למטה');
+  cue.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M12 5v13M6 13l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  hero.appendChild(cue);
+
+  cue.addEventListener('click', () => {
+    const target = document.getElementById('process');
+    if (!target) return;
+    if (lenisInstance) { lenisInstance.scrollTo(target, { offset: -20 }); return; }
+    target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  });
+
+  window.addEventListener('scroll', () => {
+    cue.classList.toggle('is-hidden', window.scrollY > 120);
+  }, { passive: true });
 }

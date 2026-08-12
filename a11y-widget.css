@@ -1,0 +1,354 @@
+/* ==========================================================================
+   Accessibility Widget — isolated, prefixed CSS. All selectors start with
+   .a11y- or target html/body state classes (a11y-*). Safe to drop into any
+   site: it never touches existing selectors, only adds new ones + a small
+   set of !important overrides that are expected/standard for a11y toggles
+   (they must reliably win over arbitrary page styles).
+   ========================================================================== */
+
+.a11y-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Floating Action Button ── */
+.a11y-fab {
+  position: fixed;
+  bottom: 24px;
+  inset-inline-start: 24px; /* RTL-friendly: physical right in an RTL page */
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--brand-red, #1a56db);
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2147483000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.a11y-fab:hover,
+.a11y-fab:focus-visible {
+  transform: scale(1.08);
+}
+.a11y-fab:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+.a11y-fab-icon {
+  width: 26px;
+  height: 26px;
+}
+
+@media (max-width: 768px) {
+  .a11y-fab { inset-inline-start: 12px; bottom: 12px; width: 46px; height: 46px; }
+  .a11y-fab-icon { width: 22px; height: 22px; }
+}
+
+/* ── Panel ── */
+.a11y-panel {
+  position: fixed;
+  bottom: 88px;
+  inset-inline-start: 24px;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  max-height: min(640px, 80vh);
+  background: #ffffff;
+  color: #1a1a1a;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  z-index: 2147483001;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  direction: rtl;
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+.a11y-panel[hidden] { display: none; }
+
+@media (max-width: 768px) {
+  .a11y-panel { inset-inline-start: 12px; bottom: 68px; width: calc(100vw - 24px); }
+}
+
+.a11y-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+.a11y-panel-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+  color: #111827;
+}
+.a11y-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: #f3f4f6;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.a11y-close-btn:hover { background: #e5e7eb; }
+.a11y-close-btn:focus-visible { outline: 2px solid var(--brand-red, #1a56db); outline-offset: 2px; }
+
+.a11y-panel-body {
+  padding: 14px 16px 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Font size row ── */
+.a11y-row-fontsize {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #f9fafb;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+.a11y-row-label { font-size: 14px; font-weight: 600; color: #111827; }
+.a11y-fontsize-controls { display: flex; align-items: center; gap: 8px; }
+.a11y-step-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.a11y-step-btn:hover { border-color: var(--brand-red, #1a56db); }
+.a11y-step-btn:focus-visible { outline: 2px solid var(--brand-red, #1a56db); outline-offset: 2px; }
+.a11y-step-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.a11y-fontsize-value { font-size: 13px; color: #4b5563; min-width: 38px; text-align: center; }
+
+/* ── Toggle rows ── */
+.a11y-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.a11y-toggle-row:hover { border-color: #cbd5e1; background: #f9fafb; }
+.a11y-toggle-row:focus-visible { outline: 2px solid var(--brand-red, #1a56db); outline-offset: 2px; }
+.a11y-toggle-row[aria-pressed="true"] {
+  border-color: var(--brand-red, #1a56db);
+  background: #eefdf3;
+}
+
+.a11y-switch {
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  border-radius: 999px;
+  background: #d1d5db;
+  position: relative;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+.a11y-switch-knob {
+  position: absolute;
+  top: 2px;
+  inset-inline-start: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: inset-inline-start 0.2s ease;
+}
+.a11y-toggle-row[aria-pressed="true"] .a11y-switch {
+  background: var(--brand-red, #1a56db);
+}
+.a11y-toggle-row[aria-pressed="true"] .a11y-switch-knob {
+  inset-inline-start: 18px;
+}
+
+/* ── Reset ── */
+.a11y-reset-btn {
+  margin-top: 4px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.a11y-reset-btn:hover { background: #e5e7eb; }
+.a11y-reset-btn:focus-visible { outline: 2px solid var(--brand-red, #1a56db); outline-offset: 2px; }
+
+/* ── Statement ── */
+.a11y-statement {
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+.a11y-statement-title { font-size: 14px; font-weight: 700; color: #111827; margin: 0 0 6px; }
+.a11y-statement p { margin: 0 0 8px; }
+.a11y-statement-updated { color: #9ca3af; font-size: 11.5px; }
+
+/* ==========================================================================
+   Feature effects — applied via classes on <html>. Kept broad + !important
+   on purpose: an a11y override must reliably win over arbitrary page CSS.
+   ========================================================================== */
+
+/* B: letter-spacing / line-height */
+html.a11y-letter-spacing body,
+html.a11y-letter-spacing body * {
+  letter-spacing: 0.06em !important;
+  line-height: 1.7 !important;
+}
+
+/* C: high contrast */
+html.a11y-high-contrast body {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+html.a11y-high-contrast body * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+html.a11y-high-contrast body a,
+html.a11y-high-contrast body button {
+  color: #ffff00 !important;
+}
+html.a11y-high-contrast body img,
+html.a11y-high-contrast body video,
+html.a11y-high-contrast body svg {
+  filter: grayscale(1) contrast(1.2);
+}
+
+/* D: invert */
+html.a11y-invert body {
+  filter: invert(1) hue-rotate(180deg);
+}
+html.a11y-invert body img,
+html.a11y-invert body video,
+html.a11y-invert .a11y-panel,
+html.a11y-invert .a11y-fab {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* E: grayscale */
+html.a11y-grayscale body {
+  filter: grayscale(1);
+}
+
+/* F: link highlight */
+html.a11y-link-highlight body a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+  color: #0b57d0 !important;
+  font-weight: 600 !important;
+}
+html.a11y-high-contrast.a11y-link-highlight body a {
+  color: #ffff00 !important;
+}
+
+/* G: heading highlight */
+html.a11y-heading-highlight body h1,
+html.a11y-heading-highlight body h2,
+html.a11y-heading-highlight body h3,
+html.a11y-heading-highlight body h4,
+html.a11y-heading-highlight body h5,
+html.a11y-heading-highlight body h6 {
+  outline: 2px dashed currentColor !important;
+  outline-offset: 4px;
+  background: rgba(255, 235, 59, 0.12) !important;
+  border-radius: 4px;
+}
+
+/* H: readable font (system fonts only, nothing imported) */
+html.a11y-readable-font body,
+html.a11y-readable-font body * {
+  font-family: "Atkinson Hyperlegible", Verdana, "Segoe UI", Tahoma, Arial, sans-serif !important;
+}
+
+/* I: big cursor / cursor contrast */
+html.a11y-big-cursor,
+html.a11y-big-cursor body,
+html.a11y-big-cursor * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path d="M4 2l14 8-6 1.5L14 19z" fill="black" stroke="white" stroke-width="1.5"/></svg>') 4 4, auto !important;
+}
+html.a11y-big-cursor.a11y-cursor-contrast,
+html.a11y-big-cursor.a11y-cursor-contrast body,
+html.a11y-big-cursor.a11y-cursor-contrast * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24"><path d="M4 2l14 8-6 1.5L14 19z" fill="yellow" stroke="black" stroke-width="2"/></svg>') 4 4, auto !important;
+}
+
+/* J: reduce motion — kills transitions/animations site-wide via a body class */
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* K: reading guide bar (positioned via JS: --a11y-guide-y) */
+.a11y-reading-guide {
+  position: fixed;
+  inset-inline: 0;
+  top: var(--a11y-guide-y, 50%);
+  height: 40px;
+  transform: translateY(-50%);
+  background: rgba(255, 235, 59, 0.22);
+  border-top: 2px solid rgba(0, 0, 0, 0.35);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  z-index: 2147482999;
+}
+html.a11y-invert .a11y-reading-guide { filter: invert(1) hue-rotate(180deg); }
+
+/* L: bigger click targets */
+html.a11y-big-targets body a,
+html.a11y-big-targets body button {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
