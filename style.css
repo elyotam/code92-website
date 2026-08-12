@@ -29,6 +29,29 @@
 
   --dur: 300ms;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Type scale — intentional hierarchy, not ad-hoc per-element sizes.
+     Prefixed --fs- (font-size), deliberately distinct from the --text-*
+     COLOR tokens above — reusing that prefix silently overwrote --text-body
+     everywhere it was used for color; never share a token namespace. */
+  --fs-display: clamp(2.5rem, 5vw, 4.5rem);    /* hero headline */
+  --fs-h1:      clamp(1.75rem, 3.6vw, 3.25rem); /* section titles, cinematic stage headings */
+  --fs-h2:      clamp(1.5rem, 2.6vw, 2.75rem);  /* recurring section eyebrow-titles */
+  --fs-h3:      1.375rem;                      /* card/component headings */
+  --fs-body-lg: 1.5rem;
+  --fs-body:    1rem;
+  --fs-body-sm: 0.875rem;
+  --fs-caption: 0.75rem;
+
+  /* Spacing scale — 8px rhythm, used for section-level spacing */
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-5: 2.5rem;   /* 40px */
+  --space-6: 3.75rem;  /* 60px */
+  --space-7: 5rem;     /* 80px */
+  --space-8: 6.25rem;  /* 100px */
 }
 
 *, *::before, *::after {
@@ -272,9 +295,9 @@ img, video {
 }
 
 .h1-rubicon {
-  font-size: 4.5rem;
+  font-size: var(--fs-display);
   font-weight: 300;
-  line-height: 6rem;
+  line-height: 1.25;
   letter-spacing: -1px;
   color: var(--text-title);
 }
@@ -291,9 +314,9 @@ img, video {
 
 .hero-desc {
   margin-right: auto;
-  margin-top: 50px;
+  margin-top: var(--space-5);
   width: 640px;
-  font-size: 1.5rem;
+  font-size: var(--fs-body-lg);
   font-weight: 300;
   line-height: 2rem;
   color: var(--text-body);
@@ -305,201 +328,303 @@ img, video {
   color: var(--text-white);
 }
 
+.hero-actions {
+  margin-right: auto;
+  margin-top: 40px;
+  width: 640px;
+  display: flex;
+  justify-content: flex-start;
+}
+.hero-cta { width: auto; padding: 0 34px; }
+
+@media (max-width: 768px) {
+  .hero-actions { width: 100%; margin-top: 24px; justify-content: center; }
+  .hero-cta { width: 100%; max-width: 340px; }
+}
+
 /* Process Cards Section 1:1 */
 .process-section {
-  padding: 134px 0 120px;
   background-color: #000000;
+}
+
+.process-cinematic { position: relative; }
+
+.process-pin-wrap {
+  position: relative;
+  height: 400vh; /* ~100vh dwell per stage; JS pins .process-pin across this range */
+}
+
+.process-pin {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-8) 0 var(--space-6);
 }
 
 .process-title {
   position: relative;
   text-align: right;
+  flex-shrink: 0;
 }
 
 .process-title p {
-  font-size: 4.5rem;
-  line-height: 6rem;
+  font-size: var(--fs-h2);
+  line-height: 1.2;
   letter-spacing: -1px;
 }
 
-.process-grid {
-  margin-top: 60px;
+.stage-progress {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: clamp(16px, 4vw, 48px);
+  transform: translateY(-50%);
+  z-index: 5;
   display: flex;
-  gap: 40px;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.process-card {
-  position: relative;
-  overflow: hidden;
-  height: 441px;
-  width: 290px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  background-color: var(--bg-card);
-  padding: 30px;
-  cursor: pointer;
-  perspective: 1000px;
-  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.process-card:hover {
-  border-color: rgba(0, 230, 118, 0.4);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 230, 118, 0.2);
-}
-
-.card-3d-badge {
-  position: absolute;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%) translateY(0) rotateX(15deg) rotateY(-10deg) scale(1);
-  width: 140px;
-  height: 140px;
-  pointer-events: none;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s var(--ease);
-  opacity: 0.75;
-  z-index: 1;
-}
-
-.process-card:hover .card-3d-badge {
-  transform: translateX(-50%) translateY(-10px) rotateX(0deg) rotateY(0deg) scale(1.15);
-  opacity: 1;
-}
-
-.card-3d-badge svg {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.7));
-}
-
-.plus-btn {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 32px;
-  height: 32px;
+.stage-dot {
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background-color: var(--bg-icon);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  padding: 0;
+  transition: all 0.3s var(--ease);
+}
+.stage-dot.is-active {
+  background: var(--brand-red);
+  border-color: var(--brand-red);
+  box-shadow: 0 0 12px rgba(0, 230, 118, 0.7);
+  transform: scale(1.3);
+}
+
+.process-stages {
+  position: relative;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.process-stage {
+  position: absolute;
+  inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: background-color var(--dur) var(--ease);
-}
-
-.process-card:hover .plus-btn {
-  background-color: var(--brand-red);
-}
-
-.plus-btn svg {
-  width: 19px;
-  height: 19px;
-  transition: transform var(--dur) var(--ease);
-}
-
-.process-card:hover .plus-btn svg {
-  transform: rotate(45deg);
-}
-
-.card-num {
-  position: absolute;
-  top: 42px;
-  left: 20px;
-  right: 20px;
   text-align: center;
-  font-size: 2.375rem;
-  font-weight: 800;
-  color: var(--brand-red);
-  text-shadow: 0 0 16px rgba(0, 230, 118, 0.6);
-  transition: transform var(--dur) var(--ease), text-shadow var(--dur) var(--ease);
-  z-index: 2;
+  padding: 0 clamp(24px, 8vw, 140px);
 }
 
-.card-heading {
+.stage-num {
   position: absolute;
-  top: 96px;
-  left: 20px;
-  right: 20px;
-  text-align: center;
-  font-size: 1.375rem;
-  font-weight: 600;
-  line-height: 1.875rem;
-  color: #e0e0e0;
-  transition: all var(--dur) var(--ease);
-  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(14rem, 32vw, 26rem);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.06);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
 }
 
-.card-desc {
-  position: absolute;
-  top: 160px;
-  left: 16px;
-  right: 16px;
-  text-align: center;
-  font-size: 0.9688rem;
-  font-weight: 500;
-  line-height: 1.5625rem;
-  color: #ffffff;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
-  z-index: 4;
-  background: rgba(10, 10, 16, 0.92);
-  backdrop-filter: blur(12px);
-  padding: 16px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(0, 230, 118, 0.4);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 230, 118, 0.2);
-  min-height: 120px;
+.stage-badge {
+  position: relative;
+  z-index: 1;
+  width: clamp(120px, 16vw, 200px);
+  height: clamp(120px, 16vw, 200px);
+  margin-bottom: 28px;
+  perspective: 800px;
+  cursor: default;
+}
+.stage-badge svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 16px 30px rgba(0, 0, 0, 0.8));
 }
 
-.typing-cursor {
-  display: inline-block;
-  color: #00e676;
-  font-weight: 800;
-  margin-inline-start: 2px;
-  animation: blinkCursor 0.7s infinite;
-}
-
-@keyframes blinkCursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.process-card:hover,
-.process-card.active {
-  border-color: rgba(0, 230, 118, 0.6);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 230, 118, 0.25);
-}
-
-.process-card:hover .card-num,
-.process-card.active .card-num {
-  transform: scale(1.18);
-  color: #00e676;
-  text-shadow: 0 0 25px rgba(0, 230, 118, 1), 0 0 35px rgba(0, 230, 118, 0.5);
-}
-
-.process-card:hover .card-heading,
-.process-card.active .card-heading {
-  color: #ffffff;
+.stage-heading {
+  position: relative;
+  z-index: 1;
+  font-size: var(--fs-h1);
   font-weight: 700;
-  transform: translateY(-2px);
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95), 0 0 18px rgba(0, 230, 118, 0.4);
-}
-
-.process-card:hover .card-desc,
-.process-card.active .card-desc {
-  opacity: 1;
-  transform: translateY(0);
   color: #ffffff;
+  letter-spacing: -0.5px;
+  margin-bottom: var(--space-2);
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
 }
 
-.process-card:hover .plus-btn svg,
-.process-card.active .plus-btn svg {
-  transform: rotate(45deg);
+.stage-desc {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--text-body);
 }
+
+/* Reduced-motion / mobile fallback: no pin, simple stacked cards, everything visible */
+.process-static-fallback .process-pin-wrap { height: auto; }
+.process-static-fallback .process-pin {
+  position: static;
+  height: auto;
+  padding: 60px 0;
+  overflow: visible;
+}
+.process-static-fallback .stage-progress { display: none; }
+.process-static-fallback .process-stages {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 40px;
+}
+.process-static-fallback .process-stage {
+  position: static;
+  padding: 48px 24px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  opacity: 1 !important;
+  transform: none !important;
+}
+.process-static-fallback .stage-num {
+  font-size: 6rem;
+  -webkit-text-stroke: 1.5px rgba(0, 230, 118, 0.25);
+}
+
+@media (max-width: 768px) {
+  .process-title { text-align: center; }
+  .process-title p { text-align: center !important; font-size: 1.625rem; line-height: 2.375rem; }
+}
+
+/* ==========================================================================
+   Project Matcher — functional 3-question tool, real content only
+   ========================================================================== */
+.matcher-section {
+  padding: var(--space-8) 0;
+  background-color: #000000;
+}
+
+.matcher-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background-color: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: var(--space-5);
+  position: relative;
+  overflow: hidden;
+}
+
+.matcher-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.matcher-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--brand-red);
+  box-shadow: 0 0 10px var(--brand-red-glow);
+  transition: width 0.4s var(--ease);
+}
+
+.matcher-step {
+  padding-top: var(--space-2);
+}
+
+.matcher-question {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--text-white);
+  text-align: center;
+  margin-bottom: var(--space-4);
+}
+
+.matcher-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.matcher-option {
+  padding: var(--space-3) var(--space-2);
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #17171d;
+  color: var(--text-title);
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s var(--ease);
+}
+.matcher-option:hover, .matcher-option:focus-visible {
+  border-color: var(--brand-red);
+  background: rgba(0, 230, 118, 0.1);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 560px) {
+  .matcher-options { grid-template-columns: 1fr; }
+}
+
+.matcher-result {
+  text-align: center;
+  padding-top: var(--space-2);
+}
+
+.matcher-result-badge {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto var(--space-3);
+}
+.matcher-result-badge svg { width: 100%; height: 100%; filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6)); }
+
+.matcher-result-title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: var(--space-1);
+}
+
+.matcher-result-desc {
+  color: var(--text-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto var(--space-4);
+}
+
+.matcher-result-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+.matcher-result-actions .btn-rubicon { width: auto; padding: 0 var(--space-3); }
+
+.matcher-restart {
+  font-size: var(--fs-body-sm);
+  color: var(--text-body);
+  text-decoration: underline;
+  padding: var(--space-1);
+}
+.matcher-restart:hover { color: var(--text-white); }
 
 /* Footer & Contact Form */
 .footer-contact-section {
-  padding: 100px 0;
+  padding: var(--space-8) 0;
   background-color: #000000;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -507,21 +632,39 @@ img, video {
 .contact-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: var(--space-6);
   align-items: start;
 }
 
 .contact-title {
   text-align: right;
-  font-size: 3rem;
+  font-size: var(--fs-h1);
   font-weight: 300;
   line-height: 1.2;
+}
+
+.contact-trust-note {
+  margin-top: var(--space-1);
+  font-size: var(--fs-body-sm);
+  color: var(--text-body);
+  text-align: start;
 }
 
 .form-box {
   background-color: var(--bg-card);
   border-radius: 10px;
   padding: 40px;
+}
+
+.form-mechanism-note {
+  margin-bottom: 20px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(0, 230, 118, 0.08);
+  border: 1px solid rgba(0, 230, 118, 0.25);
+  font-size: 0.8125rem;
+  color: #9ee8c0;
+  text-align: start;
 }
 
 .form-field {
@@ -877,9 +1020,6 @@ img, video {
 
 @media (max-width: 1024px) {
   .hero-text-block, .hero-desc { width: 100%; }
-  .h1-rubicon { font-size: 3rem; line-height: 4rem; }
-  .process-grid { flex-wrap: wrap; justify-content: center; }
-  .process-card { width: calc(50% - 20px); min-width: 280px; }
   .contact-layout { grid-template-columns: 1fr; }
   .sales-chat-panel { width: calc(100vw - 32px); inset-inline-end: 0; }
 }
@@ -923,8 +1063,6 @@ img, video {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 230, 118, 0.2);
   }
   .h1-rubicon {
-    font-size: 2.375rem;
-    line-height: 3.125rem;
     font-weight: 700;
     letter-spacing: -0.5px;
     text-align: center;
@@ -958,97 +1096,6 @@ img, video {
     object-fit: cover;
     opacity: 0.45;
     border-radius: 0;
-  }
-  .process-section {
-    padding: 50px 0;
-  }
-  .process-title {
-    text-align: center !important;
-  }
-  .process-title p {
-    font-size: 1.625rem;
-    line-height: 2.375rem;
-    text-align: center !important;
-  }
-  .process-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    margin-top: 36px;
-  }
-  .process-card {
-    width: 100%;
-    max-width: 420px;
-    height: auto;
-    min-height: 280px;
-    padding: 32px 20px;
-    border-radius: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center !important;
-    margin: 0 auto;
-  }
-  .card-num {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    text-align: center !important;
-    font-size: 2.375rem;
-    font-weight: 800;
-    color: var(--brand-red);
-    text-shadow: 0 0 16px rgba(0, 230, 118, 0.6);
-    margin-bottom: 8px;
-  }
-  .card-heading {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    text-align: center !important;
-    font-size: 1.3125rem;
-    font-weight: 600;
-    line-height: 1.75rem;
-    color: #ffffff;
-    margin-bottom: 12px;
-  }
-  .card-desc {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    text-align: center !important;
-    opacity: 1;
-    transform: none;
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: #ffffff;
-    background: rgba(10, 10, 16, 0.75);
-    backdrop-filter: blur(8px);
-    padding: 16px 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 230, 118, 0.25);
-    margin-bottom: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
-  }
-  .card-3d-badge {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    margin: 12px auto 0 auto;
-    width: 110px;
-    height: 110px;
-    opacity: 0.95;
-  }
-  .process-card:hover .card-3d-badge {
-    transform: scale(1.08);
   }
   .footer-contact-section {
     padding: 50px 0 30px;
@@ -1126,9 +1173,9 @@ img, video {
 }
 
 /* ==========================================================================
-   Process Card 3D Tilt (JS-driven transform; perspective already set above)
+   Stage Badge 3D Tilt (JS-driven transform)
    ========================================================================== */
-.process-card {
+.stage-badge {
   transform-style: preserve-3d;
   will-change: transform;
 }

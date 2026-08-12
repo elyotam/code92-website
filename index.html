@@ -19,6 +19,28 @@
   <link rel="stylesheet" href="style.css?v=3.0" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Structured data: only fields that mirror real, visible page content — no invented ratings/reviews/address -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Code92",
+    "description": "אנחנו מספקים פתרון מקיף לפרויקט שלכם - מאסטרטגיה ועד להשקה, עם צוות מקצועי ומנהל פרויקט אישי צמוד שמלווה אותכם בכל התהליך.",
+    "telephone": "+972-52-205-7074",
+    "areaServed": "IL",
+    "founder": {
+      "@type": "Person",
+      "name": "יותם כהן"
+    },
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "אסטרטגיה ואפיון" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "פיתוח אתרים ומערכות Web" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "אוטומציות AI ואפליקציות מותאמות" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "מעטפת Cloud, אבטחה וצמיחה מתמדת" } }
+    ]
+  }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
 <body class="min-h-full flex flex-col antialiased">
@@ -83,171 +105,222 @@
         <p class="hero-desc" id="heroSubtitle">
           בניית אתרים, חנויות אונליין, אפליקציות, מערכות ואוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.
         </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn-rubicon hero-cta">
+            <span>דברו איתנו על הפרויקט שלכם</span>
+            <svg viewBox="0 0 25 14" fill="none" aria-hidden="true">
+              <path d="M23.4062 6.91304H1.40625M7.25 12.8261L1.40625 6.91304L7.25 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ====================================================================
-       PROCESS SECTION ("פרימיום במחיר הגיוני: איך זה עובד?") 1:1
+       PROCESS SECTION — pinned, scroll-driven cinematic stage sequence.
+       Same real content/badges as before, new full-screen journey interaction.
        ==================================================================== -->
-  <section id="process" class="process-section">
+  <section id="process" class="process-section process-cinematic">
+    <div class="process-pin-wrap" id="processPinWrap">
+      <div class="process-pin">
+        <div class="container process-title" id="processTitle">
+          <p class="border-b-line" style="color:#cfcfcf;font-weight:300">איך אנחנו הופכים רעיון</p>
+          <p class="border-b-line text-brand">לפתרון שמייצר תוצאות</p>
+        </div>
+
+        <div class="stage-progress" role="group" aria-label="שלבי התהליך">
+          <button type="button" class="stage-dot is-active" data-stage-jump="0" aria-label="שלב 1: אסטרטגיה ואפיון"></button>
+          <button type="button" class="stage-dot" data-stage-jump="1" aria-label="שלב 2: פיתוח אתרים ומערכות Web"></button>
+          <button type="button" class="stage-dot" data-stage-jump="2" aria-label="שלב 3: אוטומציות AI ואפליקציות מותאמות"></button>
+          <button type="button" class="stage-dot" data-stage-jump="3" aria-label="שלב 4: מעטפת Cloud אבטחה וצמיחה מתמדת"></button>
+        </div>
+
+        <div class="process-stages container">
+          <article class="process-stage" data-stage="0">
+            <span class="stage-num">1</span>
+            <div class="stage-badge">
+              <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
+                  </linearGradient>
+                  <linearGradient id="glass1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+                  </linearGradient>
+                  <filter id="glow1" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                  </filter>
+                </defs>
+                <path d="M60 15 L105 38 L60 61 L15 38 Z" fill="url(#glass1)" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
+                <path d="M60 35 L105 58 L60 81 L15 58 Z" fill="url(#glass1)" stroke="url(#grad1)" stroke-width="1.5"/>
+                <path d="M60 55 L105 78 L60 101 L15 78 Z" fill="url(#grad1)" stroke="#00e676" stroke-width="2" filter="url(#glow1)"/>
+                <line x1="60" y1="25" x2="60" y2="75" stroke="#00e676" stroke-width="2" stroke-dasharray="3 3"/>
+                <circle cx="60" cy="25" r="5" fill="#00e676" filter="url(#glow1)"/>
+                <circle cx="82" cy="48" r="4" fill="#ffffff" fill-opacity="0.8"/>
+                <circle cx="38" cy="48" r="4" fill="#ffffff" fill-opacity="0.8"/>
+              </svg>
+            </div>
+            <h3 class="stage-heading">אסטרטגיה ואפיון</h3>
+            <p class="stage-desc">איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים</p>
+          </article>
+
+          <article class="process-stage" data-stage="1">
+            <span class="stage-num">2</span>
+            <div class="stage-badge">
+              <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
+                  </linearGradient>
+                  <linearGradient id="glass2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+                  </linearGradient>
+                  <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                  </filter>
+                </defs>
+                <rect x="25" y="45" width="75" height="55" rx="6" fill="url(#grad2)" stroke="#00e676" stroke-width="1.5" filter="url(#glow2)"/>
+                <rect x="15" y="25" width="80" height="58" rx="6" fill="url(#glass2)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
+                <circle cx="27" cy="34" r="2.5" fill="#00e676"/>
+                <circle cx="35" cy="34" r="2.5" fill="#ffffff" fill-opacity="0.6"/>
+                <circle cx="43" cy="34" r="2.5" fill="#ffffff" fill-opacity="0.6"/>
+                <line x1="15" y1="42" x2="95" y2="42" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1"/>
+                <path d="M42 52 L34 60 L42 68" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M68 52 L76 60 L68 68" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="60" y1="50" x2="50" y2="70" stroke="#00e676" stroke-width="2" stroke-linecap="round" filter="url(#glow2)"/>
+              </svg>
+            </div>
+            <h3 class="stage-heading">פיתוח אתרים ומערכות Web</h3>
+            <p class="stage-desc">בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות</p>
+          </article>
+
+          <article class="process-stage" data-stage="2">
+            <span class="stage-num">3</span>
+            <div class="stage-badge">
+              <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
+                  </linearGradient>
+                  <linearGradient id="glass3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+                  </linearGradient>
+                  <filter id="glow3" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                  </filter>
+                </defs>
+                <rect x="35" y="18" width="50" height="84" rx="10" fill="url(#glass3)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
+                <line x1="52" y1="24" x2="68" y2="24" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+                <rect x="44" y="42" width="32" height="32" rx="6" fill="url(#grad3)" stroke="#00e676" stroke-width="1.5" filter="url(#glow3)"/>
+                <path d="M60 48 L60 68 M50 60 L70 60" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="60" cy="60" r="4" fill="#ffffff"/>
+                <circle cx="44" cy="50" r="2" fill="#00e676"/>
+                <circle cx="76" cy="50" r="2" fill="#00e676"/>
+                <circle cx="44" cy="70" r="2" fill="#00e676"/>
+                <circle cx="76" cy="70" r="2" fill="#00e676"/>
+              </svg>
+            </div>
+            <h3 class="stage-heading">אוטומציות AI ואפליקציות מותאמות</h3>
+            <p class="stage-desc">פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7</p>
+          </article>
+
+          <article class="process-stage" data-stage="3">
+            <span class="stage-num">4</span>
+            <div class="stage-badge">
+              <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
+                  </linearGradient>
+                  <linearGradient id="glass4" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+                  </linearGradient>
+                  <filter id="glow4" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                  </filter>
+                </defs>
+                <path d="M30 65 C25 65 20 60 20 52 C20 45 26 40 33 40 C36 32 45 28 55 30 C63 25 74 28 80 35 C88 36 94 43 93 51 C98 55 97 65 90 67 Z" fill="url(#glass4)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
+                <path d="M60 48 L78 56 V72 C78 84 60 92 60 92 C60 92 42 84 42 72 V56 L60 48 Z" fill="url(#grad4)" stroke="#00e676" stroke-width="1.5" filter="url(#glow4)"/>
+                <path d="M60 58 L65 67 L60 65 L55 67 Z" fill="#ffffff"/>
+                <circle cx="60" cy="72" r="3" fill="#ffffff" fill-opacity="0.8"/>
+              </svg>
+            </div>
+            <h3 class="stage-heading">מעטפת Cloud אבטחה וצמיחה מתמדת</h3>
+            <p class="stage-desc">תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       PROJECT MATCHER — real, functional 3-question tool. Recommendations
+       reuse the exact same service copy already shown above (no new claims).
+       ==================================================================== -->
+  <section id="matcher" class="matcher-section">
     <div class="container">
-      <div class="process-title" id="processTitle">
-        <p class="border-b-line" style="color:#cfcfcf;font-weight:300">איך אנחנו הופכים רעיון</p>
-        <p class="border-b-line text-brand">לפתרון שמייצר תוצאות</p>
+      <div class="process-title" style="margin-bottom: var(--space-6);">
+        <p class="border-b-line" style="color:#cfcfcf;font-weight:300">לא בטוחים מאיפה להתחיל?</p>
+        <p class="border-b-line text-brand">בואו נמצא את הכיוון הנכון</p>
       </div>
 
-      <div class="process-grid">
-        <div class="process-card" data-card="1">
-          <div class="plus-btn">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3.5v17M3.5 12h17" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
-          </div>
-          <span class="card-num" id="pCardNum1">1</span>
-          <p class="card-heading" id="pCardHead1">אסטרטגיה ואפיון</p>
-          <p class="card-desc" id="pCardDesc1" data-fulltext="איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים">איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים</p>
-          
-          <!-- 3D Graphic Badge 01 -->
-          <div class="card-3d-badge">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
-                </linearGradient>
-                <linearGradient id="glass1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
-                </linearGradient>
-                <filter id="glow1" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <path d="M60 15 L105 38 L60 61 L15 38 Z" fill="url(#glass1)" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
-              <path d="M60 35 L105 58 L60 81 L15 58 Z" fill="url(#glass1)" stroke="url(#grad1)" stroke-width="1.5"/>
-              <path d="M60 55 L105 78 L60 101 L15 78 Z" fill="url(#grad1)" stroke="#00e676" stroke-width="2" filter="url(#glow1)"/>
-              <line x1="60" y1="25" x2="60" y2="75" stroke="#00e676" stroke-width="2" stroke-dasharray="3 3"/>
-              <circle cx="60" cy="25" r="5" fill="#00e676" filter="url(#glow1)"/>
-              <circle cx="82" cy="48" r="4" fill="#ffffff" fill-opacity="0.8"/>
-              <circle cx="38" cy="48" r="4" fill="#ffffff" fill-opacity="0.8"/>
-            </svg>
+      <div class="matcher-card" id="matcherCard" role="group" aria-label="כלי התאמת פרויקט">
+        <div class="matcher-progress-bar" aria-hidden="true"><div class="matcher-progress-fill" id="matcherProgressFill"></div></div>
+
+        <div class="matcher-step" data-step="0">
+          <h3 class="matcher-question">מה הכי קרוב למה שאתם צריכים?</h3>
+          <div class="matcher-options">
+            <button type="button" class="matcher-option" data-key="need" data-value="web">אתר או חנות אונליין</button>
+            <button type="button" class="matcher-option" data-key="need" data-value="ai">אוטומציה או אפליקציה חכמה</button>
+            <button type="button" class="matcher-option" data-key="need" data-value="cloud">תשתית, אבטחה או ליווי שוטף</button>
+            <button type="button" class="matcher-option" data-key="need" data-value="unsure">לא בטוחים, צריך ייעוץ</button>
           </div>
         </div>
 
-        <div class="process-card" data-card="2">
-          <div class="plus-btn">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3.5v17M3.5 12h17" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
-          </div>
-          <span class="card-num" id="pCardNum2">2</span>
-          <p class="card-heading" id="pCardHead2">פיתוח אתרים ומערכות Web</p>
-          <p class="card-desc" id="pCardDesc2" data-fulltext="בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות">בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות</p>
-          
-          <!-- 3D Graphic Badge 02 -->
-          <div class="card-3d-badge">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
-                </linearGradient>
-                <linearGradient id="glass2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
-                </linearGradient>
-                <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <rect x="25" y="45" width="75" height="55" rx="6" fill="url(#grad2)" stroke="#00e676" stroke-width="1.5" filter="url(#glow2)"/>
-              <rect x="15" y="25" width="80" height="58" rx="6" fill="url(#glass2)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
-              <circle cx="27" cy="34" r="2.5" fill="#00e676"/>
-              <circle cx="35" cy="34" r="2.5" fill="#ffffff" fill-opacity="0.6"/>
-              <circle cx="43" cy="34" r="2.5" fill="#ffffff" fill-opacity="0.6"/>
-              <line x1="15" y1="42" x2="95" y2="42" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1"/>
-              <path d="M42 52 L34 60 L42 68" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M68 52 L76 60 L68 68" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <line x1="60" y1="50" x2="50" y2="70" stroke="#00e676" stroke-width="2" stroke-linecap="round" filter="url(#glow2)"/>
-            </svg>
+        <div class="matcher-step" data-step="1" hidden>
+          <h3 class="matcher-question">איפה אתם נמצאים היום?</h3>
+          <div class="matcher-options">
+            <button type="button" class="matcher-option" data-key="stage" data-value="idea">יש רעיון, עדיין בתכנון</button>
+            <button type="button" class="matcher-option" data-key="stage" data-value="existing">יש לנו כבר עסק או מוצר קיים</button>
+            <button type="button" class="matcher-option" data-key="stage" data-value="upgrade">רוצים לשדרג משהו קיים</button>
           </div>
         </div>
 
-        <div class="process-card" data-card="3">
-          <div class="plus-btn">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3.5v17M3.5 12h17" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
-          </div>
-          <span class="card-num" id="pCardNum3">3</span>
-          <p class="card-heading" id="pCardHead3">אוטומציות AI ואפליקציות מותאמות</p>
-          <p class="card-desc" id="pCardDesc3" data-fulltext="פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7">פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7</p>
-          
-          <!-- 3D Graphic Badge 03 -->
-          <div class="card-3d-badge">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
-                </linearGradient>
-                <linearGradient id="glass3" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
-                </linearGradient>
-                <filter id="glow3" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <rect x="35" y="18" width="50" height="84" rx="10" fill="url(#glass3)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
-              <line x1="52" y1="24" x2="68" y2="24" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
-              <rect x="44" y="42" width="32" height="32" rx="6" fill="url(#grad3)" stroke="#00e676" stroke-width="1.5" filter="url(#glow3)"/>
-              <path d="M60 48 L60 68 M50 60 L70 60" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="60" cy="60" r="4" fill="#ffffff"/>
-              <circle cx="44" cy="50" r="2" fill="#00e676"/>
-              <circle cx="76" cy="50" r="2" fill="#00e676"/>
-              <circle cx="44" cy="70" r="2" fill="#00e676"/>
-              <circle cx="76" cy="70" r="2" fill="#00e676"/>
-            </svg>
+        <div class="matcher-step" data-step="2" hidden>
+          <h3 class="matcher-question">מה לוח הזמנים שלכם?</h3>
+          <div class="matcher-options">
+            <button type="button" class="matcher-option" data-key="timing" data-value="asap">רוצים להתחיל בהקדם</button>
+            <button type="button" class="matcher-option" data-key="timing" data-value="quarter">ברבעון הקרוב</button>
+            <button type="button" class="matcher-option" data-key="timing" data-value="exploring">עדיין בודקים אפשרויות</button>
           </div>
         </div>
 
-        <div class="process-card" data-card="4">
-          <div class="plus-btn">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3.5v17M3.5 12h17" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
-            </svg>
-          </div>
-          <span class="card-num" id="pCardNum4">4</span>
-          <p class="card-heading" id="pCardHead4">מעטפת Cloud אבטחה וצמיחה מתמדת</p>
-          <p class="card-desc" id="pCardDesc4" data-fulltext="תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן">תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן</p>
-          
-          <!-- 3D Graphic Badge 04 -->
-          <div class="card-3d-badge">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#69f0ae" stop-opacity="0.25"/>
-                </linearGradient>
-                <linearGradient id="glass4" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
-                </linearGradient>
-                <filter id="glow4" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <path d="M30 65 C25 65 20 60 20 52 C20 45 26 40 33 40 C36 32 45 28 55 30 C63 25 74 28 80 35 C88 36 94 43 93 51 C98 55 97 65 90 67 Z" fill="url(#glass4)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
-              <path d="M60 48 L78 56 V72 C78 84 60 92 60 92 C60 92 42 84 42 72 V56 L60 48 Z" fill="url(#grad4)" stroke="#00e676" stroke-width="1.5" filter="url(#glow4)"/>
-              <path d="M60 58 L65 67 L60 65 L55 67 Z" fill="#ffffff"/>
-              <circle cx="60" cy="72" r="3" fill="#ffffff" fill-opacity="0.8"/>
-            </svg>
+        <div class="matcher-result" data-step="3" hidden>
+          <div class="matcher-result-badge" id="matcherResultBadge"></div>
+          <h3 class="matcher-result-title" id="matcherResultTitle"></h3>
+          <p class="matcher-result-desc" id="matcherResultDesc"></p>
+          <div class="matcher-result-actions">
+            <a href="#contact" class="btn-rubicon" id="matcherCta">
+              <span>המשיכו לטופס עם הפרטים שמילאתם</span>
+              <svg viewBox="0 0 25 14" fill="none" aria-hidden="true">
+                <path d="M23.4062 6.91304H1.40625M7.25 12.8261L1.40625 6.91304L7.25 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <button type="button" class="matcher-restart" id="matcherRestart">התחילו מחדש</button>
           </div>
         </div>
       </div>
@@ -265,13 +338,15 @@
             <span class="border-b-line">רוצים לשמוע עוד?</span>
             <span class="border-b-line text-brand">צרו איתנו קשר</span>
           </h2>
-          <p style="font-size:20px;color:#878787;margin-top:24px;text-align:start" id="contactSubtitle">
+          <p class="contact-subtitle" style="font-size:20px;color:#878787;margin-top:24px;text-align:start" id="contactSubtitle">
             השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.
           </p>
+          <p class="contact-trust-note">הפנייה מטופלת אישית על ידי יותם כהן — לא עוברת דרך מוקד או נציג.</p>
         </div>
 
         <div class="form-box">
           <form id="rubiconContactForm" novalidate>
+              <p class="form-mechanism-note">לחיצה על "שליחה" תפתח הודעת WhatsApp מוכנה, ישירות ליותם כהן.</p>
               <div class="form-field">
                 <label for="name" id="lblFullname">שם מלא *</label>
                 <input type="text" id="name" required placeholder="שם מלא" />

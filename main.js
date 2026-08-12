@@ -712,7 +712,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initHumanSalesBot();
   initHeroParticlesCanvas();
-  initProcessCardTypewriter();
   initLenisSmoothScroll();
   initScrollAnimations();
   initMagneticCursor();
@@ -720,87 +719,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollChrome();
   initCardTilt();
   initHeroScrollCue();
+  initProcessCinematic();
+  initProjectMatcher();
 });
-
-// Dynamic Real-Time Typewriter Effect for Process Cards
-let typingTimers = {};
-
-function initProcessCardTypewriter() {
-  const cards = document.querySelectorAll('.process-card');
-
-  cards.forEach(card => {
-    const cardId = card.getAttribute('data-card');
-    const descEl = card.querySelector('.card-desc');
-    if (!descEl || !cardId) return;
-
-    function getTargetText() {
-      const dictKey = `pCardDesc${cardId}`;
-      return DICT[currentLang]?.[dictKey] || descEl.getAttribute('data-fulltext') || descEl.textContent.trim();
-    }
-
-    function startTyping() {
-      if (typingTimers[cardId]) {
-        clearInterval(typingTimers[cardId]);
-      }
-
-      const fullText = getTargetText();
-      descEl.setAttribute('data-fulltext', fullText);
-      
-      descEl.style.opacity = '1';
-      descEl.style.transform = 'translateY(0)';
-
-      let charIndex = 0;
-      descEl.innerHTML = '<span class="typed-content"></span><span class="typing-cursor">|</span>';
-      const typedSpan = descEl.querySelector('.typed-content');
-
-      typingTimers[cardId] = setInterval(() => {
-        if (charIndex < fullText.length) {
-          typedSpan.textContent += fullText.charAt(charIndex);
-          charIndex++;
-        } else {
-          clearInterval(typingTimers[cardId]);
-          const cursor = descEl.querySelector('.typing-cursor');
-          if (cursor) cursor.style.display = 'none';
-        }
-      }, 16);
-    }
-
-    function stopTyping() {
-      if (typingTimers[cardId]) {
-        clearInterval(typingTimers[cardId]);
-      }
-      descEl.style.opacity = '0';
-      descEl.style.transform = 'translateY(12px)';
-      const fullText = descEl.getAttribute('data-fulltext') || getTargetText();
-      descEl.textContent = fullText;
-    }
-
-    // Desktop Mouse Hover
-    card.addEventListener('mouseenter', startTyping);
-    card.addEventListener('mouseleave', stopTyping);
-
-    // Mobile Tap / Click
-    card.addEventListener('click', () => {
-      const isActive = card.classList.contains('active');
-      
-      cards.forEach(c => {
-        c.classList.remove('active');
-        const cId = c.getAttribute('data-card');
-        const cDesc = c.querySelector('.card-desc');
-        if (cDesc && typingTimers[cId]) {
-          clearInterval(typingTimers[cId]);
-          cDesc.style.opacity = '0';
-          cDesc.style.transform = 'translateY(12px)';
-        }
-      });
-
-      if (!isActive) {
-        card.classList.add('active');
-        startTyping();
-      }
-    });
-  });
-}
 
 // Dynamic Cyber Particle Matrix Canvas
 function initHeroParticlesCanvas() {
@@ -983,17 +904,6 @@ function initScrollAnimations() {
     });
   }
 
-  // Process cards: grid stagger reveal, slight overshoot — reads as premium, not sluggish
-  gsap.from('.process-card', {
-    opacity: 0,
-    y: 40,
-    scale: 0.94,
-    duration: 0.6,
-    stagger: { each: 0.12, from: 'start' },
-    ease: 'back.out(1.4)',
-    scrollTrigger: { trigger: '.process-grid', start: 'top 80%', toggleActions: 'play none none reverse' },
-  });
-
   // Contact section: title + form fade up together
   const contactTitle = document.querySelector('.contact-title');
   const formBox = document.querySelector('.form-box');
@@ -1039,7 +949,7 @@ function initMagneticCursor() {
   }
   raf();
 
-  const interactiveSelector = 'a, button, input, textarea, .process-card, [data-cursor-hover]';
+  const interactiveSelector = 'a, button, input, textarea, .stage-badge, [data-cursor-hover]';
   document.addEventListener('mouseover', (e) => {
     if (e.target.closest(interactiveSelector)) cursor.classList.add('is-active');
   });
@@ -1154,14 +1064,13 @@ function initScrollChrome() {
 }
 
 // ==========================================================================
-// 3D Card Tilt — completes the perspective:1000px already set on .process-card
-// in the CSS; the card itself never actually tilted before this. Desktop only.
+// 3D Badge Tilt — each stage's 3D SVG badge tilts toward the cursor. Desktop only.
 // ==========================================================================
 function initCardTilt() {
   if (!window.matchMedia('(pointer: fine)').matches) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  document.querySelectorAll('.process-card').forEach((card) => {
+  document.querySelectorAll('.stage-badge').forEach((card) => {
     let rafId = null;
     let targetRotX = 0, targetRotY = 0;
     let curRotX = 0, curRotY = 0;
@@ -1181,8 +1090,8 @@ function initCardTilt() {
       const rect = card.getBoundingClientRect();
       const px = (e.clientX - rect.left) / rect.width - 0.5;
       const py = (e.clientY - rect.top) / rect.height - 0.5;
-      targetRotY = px * 10;
-      targetRotX = py * -10;
+      targetRotY = px * 16;
+      targetRotX = py * -16;
       if (!rafId) rafId = requestAnimationFrame(loop);
     });
 
@@ -1217,4 +1126,166 @@ function initHeroScrollCue() {
   window.addEventListener('scroll', () => {
     cue.classList.toggle('is-hidden', window.scrollY > 120);
   }, { passive: true });
+}
+
+// ==========================================================================
+// Process Cinematic — pins the process section and crossfades through the
+// 4 real stages as the user scrolls, instead of a static side-by-side grid.
+// Falls back to a plain stacked, always-visible layout on mobile and under
+// prefers-reduced-motion (no pin, no scroll-jacking, nothing hidden by JS).
+// ==========================================================================
+function initProcessCinematic() {
+  const wrap = document.getElementById('processPinWrap');
+  const pin = wrap?.querySelector('.process-pin');
+  const stages = document.querySelectorAll('.process-stage');
+  const dots = document.querySelectorAll('.stage-dot');
+  if (!wrap || !pin || !stages.length) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isNarrow = window.matchMedia('(max-width: 768px)').matches;
+  const gsapReady = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+  if (reduceMotion || isNarrow || !gsapReady) {
+    wrap.classList.add('process-static-fallback');
+    return;
+  }
+
+  gsap.set(stages, { opacity: 0, y: 40 });
+  gsap.set(stages[0], { opacity: 1, y: 0 });
+
+  let activeIndex = 0;
+  function setActive(index) {
+    if (index === activeIndex) return;
+    activeIndex = index;
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
+  }
+
+  // Each stage HOLDS fully visible (readable) for most of its share of the scroll
+  // range, with a short crossfade burst into the next — not a continuous blend
+  // across the whole pin, which never let any stage actually settle.
+  const HOLD = 2.4, TRANS = 0.6, CYCLE = HOLD + TRANS;
+  function computeActiveIndex(t) {
+    const lastIndex = stages.length - 1;
+    if (t >= lastIndex * CYCLE) return lastIndex;
+    const j = Math.floor(t / CYCLE);
+    const localT = t - j * CYCLE;
+    return localT < HOLD + TRANS / 2 ? j : j + 1;
+  }
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: wrap,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 0.6,
+      pin: pin,
+      onUpdate(self) {
+        setActive(computeActiveIndex(self.progress * tl.duration()));
+      },
+    },
+  });
+
+  for (let i = 1; i < stages.length; i++) {
+    tl.to({}, { duration: HOLD })
+      .to(stages[i - 1], { opacity: 0, y: -40, duration: TRANS })
+      .fromTo(stages[i], { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: TRANS }, '<');
+  }
+  tl.to({}, { duration: HOLD }); // hold the final stage through the tail of the scroll range
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      const st = tl.scrollTrigger;
+      const stageTimelinePos = i === 0 ? 0 : HOLD + (i - 1) * (HOLD + TRANS) + TRANS;
+      const progress = stageTimelinePos / tl.duration();
+      const target = st.start + (st.end - st.start) * progress;
+      if (lenisInstance) lenisInstance.scrollTo(target);
+      else window.scrollTo({ top: target, behavior: 'smooth' });
+    });
+  });
+}
+
+// ==========================================================================
+// Project Matcher — 3-question tool. Recommendations reuse the exact same
+// service copy already shown in the process section above; nothing invented.
+// ==========================================================================
+const MATCHER_RESULTS = {
+  web: {
+    title: 'פיתוח אתרים ומערכות Web',
+    desc: 'בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות',
+    badge: '<svg viewBox="0 0 120 120" fill="none"><rect x="25" y="45" width="75" height="55" rx="6" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="1.5"/><rect x="15" y="25" width="80" height="58" rx="6" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><circle cx="27" cy="34" r="2.5" fill="#00e676"/><circle cx="35" cy="34" r="2.5" fill="#fff" fill-opacity="0.6"/><circle cx="43" cy="34" r="2.5" fill="#fff" fill-opacity="0.6"/></svg>',
+  },
+  ai: {
+    title: 'אוטומציות AI ואפליקציות מותאמות',
+    desc: 'פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7',
+    badge: '<svg viewBox="0 0 120 120" fill="none"><rect x="35" y="18" width="50" height="84" rx="10" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><rect x="44" y="42" width="32" height="32" rx="6" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="1.5"/><path d="M60 48 L60 68 M50 60 L70 60" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  },
+  cloud: {
+    title: 'מעטפת Cloud אבטחה וצמיחה מתמדת',
+    desc: 'תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן',
+    badge: '<svg viewBox="0 0 120 120" fill="none"><path d="M30 65 C25 65 20 60 20 52 C20 45 26 40 33 40 C36 32 45 28 55 30 C63 25 74 28 80 35 C88 36 94 43 93 51 C98 55 97 65 90 67 Z" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><path d="M60 48 L78 56 V72 C78 84 60 92 60 92 C60 92 42 84 42 72 V56 L60 48 Z" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="1.5"/></svg>',
+  },
+  unsure: {
+    title: 'אסטרטגיה ואפיון',
+    desc: 'איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים',
+    badge: '<svg viewBox="0 0 120 120" fill="none"><path d="M60 15 L105 38 L60 61 L15 38 Z" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><path d="M60 55 L105 78 L60 101 L15 78 Z" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="2"/><circle cx="60" cy="25" r="5" fill="#00e676"/></svg>',
+  },
+};
+
+const MATCHER_LABELS = {
+  need: { web: 'אתר או חנות אונליין', ai: 'אוטומציה או אפליקציה חכמה', cloud: 'תשתית, אבטחה או ליווי שוטף', unsure: 'ייעוץ כללי' },
+  stage: { idea: 'יש רעיון, עדיין בתכנון', existing: 'יש כבר עסק או מוצר קיים', upgrade: 'שדרוג של משהו קיים' },
+  timing: { asap: 'בהקדם האפשרי', quarter: 'ברבעון הקרוב', exploring: 'עדיין בודקים אפשרויות' },
+};
+
+function initProjectMatcher() {
+  const card = document.getElementById('matcherCard');
+  if (!card) return;
+
+  const steps = card.querySelectorAll('.matcher-step, .matcher-result');
+  const progressFill = document.getElementById('matcherProgressFill');
+  const answers = {};
+  let stepIndex = 0;
+
+  function showStep(index) {
+    stepIndex = index;
+    steps.forEach((s) => { s.hidden = Number(s.dataset.step) !== index; });
+    progressFill.style.width = `${(Math.min(index, 3) / 3) * 100}%`;
+  }
+
+  function renderResult() {
+    const result = MATCHER_RESULTS[answers.need] || MATCHER_RESULTS.unsure;
+    document.getElementById('matcherResultBadge').innerHTML = result.badge;
+    document.getElementById('matcherResultTitle').textContent = result.title;
+    document.getElementById('matcherResultDesc').textContent = result.desc;
+
+    const summary = `היי! השתמשתי בכלי ההתאמה באתר.\n` +
+      `מה שאני צריך/ה: ${MATCHER_LABELS.need[answers.need] || ''}\n` +
+      `שלב נוכחי: ${MATCHER_LABELS.stage[answers.stage] || ''}\n` +
+      `לוח זמנים: ${MATCHER_LABELS.timing[answers.timing] || ''}`;
+
+    const cta = document.getElementById('matcherCta');
+    cta.addEventListener('click', () => {
+      const messageField = document.getElementById('message');
+      if (messageField && !messageField.value.trim()) messageField.value = summary;
+    }, { once: true });
+  }
+
+  card.querySelectorAll('.matcher-option').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      answers[btn.dataset.key] = btn.dataset.value;
+      if (stepIndex < 2) {
+        showStep(stepIndex + 1);
+      } else {
+        renderResult();
+        showStep(3);
+      }
+    });
+  });
+
+  document.getElementById('matcherRestart')?.addEventListener('click', () => {
+    Object.keys(answers).forEach((k) => delete answers[k]);
+    showStep(0);
+  });
+
+  showStep(0);
 }
