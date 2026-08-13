@@ -132,18 +132,24 @@
     applyMotionIntegration();
   }
 
+  // Reads the language main.js's toggleLanguage() sets on <html lang="...">
+  // so announcements stay in sync without this widget depending on main.js.
+  function isHe() {
+    return document.documentElement.lang !== 'en';
+  }
+
   function toggleFeature(key, label) {
     prefs[key] = !prefs[key];
     savePrefs();
     applyAll();
-    announce(label + (prefs[key] ? ' הופעל' : ' כובה'));
+    announce(label + (isHe() ? (prefs[key] ? ' הופעל' : ' כובה') : (prefs[key] ? ' enabled' : ' disabled')));
   }
 
   function resetAll() {
     prefs = Object.assign({}, defaults);
     savePrefs();
     applyAll();
-    announce('כל הגדרות הנגישות אופסו לברירת המחדל');
+    announce(isHe() ? 'כל הגדרות הנגישות אופסו לברירת המחדל' : 'All accessibility settings reset to default');
   }
 
   // ---- Panel open / close / focus trap ----
@@ -213,7 +219,7 @@
       prefs.fontStep++;
       savePrefs();
       applyFontStep();
-      announce('גודל טקסט ' + FONT_STEPS[prefs.fontStep] + ' אחוז');
+      announce(isHe() ? 'גודל טקסט ' + FONT_STEPS[prefs.fontStep] + ' אחוז' : 'Text size ' + FONT_STEPS[prefs.fontStep] + ' percent');
     }
   });
   document.getElementById('a11yFontDecBtn').addEventListener('click', function () {
@@ -221,7 +227,7 @@
       prefs.fontStep--;
       savePrefs();
       applyFontStep();
-      announce('גודל טקסט ' + FONT_STEPS[prefs.fontStep] + ' אחוז');
+      announce(isHe() ? 'גודל טקסט ' + FONT_STEPS[prefs.fontStep] + ' אחוז' : 'Text size ' + FONT_STEPS[prefs.fontStep] + ' percent');
     }
   });
 

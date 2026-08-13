@@ -723,8 +723,9 @@ img, video {
 .matcher-restart:hover { color: var(--text-white); }
 
 /* ==========================================================================
-   Why Code92 — honest differentiators, deliberately restrained (no glow/pin/
-   scroll-jack) so it reads as calm and credible rather than another effect.
+   Why Code92 — honest differentiators, deliberately restrained (no pin/
+   scroll-jack) so it reads as calm and credible; a subtle green hover glow
+   on each card is the one bit of interactivity.
    ========================================================================== */
 .why-us-section {
   padding: var(--space-8) 0;
@@ -745,6 +746,13 @@ img, video {
   border-radius: 14px;
   background: var(--bg-card);
   text-align: start;
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.why-us-card:hover, .why-us-card:focus-within {
+  border-color: var(--brand-red);
+  box-shadow: 0 0 0 1px rgba(0, 230, 118, 0.4), 0 0 34px rgba(0, 230, 118, 0.35);
+  transform: translateY(-3px);
 }
 
 .why-us-icon {

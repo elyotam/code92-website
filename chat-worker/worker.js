@@ -35,14 +35,14 @@ const SERVICES_HE = `
 1. אסטרטגיה ואפיון — איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים.
 2. פיתוח אתרים ומערכות Web — בניית אתרים יוקרתיים, חנויות E-commerce ומערכות Web מתקדמות.
 3. אוטומציות AI ואפליקציות מותאמות — פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים שחוסכים עד 80% מזמן העבודה הידנית ומייעלים מכירות ושירות 24/7.
-4. מעטפת Cloud, אבטחה וצמיחה מתמדת — תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי צמוד מהצוות שלנו.
+4. מעטפת Cloud, אבטחה וצמיחה מתמדת — תשתיות ענן ואבטחת מידע קפדנית, עם מעקב שוטף מהצוות שלנו אחרי ההשקה.
 `.trim();
 
 const SERVICES_EN = `
 1. Strategy & Scoping — precise scoping and market research that identifies the business's real growth engines to build a digital architecture that converts visitors into paying customers.
 2. Website & Web Systems Development — luxury websites, e-commerce stores, and advanced web systems.
 3. AI Automations & Custom Apps — custom apps and smart AI agents that save up to 80% of manual work and streamline sales and support 24/7.
-4. Cloud, Security & Ongoing Growth — cloud infrastructure, rigorous information security, and close ongoing management from our team.
+4. Cloud, Security & Ongoing Growth — cloud infrastructure and rigorous information security, with our team staying involved after launch.
 `.trim();
 
 function buildSystemPrompt(lang) {

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Code92 | בניית אתרים, אוטומציות AI ופתרונות ענן לעסקים</title>
-  <meta name="description" content="Code92 בונה אתרים, חנויות אונליין, אוטומציות AI ותשתיות ענן לעסקים שרוצים לצמוח — ליווי מקצועי צמוד מאסטרטגיה ועד השקה, עם צוות מומחים שמלווה אתכם לאורך כל הדרך." />
+  <meta name="description" content="Code92 בונה אתרים, חנויות אונליין, אוטומציות AI ותשתיות ענן לעסקים שרוצים לצמוח, עם צוות מומחים שמלווה כל פרויקט מהאפיון ועד אחרי ההשקה." />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#060608" />
   <link rel="canonical" href="https://elyotam.github.io/code92-website/" />
@@ -14,12 +14,12 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://elyotam.github.io/code92-website/" />
   <meta property="og:title" content="Code92 | בניית אתרים, אוטומציות AI ופתרונות ענן לעסקים" />
-  <meta property="og:description" content="Code92 בונה אתרים, חנויות אונליין, אוטומציות AI ותשתיות ענן לעסקים שרוצים לצמוח — ליווי מקצועי צמוד מאסטרטגיה ועד השקה, עם צוות מומחים שמלווה אתכם לאורך כל הדרך." />
+  <meta property="og:description" content="Code92 בונה אתרים, חנויות אונליין, אוטומציות AI ותשתיות ענן לעסקים שרוצים לצמוח, עם צוות מומחים שמלווה כל פרויקט מהאפיון ועד אחרי ההשקה." />
   <meta property="og:image" content="https://elyotam.github.io/code92-website/assets/logo-full.png" />
   <meta property="og:locale" content="he_IL" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Code92 | בניית אתרים, אוטומציות AI ופתרונות ענן לעסקים" />
-  <meta name="twitter:description" content="Code92 בונה אתרים, חנויות אונליין, אוטומציות AI ותשתיות ענן לעסקים שרוצים לצמוח — ליווי מקצועי צמוד מאסטרטגיה ועד השקה." />
+  <meta name="twitter:description" content="Code92 בונה אתרים, חנויות אונליין, אוטומציות AI ותשתיות ענן לעסקים שרוצים לצמוח." />
   <meta name="twitter:image" content="https://elyotam.github.io/code92-website/assets/logo-full.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,7 +34,7 @@
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "Code92",
-    "description": "Code92 בונה אתרים, חנויות אונליין, אוטומציות AI ותשתיות ענן לעסקים שרוצים לצמוח — ליווי מקצועי צמוד מאסטרטגיה ועד השקה.",
+    "description": "Code92 בונה אתרים, חנויות אונליין, אוטומציות AI ותשתיות ענן לעסקים שרוצים לצמוח.",
     "url": "https://elyotam.github.io/code92-website/",
     "telephone": "+972-50-000-0000",
     "areaServed": "IL",
@@ -50,7 +50,7 @@
 </head>
 <body class="min-h-full flex flex-col antialiased">
 
-  <a href="#hero" class="skip-link">דלגו לתוכן הראשי</a>
+  <a href="#hero" class="skip-link" id="skipLink">דלגו לתוכן הראשי</a>
 
   <div class="noise-overlay" aria-hidden="true"></div>
   <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
@@ -71,7 +71,7 @@
         <div class="nav-right">
           <button id="langToggleBtn" class="lang-btn" aria-label="Toggle Language">EN</button>
           
-          <a href="https://wa.me/972500000000?text=שלום%20Code92!%20אני%20מעוניין%20בפתרון%20דיגיטלי" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="btn-wa-sq">
+          <a href="https://wa.me/972500000000?text=שלום%20Code92!%20אני%20מעוניין%20בפתרון%20דיגיטלי" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="btn-wa-sq" id="whatsappHeaderLink">
             <svg viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.892c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652a12.062 12.062 0 005.71 1.447h.005c6.582 0 11.945-5.335 11.948-11.892a11.821 11.821 0 00-3.48-8.413z"></path>
             </svg>
@@ -109,7 +109,7 @@
         </h1>
 
         <p class="hero-desc" id="heroSubtitle">
-          בניית אתרים, חנויות אונליין, אפליקציות, מערכות ואוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.
+          אנחנו בונים אתרים, חנויות אונליין ומערכות דיגיטליות מבוססות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.
         </p>
 
         <div class="hero-actions">
@@ -136,7 +136,7 @@
           <span class="border-b-line text-brand">לפתרון שמייצר תוצאות</span>
         </h2>
 
-        <div class="stage-progress" role="group" aria-label="שלבי התהליך">
+        <div class="stage-progress" role="group" aria-label="שלבי התהליך" id="stageProgressGroup">
           <button type="button" class="stage-dot is-active" data-stage-jump="0" aria-label="שלב 1: אסטרטגיה ואפיון"></button>
           <button type="button" class="stage-dot" data-stage-jump="1" aria-label="שלב 2: פיתוח אתרים ומערכות Web"></button>
           <button type="button" class="stage-dot" data-stage-jump="2" aria-label="שלב 3: אוטומציות AI ואפליקציות מותאמות"></button>
@@ -170,8 +170,8 @@
                 <circle cx="38" cy="48" r="4" fill="#ffffff" fill-opacity="0.8"/>
               </svg>
             </div>
-            <h3 class="stage-heading">אסטרטגיה ואפיון</h3>
-            <p class="stage-desc">איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים</p>
+            <h3 class="stage-heading" id="pCardHead1">אסטרטגיה ואפיון</h3>
+            <p class="stage-desc" id="pCardDesc1">איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים</p>
           </article>
 
           <article class="process-stage" data-stage="1">
@@ -202,8 +202,8 @@
                 <line x1="60" y1="50" x2="50" y2="70" stroke="#00e676" stroke-width="2" stroke-linecap="round" filter="url(#glow2)"/>
               </svg>
             </div>
-            <h3 class="stage-heading">פיתוח אתרים ומערכות Web</h3>
-            <p class="stage-desc">אתרים וחנויות E-commerce ברמת עיצוב גבוהה, בנויים כדי להמיר גולשים ללקוחות משלמים</p>
+            <h3 class="stage-heading" id="pCardHead2">פיתוח אתרים ומערכות Web</h3>
+            <p class="stage-desc" id="pCardDesc2">אתרים וחנויות E-commerce ברמת עיצוב גבוהה, בנויים כדי להמיר גולשים ללקוחות משלמים</p>
           </article>
 
           <article class="process-stage" data-stage="2">
@@ -234,8 +234,8 @@
                 <circle cx="76" cy="70" r="2" fill="#00e676"/>
               </svg>
             </div>
-            <h3 class="stage-heading">אוטומציות AI ואפליקציות מותאמות</h3>
-            <p class="stage-desc">פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7</p>
+            <h3 class="stage-heading" id="pCardHead3">אוטומציות AI ואפליקציות מותאמות</h3>
+            <p class="stage-desc" id="pCardDesc3">פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7</p>
           </article>
 
           <article class="process-stage" data-stage="3">
@@ -261,8 +261,8 @@
                 <circle cx="60" cy="72" r="3" fill="#ffffff" fill-opacity="0.8"/>
               </svg>
             </div>
-            <h3 class="stage-heading">מעטפת Cloud אבטחה וצמיחה מתמדת</h3>
-            <p class="stage-desc">תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי צמוד מהצוות שלנו, שמבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן</p>
+            <h3 class="stage-heading" id="pCardHead4">מעטפת Cloud אבטחה וצמיחה מתמדת</h3>
+            <p class="stage-desc" id="pCardDesc4">תשתיות ענן ואבטחת מידע קפדנית, עם מעקב שוטף מהצוות שלנו שמבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן</p>
           </article>
         </div>
       </div>
@@ -275,9 +275,9 @@
        ==================================================================== -->
   <section id="matcher" class="matcher-section">
     <div class="container">
-      <h2 class="process-title" style="margin-bottom: var(--space-6);">
-        <span class="border-b-line" style="color:#cfcfcf;font-weight:300">לא בטוחים מאיפה להתחיל?</span>
-        <span class="border-b-line text-brand">בואו נמצא את הכיוון הנכון</span>
+      <h2 class="process-title" style="margin-bottom: var(--space-6);" id="matcherTitle">
+        <span class="border-b-line" style="color:#cfcfcf;font-weight:300" id="matcherTitle1">לא בטוחים מאיפה להתחיל?</span>
+        <span class="border-b-line text-brand" id="matcherTitle2">בואו נמצא את הכיוון הנכון</span>
       </h2>
 
       <div class="matcher-card-wrap">
@@ -285,7 +285,7 @@
         <div class="matcher-progress-bar" aria-hidden="true"><div class="matcher-progress-fill" id="matcherProgressFill"></div></div>
 
         <div class="matcher-step" data-step="0">
-          <h3 class="matcher-question">מה הכי קרוב למה שאתם צריכים?</h3>
+          <h3 class="matcher-question" id="matcherQ0">מה הכי קרוב למה שאתם צריכים?</h3>
           <div class="matcher-options">
             <button type="button" class="matcher-option" data-key="need" data-value="web">אתר או חנות אונליין</button>
             <button type="button" class="matcher-option" data-key="need" data-value="ai">אוטומציה או אפליקציה חכמה</button>
@@ -295,7 +295,7 @@
         </div>
 
         <div class="matcher-step" data-step="1" hidden>
-          <h3 class="matcher-question">איפה אתם נמצאים היום?</h3>
+          <h3 class="matcher-question" id="matcherQ1">איפה אתם נמצאים היום?</h3>
           <div class="matcher-options">
             <button type="button" class="matcher-option" data-key="stage" data-value="idea">יש רעיון, עדיין בתכנון</button>
             <button type="button" class="matcher-option" data-key="stage" data-value="existing">יש לנו כבר עסק או מוצר קיים</button>
@@ -304,7 +304,7 @@
         </div>
 
         <div class="matcher-step" data-step="2" hidden>
-          <h3 class="matcher-question">מה לוח הזמנים שלכם?</h3>
+          <h3 class="matcher-question" id="matcherQ2">מה לוח הזמנים שלכם?</h3>
           <div class="matcher-options">
             <button type="button" class="matcher-option" data-key="timing" data-value="asap">רוצים להתחיל בהקדם</button>
             <button type="button" class="matcher-option" data-key="timing" data-value="quarter">ברבעון הקרוב</button>
@@ -318,7 +318,7 @@
           <p class="matcher-result-desc" id="matcherResultDesc"></p>
           <div class="matcher-result-actions">
             <a href="#contact" class="btn-rubicon" id="matcherCta">
-              <span>המשיכו לטופס עם הפרטים שמילאתם</span>
+              <span id="matcherCtaText">המשיכו לטופס עם הפרטים שמילאתם</span>
               <svg viewBox="0 0 25 14" fill="none" aria-hidden="true">
                 <path d="M23.4062 6.91304H1.40625M7.25 12.8261L1.40625 6.91304L7.25 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -339,9 +339,9 @@
        ==================================================================== -->
   <section id="why-us" class="why-us-section">
     <div class="container">
-      <h2 class="process-title why-us-title">
-        <span class="border-b-line" style="color:#cfcfcf;font-weight:300">למה לעבוד</span>
-        <span class="border-b-line text-brand">איתנו</span>
+      <h2 class="process-title why-us-title" id="whyUsTitle">
+        <span class="border-b-line" style="color:#cfcfcf;font-weight:300" id="whyUsTitle1">למה לעבוד</span>
+        <span class="border-b-line text-brand" id="whyUsTitle2">איתנו</span>
       </h2>
 
       <div class="why-us-grid">
@@ -350,16 +350,16 @@
             <path d="M12 3 21 8 12 13 3 8 12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
             <path d="M3 12l9 5 9-5M3 16l9 5 9-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <h3>4 תחומי מומחיות תחת קורת גג אחת</h3>
-          <p>מאסטרטגיה, דרך פיתוח, ועד תשתיות ענן ואבטחה — הכל בליווי אחד רציף, בלי להעביר אתכם בין ספקים שונים.</p>
+          <h3 id="whyUsHead1">4 תחומי מומחיות תחת קורת גג אחת</h3>
+          <p id="whyUsDesc1">מאסטרטגיה, דרך פיתוח, ועד תשתיות ענן ואבטחה. הכל תחת ליווי אחד רציף, בלי להעביר אתכם בין ספקים שונים.</p>
         </div>
 
         <div class="why-us-card">
           <svg class="why-us-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M8 9 4 12l4 3M16 9l4 3-4 3M14 6l-4 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <h3>טכנולוגיות מהמתקדמות בעולם</h3>
-          <p>React, Next.js, Node.js, Python ותשתיות AWS — אותם כלים שסטארטאפים וחברות טכנולוגיה מובילות בונים איתם.</p>
+          <h3 id="whyUsHead2">סטאק טכנולוגי מודרני</h3>
+          <p id="whyUsDesc2">React, Next.js, Node.js, Python ותשתיות AWS. אותם כלים שסטארטאפים וחברות טכנולוגיה מובילות בונים איתם.</p>
         </div>
 
         <div class="why-us-card">
@@ -367,8 +367,8 @@
             <path d="M4 5h16v11H8l-4 4V5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
             <path d="M8 10h8M8 13h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
           </svg>
-          <h3>תקשורת ישירה, בלי בירוקרטיה</h3>
-          <p>כל פנייה מטופלת אישית, בלי מוקד ובלי תורים — מדברים ישירות עם הצוות שבונה את הפרויקט שלכם.</p>
+          <h3 id="whyUsHead3">תקשורת ישירה, בלי בירוקרטיה</h3>
+          <p id="whyUsDesc3">כל פנייה מטופלת אישית, בלי מוקד ובלי תורים. מדברים ישירות עם הצוות שבונה את הפרויקט שלכם.</p>
         </div>
 
         <div class="why-us-card">
@@ -376,8 +376,8 @@
             <path d="M4 19 10 9l4 5 6-9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M15 5h5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <h3>ליווי צמוד מאסטרטגיה ועד השקה</h3>
-          <p>לא עוזבים באמצע הדרך — מלווים את הפרויקט משלב האפיון ועד אחרי שהוא באוויר.</p>
+          <h3 id="whyUsHead4">ליווי צמוד מאסטרטגיה ועד השקה</h3>
+          <p id="whyUsDesc4">לא עוזבים באמצע הדרך. מלווים את הפרויקט משלב האפיון ועד אחרי שהוא באוויר.</p>
         </div>
       </div>
     </div>
@@ -397,12 +397,12 @@
           <p class="contact-subtitle" style="font-size:20px;color:#878787;margin-top:24px;text-align:start" id="contactSubtitle">
             השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.
           </p>
-          <p class="contact-trust-note">כל פנייה מטופלת אישית על ידי הצוות המקצועי שלנו — בלי בירוקרטיה מיותרת.</p>
+          <p class="contact-trust-note" id="contactTrustNote">מי שעונה לכם הוא מישהו מהצוות עצמו, לא מוקד שירות.</p>
         </div>
 
         <div class="form-box">
           <form id="rubiconContactForm" novalidate>
-              <p class="form-mechanism-note">לחיצה על "שליחה" תפתח הודעת WhatsApp מוכנה, ישירות לצוות שלנו.</p>
+              <p class="form-mechanism-note" id="formMechanismNote">לחיצה על "שליחה" תפתח הודעת WhatsApp מוכנה, ישירות לצוות שלנו.</p>
               <div class="form-field">
                 <label for="name" id="lblFullname">שם מלא *</label>
                 <input type="text" id="name" required placeholder="שם מלא" />
@@ -614,12 +614,12 @@
 
         <!-- M: Accessibility statement -->
         <div class="a11y-statement">
-          <h3 class="a11y-statement-title">הצהרת נגישות</h3>
-          <p>אנו משקיעים מאמצים להנגיש את האתר בהתאם להנחיות WCAG 2.1 ברמה AA, במטרה לאפשר חוויית שימוש נוחה ושוויונית לכלל המשתמשים.</p>
-          <p>במידה ונתקלתם בקושי או בתקלה בנושא נגישות, נשמח לקבל פנייה ולטפל בה בהקדם.</p>
-          <p>אחראי נגישות: <strong>Code92</strong> · טלפון: <strong>050-0000000</strong> · אימייל: <strong>elyotam.finance@gmail.com</strong></p>
-          <p>פנייה זמינה גם בוואטסאפ או דרך טופס יצירת הקשר באתר.</p>
-          <p class="a11y-statement-updated">עודכן לאחרונה: 13.08.2026</p>
+          <h3 class="a11y-statement-title" id="a11yStatementTitle">הצהרת נגישות</h3>
+          <p id="a11yStatementP1">אנו משקיעים מאמצים להנגיש את האתר בהתאם להנחיות WCAG 2.1 ברמה AA, במטרה לאפשר חוויית שימוש נוחה ושוויונית לכלל המשתמשים.</p>
+          <p id="a11yStatementP2">במידה ונתקלתם בקושי או בתקלה בנושא נגישות, נשמח לקבל פנייה ולטפל בה בהקדם.</p>
+          <p id="a11yStatementP3">אחראי נגישות: <strong>Code92</strong> · טלפון: <strong>050-0000000</strong> · אימייל: <strong>elyotam.finance@gmail.com</strong></p>
+          <p id="a11yStatementP4">פנייה זמינה גם בוואטסאפ או דרך טופס יצירת הקשר באתר.</p>
+          <p class="a11y-statement-updated" id="a11yStatementUpdated">עודכן לאחרונה: 13.08.2026</p>
         </div>
       </div>
     </div>
