@@ -1055,6 +1055,29 @@ function initScrollAnimations() {
     });
   }
 
+  // Matcher section: eyebrow title fades up, then the card itself rises and
+  // scales in — previously had no reveal at all, so it just snapped into view.
+  const matcherTitle = document.querySelector('.matcher-section .process-title');
+  const matcherCardWrap = document.querySelector('.matcher-card-wrap');
+  if (matcherTitle && matcherCardWrap) {
+    gsap.from(matcherTitle.children, {
+      opacity: 0,
+      y: 24,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: matcherTitle, start: 'top 85%', toggleActions: 'play none none reverse' },
+    });
+    gsap.from(matcherCardWrap, {
+      opacity: 0,
+      y: 50,
+      scale: 0.94,
+      duration: 0.75,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: matcherCardWrap, start: 'top 88%', toggleActions: 'play none none reverse' },
+    });
+  }
+
   // Contact section: title + form fade up together
   const contactTitle = document.querySelector('.contact-title');
   const formBox = document.querySelector('.form-box');
@@ -1301,8 +1324,8 @@ function initProcessCinematic() {
     return;
   }
 
-  gsap.set(stages, { opacity: 0, y: 40 });
-  gsap.set(stages[0], { opacity: 1, y: 0 });
+  gsap.set(stages, { opacity: 0, y: 40, scale: 0.94, filter: 'blur(6px)' });
+  gsap.set(stages[0], { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' });
 
   let activeIndex = 0;
   function setActive(index) {
@@ -1337,9 +1360,21 @@ function initProcessCinematic() {
   });
 
   for (let i = 1; i < stages.length; i++) {
+    const inBadge = stages[i].querySelector('.stage-badge');
+    // Camera-cut feel: outgoing stage pushes back and racks out of focus
+    // (scale up + blur), incoming stage pulls in from soft-focus to sharp —
+    // a proper focus-pull, not just a flat crossfade.
     tl.to({}, { duration: HOLD })
-      .to(stages[i - 1], { opacity: 0, y: -40, duration: TRANS })
-      .fromTo(stages[i], { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: TRANS }, '<');
+      .to(stages[i - 1], { opacity: 0, y: -70, scale: 1.08, filter: 'blur(10px)', duration: TRANS, ease: 'power2.in' })
+      .fromTo(stages[i],
+        { opacity: 0, y: 70, scale: 0.92, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: TRANS, ease: 'power2.out' },
+        '<');
+    // Extra bouncy pop on the incoming badge, layered on top of the fade above
+    // (doesn't touch it — just adds energy the flat opacity/y crossfade lacks).
+    if (inBadge) {
+      tl.fromTo(inBadge, { scale: 0.5, rotate: -14 }, { scale: 1, rotate: 0, duration: TRANS * 1.4, ease: 'back.out(2.2)' }, '<');
+    }
   }
   tl.to({}, { duration: HOLD }); // hold the final stage through the tail of the scroll range
 
