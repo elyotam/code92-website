@@ -1418,8 +1418,13 @@ function initProcessCinematic() {
         '<');
     // Extra bouncy pop on the incoming badge, layered on top of the fade above
     // (doesn't touch it — just adds energy the flat opacity/y crossfade lacks).
+    // Duration MUST NOT exceed TRANS: this timeline is scroll-scrubbed, not
+    // time-based, so an animation that overruns its synced slot leaves a
+    // "dead zone" — if the visitor stops scrolling inside it, the badge
+    // freezes wherever back.out's overshoot happened to be (i.e. oversized),
+    // not at its resting scale. That's what produced the giant stuck icon.
     if (inBadge) {
-      tl.fromTo(inBadge, { scale: 0.5, rotate: -14 }, { scale: 1, rotate: 0, duration: TRANS * 1.4, ease: 'back.out(2.2)' }, '<');
+      tl.fromTo(inBadge, { scale: 0.5, rotate: -14 }, { scale: 1, rotate: 0, duration: TRANS, ease: 'back.out(1.7)' }, '<');
     }
   }
   tl.to({}, { duration: HOLD }); // hold the final stage through the tail of the scroll range
