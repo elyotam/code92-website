@@ -1314,6 +1314,7 @@ function initScrollAnimations() {
       duration: 0.55,
       stagger: 0.1,
       ease: 'power2.out',
+      clearProps: 'transform',
       scrollTrigger: { trigger: '.why-us-grid', start: 'top 88%', toggleActions: 'play none none reverse' },
     });
   }
