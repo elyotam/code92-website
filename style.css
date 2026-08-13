@@ -376,7 +376,7 @@ img, video {
   flex-shrink: 0;
 }
 
-.process-title p {
+.process-title span {
   font-size: var(--fs-h2);
   line-height: 1.2;
   letter-spacing: -1px;
@@ -526,7 +526,7 @@ img, video {
 
 @media (max-width: 768px) {
   .process-title { text-align: center; }
-  .process-title p { text-align: center !important; font-size: 1.625rem; line-height: 2.375rem; }
+  .process-title span { text-align: center !important; font-size: 1.625rem; line-height: 2.375rem; }
 }
 
 /* ==========================================================================

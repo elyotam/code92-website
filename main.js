@@ -1,12 +1,11 @@
 /**
  * Code92 — main.js v35.0
  * Company: Code92
- * Owner: יותם כהן (Yotam Cohen) | 052-2057074
- * Dual Language Translation & Human Sales Representative Chatbot (5 Core Services + Live Typing Indicator)
+ * Dual Language Translation & AI Sales Concierge Chatbot
  */
 'use strict';
 
-const WA_NUMBER = '972522057074';
+const WA_NUMBER = '972500000000';
 
 // Real-AI backend for genuinely open-ended chat questions (see chat-worker/DEPLOY.md).
 // Until deployed and this placeholder replaced with the real workers.dev URL,
@@ -20,7 +19,7 @@ const DICT = {
     langBtn: 'EN',
     navContactBtnText: 'צרו איתנו קשר',
     h1_line1: 'פתרונות דיגיטליים',
-    h1_line2: 'לאנשים שרוצים',
+    h1_line2: 'לעסקים שרוצים',
     h1_line3: 'לייצר <span class="text-brand">תוצאות</span>',
     heroDesc: 'בניית אתרים, חנויות אונליין, אפליקציות, מערכות ואוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.',
     processTitle1: 'איך אנחנו הופכים רעיון',
@@ -28,11 +27,11 @@ const DICT = {
     pCardNum1: '1', pCardHead1: 'אסטרטגיה ואפיון',
     pCardDesc1: 'איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים',
     pCardNum2: '2', pCardHead2: 'פיתוח אתרים ומערכות Web',
-    pCardDesc2: 'בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות',
+    pCardDesc2: 'אתרים וחנויות E-commerce ברמת עיצוב גבוהה, בנויים כדי להמיר גולשים ללקוחות משלמים',
     pCardNum3: '3', pCardHead3: 'אוטומציות AI ואפליקציות מותאמות',
     pCardDesc3: 'פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7',
     pCardNum4: '4', pCardHead4: 'מעטפת Cloud אבטחה וצמיחה מתמדת',
-    pCardDesc4: 'תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן',
+    pCardDesc4: 'תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי צמוד מהצוות שלנו, שמבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן',
     contactTitle1: 'רוצים לשמוע עוד?',
     contactTitle2: 'צרו איתנו קשר',
     contactSub: 'השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.',
@@ -41,11 +40,11 @@ const DICT = {
     lblEmail: 'אימייל *',
     lblMsg: 'הודעה',
     placeholderName: 'שם מלא',
-    placeholderPhone: '052-2057074',
+    placeholderPhone: '050-0000000',
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'איך נוכל לעזור?',
     btnSubmitTxt: 'שליחה',
-    copyright: '© Code92 · כל הזכויות שמורות ליותם כהן',
+    copyright: '© Code92 · כל הזכויות שמורות',
 
     // Bot Translations
     botName: 'העוזר הווירטואלי',
@@ -55,7 +54,7 @@ const DICT = {
     botGreeting: `היי! 👋 אני היועץ הדיגיטלי.\nבמקום למלא טופס יבש — בואו נבין תוך דקה מה הכי מתאים לפרויקט שלכם.\nאיזה תחום הכי קרוב למה שאתם מחפשים?`,
     botStageQ: 'באיזה שלב אתם נמצאים כרגע?',
     botTimingQ: 'ומתי הייתם רוצים להתחיל?',
-    botContactQ: `מעולה, יש לי כבר תמונה טובה על הפרויקט 🙌\nכדי שיותם כהן יחזור אליכם באופן אישי — מה השם המלא ומספר הטלפון שלכם?`,
+    botContactQ: `מעולה, יש לי כבר תמונה טובה על הפרויקט 🙌\nכדי שנציג מהצוות שלנו יחזור אליכם באופן אישי — מה השם המלא ומספר הטלפון שלכם?`,
     botServices: [
       {
         id: 'web',
@@ -70,7 +69,7 @@ const DICT = {
       {
         id: 'cloud',
         label: '☁️ תשתית, אבטחה או ליווי שוטף',
-        response: `הבנתי ☁️ אנחנו מספקים תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי שוטף בניהול אישי של יותם כהן.`
+        response: `הבנתי ☁️ אנחנו מספקים תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי שוטף מהצוות שלנו.`
       },
       {
         id: 'unsure',
@@ -99,7 +98,7 @@ const DICT = {
     langBtn: 'HE',
     navContactBtnText: 'Contact Us',
     h1_line1: 'Digital Solutions',
-    h1_line2: 'For People Who Want',
+    h1_line2: 'For Businesses That Want',
     h1_line3: 'To Generate <span class="text-brand">Results</span>',
     heroDesc: 'Building websites, online stores, apps, custom systems and AI automations <strong>that keep you steps ahead of your competitors</strong>.',
     processTitle1: 'How We Turn An Idea',
@@ -107,11 +106,11 @@ const DICT = {
     pCardNum1: '1', pCardHead1: 'Strategy & UX Architecture',
     pCardDesc1: 'Precise architecture and market research identifying your exact growth engines to convert visitors into paying clients',
     pCardNum2: '2', pCardHead2: 'Websites & Web Systems Development',
-    pCardDesc2: 'Building luxury websites, E-commerce stores and advanced Web systems',
+    pCardDesc2: 'Premium websites and e-commerce stores, built to convert visitors into paying customers',
     pCardNum3: '3', pCardHead3: 'AI Automations & Custom Apps',
     pCardDesc3: 'Custom mobile apps and intelligent AI agents saving up to 80% manual work while boosting sales and 24/7 support',
     pCardNum4: '4', pCardHead4: 'Cloud Infrastructure & Growth',
-    pCardDesc4: 'Enterprise cloud cyber security and ongoing personal management by Yotam Cohen ensuring continuous revenue growth',
+    pCardDesc4: 'Enterprise cloud infrastructure, rigorous cyber security, and close ongoing management by our team ensuring continuous revenue growth',
     contactTitle1: 'Want to hear more?',
     contactTitle2: 'Contact Us',
     contactSub: 'Leave your details and we will get back to you shortly with full answers.',
@@ -120,11 +119,11 @@ const DICT = {
     lblEmail: 'Email *',
     lblMsg: 'Message',
     placeholderName: 'Full Name',
-    placeholderPhone: '052-2057074',
+    placeholderPhone: '050-0000000',
     placeholderEmail: 'name@company.com',
     placeholderMsg: 'How can we help?',
     btnSubmitTxt: 'Submit',
-    copyright: '© Code92 · All Rights Reserved to Yotam Cohen',
+    copyright: '© Code92 · All Rights Reserved',
 
     // Bot Translations
     botName: 'Virtual Assistant',
@@ -134,7 +133,7 @@ const DICT = {
     botGreeting: `Hi! 👋 I'm your digital consultant.\nInstead of a plain form — let's figure out in a minute what fits your project best.\nWhich area is closest to what you're looking for?`,
     botStageQ: 'What stage are you at right now?',
     botTimingQ: 'And when would you like to start?',
-    botContactQ: `Great, I have a good picture of the project now 🙌\nSo Yotam Cohen can get back to you personally — what's your full name and phone number?`,
+    botContactQ: `Great, I have a good picture of the project now 🙌\nSo a member of our team can get back to you personally — what's your full name and phone number?`,
     botServices: [
       {
         id: 'web',
@@ -149,7 +148,7 @@ const DICT = {
       {
         id: 'cloud',
         label: '☁️ Infrastructure, security or ongoing support',
-        response: `Got it ☁️ We provide cloud infrastructure, rigorous information security and ongoing personal management by Yotam Cohen.`
+        response: `Got it ☁️ We provide cloud infrastructure, rigorous information security and ongoing professional management from our team.`
       },
       {
         id: 'unsure',
@@ -298,7 +297,7 @@ function toggleLanguage() {
   setText('navContactBtnText', data.navContactBtnText);
   setHtml('heroHeadline', `<span class="border-b-line">${data.h1_line1}</span><span class="border-b-line">${data.h1_line2}</span><span class="border-b-line">${data.h1_line3}</span>`);
   setHtml('heroSubtitle', data.heroDesc);
-  setHtml('processTitle', `<p class="border-b-line" style="color:#cfcfcf;font-weight:300">${data.processTitle1}</p><p class="border-b-line text-brand">${data.processTitle2}</p>`);
+  setHtml('processTitle', `<span class="border-b-line" style="color:#cfcfcf;font-weight:300">${data.processTitle1}</span><span class="border-b-line text-brand">${data.processTitle2}</span>`);
 
   setText('pCardNum1', data.pCardNum1); setText('pCardHead1', data.pCardHead1); setText('pCardDesc1', data.pCardDesc1);
   setText('pCardNum2', data.pCardNum2); setText('pCardHead2', data.pCardHead2); setText('pCardDesc2', data.pCardDesc2);
@@ -740,15 +739,15 @@ function initSmartConcierge() {
     const needSummary = matched ? matched.title : (chatState.needLabel || (isHe ? 'פנייה כללית' : 'General inquiry'));
 
     const summaryText = isHe
-      ? `תודה רבה! 🙏\nהפנייה שלכם נקלטה בהצלחה:\n• תחום מומלץ: ${needSummary}\n• שלב: ${chatState.stageLabel || '-'}\n• לוח זמנים: ${chatState.timingLabel || '-'}\n• יצירת קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nיותם כהן מ-Code92 יחזור אליכם בהקדם!`
-      : `Thank you! 🙏\nYour inquiry was received:\n• Recommended area: ${needSummary}\n• Stage: ${chatState.stageLabel || '-'}\n• Timeline: ${chatState.timingLabel || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nYotam Cohen from Code92 will get back to you shortly!`;
+      ? `תודה רבה! 🙏\nהפנייה שלכם נקלטה בהצלחה:\n• תחום מומלץ: ${needSummary}\n• שלב: ${chatState.stageLabel || '-'}\n• לוח זמנים: ${chatState.timingLabel || '-'}\n• יצירת קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nהצוות שלנו מ-Code92 יחזור אליכם בהקדם!`
+      : `Thank you! 🙏\nYour inquiry was received:\n• Recommended area: ${needSummary}\n• Stage: ${chatState.stageLabel || '-'}\n• Timeline: ${chatState.timingLabel || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nOur team at Code92 will get back to you shortly!`;
 
     replyWithTyping(summaryText, () => {
       const waNote = isHe ? 'רוצים להמשיך את השיחה ב-WhatsApp כעת?' : 'Want to continue on WhatsApp now?';
       const btnLabel = isHe ? '📲 פתיחת שיחה ב-WhatsApp מול Code92' : '📲 Open WhatsApp chat with Code92';
 
       const waMessageText = encodeURIComponent(
-        `שלום ליותם כהן (Code92)! 👋\n` +
+        `שלום Code92! 👋\n` +
         `פנייה חדשה מהצ'אט באתר.\n` +
         `תחום מומלץ: ${needSummary}\n` +
         `שלב: ${chatState.stageLabel || '-'}\n` +
@@ -847,7 +846,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const text = encodeURIComponent(
-        `שלום ליותם כהן (Code92)! 👋\n\n` +
+        `שלום Code92! 👋\n\n` +
         `פנייה חדשה מאתר Code92:\n` +
         `👤 שם: ${name}\n` +
         `📞 טלפון: ${phone}\n` +
@@ -1397,7 +1396,7 @@ function initProcessCinematic() {
 const MATCHER_RESULTS = {
   web: {
     title: 'פיתוח אתרים ומערכות Web',
-    desc: 'בניית אתרים יוקרתיים חנויות E-commerce ומערכות Web מתקדמות',
+    desc: 'אתרים וחנויות E-commerce ברמת עיצוב גבוהה, בנויים כדי להמיר גולשים ללקוחות משלמים',
     badge: '<svg viewBox="0 0 120 120" fill="none"><rect x="25" y="45" width="75" height="55" rx="6" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="1.5"/><rect x="15" y="25" width="80" height="58" rx="6" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><circle cx="27" cy="34" r="2.5" fill="#00e676"/><circle cx="35" cy="34" r="2.5" fill="#fff" fill-opacity="0.6"/><circle cx="43" cy="34" r="2.5" fill="#fff" fill-opacity="0.6"/></svg>',
   },
   ai: {
@@ -1407,7 +1406,7 @@ const MATCHER_RESULTS = {
   },
   cloud: {
     title: 'מעטפת Cloud אבטחה וצמיחה מתמדת',
-    desc: 'תשתיות ענן אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול יותם כהן המבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן',
+    desc: 'תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי צמוד מהצוות שלנו, שמבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן',
     badge: '<svg viewBox="0 0 120 120" fill="none"><path d="M30 65 C25 65 20 60 20 52 C20 45 26 40 33 40 C36 32 45 28 55 30 C63 25 74 28 80 35 C88 36 94 43 93 51 C98 55 97 65 90 67 Z" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><path d="M60 48 L78 56 V72 C78 84 60 92 60 92 C60 92 42 84 42 72 V56 L60 48 Z" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="1.5"/></svg>',
   },
   unsure: {

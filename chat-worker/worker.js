@@ -19,8 +19,10 @@ const ALLOWED_ORIGINS = [
   'https://elyotam.github.io',
   'http://localhost:5500',
   'http://localhost:5502',
+  'http://localhost:5503',
   'http://127.0.0.1:5500',
   'http://127.0.0.1:5502',
+  'http://127.0.0.1:5503',
 ];
 
 const MODEL = '@cf/mistralai/mistral-small-3.1-24b-instruct'; // llama-3.1-8b-instruct was deprecated 2026-05-30; llama-3.2-3b-instruct's Hebrew output was unreliable (garbled/incoherent) in testing
@@ -33,14 +35,14 @@ const SERVICES_HE = `
 1. אסטרטגיה ואפיון — איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים.
 2. פיתוח אתרים ומערכות Web — בניית אתרים יוקרתיים, חנויות E-commerce ומערכות Web מתקדמות.
 3. אוטומציות AI ואפליקציות מותאמות — פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים שחוסכים עד 80% מזמן העבודה הידנית ומייעלים מכירות ושירות 24/7.
-4. מעטפת Cloud, אבטחה וצמיחה מתמדת — תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי מתמשך בניהול אישי של יותם כהן.
+4. מעטפת Cloud, אבטחה וצמיחה מתמדת — תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי צמוד מהצוות שלנו.
 `.trim();
 
 const SERVICES_EN = `
 1. Strategy & Scoping — precise scoping and market research that identifies the business's real growth engines to build a digital architecture that converts visitors into paying customers.
 2. Website & Web Systems Development — luxury websites, e-commerce stores, and advanced web systems.
 3. AI Automations & Custom Apps — custom apps and smart AI agents that save up to 80% of manual work and streamline sales and support 24/7.
-4. Cloud, Security & Ongoing Growth — cloud infrastructure, rigorous information security, and continuous personal management by Yotam Cohen.
+4. Cloud, Security & Ongoing Growth — cloud infrastructure, rigorous information security, and close ongoing management from our team.
 `.trim();
 
 function buildSystemPrompt(lang) {
@@ -50,7 +52,7 @@ function buildSystemPrompt(lang) {
     ? 'Respond ONLY in simple, grammatically correct, natural conversational Hebrew — full sentences, never a word list or sentence fragments. Do not mix in English words unless it is a proper noun like a technology name.'
     : 'Respond ONLY in English, in a warm, concise, professional tone.';
 
-  return `You are the AI assistant embedded in Code92's website chat widget. Code92 is a real digital agency owned by Yotam Cohen (יותם כהן), reachable at +972-52-205-7074 (WhatsApp).
+  return `You are the AI assistant embedded in Code92's website chat widget. Code92 is a real digital agency, reachable at +972-50-000-0000 (WhatsApp).
 
 Code92's real services (the ONLY services it offers — do not invent others):
 ${services}
@@ -58,8 +60,8 @@ ${services}
 Rules you must follow strictly:
 - First, directly answer the SPECIFIC question the visitor asked — do not just list services if they asked something else (e.g. timing, process, who you work with).
 - Keep it to 2-4 short, complete, natural sentences. No long essays, no bullet/word lists.
-- NEVER invent specific prices, delivery dates, client names, testimonials, statistics, or guarantees. If asked about price or exact timeline, say it depends on project scope and Yotam gives a custom quote after a short chat.
-- If the question is unrelated to Code92 or web/app/AI/cloud development, say so honestly and offer to connect them with Yotam directly instead of guessing.
+- NEVER invent specific prices, delivery dates, client names, testimonials, statistics, or guarantees. If asked about price or exact timeline, say it depends on project scope and the team gives a custom quote after a short chat.
+- If the question is unrelated to Code92 or web/app/AI/cloud development, say so honestly and offer to connect them with the team directly instead of guessing.
 - Never claim to be a human. If asked, say you're Code92's site assistant.
 - ${langLine}`;
 }
@@ -76,7 +78,7 @@ function buildRedirectPrompt(lang) {
     ? 'Respond ONLY in simple, grammatically correct, natural conversational Hebrew, one full sentence.'
     : 'Respond ONLY in English, one warm, natural sentence.';
 
-  return `You are the AI assistant embedded in Code92's website chat widget, mid-conversation with a visitor. Code92 is a real digital agency owned by Yotam Cohen.
+  return `You are the AI assistant embedded in Code92's website chat widget, mid-conversation with a visitor. Code92 is a real digital agency.
 
 The visitor just sent a message that does not clearly answer the question the chat is currently waiting on. Your ONLY job: write ONE short, warm, natural sentence reacting to their message — acknowledge it if it has real content (small talk, a stray comment, a partial thought), or gently note if it looks like random/garbled typing.
 
