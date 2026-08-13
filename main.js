@@ -819,12 +819,12 @@ function initSmartConcierge() {
   send?.addEventListener('click', handleUserInput);
   input?.addEventListener('keydown', e => { if (e.key === 'Enter') handleUserInput(); });
 
-  // Automatic Pop-Up after 3 seconds
+  // Automatic Pop-Up after 9 seconds
   setTimeout(() => {
     if (!isOpen) {
       toggleChat(true);
     }
-  }, 3000);
+  }, 9000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
