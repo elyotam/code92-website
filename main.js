@@ -1101,6 +1101,29 @@ function initScrollAnimations() {
     });
   }
 
+  // Why Code92 section: plain fade-up, same treatment as everything else —
+  // deliberately not a new effect, this section is meant to read as calm.
+  const whyUsTitle = document.querySelector('.why-us-title');
+  const whyUsCards = document.querySelectorAll('.why-us-card');
+  if (whyUsTitle && whyUsCards.length) {
+    gsap.from(whyUsTitle.children, {
+      opacity: 0,
+      y: 24,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: whyUsTitle, start: 'top 85%', toggleActions: 'play none none reverse' },
+    });
+    gsap.from(whyUsCards, {
+      opacity: 0,
+      y: 30,
+      duration: 0.55,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.why-us-grid', start: 'top 88%', toggleActions: 'play none none reverse' },
+    });
+  }
+
   // Contact section: title + form fade up together
   const contactTitle = document.querySelector('.contact-title');
   const formBox = document.querySelector('.form-box');

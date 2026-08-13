@@ -357,7 +357,8 @@ img, video {
 
 .process-pin-wrap {
   position: relative;
-  height: 400vh; /* ~100vh dwell per stage; JS pins .process-pin across this range */
+  height: 280vh; /* shortened from 400vh — same HOLD/TRANS pacing ratio in the JS
+                    timeline, just less physical scroll distance to get through it */
 }
 
 .process-pin {
@@ -720,6 +721,60 @@ img, video {
   padding: var(--space-1);
 }
 .matcher-restart:hover { color: var(--text-white); }
+
+/* ==========================================================================
+   Why Code92 — honest differentiators, deliberately restrained (no glow/pin/
+   scroll-jack) so it reads as calm and credible rather than another effect.
+   ========================================================================== */
+.why-us-section {
+  padding: var(--space-8) 0;
+  background-color: #000000;
+}
+
+.why-us-title { margin-bottom: var(--space-6); }
+
+.why-us-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.why-us-card {
+  padding: var(--space-4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: var(--bg-card);
+  text-align: start;
+}
+
+.why-us-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--brand-red);
+  margin-bottom: var(--space-2);
+}
+
+.why-us-card h3 {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--text-title);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.why-us-card p {
+  font-size: var(--fs-body-sm);
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .why-us-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .why-us-grid { grid-template-columns: 1fr; }
+}
 
 /* Footer & Contact Form */
 .footer-contact-section {
