@@ -123,6 +123,34 @@ export default {
       return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers });
     }
 
+    // Durable lead capture — a safety net so a submission is never silently
+    // lost if the visitor doesn't finish the WhatsApp handoff. Doesn't touch
+    // or block that flow; the frontend fires this alongside it.
+    if (body.type === 'lead') {
+      const lead = {
+        source: String(body.source || 'unknown').slice(0, 50),
+        name: String(body.name || '').slice(0, 200),
+        phone: String(body.phone || '').slice(0, 50),
+        email: String(body.email || '').slice(0, 200),
+        message: String(body.message || '').slice(0, 2000),
+        needSummary: String(body.needSummary || '').slice(0, 200),
+        stageLabel: String(body.stageLabel || '').slice(0, 200),
+        timingLabel: String(body.timingLabel || '').slice(0, 200),
+        lang: body.lang === 'en' ? 'en' : 'he',
+        receivedAt: new Date().toISOString(),
+      };
+      if (!lead.name && !lead.phone && !lead.email) {
+        return new Response(JSON.stringify({ error: 'Empty lead' }), { status: 400, headers });
+      }
+      const key = `lead:${Date.now()}:${Math.random().toString(36).slice(2, 8)}`;
+      try {
+        await env.LEADS.put(key, JSON.stringify(lead));
+        return new Response(JSON.stringify({ ok: true }), { headers });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: 'Failed to store lead' }), { status: 502, headers });
+      }
+    }
+
     const question = String(body.question || '').trim().slice(0, MAX_QUESTION_LENGTH);
     const lang = body.lang === 'en' ? 'en' : 'he';
     const mode = body.mode === 'redirect' ? 'redirect' : 'answer';

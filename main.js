@@ -277,6 +277,20 @@ async function askAI(question, mode) {
   }
 }
 
+// Durable lead capture — fires alongside the existing WhatsApp handoff (contact
+// form and chat) so a submission is never silently lost if the visitor doesn't
+// finish sending the WhatsApp message. Purely additive: never awaited by the
+// caller, never blocks or alters the existing flow, silently no-ops if the
+// Worker isn't deployed or the request fails.
+function saveLead(fields) {
+  if (AI_WORKER_URL.includes('YOUR-SUBDOMAIN')) return;
+  fetch(AI_WORKER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'lead', lang: currentLang, ...fields }),
+  }).catch(() => {});
+}
+
 let updateBotUiFn = null;
 let lenisInstance = null;
 
@@ -738,6 +752,15 @@ function initSmartConcierge() {
     const matched = MATCHER_RESULTS[chatState.needId] || null;
     const needSummary = matched ? matched.title : (chatState.needLabel || (isHe ? 'פנייה כללית' : 'General inquiry'));
 
+    saveLead({
+      source: 'chat',
+      name: chatState.userName || '',
+      phone: chatState.userPhone || '',
+      needSummary,
+      stageLabel: chatState.stageLabel || '',
+      timingLabel: chatState.timingLabel || '',
+    });
+
     const summaryText = isHe
       ? `תודה רבה! 🙏\nהפנייה שלכם נקלטה בהצלחה:\n• תחום מומלץ: ${needSummary}\n• שלב: ${chatState.stageLabel || '-'}\n• לוח זמנים: ${chatState.timingLabel || '-'}\n• יצירת קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nהצוות שלנו מ-Code92 יחזור אליכם בהקדם!`
       : `Thank you! 🙏\nYour inquiry was received:\n• Recommended area: ${needSummary}\n• Stage: ${chatState.stageLabel || '-'}\n• Timeline: ${chatState.timingLabel || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nOur team at Code92 will get back to you shortly!`;
@@ -854,6 +877,7 @@ document.addEventListener('DOMContentLoaded', () => {
         (message ? `📝 הודעה: ${message}\n` : '')
       );
 
+      saveLead({ source: 'contact-form', name, phone, email, message });
       window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, '_blank');
       showFormSuccess(form);
       form.reset();
