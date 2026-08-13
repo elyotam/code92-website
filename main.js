@@ -8,6 +8,12 @@
 
 const WA_NUMBER = '972522057074';
 
+// Real-AI backend for genuinely open-ended chat questions (see chat-worker/DEPLOY.md).
+// Until deployed and this placeholder replaced with the real workers.dev URL,
+// askAI() below simply returns null and the guided flow handles everything —
+// the chat stays fully functional either way.
+const AI_WORKER_URL = 'https://code92-chat-ai.chat-worker.workers.dev';
+
 // 100% Complete Dual Language Dictionary
 const DICT = {
   he: {
@@ -42,38 +48,52 @@ const DICT = {
     copyright: '© Code92 · כל הזכויות שמורות ליותם כהן',
 
     // Bot Translations
-    botStatus: 'מחובר/ת כעת לשיחה',
-    botTyping: 'מקליד/ה הודעה...',
-    botPlaceholder: 'הקלד/י הודעה או מספר טלפון...',
-    botGreeting: (name) => `שלום! 👋 שמי ${name} מ-Code92.\nבמה אוכל לסייע לך בפרויקט היום?`,
-    botRedirecting: `תודה רבה! העברתי את פנייתך ליותם כהן ב-Code92.\nלחץ על הלחצן למטה לפתיחת שיחה ב-WhatsApp:`,
+    botName: 'העוזר הווירטואלי',
+    botStatus: 'יועץ דיגיטלי • זמין 24/7',
+    botTyping: 'כותב/ת תשובה...',
+    botPlaceholder: 'הקלידו הודעה או מספר טלפון...',
+    botGreeting: `היי! 👋 אני היועץ הדיגיטלי.\nבמקום למלא טופס יבש — בואו נבין תוך דקה מה הכי מתאים לפרויקט שלכם.\nאיזה תחום הכי קרוב למה שאתם מחפשים?`,
+    botStageQ: 'באיזה שלב אתם נמצאים כרגע?',
+    botTimingQ: 'ומתי הייתם רוצים להתחיל?',
+    botContactQ: `מעולה, יש לי כבר תמונה טובה על הפרויקט 🙌\nכדי שיותם כהן יחזור אליכם באופן אישי — מה השם המלא ומספר הטלפון שלכם?`,
     botServices: [
-      { 
-        id: 'ecommerce',
-        label: '🛍️ חנויות E-commerce', 
-        response: `בחירה מעולה! חנויות E-commerce ב-Code92 נבנות להמרה מקסימלית ב-Next.js 🚀\nאשמח לדעת: מדובר בחנות חדשה מאפס או שדרוג חנות קיימת, וכמה מוצרים מתוכננים בה בערך?` 
-      },
-      { 
-        id: 'ai',
-        label: '🤖 אוטומציות עסקיות + AI', 
-        response: `בחירה מצוינת! סוכני AI ואוטומציות עסקיות ב-Code92 חוסכים עד 80% מזמן העבודה 🤖\nאיזה תהליך בעסק היית רוצה לאוטמט? (סוכן מכירות, מענה ללקוחות, ניהול CRM או חשבוניות)` 
-      },
-      { 
+      {
         id: 'web',
-        label: '💻 בניית אתרים ומערכות Web לעסקים', 
-        response: `נפלא! אנחנו מתמחים בבניית אתרים ומערכות Web פרימיום ב-Code92 ברמה בינלאומית 💻\nמה סוג הפרויקט שדרוש לך? (אתר תדמית יוקרתי, קטלוג מוצרים, או מערכת ניהול מותאמת)` 
+        label: '💻 אתר או חנות אונליין',
+        response: `מצוין — בדיוק התחום שלנו 💻 אנחנו בונים אתרי תדמית יוקרתיים, חנויות אונליין ומערכות Web מתקדמות.`
       },
-      { 
-        id: 'apps',
-        label: '📱 פיתוח מערכות ואפליקציות מותאמות לעסק', 
-        response: `מעולה! ארכיטקטורת תוכנה, SaaS ואפליקציות מותאמות אישית ב-Code92 📱\nבאיזו פלטפורמה מדובר? (אפליקציית מובייל iOS/Android, מערכת ענן SaaS, או תוכנה פנימית)` 
+      {
+        id: 'ai',
+        label: '🤖 אוטומציה או אפליקציה חכמה',
+        response: `נשמע מעניין 🤖 אנחנו מפתחים סוכני AI ואפליקציות מותאמות שחוסכות עד 80% מזמן העבודה הידנית.`
       },
-      { 
+      {
         id: 'cloud',
-        label: '🛡️ תחזוקה, Cloud, אבטחה וניהול שוטף', 
-        response: `מצוין! תשתיות ענן, DevOps, אבטחת מידע וניהול שוטף עם 99.99% Uptime SLA ב-Code92 🛡️\nבאיזה שירות מדובר? (אבטחת מידע, אחסון ענן AWS, או תחזוקה שוטפת)` 
+        label: '☁️ תשתית, אבטחה או ליווי שוטף',
+        response: `הבנתי ☁️ אנחנו מספקים תשתיות ענן, אבטחת מידע קפדנית וליווי מקצועי שוטף בניהול אישי של יותם כהן.`
+      },
+      {
+        id: 'unsure',
+        label: '🧭 לא בטוחים, צריך ייעוץ',
+        response: `אין בעיה 🧭 נתחיל מאיפיון קצר — כך גם אם עדיין לא בטוחים, נדע להכווין אתכם נכון.`
       }
-    ]
+    ],
+    botStageOpts: [
+      { id: 'idea', label: 'יש רעיון, עדיין בתכנון' },
+      { id: 'existing', label: 'יש לנו כבר עסק או מוצר קיים' },
+      { id: 'upgrade', label: 'רוצים לשדרג משהו קיים' }
+    ],
+    botTimingOpts: [
+      { id: 'asap', label: 'רוצים להתחיל בהקדם' },
+      { id: 'quarter', label: 'ברבעון הקרוב' },
+      { id: 'exploring', label: 'עדיין בודקים אפשרויות' }
+    ],
+    botDidntUnderstand: `אופס, ההודעה שכתבת לא כל כך מובנת לי 😅\nאפשר לנסות לנסח מחדש או לבחור באחת האפשרויות למטה:`,
+    botAskPhoneAgain: (name) => `תודה${name ? ', ' + name : ''}! ומה מספר הטלפון הכי נוח ליצירת קשר? 📱`,
+    botAskContactAgain: `כדי שנוכל לחזור אליכם, אשמח לקבל שם מלא ומספר טלפון תקין 🙂`,
+    botGreetingReply: 'שלום! 😊',
+    botNeedQ: 'באיזה תחום תרצו להתמקד?',
+    botContactQShort: 'מה השם המלא ומספר הטלפון שלכם? 📱'
   },
   en: {
     langBtn: 'HE',
@@ -107,54 +127,157 @@ const DICT = {
     copyright: '© Code92 · All Rights Reserved to Yotam Cohen',
 
     // Bot Translations
-    botStatus: 'Online Now',
-    botTyping: 'typing a message...',
+    botName: 'Virtual Assistant',
+    botStatus: 'Digital Consultant • Available 24/7',
+    botTyping: 'typing a reply...',
     botPlaceholder: 'Type a message or phone number...',
-    botGreeting: (name) => `Hello! 👋 My name is ${name} from Code92.\nHow can I assist you with your project today?`,
-    botRedirecting: `Thank you! I forwarded your inquiry to Yotam Cohen at Code92.\nClick the button below to start a WhatsApp chat:`,
+    botGreeting: `Hi! 👋 I'm your digital consultant.\nInstead of a plain form — let's figure out in a minute what fits your project best.\nWhich area is closest to what you're looking for?`,
+    botStageQ: 'What stage are you at right now?',
+    botTimingQ: 'And when would you like to start?',
+    botContactQ: `Great, I have a good picture of the project now 🙌\nSo Yotam Cohen can get back to you personally — what's your full name and phone number?`,
     botServices: [
-      { 
-        id: 'ecommerce',
-        label: '🛍️ E-Commerce Online Stores', 
-        response: `Excellent choice! E-commerce stores by Code92 built in Next.js for high conversion 🚀\nIs this a new store from scratch or an existing store upgrade? How many products are planned?` 
-      },
-      { 
-        id: 'ai',
-        label: '🤖 Business Automation & AI', 
-        response: `Great choice! AI Agents & Automations by Code92 saving up to 80% manual work 🤖\nWhich business process would you like to automate? (Sales agent, customer support, CRM)` 
-      },
-      { 
+      {
         id: 'web',
-        label: '💻 Website & Web System Development', 
-        response: `Great! At Code92 we engineer world-class premium websites 💻\nWhat type of project do you need? (Luxury brand site, product catalog, or custom Web App)` 
+        label: '💻 A website or online store',
+        response: `Great — that's exactly our focus 💻 We build luxury brand websites, online stores and advanced Web systems.`
       },
-      { 
-        id: 'apps',
-        label: '📱 Custom App & Software Engineering', 
-        response: `Enterprise software architecture, SaaS & custom mobile apps by Code92 📱\nWhich platform? (iOS/Android mobile app, Cloud SaaS, or internal tool)` 
+      {
+        id: 'ai',
+        label: '🤖 Automation or a smart app',
+        response: `Sounds interesting 🤖 We develop AI agents and custom apps that save up to 80% of manual work.`
       },
-      { 
+      {
         id: 'cloud',
-        label: '🛡️ Cloud, DevOps, Cyber & Maintenance', 
-        response: `Cloud infrastructure, DevOps, Cyber Security & ongoing management with 99.99% Uptime SLA by Code92 🛡️\nWhich service? (Cyber security, AWS Cloud, or ongoing maintenance)` 
+        label: '☁️ Infrastructure, security or ongoing support',
+        response: `Got it ☁️ We provide cloud infrastructure, rigorous information security and ongoing personal management by Yotam Cohen.`
+      },
+      {
+        id: 'unsure',
+        label: '🧭 Not sure yet, need advice',
+        response: `No problem 🧭 Let's start with a short scoping chat — even if you're not sure yet, we'll help point you in the right direction.`
       }
-    ]
+    ],
+    botStageOpts: [
+      { id: 'idea', label: 'We have an idea, still planning' },
+      { id: 'existing', label: 'We already have a business or product' },
+      { id: 'upgrade', label: 'We want to upgrade something existing' }
+    ],
+    botTimingOpts: [
+      { id: 'asap', label: 'Want to start ASAP' },
+      { id: 'quarter', label: 'Within this quarter' },
+      { id: 'exploring', label: 'Still exploring options' }
+    ],
+    botDidntUnderstand: `Oops, I couldn't quite understand that 😅\nPlease try rephrasing or choose one of the options below:`,
+    botAskPhoneAgain: (name) => `Thanks${name ? ', ' + name : ''}! And what's the best phone number to reach you? 📱`,
+    botAskContactAgain: `So we can get back to you, please share your full name and a valid phone number 🙂`,
+    botGreetingReply: 'Hi there! 😊',
+    botNeedQ: 'Which area would you like to focus on?',
+    botContactQShort: "What's your full name and phone number? 📱"
   }
 };
 
 let currentLang = 'he';
 
-// Human Representatives Pool (Updated with Dana, Guy, Ahuvit, Ido, Aviv, Karin)
-const SALES_REPS = [
-  { name: 'דנה', gender: 'female', img: 'assets/rep_dana.jpg', icon: '👩‍💼', enName: 'Dana' },
-  { name: 'גיא', gender: 'male', img: 'assets/rep_guy.jpg', icon: '👨‍💼', enName: 'Guy' },
-  { name: 'אהובית', gender: 'female', img: 'assets/rep_ahuvit.jpg', icon: '👩‍💼', enName: 'Ahuvit' },
-  { name: 'עידו', gender: 'male', img: 'assets/rep_ido.png', icon: '👨‍💼', enName: 'Ido' },
-  { name: 'אביב', gender: 'male', img: 'assets/rep_aviv.png', icon: '👨‍💼', enName: 'Aviv' },
-  { name: 'קארין', gender: 'female', img: 'assets/rep_karin.png', icon: '👩‍💼', enName: 'Karin' }
+// ==========================================================================
+// Lightweight offline understanding layer for the chat concierge.
+// No external API/LLM — everything runs client-side, so there's nothing that
+// could be exposed as a stealable key on a static, no-backend site. Instead of
+// blindly accepting any free text as an answer, incoming messages are checked
+// against known filler/greeting patterns (rejected, re-asked) and matched
+// against bilingual keyword sets per question (accepted + normalized). Real
+// answers that don't match a known phrase are still accepted as free text —
+// this only filters out clear non-answers, it never blocks genuine input.
+// ==========================================================================
+// Greetings ("שלום", "hi"...) are the single most natural thing a visitor types
+// to open a chat — they get a warm reply that re-asks the pending question, NOT
+// a "didn't understand" rejection. Neutral filler ("test", "ok"...) has no
+// conversational content worth replying to, so it just re-asks plainly.
+const GREETING_WORDS = [
+  'היי', 'הי', 'הייי', 'הלו', 'שלום', 'אהלה', 'מה קורה', 'מה נשמע', 'מה המצב', 'מה העניינים',
+  'hi', 'hii', 'hey', 'heyy', 'hello', 'yo', 'sup', 'howdy'
 ];
 
-let activeRep = null;
+const FILLER_WORDS = [
+  'test', 'טסט', 'בדיקה', 'ניסיון', 'בודק', 'בודקת',
+  'אוקיי', 'אוקי', 'בסדר', 'כן', 'לא', 'נו', 'ok', 'okay', 'k', 'sure', 'cool', 'nice'
+];
+
+function normalizeForFillerCheck(text) {
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/[!.?,;:'"״’]/g, '')
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '')
+    .trim();
+}
+
+function isGreetingOnly(text) {
+  return GREETING_WORDS.includes(normalizeForFillerCheck(text));
+}
+
+function isFillerOnly(text) {
+  const stripped = normalizeForFillerCheck(text);
+  if (!stripped) return true;
+  return FILLER_WORDS.includes(stripped);
+}
+
+const NEED_KEYWORDS = {
+  web: ['אתר', 'חנות', 'דף נחיתה', 'קטלוג', 'landing', 'website', 'site', 'store', 'shop', 'e-commerce', 'ecommerce'],
+  ai: ['אוטומצי', 'בוט', 'סוכן חכם', 'אפליקצי', 'automation', 'bot', 'ai agent', 'chatbot', 'smart app', 'custom app'],
+  cloud: ['ענן', 'אבטחה', 'שרת', 'תחזוקה', 'ליווי', 'cloud', 'security', 'hosting', 'server', 'maintenance', 'devops'],
+  unsure: ['לא בטוח', 'לא יודע', 'ייעוץ', 'not sure', "don't know", 'advice', 'consult', 'unsure']
+};
+
+const STAGE_KEYWORDS = {
+  idea: ['רעיון', 'בתכנון', 'לתכנן', 'עוד לא התחלנו', 'עדיין לא', 'idea', 'planning', "haven't started", 'not started yet'],
+  existing: ['יש לנו', 'יש כבר', 'קיים', 'פועל כבר', 'עסק קיים', 'מוצר קיים', 'already have', 'existing', 'up and running', 'have a business', 'have a product'],
+  upgrade: ['שדרוג', 'לשדרג', 'לשפר', 'לחדש', 'לעדכן', 'upgrade', 'improve', 'revamp', 'redesign']
+};
+
+const TIMING_KEYWORDS = {
+  asap: ['בהקדם', 'מיד', 'דחוף', 'עכשיו', 'כמה שיותר מהר', 'asap', 'urgent', 'right away', 'immediately'],
+  quarter: ['רבעון', 'חודש', 'שבועות', 'בקרוב', 'quarter', 'month', 'weeks', 'soon'],
+  exploring: ['בודקים', 'מתלבטים', 'לא בטוחים', 'רק בודק', 'עדיין חושבים', 'exploring', 'just looking', 'not sure yet', 'still thinking']
+};
+
+function matchKeywords(text, dict) {
+  const lower = text.toLowerCase();
+  for (const key of Object.keys(dict)) {
+    if (dict[key].some((kw) => lower.includes(kw.toLowerCase()))) return key;
+  }
+  return null;
+}
+
+const QUESTION_STARTERS = /^(איך|למה|מה|כמה|האם|מתי|מי|איפה|תסביר|why|how|what|when|who|where|which|do you|does|can you|is it|are you|will you)\b/i;
+
+function looksLikeOpenQuestion(text) {
+  return /\?/.test(text) || QUESTION_STARTERS.test(text.trim());
+}
+
+// Calls the Cloudflare Worker (see chat-worker/) for a real, grounded AI answer.
+// mode: 'answer' (default) for genuine open questions, or 'redirect' for a
+// one-sentence reaction to a message that didn't clearly answer the pending
+// guided-flow question (the caller appends the real question text itself —
+// see handleUnclearInput below — since the model doesn't reliably track which
+// question is pending when asked to pick the follow-up itself).
+// Returns null on any failure (not deployed yet, network error, rate limit) so
+// callers can fall back to canned copy — the chat never breaks over this.
+async function askAI(question, mode) {
+  if (AI_WORKER_URL.includes('YOUR-SUBDOMAIN')) return null;
+  try {
+    const res = await fetch(AI_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question, lang: currentLang, mode: mode || 'answer' }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data && data.answer ? String(data.answer) : null;
+  } catch {
+    return null;
+  }
+}
+
 let updateBotUiFn = null;
 let lenisInstance = null;
 
@@ -201,47 +324,37 @@ function toggleLanguage() {
   }
 }
 
-// ================= CODE92 SMART AI SALES BOT =================
-function initHumanSalesBot() {
-  activeRep = SALES_REPS[Math.floor(Math.random() * SALES_REPS.length)];
-
-  const avatar = document.getElementById('repAvatar');
-  const nameEl = document.getElementById('repName');
-  const statusEl = document.getElementById('repStatusTxt');
+// ================= CODE92 AI CONCIERGE =================
+// Transparently-automated assistant — no fake human identity, no stock photo.
+// Question flow mirrors the real project-matcher tool (#matcher) 1:1 so both
+// tools stay consistent and every recommendation traces back to real,
+// already-published service content (see MATCHER_RESULTS / MATCHER_LABELS below).
+function initSmartConcierge() {
+  const nameEl = document.getElementById('botNameTitle');
+  const statusEl = document.getElementById('botStatusTxt');
   const panel = document.getElementById('salesChatPanel');
   const fab = document.getElementById('salesChatFab');
   const close = document.getElementById('salesChatClose');
   const msgs = document.getElementById('salesChatMessages');
-  const opts = document.getElementById('salesChatOpts');
   const input = document.getElementById('salesChatInput');
   const send = document.getElementById('salesChatSend');
 
   let isOpen = false;
+  let currentOptsRow = null; // the live chip row, if any — always lives inside the scrolling message flow
 
-  // Bot State Management
+  // Bot State Management — mirrors the matcher tool's need -> stage -> timing arc
   let chatState = {
-    step: 'INIT', // 'INIT', 'CATEGORY_SELECTED', 'SPECIFIC_ANSWERED', 'TIMELINE_ANSWERED', 'DONE'
-    category: '',
-    categoryId: '',
-    specificDetails: '',
-    timeline: '',
+    step: 'INIT', // 'INIT' -> 'NEED_SELECTED' -> 'STAGE_SELECTED' -> 'TIMING_SELECTED' -> 'DONE'
+    needId: '',
+    needLabel: '',
+    stageLabel: '',
+    timingLabel: '',
     userName: '',
     userPhone: ''
   };
 
-  function renderRepInfo() {
-    const isHe = currentLang === 'he';
-    if (avatar) {
-      if (activeRep.img) {
-        avatar.innerHTML = `<img src="${activeRep.img}" alt="${activeRep.name}" class="rep-avatar-img" />`;
-        avatar.style.backgroundColor = 'transparent';
-      } else {
-        avatar.innerHTML = activeRep.icon;
-        avatar.style.fontSize = '1.35rem';
-        avatar.style.backgroundColor = activeRep.gender === 'female' ? '#db2777' : 'var(--brand-red)';
-      }
-    }
-    if (nameEl) nameEl.textContent = isHe ? `${activeRep.name} מ-Code92` : `${activeRep.enName} from Code92`;
+  function renderBotInfo() {
+    if (nameEl) nameEl.textContent = DICT[currentLang].botName;
     if (statusEl) statusEl.textContent = DICT[currentLang].botStatus;
     if (input) input.placeholder = DICT[currentLang].botPlaceholder;
   }
@@ -282,9 +395,22 @@ function initHumanSalesBot() {
     }, 900);
   }
 
+  // Chips render as the newest item in the scrolling message list itself (not a
+  // separate fixed footer) — this is what keeps them from ever competing for a
+  // fixed pixel budget with the messages above them on short mobile viewports.
+  function clearOptions() {
+    if (currentOptsRow) {
+      currentOptsRow.remove();
+      currentOptsRow = null;
+    }
+  }
+
   function setOptions(optionsList) {
-    opts.innerHTML = '';
+    clearOptions();
     if (!optionsList || !optionsList.length) return;
+
+    const row = document.createElement('div');
+    row.className = 'chat-quick-opts-inline';
 
     optionsList.forEach(opt => {
       const btn = document.createElement('button');
@@ -292,11 +418,15 @@ function initHumanSalesBot() {
       btn.textContent = opt.label;
       btn.addEventListener('click', () => {
         addMsg(opt.label, false);
-        opts.innerHTML = '';
+        clearOptions();
         handleOptionSelection(opt);
       });
-      opts.appendChild(btn);
+      row.appendChild(btn);
     });
+
+    currentOptsRow = row;
+    msgs.appendChild(row);
+    msgs.scrollTop = msgs.scrollHeight;
   }
 
   // AI & NLP: Detect gibberish / unreadable inputs
@@ -330,8 +460,11 @@ function initHumanSalesBot() {
     const phoneMatch = text.match(/\b05\d[-]?\d{7}\b/) || text.match(/\b0\d[-]?\d{7,8}\b/);
     if (phoneMatch) return { intent: 'PHONE', val: phoneMatch[0] };
 
-    // Check Gibberish
-    if (isGibberish(text)) return { intent: 'GIBBERISH' };
+    // Check Greeting — a friendly opener, answered warmly, never rejected
+    if (isGreetingOnly(text)) return { intent: 'GREETING' };
+
+    // Check Gibberish / filler-only messages ("test", "ok"...) — not real answers
+    if (isFillerOnly(text) || isGibberish(text)) return { intent: 'GIBBERISH' };
 
     // Check Price Inquiry
     if (/(מחיר|עלות|כמה עולה|תמחור|הצעה|הצעת מחיר|תקציב|cost|price|budget|quote)/i.test(lower)) {
@@ -351,160 +484,155 @@ function initHumanSalesBot() {
     return { intent: 'GENERAL' };
   }
 
-  // Category specific follow-up options
-  function getCategorySubOptions(catId) {
-    const isHe = currentLang === 'he';
-    switch (catId) {
-      case 'ecommerce':
-        return isHe ? [
-          { label: '🆕 חנות חדשה מאפס (עד 50 מוצרים)' },
-          { label: '🚀 חנות גדולה / מורכבת (100+ מוצרים)' },
-          { label: '🔄 שדרוג חנות קיימת / מעבר מערכת' }
-        ] : [
-          { label: '🆕 New Store from Scratch (Up to 50 items)' },
-          { label: '🚀 Large Enterprise Store (100+ items)' },
-          { label: '🔄 Existing Store Redesign / Migration' }
-        ];
-      case 'ai':
-        return isHe ? [
-          { label: '🤖 סוכן AI למכירות ושירות 24/7' },
-          { label: '⚡ אוטומציית לידים, WhatsApp ו-CRM' },
-          { label: '🔗 חיבור וסנכרון מערכות עסקיות' }
-        ] : [
-          { label: '🤖 24/7 Sales & Support AI Agent' },
-          { label: '⚡ Leads, WhatsApp & CRM Automations' },
-          { label: '🔗 Business Systems Integration' }
-        ];
-      case 'web':
-        return isHe ? [
-          { label: '✨ אתר תדמית יוקרתי לעסק' },
-          { label: '🖥️ מערכת ניהול / Web App מותאם' },
-          { label: '🛠️ שדרוג וחידוש אתר קיים' }
-        ] : [
-          { label: '✨ Luxury Corporate Website' },
-          { label: '🖥️ Custom Web Application / Portal' },
-          { label: '🛠️ Existing Website Overhaul' }
-        ];
-      case 'apps':
-        return isHe ? [
-          { label: '📱 אפליקציית מובייל (iOS / Android)' },
-          { label: '☁️ מערכת SaaS בענן' },
-          { label: '🏢 תוכנה פנימית וארגונית לעסק' }
-        ] : [
-          { label: '📱 Mobile App (iOS / Android)' },
-          { label: '☁️ Cloud SaaS Product' },
-          { label: '🏢 Internal Enterprise Software' }
-        ];
-      case 'cloud':
-      default:
-        return isHe ? [
-          { label: '☁️ תשתיות ענן, AWS ו-DevOps' },
-          { label: '🔒 אבטחת מידע וסייבר' },
-          { label: '⚙️ תחזוקה וניהול שוטף' }
-        ] : [
-          { label: '☁️ Cloud Infrastructure, AWS & DevOps' },
-          { label: '🔒 Cyber & Information Security' },
-          { label: '⚙️ Maintenance & Managed Services' }
-        ];
-    }
+  // Step 2: stage question — identical wording to the #matcher tool's stage step
+  function askStage() {
+    replyWithTyping(DICT[currentLang].botStageQ, () => {
+      setOptions(DICT[currentLang].botStageOpts);
+    });
   }
 
-  // Handle Category Option Selection
+  // Step 3: timing question — identical wording to the #matcher tool's timing step
+  function askTiming() {
+    replyWithTyping(DICT[currentLang].botTimingQ, () => {
+      setOptions(DICT[currentLang].botTimingOpts);
+    });
+  }
+
+  // Step 4: contact capture
+  function askContact() {
+    replyWithTyping(DICT[currentLang].botContactQ, () => {
+      setOptions([]);
+    });
+  }
+
+  // Anything that doesn't clearly answer the pending question (small talk,
+  // filler, garbled typing) still gets a real, varied reply instead of the same
+  // canned "I didn't understand" every time: the AI generates a one-sentence
+  // reaction (see chat-worker/'s "redirect" mode), and the code appends the
+  // ACTUAL pending question verbatim — so the follow-up is always correct even
+  // though the model doesn't reliably track it itself. Falls back to plain
+  // canned copy if the AI is unreachable; either way the state never advances.
+  async function handleUnclearInput(val) {
+    const d = DICT[currentLang];
+    const isContactStep = chatState.step === 'TIMING_SELECTED' || chatState.step === 'DONE';
+    const contextQuestion = chatState.step === 'NEED_SELECTED' ? d.botStageQ
+      : chatState.step === 'STAGE_SELECTED' ? d.botTimingQ
+      : isContactStep ? d.botContactQShort
+      : d.botNeedQ;
+
+    showTypingIndicator();
+    const reaction = await askAI(val, 'redirect');
+    removeTypingIndicator();
+
+    const message = reaction ? `${reaction} ${contextQuestion}` : (isContactStep ? d.botAskContactAgain : d.botDidntUnderstand);
+    addMsg(message);
+
+    if (chatState.step === 'INIT') setOptions(d.botServices);
+    else if (chatState.step === 'NEED_SELECTED') setOptions(d.botStageOpts);
+    else if (chatState.step === 'STAGE_SELECTED') setOptions(d.botTimingOpts);
+    // contact step has no buttons — the message above already re-asks in words
+  }
+
+  // Handle Chip/Button Option Selection
   function handleOptionSelection(opt) {
-    const isHe = currentLang === 'he';
-
     if (chatState.step === 'INIT') {
-      chatState.category = opt.label;
-      chatState.categoryId = opt.id || 'web';
-      chatState.step = 'CATEGORY_SELECTED';
-
-      const categoryResponse = opt.response;
-
-      replyWithTyping(categoryResponse, () => {
-        const subOpts = getCategorySubOptions(chatState.categoryId);
-        setOptions(subOpts);
-      });
-    } else if (chatState.step === 'CATEGORY_SELECTED') {
-      chatState.specificDetails = opt.label;
-      chatState.step = 'SPECIFIC_ANSWERED';
-
-      const timelinePrompt = isHe
-        ? `רשמתי! 👍 מה לוח הזמנים המועדף עליך לעלייה לאוויר?`
-        : `Noted! 👍 What is your target timeline to go live?`;
-
-      replyWithTyping(timelinePrompt, () => {
-        const timelineOpts = isHe ? [
-          { label: '⚡ מיידי (1-2 שבועות)' },
-          { label: '📅 במהלך החודש הקרוב' },
-          { label: '🔍 בודק/ת אפשרויות ותקציב' }
-        ] : [
-          { label: '⚡ Immediate (1-2 weeks)' },
-          { label: '📅 Within next month' },
-          { label: '🔍 Exploring options' }
-        ];
-        setOptions(timelineOpts);
-      });
-    } else if (chatState.step === 'SPECIFIC_ANSWERED') {
-      chatState.timeline = opt.label;
-      chatState.step = 'TIMELINE_ANSWERED';
-
-      const askContactPrompt = isHe
-        ? `מעולה! קיבלתי את כל הנתונים 👍\nכדי ששיחה תועבר לטיפול אישי של יותם כהן ב-Code92 — נא להקליד שם מלא ומספר טלפון לחזרה:`
-        : `Great! Received all details 👍\nPlease type your Full Name and Phone Number so Yotam Cohen at Code92 can contact you:`;
-
-      replyWithTyping(askContactPrompt, () => {
-        setOptions([]);
-      });
+      chatState.needId = opt.id || 'unsure';
+      chatState.needLabel = opt.label;
+      chatState.step = 'NEED_SELECTED';
+      replyWithTyping(opt.response, askStage);
+    } else if (chatState.step === 'NEED_SELECTED') {
+      chatState.stageLabel = opt.label;
+      chatState.step = 'STAGE_SELECTED';
+      askTiming();
+    } else if (chatState.step === 'STAGE_SELECTED') {
+      chatState.timingLabel = opt.label;
+      chatState.step = 'TIMING_SELECTED';
+      askContact();
     }
   }
 
-  // Handle Free Text User Input
-  function handleUserInput() {
+  // Handle Free Text User Input. Disabled for the duration of processing so a
+  // fast typist can't fire overlapping AI calls / out-of-order responses.
+  let isProcessingInput = false;
+  async function handleUserInput() {
+    if (isProcessingInput) return;
     const val = input.value.trim();
     if (!val) return;
 
+    isProcessingInput = true;
+    if (send) send.disabled = true;
+    if (input) input.disabled = true;
+
+    try {
+      await processUserInput(val);
+    } finally {
+      isProcessingInput = false;
+      if (send) send.disabled = false;
+      if (input) { input.disabled = false; input.focus(); }
+    }
+  }
+
+  async function processUserInput(val) {
     addMsg(val, false);
     input.value = '';
-    opts.innerHTML = '';
+    clearOptions();
 
     const isHe = currentLang === 'he';
     const analysis = detectIntent(val);
 
-    // 1. Gibberish Response
-    if (analysis.intent === 'GIBBERISH') {
-      const gibberishMsg = isHe
-        ? `אופס, ההודעה שכתבת לא כל כך מובנת לי 😅\nאפשר לנסות לנסח מחדש או לבחור באחת האפשרויות למטה:`
-        : `Oops, I couldn't quite understand that 😅\nPlease try rephrasing or choose one of the options below:`;
+    // 1. Greeting — the single most natural way to open a chat ("שלום"/"hi").
+    // Never treated as a non-answer; replies warmly and re-asks whatever
+    // question is actually pending, instead of "I didn't understand you".
+    if (analysis.intent === 'GREETING') {
+      const d = DICT[currentLang];
+      let questionText;
+      if (chatState.step === 'NEED_SELECTED') questionText = d.botStageQ;
+      else if (chatState.step === 'STAGE_SELECTED') questionText = d.botTimingQ;
+      else if (chatState.step === 'TIMING_SELECTED' || chatState.step === 'DONE') questionText = d.botContactQShort;
+      else questionText = d.botNeedQ;
 
-      replyWithTyping(gibberishMsg, () => {
-        if (chatState.step === 'INIT') {
-          setOptions(DICT[currentLang].botServices);
-        } else if (chatState.step === 'CATEGORY_SELECTED') {
-          setOptions(getCategorySubOptions(chatState.categoryId));
-        }
+      replyWithTyping(`${d.botGreetingReply} ${questionText}`, () => {
+        if (chatState.step === 'INIT') setOptions(d.botServices);
+        else if (chatState.step === 'NEED_SELECTED') setOptions(d.botStageOpts);
+        else if (chatState.step === 'STAGE_SELECTED') setOptions(d.botTimingOpts);
+        // contact step has no buttons — the message above already re-asks in words
       });
       return;
     }
 
-    // 2. Phone / Contact Info Detected
-    if (analysis.intent === 'PHONE' || chatState.step === 'TIMELINE_ANSWERED' || chatState.step === 'DONE') {
-      chatState.userPhone = analysis.val || val;
-      if (!chatState.userName) chatState.userName = val.replace(analysis.val || '', '').trim() || 'לקוח יקר';
-      chatState.step = 'DONE';
+    // 1b. Gibberish / filler-only Response — a non-answer never advances the flow;
+    // gets a real AI-generated reaction plus the actual pending question, not a
+    // static template (see handleUnclearInput above).
+    if (analysis.intent === 'GIBBERISH') {
+      await handleUnclearInput(val);
+      return;
+    }
 
+    // 2. Phone number typed anywhere — accepted immediately regardless of step
+    if (analysis.intent === 'PHONE') {
+      chatState.userPhone = analysis.val;
+      if (!chatState.userName) chatState.userName = val.replace(analysis.val, '').trim() || (isHe ? 'לקוח יקר' : 'Prospective client');
+      chatState.step = 'DONE';
       finishLeadCapture();
+      return;
+    }
+
+    // 2b. At the contact step but no phone digits in this message — capture it as
+    // the name and ask specifically for a phone number instead of misfiling it.
+    if (chatState.step === 'TIMING_SELECTED' || chatState.step === 'DONE') {
+      if (!chatState.userName) chatState.userName = val;
+      chatState.step = 'TIMING_SELECTED';
+      replyWithTyping(DICT[currentLang].botAskPhoneAgain(chatState.userName));
       return;
     }
 
     // 3. Pricing Query Handling
     if (analysis.intent === 'PRICING') {
       const priceMsg = isHe
-        ? `מחירי הפרויקטים ב-Code92 נגזרים מאפיון מדויק והיקף העבודה. אנו מציעים הצעת מחיר שקופה ומותאמת אישית 💎\nבאיזה תחום מדובר? אפשר לבחור קטגוריה למטה:`
-        : `Project pricing at Code92 depends on scope and technical architecture. We provide transparent, custom quotes 💎\nWhich category fits your project? Choose below:`;
+        ? `מחירי הפרויקטים ב-Code92 נגזרים מאפיון מדויק והיקף העבודה. אנו מציעים הצעת מחיר שקופה ומותאמת אישית 💎\nבאיזה תחום מדובר? אפשר לבחור למטה:`
+        : `Project pricing at Code92 depends on scope and technical architecture. We provide transparent, custom quotes 💎\nWhich area fits your project? Choose below:`;
 
-      replyWithTyping(priceMsg, () => {
-        setOptions(DICT[currentLang].botServices);
-      });
+      replyWithTyping(priceMsg, () => setOptions(DICT[currentLang].botServices));
       return;
     }
 
@@ -514,18 +642,7 @@ function initHumanSalesBot() {
         ? `אתרי תדמית ומערכות בסיסיות נבנים בדרך כלל תוך 1-2 שבועות. מערכות מורכבות וסוכני AI מפותחים תוך 3-4 שבועות ⚡\nמה לוח הזמנים המועדף עליך?`
         : `Websites and core solutions are delivered within 1-2 weeks. Custom apps & AI agents take 3-4 weeks ⚡\nWhat is your target timeline?`;
 
-      replyWithTyping(timelineMsg, () => {
-        const timelineOpts = isHe ? [
-          { label: '⚡ מיידי (1-2 שבועות)' },
-          { label: '📅 במהלך החודש הקרוב' },
-          { label: '🔍 בודק/ת אפשרויות' }
-        ] : [
-          { label: '⚡ Immediate (1-2 weeks)' },
-          { label: '📅 Within next month' },
-          { label: '🔍 Exploring options' }
-        ];
-        setOptions(timelineOpts);
-      });
+      replyWithTyping(timelineMsg, () => setOptions(DICT[currentLang].botTimingOpts));
       return;
     }
 
@@ -535,71 +652,108 @@ function initHumanSalesBot() {
         ? `אנחנו ב-Code92 מפתחים בטכנולוגיות המתקדמות בעולם: React, Next.js, Node.js, Python, Tailwind, ותשתיות AWS/Cloud 🚀\nאיזה סוג פרויקט תרצה שנבנה עבורך?`
         : `At Code92 we build with modern tech: React, Next.js, Node.js, Python, Tailwind, and AWS Cloud 🚀\nWhat type of project would you like us to engineer?`;
 
-      replyWithTyping(techMsg, () => {
-        setOptions(DICT[currentLang].botServices);
-      });
+      replyWithTyping(techMsg, () => setOptions(DICT[currentLang].botServices));
       return;
     }
 
-    // 6. Generic Text Input Handling through flow steps
+    // 5c. Genuinely open-ended questions ("how do you build this", "do you work
+    // with restaurants", etc.) get a real, grounded AI answer instead of a canned
+    // reply — see chat-worker/. Only fires for actual questions, so the free daily
+    // Neuron allocation is spent on real Q&A, not on every single message. If the
+    // Worker isn't deployed yet or is unreachable, askAI() resolves to null and we
+    // silently fall through to the guided-flow handling below — chat never breaks.
+    if (looksLikeOpenQuestion(val)) {
+      showTypingIndicator();
+      const aiAnswer = await askAI(val);
+      removeTypingIndicator();
+
+      if (aiAnswer) {
+        addMsg(aiAnswer);
+        setTimeout(() => {
+          if (chatState.step === 'INIT') setOptions(DICT[currentLang].botServices);
+          else if (chatState.step === 'NEED_SELECTED') setOptions(DICT[currentLang].botStageOpts);
+          else if (chatState.step === 'STAGE_SELECTED') setOptions(DICT[currentLang].botTimingOpts);
+        }, 300);
+        return;
+      }
+      // aiAnswer is null (not deployed / network error) — fall through below
+    }
+
+    // 5b. Guard for all three categorical questions (need/stage/timing): a fixed
+    // filler-word list can never cover every typo/variant ("חיי" vs "היי" etc.),
+    // so anything short that ALSO doesn't match a known concept for the question
+    // actually being asked is treated as not-understood rather than silently
+    // accepted as the answer. Longer free text is still accepted even without a
+    // keyword hit — this only catches short non-answers, never genuine (if
+    // differently-phrased) ones, and INIT stays the most lenient of the three
+    // since describing a project in your own words is legitimately open-ended.
+    const isShortUnmatchedNeed = chatState.step === 'INIT' && val.length < 8 && !matchKeywords(val, NEED_KEYWORDS);
+    const isShortUnmatchedStage = chatState.step === 'NEED_SELECTED' && val.length < 8 && !matchKeywords(val, STAGE_KEYWORDS);
+    const isShortUnmatchedTiming = chatState.step === 'STAGE_SELECTED' && val.length < 8 && !matchKeywords(val, TIMING_KEYWORDS);
+
+    if (isShortUnmatchedNeed || isShortUnmatchedStage || isShortUnmatchedTiming) {
+      await handleUnclearInput(val);
+      return;
+    }
+
+    // 6. Generic free-text answers through the need -> stage -> timing flow.
+    // Each is checked against a bilingual keyword set for that specific question first —
+    // a match is normalized to the same canonical option a button-click would produce
+    // (and, for the need step, triggers the same personalized reply as clicking the
+    // matching chip). Text that matches nothing is still accepted as-is: this layer
+    // only filters out clear non-answers (already caught above), never genuine ones.
     if (chatState.step === 'INIT') {
-      chatState.specificDetails = val;
-      chatState.step = 'INIT_RESPONSE_SENT';
+      const matchedId = matchKeywords(val, NEED_KEYWORDS);
+      const matchedService = matchedId && DICT[currentLang].botServices.find((s) => s.id === matchedId);
 
-      const ackMsg = isHe
-        ? `תודה! קיבלתי את הודעתך: "${val}" 👍\nבאיזה תחום מדובר? אפשר לבחור באחת האפשרויות למטה:`
-        : `Thank you! Received your message: "${val}" 👍\nWhich category fits your project best? Choose below:`;
+      chatState.needId = matchedService ? matchedService.id : 'custom';
+      chatState.needLabel = matchedService ? matchedService.label : val;
+      chatState.step = 'NEED_SELECTED';
 
-      replyWithTyping(ackMsg, () => {
-        setOptions(DICT[currentLang].botServices);
-      });
-    } else if (chatState.step === 'INIT_RESPONSE_SENT' || chatState.step === 'CATEGORY_SELECTED') {
-      chatState.specificDetails = val;
-      chatState.step = 'SPECIFIC_ANSWERED';
+      const ackMsg = matchedService
+        ? matchedService.response
+        : (isHe ? `תודה, קיבלתי 👍 בואו נבין עוד קצת על הפרויקט.` : `Thanks, got it 👍 Let's understand the project a bit more.`);
 
-      const askContact = isHe
-        ? `מצויין! מה לוח הזמנים הרצוי עליך?`
-        : `Excellent! What is your target timeline?`;
+      replyWithTyping(ackMsg, askStage);
+    } else if (chatState.step === 'NEED_SELECTED') {
+      const matchedId = matchKeywords(val, STAGE_KEYWORDS);
+      const matchedOpt = matchedId && DICT[currentLang].botStageOpts.find((o) => o.id === matchedId);
 
-      replyWithTyping(askContact, () => {
-        const timelineOpts = isHe ? [
-          { label: '⚡ מיידי (1-2 שבועות)' },
-          { label: '📅 במהלך החודש הקרוב' },
-          { label: '🔍 בודק/ת אפשרויות' }
-        ] : [
-          { label: '⚡ Immediate (1-2 weeks)' },
-          { label: '📅 Within next month' },
-          { label: '🔍 Exploring options' }
-        ];
-        setOptions(timelineOpts);
-      });
-    } else if (chatState.step === 'SPECIFIC_ANSWERED') {
-      chatState.userPhone = val;
-      chatState.step = 'DONE';
+      chatState.stageLabel = matchedOpt ? matchedOpt.label : val;
+      chatState.step = 'STAGE_SELECTED';
+      askTiming();
+    } else if (chatState.step === 'STAGE_SELECTED') {
+      const matchedId = matchKeywords(val, TIMING_KEYWORDS);
+      const matchedOpt = matchedId && DICT[currentLang].botTimingOpts.find((o) => o.id === matchedId);
 
-      finishLeadCapture();
+      chatState.timingLabel = matchedOpt ? matchedOpt.label : val;
+      chatState.step = 'TIMING_SELECTED';
+      askContact();
     }
   }
 
-  // Complete Intake & Bridge to WhatsApp
+  // Complete Intake & Bridge to WhatsApp — recommendation copy reuses the exact
+  // same MATCHER_RESULTS titles shown in the #matcher tool, nothing invented here.
   function finishLeadCapture() {
     const isHe = currentLang === 'he';
+    const matched = MATCHER_RESULTS[chatState.needId] || null;
+    const needSummary = matched ? matched.title : (chatState.needLabel || (isHe ? 'פנייה כללית' : 'General inquiry'));
 
     const summaryText = isHe
-      ? `תודה רבה! 🙏\nפנייתך נקלטה בהצלחה במערכת Code92:\n• תחום: ${chatState.category || 'פנייה כללית'}\n• פרטים: ${chatState.specificDetails || '-'}\n• לוח זמנים: ${chatState.timeline || '-'}\n• איש קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nנציג מ-Code92 (ניהול יותם כהן) יחזור אליך בהקדם!`
-      : `Thank you! 🙏\nYour inquiry is submitted to Code92:\n• Category: ${chatState.category || 'General'}\n• Details: ${chatState.specificDetails || '-'}\n• Timeline: ${chatState.timeline || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nA representative from Code92 will contact you shortly!`;
+      ? `תודה רבה! 🙏\nהפנייה שלכם נקלטה בהצלחה:\n• תחום מומלץ: ${needSummary}\n• שלב: ${chatState.stageLabel || '-'}\n• לוח זמנים: ${chatState.timingLabel || '-'}\n• יצירת קשר: ${chatState.userPhone || chatState.userName || 'פרטים התקבלו'}\n\nיותם כהן מ-Code92 יחזור אליכם בהקדם!`
+      : `Thank you! 🙏\nYour inquiry was received:\n• Recommended area: ${needSummary}\n• Stage: ${chatState.stageLabel || '-'}\n• Timeline: ${chatState.timingLabel || '-'}\n• Contact: ${chatState.userPhone || chatState.userName || 'Details received'}\n\nYotam Cohen from Code92 will get back to you shortly!`;
 
     replyWithTyping(summaryText, () => {
-      const waNote = isHe ? 'מעדיף/ה להמשיך את השיחה ב-WhatsApp כעת?' : 'Prefer to continue on WhatsApp now?';
-      const btnLabel = isHe ? '📲 לחץ/י כאן לפתיחת שיחה ב-WhatsApp מול Code92' : '📲 Click to open WhatsApp chat with Code92';
-      
+      const waNote = isHe ? 'רוצים להמשיך את השיחה ב-WhatsApp כעת?' : 'Want to continue on WhatsApp now?';
+      const btnLabel = isHe ? '📲 פתיחת שיחה ב-WhatsApp מול Code92' : '📲 Open WhatsApp chat with Code92';
+
       const waMessageText = encodeURIComponent(
         `שלום ליותם כהן (Code92)! 👋\n` +
-        `פנייה חדשה מאת פנייה מנציג/ה: ${activeRep.name}\n` +
-        `תחום: ${chatState.category || 'כללי'}\n` +
-        `פירוט: ${chatState.specificDetails || '-'}\n` +
-        `לוח זמנים: ${chatState.timeline || '-'}\n` +
-        `איש קשר: ${chatState.userPhone || chatState.userName}`
+        `פנייה חדשה מהצ'אט באתר.\n` +
+        `תחום מומלץ: ${needSummary}\n` +
+        `שלב: ${chatState.stageLabel || '-'}\n` +
+        `לוח זמנים: ${chatState.timingLabel || '-'}\n` +
+        `יצירת קשר: ${chatState.userPhone || chatState.userName}`
       );
       const waUrl = `https://wa.me/${WA_NUMBER}?text=${waMessageText}`;
 
@@ -607,36 +761,33 @@ function initHumanSalesBot() {
     });
   }
 
-  function startSalesFunnel() {
+  function startConversation() {
     msgs.innerHTML = '';
     chatState = {
       step: 'INIT',
-      category: '',
-      categoryId: '',
-      specificDetails: '',
-      timeline: '',
+      needId: '',
+      needLabel: '',
+      stageLabel: '',
+      timingLabel: '',
       userName: '',
       userPhone: ''
     };
-    const name = currentLang === 'he' ? activeRep.name : activeRep.enName;
-    addMsg(DICT[currentLang].botGreeting(name));
-    setOptions([]); // DO NOT display options initially!
+    addMsg(DICT[currentLang].botGreeting);
+    setOptions(DICT[currentLang].botServices);
   }
 
   updateBotUiFn = () => {
-    renderRepInfo();
-    if (isOpen) {
-      startSalesFunnel();
-    }
+    renderBotInfo();
+    if (isOpen) startConversation();
   };
 
-  renderRepInfo();
+  renderBotInfo();
 
   function toggleChat(state) {
     isOpen = state !== undefined ? state : !isOpen;
     panel.classList.toggle('open', isOpen);
     if (isOpen && msgs.children.length === 0) {
-      startSalesFunnel();
+      startConversation();
     }
   }
 
@@ -710,7 +861,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  initHumanSalesBot();
+  initSmartConcierge();
   initHeroParticlesCanvas();
   initLenisSmoothScroll();
   initScrollAnimations();
