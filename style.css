@@ -426,21 +426,6 @@ img, video {
   padding: 0 clamp(24px, 8vw, 140px);
 }
 
-.stage-num {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: clamp(14rem, 32vw, 26rem);
-  font-weight: 900;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.06);
-  line-height: 1;
-  pointer-events: none;
-  z-index: 0;
-  user-select: none;
-}
-
 .stage-badge {
   position: relative;
   z-index: 1;
@@ -500,10 +485,6 @@ img, video {
   opacity: 1 !important;
   transform: none !important;
 }
-.process-static-fallback .stage-num {
-  font-size: 6rem;
-  -webkit-text-stroke: 1.5px rgba(0, 230, 118, 0.25);
-}
 
 @media (max-width: 768px) {
   .process-title { text-align: center; }
@@ -518,15 +499,81 @@ img, video {
   background-color: #000000;
 }
 
-.matcher-card {
+/* Outer wrapper hosts the animated light-trace border — kept separate from
+   .matcher-card itself because that card needs overflow:hidden (to clip the
+   progress bar to its rounded corners), which would also clip a glow effect
+   drawn on the card's own edge. */
+.matcher-card-wrap {
+  position: relative;
   max-width: 720px;
   margin: 0 auto;
-  background-color: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: var(--space-5);
+  border-radius: 22px;
+  isolation: isolate;
+}
+
+@property --matcher-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Comet-style trace: soft green tail rising to a white-hot tip, then a sharp
+   cut to transparent. ::after duplicates it larger + blurred as a trailing
+   glow bloom, giving the sharp trace something to glow into as it passes. */
+.matcher-card-wrap::before,
+.matcher-card-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--matcher-angle),
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 230, 118, 0.45) 78%,
+    #00e676 89%,
+    #ffffff 95%,
+    #00e676 98%,
+    transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: matcherBorderSpin 5s linear infinite;
+  pointer-events: none;
+}
+
+.matcher-card-wrap::before {
+  z-index: 2;
+}
+
+.matcher-card-wrap::after {
+  z-index: 0;
+  inset: -3px;
+  padding: 5px;
+  filter: blur(10px);
+  opacity: 0.85;
+}
+
+@keyframes matcherBorderSpin {
+  to { --matcher-angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .matcher-card-wrap::before,
+  .matcher-card-wrap::after {
+    animation: none;
+  }
+}
+
+.matcher-card {
+  background: linear-gradient(180deg, #14151a 0%, var(--bg-card) 100%);
+  border: 1px solid rgba(0, 230, 118, 0.3);
+  border-radius: 20px;
+  padding: var(--space-6) var(--space-5);
   position: relative;
+  z-index: 1;
   overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55), 0 0 50px rgba(0, 230, 118, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .matcher-progress-bar {
@@ -550,35 +597,43 @@ img, video {
 }
 
 .matcher-question {
-  font-size: var(--fs-h3);
-  font-weight: 600;
+  font-size: clamp(1.375rem, 2.4vw, 1.75rem);
+  font-weight: 700;
   color: var(--text-white);
   text-align: center;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
+  letter-spacing: -0.3px;
 }
 
 .matcher-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 
 .matcher-option {
-  padding: var(--space-3) var(--space-2);
-  min-height: 44px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: #17171d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: var(--space-4) var(--space-3);
+  min-height: 64px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  background: #17171f;
   color: var(--text-title);
-  font-size: var(--fs-body-sm);
-  font-weight: 500;
+  font-size: var(--fs-body);
+  font-weight: 600;
   text-align: center;
-  transition: all 0.2s var(--ease);
+  line-height: 1.35;
+  transition: all 0.22s var(--ease);
 }
+
 .matcher-option:hover, .matcher-option:focus-visible {
   border-color: var(--brand-red);
-  background: rgba(0, 230, 118, 0.1);
-  transform: translateY(-2px);
+  background: rgba(0, 230, 118, 0.14);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 230, 118, 0.18);
 }
 
 @media (max-width: 560px) {
