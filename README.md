@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/code92-icon.svg" alt="Code92 logo" width="96" height="96">
+</p>
+
 # Code92
 
 ![Status](https://img.shields.io/badge/Status-Live-00E676?style=flat-square)
