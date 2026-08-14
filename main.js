@@ -5,7 +5,14 @@
  */
 'use strict';
 
-const WA_NUMBER = '972500000000';
+const WA_NUMBER = '972522057074';
+
+// Strips emoji before text goes into a wa.me deep-link — some Android/WhatsApp
+// handoffs corrupt astral-plane emoji (like the ones baked into chat option
+// labels) into "�" mid-transit, even though encodeURIComponent itself is fine.
+function stripEmoji(str) {
+  return str.replace(/\p{Extended_Pictographic}/gu, '').replace(/\s+/g, ' ').trim();
+}
 
 // Real-AI backend for genuinely open-ended chat questions (see chat-worker/DEPLOY.md).
 // Until deployed and this placeholder replaced with the real workers.dev URL,
@@ -18,20 +25,19 @@ const DICT = {
   he: {
     langBtn: 'EN',
     navContactBtnText: 'צרו איתנו קשר',
+    heroCtaText: 'דברו איתנו על הפרויקט שלכם',
     h1_line1: 'פתרונות דיגיטליים',
     h1_line2: 'לעסקים שרוצים',
     h1_line3: 'לייצר <span class="text-brand">תוצאות</span>',
-    heroDesc: 'אנחנו בונים אתרים, חנויות אונליין ומערכות דיגיטליות מבוססות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.',
+    heroDesc: 'אנחנו בונים אתרים, אפליקציות וחנויות אונליין, ומפתחים אוטומציות AI <strong>שמקדמות אותכם כמה צעדים לפני המתחרים</strong>.',
     processTitle1: 'איך אנחנו הופכים רעיון',
     processTitle2: 'לפתרון שמייצר תוצאות',
-    pCardNum1: '1', pCardHead1: 'אסטרטגיה ואפיון',
-    pCardDesc1: 'איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק שלכם כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים',
-    pCardNum2: '2', pCardHead2: 'פיתוח אתרים ומערכות Web',
-    pCardDesc2: 'אתרים וחנויות E-commerce ברמת עיצוב גבוהה, בנויים כדי להמיר גולשים ללקוחות משלמים',
-    pCardNum3: '3', pCardHead3: 'אוטומציות AI ואפליקציות מותאמות',
-    pCardDesc3: 'פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים החוסכים 80% מזמן העבודה הידנית ומייעלים את מערך המכירות והשירות 24/7',
-    pCardNum4: '4', pCardHead4: 'מעטפת Cloud אבטחה וצמיחה מתמדת',
-    pCardDesc4: 'תשתיות ענן ואבטחת מידע קפדנית, עם מעקב שוטף מהצוות שלנו שמבטיח שהמוצר שלכם ממשיך לייצר לידים והכנסות לאורך זמן',
+    pCardHead1: 'פיתוח אתרים',
+    pCardDesc1: 'אתרי חנות, אתרי תדמית ודפי נחיתה, ברמת עיצוב גבוהה ובנויים להמרה',
+    pCardHead2: 'אפליקציות וחנויות E-commerce',
+    pCardDesc2: 'פתרונות דיגיטליים מותאמים אישית לצרכי העסק, מאפליקציה ועד חנות מסחר אלקטרוני שלמה',
+    pCardHead3: 'אוטומציות AI',
+    pCardDesc3: 'סוכני AI ומערכות חכמות שחוסכות עד 80% מזמן העבודה הידנית ומייעלות מכירות ושירות 24/7',
     contactTitle1: 'רוצים לשמוע עוד?',
     contactTitle2: 'צרו איתנו קשר',
     contactSub: 'השאירו פרטים ונחזור אליכם בהקדם האפשרי עם כל התשובות.',
@@ -58,34 +64,35 @@ const DICT = {
     botServices: [
       {
         id: 'web',
-        label: '💻 אתר או חנות אונליין',
-        response: `מצוין, בדיוק התחום שלנו 💻 אנחנו בונים אתרי תדמית יוקרתיים, חנויות אונליין ומערכות Web מתקדמות.`
+        label: '💻 אתר חנות, תדמית או דף נחיתה',
+        response: `מעולה, בדיוק התחום שלנו 💻 אנחנו בונים אתרי חנות, אתרי תדמית ודפי נחיתה ברמת עיצוב גבוהה.`
+      },
+      {
+        id: 'app',
+        label: '🛒 אפליקציה או חנות E-commerce',
+        response: `מצוין 🛒 אנחנו מפתחים אפליקציות מותאמות אישית וחנויות E-commerce שבנויות לגדול איתכם.`
       },
       {
         id: 'ai',
-        label: '🤖 אוטומציה או אפליקציה חכמה',
-        response: `נשמע מעניין 🤖 אנחנו מפתחים סוכני AI ואפליקציות מותאמות שחוסכות עד 80% מזמן העבודה הידנית.`
-      },
-      {
-        id: 'cloud',
-        label: '☁️ תשתית, אבטחה או ליווי שוטף',
-        response: `הבנתי ☁️ אנחנו מספקים תשתיות ענן, אבטחת מידע קפדנית ומעקב שוטף מהצוות שלנו אחרי ההשקה.`
+        label: '🤖 אוטומציה חכמה',
+        response: `נשמע מעניין 🤖 אנחנו בונים סוכני AI ומערכות חכמות שחוסכות עד 80% מזמן העבודה הידנית.`
       },
       {
         id: 'unsure',
         label: '🧭 לא בטוחים, צריך ייעוץ',
-        response: `אין בעיה 🧭 נתחיל מאיפיון קצר. כך גם אם עדיין לא בטוחים, נדע להכווין אתכם נכון.`
+        response: `אין בעיה 🧭 נתחיל משיחה קצרה. כך גם אם עדיין לא בטוחים, נדע להכווין אתכם נכון.`
       }
     ],
     botStageOpts: [
-      { id: 'idea', label: 'יש רעיון, עדיין בתכנון' },
-      { id: 'existing', label: 'יש לנו כבר עסק או מוצר קיים' },
-      { id: 'upgrade', label: 'רוצים לשדרג משהו קיים' }
+      { id: 'none', label: 'עוד אין לי כלום, בואו נדבר' },
+      { id: 'idea', label: 'יש לי רעיון, רוצה להתחיל' },
+      { id: 'existing', label: 'יש לי עסק, רוצה לקחת קדימה' },
+      { id: 'upgrade', label: 'יש לי משהו קיים, צריך שדרוג' }
     ],
     botTimingOpts: [
-      { id: 'asap', label: 'רוצים להתחיל בהקדם' },
-      { id: 'quarter', label: 'ברבעון הקרוב' },
-      { id: 'exploring', label: 'עדיין בודקים אפשרויות' }
+      { id: 'asap', label: 'רוצה להתחיל כמה שיותר מהר' },
+      { id: 'quarter', label: 'מתכנן/ת להתחיל ברבעון הקרוב' },
+      { id: 'exploring', label: 'עדיין בודק/ת, בלי לוח זמנים סגור' }
     ],
     botDidntUnderstand: `אופס, ההודעה שכתבת לא כל כך מובנת לי 😅\nאפשר לנסות לנסח מחדש או לבחור באחת האפשרויות למטה:`,
     botAskPhoneAgain: (name) => `תודה${name ? ', ' + name : ''}! ומה מספר הטלפון הכי נוח ליצירת קשר? 📱`,
@@ -98,8 +105,8 @@ const DICT = {
     // Why Us section
     whyUsTitle1: 'למה לעבוד',
     whyUsTitle2: 'איתנו',
-    whyUsHead1: '4 תחומי מומחיות תחת קורת גג אחת',
-    whyUsDesc1: 'מאסטרטגיה, דרך פיתוח, ועד תשתיות ענן ואבטחה. הכל תחת ליווי אחד רציף, בלי להעביר אתכם בין ספקים שונים.',
+    whyUsHead1: '3 תחומי מומחיות תחת קורת גג אחת',
+    whyUsDesc1: 'מפיתוח אתרים, דרך אפליקציות וחנויות אונליין, ועד אוטומציות AI. הכל תחת ליווי אחד רציף, בלי להעביר אתכם בין ספקים שונים.',
     whyUsHead2: 'סטאק טכנולוגי מודרני',
     whyUsDesc2: 'React, Next.js, Node.js, Python ותשתיות AWS. אותם כלים שסטארטאפים וחברות טכנולוגיה מובילות בונים איתם.',
     whyUsHead3: 'תקשורת ישירה, בלי בירוקרטיה',
@@ -116,12 +123,14 @@ const DICT = {
     matcherCtaText: 'המשיכו לטופס עם הפרטים שמילאתם',
     matcherRestartText: 'התחילו מחדש',
     matcherAriaLabel: 'כלי התאמת פרויקט',
+    matcherUnsureTitle: 'בואו נבין ביחד מה הכי מתאים',
+    matcherUnsureDesc: 'נתחיל משיחה קצרה כדי להבין מה העסק שלכם צריך, ונמליץ על הכיוון הנכון: פיתוח אתרים, אפליקציה או חנות E-commerce, או אוטומציית AI.',
 
     // Misc small strings
     skipLinkText: 'דלגו לתוכן הראשי',
     backToTopAria: 'חזרה לראש העמוד',
     stageAriaPrefix: 'שלב',
-    whatsappPrefillMsg: 'שלום Code92! אני מעוניין בפתרון דיגיטלי',
+    whatsappPrefillMsg: 'היי! ראיתי את האתר, אשמח לקבל פרטים.',
     formMechanismNote: 'לחיצה על "שליחה" תפתח הודעת WhatsApp מוכנה, ישירות לצוות שלנו.',
     contactTrustNote: 'מי שעונה לכם הוא מישהו מהצוות עצמו, לא מוקד שירות.',
 
@@ -150,27 +159,26 @@ const DICT = {
     a11yStatementTitle: 'הצהרת נגישות',
     a11yStatementP1: 'אנו משקיעים מאמצים להנגיש את האתר בהתאם להנחיות WCAG 2.1 ברמה AA, במטרה לאפשר חוויית שימוש נוחה ושוויונית לכלל המשתמשים.',
     a11yStatementP2: 'במידה ונתקלתם בקושי או בתקלה בנושא נגישות, נשמח לקבל פנייה ולטפל בה בהקדם.',
-    a11yStatementP3: 'אחראי נגישות: <strong>Code92</strong> · טלפון: <strong>050-0000000</strong> · אימייל: <strong>elyotam.finance@gmail.com</strong>',
+    a11yStatementP3: 'אחראי נגישות: <strong>Code92</strong> · טלפון: <strong>052-2057074</strong> · אימייל: <strong>elyotam.finance@gmail.com</strong>',
     a11yStatementP4: 'פנייה זמינה גם בוואטסאפ או דרך טופס יצירת הקשר באתר.',
     a11yStatementUpdated: 'עודכן לאחרונה: 13.08.2026',
   },
   en: {
     langBtn: 'HE',
     navContactBtnText: 'Contact Us',
+    heroCtaText: "Let's Talk About Your Project",
     h1_line1: 'Digital Solutions',
     h1_line2: 'For Businesses That Want',
     h1_line3: 'To Generate <span class="text-brand">Results</span>',
-    heroDesc: 'We build websites, online stores and AI-driven systems <strong>that keep you steps ahead of your competitors</strong>.',
+    heroDesc: 'We build websites, apps and online stores, and develop AI automations <strong>that keep you steps ahead of your competitors</strong>.',
     processTitle1: 'How We Turn An Idea',
     processTitle2: 'Into A Solution That Drives Results',
-    pCardNum1: '1', pCardHead1: 'Strategy & UX Architecture',
-    pCardDesc1: 'Precise architecture and market research identifying your exact growth engines to convert visitors into paying clients',
-    pCardNum2: '2', pCardHead2: 'Websites & Web Systems Development',
-    pCardDesc2: 'Premium websites and e-commerce stores, built to convert visitors into paying customers',
-    pCardNum3: '3', pCardHead3: 'AI Automations & Custom Apps',
-    pCardDesc3: 'Custom mobile apps and intelligent AI agents saving up to 80% manual work while boosting sales and 24/7 support',
-    pCardNum4: '4', pCardHead4: 'Cloud Infrastructure & Growth',
-    pCardDesc4: 'Cloud infrastructure and rigorous cyber security, with our team staying involved after launch so the product keeps generating leads and revenue',
+    pCardHead1: 'Website Development',
+    pCardDesc1: 'Store sites, brand websites and landing pages, built with premium design and made to convert',
+    pCardHead2: 'Apps & E-commerce',
+    pCardDesc2: 'Custom digital solutions built around your business, from a mobile app to a complete online store',
+    pCardHead3: 'AI Automations',
+    pCardDesc3: 'AI agents and smart systems that save up to 80% of manual work and streamline sales and support 24/7',
     contactTitle1: 'Want to hear more?',
     contactTitle2: 'Contact Us',
     contactSub: 'Leave your details and we will get back to you shortly with full answers.',
@@ -197,34 +205,35 @@ const DICT = {
     botServices: [
       {
         id: 'web',
-        label: '💻 A website or online store',
-        response: `Great, that's exactly our focus 💻 We build luxury brand websites, online stores and advanced Web systems.`
+        label: '💻 A store, brand or landing page site',
+        response: `Great, that's exactly our focus 💻 We build store sites, brand websites and landing pages with premium design.`
+      },
+      {
+        id: 'app',
+        label: '🛒 An app or E-commerce store',
+        response: `Excellent 🛒 We develop custom apps and E-commerce stores built to grow with you.`
       },
       {
         id: 'ai',
-        label: '🤖 Automation or a smart app',
-        response: `Sounds interesting 🤖 We develop AI agents and custom apps that save up to 80% of manual work.`
-      },
-      {
-        id: 'cloud',
-        label: '☁️ Infrastructure, security or ongoing support',
-        response: `Got it ☁️ We provide cloud infrastructure, rigorous information security, and stay involved after launch.`
+        label: '🤖 A smart automation',
+        response: `Sounds interesting 🤖 We build AI agents and smart systems that save up to 80% of manual work.`
       },
       {
         id: 'unsure',
         label: '🧭 Not sure yet, need advice',
-        response: `No problem 🧭 Let's start with a short scoping chat. Even if you're not sure yet, we'll help point you in the right direction.`
+        response: `No problem 🧭 Let's start with a short chat. Even if you're not sure yet, we'll help point you in the right direction.`
       }
     ],
     botStageOpts: [
-      { id: 'idea', label: 'We have an idea, still planning' },
-      { id: 'existing', label: 'We already have a business or product' },
-      { id: 'upgrade', label: 'We want to upgrade something existing' }
+      { id: 'none', label: "Nothing yet, let's talk" },
+      { id: 'idea', label: 'I have an idea, ready to start' },
+      { id: 'existing', label: 'I have a business, want to grow it' },
+      { id: 'upgrade', label: 'I have something that needs an upgrade' }
     ],
     botTimingOpts: [
-      { id: 'asap', label: 'Want to start ASAP' },
-      { id: 'quarter', label: 'Within this quarter' },
-      { id: 'exploring', label: 'Still exploring options' }
+      { id: 'asap', label: 'Want to start as soon as possible' },
+      { id: 'quarter', label: 'Planning to start within the next quarter' },
+      { id: 'exploring', label: 'Still exploring, no fixed timeline yet' }
     ],
     botDidntUnderstand: `Oops, I couldn't quite understand that 😅\nPlease try rephrasing or choose one of the options below:`,
     botAskPhoneAgain: (name) => `Thanks${name ? ', ' + name : ''}! And what's the best phone number to reach you? 📱`,
@@ -237,8 +246,8 @@ const DICT = {
     // Why Us section
     whyUsTitle1: 'Why Work',
     whyUsTitle2: 'With Us',
-    whyUsHead1: '4 Areas of Expertise Under One Roof',
-    whyUsDesc1: 'From strategy, through development, to cloud infrastructure and security. One continuous team, so you never get passed between vendors.',
+    whyUsHead1: '3 Areas of Expertise Under One Roof',
+    whyUsDesc1: 'From website development, through apps and online stores, to AI automations. One continuous team, so you never get passed between vendors.',
     whyUsHead2: 'A Modern Tech Stack',
     whyUsDesc2: 'React, Next.js, Node.js, Python and AWS infrastructure. The same tools leading startups and tech companies build with.',
     whyUsHead3: 'Direct Communication, No Red Tape',
@@ -255,12 +264,14 @@ const DICT = {
     matcherCtaText: 'Continue to the form with your answers',
     matcherRestartText: 'Start over',
     matcherAriaLabel: 'Project matching tool',
+    matcherUnsureTitle: "Let's figure out what fits together",
+    matcherUnsureDesc: "We'll start with a short conversation to understand what your business needs, and recommend the right direction: website development, an app or E-commerce store, or an AI automation.",
 
     // Misc small strings
     skipLinkText: 'Skip to main content',
     backToTopAria: 'Back to top',
     stageAriaPrefix: 'Stage',
-    whatsappPrefillMsg: "Hi Code92! I'm interested in a digital solution",
+    whatsappPrefillMsg: "Hi! I saw the site, I'd love to get some details.",
     formMechanismNote: 'Clicking "Submit" opens a ready-made WhatsApp message, straight to our team.',
     contactTrustNote: 'Whoever answers is someone from the team itself, not a call center.',
 
@@ -289,7 +300,7 @@ const DICT = {
     a11yStatementTitle: 'Accessibility Statement',
     a11yStatementP1: 'We work to make this site accessible according to WCAG 2.1 Level AA guidelines, so all users can browse comfortably and equally.',
     a11yStatementP2: "If you run into any accessibility issue, we'd be glad to hear from you and address it as soon as possible.",
-    a11yStatementP3: 'Accessibility contact: <strong>Code92</strong> · Phone: <strong>050-0000000</strong> · Email: <strong>elyotam.finance@gmail.com</strong>',
+    a11yStatementP3: 'Accessibility contact: <strong>Code92</strong> · Phone: <strong>052-2057074</strong> · Email: <strong>elyotam.finance@gmail.com</strong>',
     a11yStatementP4: 'You can also reach us on WhatsApp or through the contact form on this site.',
     a11yStatementUpdated: 'Last updated: August 13, 2026',
   }
@@ -341,13 +352,14 @@ function isFillerOnly(text) {
 }
 
 const NEED_KEYWORDS = {
-  web: ['אתר', 'חנות', 'דף נחיתה', 'קטלוג', 'landing', 'website', 'site', 'store', 'shop', 'e-commerce', 'ecommerce'],
-  ai: ['אוטומצי', 'בוט', 'סוכן חכם', 'אפליקצי', 'automation', 'bot', 'ai agent', 'chatbot', 'smart app', 'custom app'],
-  cloud: ['ענן', 'אבטחה', 'שרת', 'תחזוקה', 'ליווי', 'cloud', 'security', 'hosting', 'server', 'maintenance', 'devops'],
+  web: ['אתר', 'תדמית', 'דף נחיתה', 'קטלוג', 'landing', 'website', 'site', 'brand site'],
+  app: ['אפליקצי', 'חנות', 'e-commerce', 'ecommerce', 'store', 'shop', 'app', 'mobile app', 'online store'],
+  ai: ['אוטומצי', 'בוט', 'סוכן חכם', 'automation', 'bot', 'ai agent', 'chatbot', 'smart automation'],
   unsure: ['לא בטוח', 'לא יודע', 'ייעוץ', 'not sure', "don't know", 'advice', 'consult', 'unsure']
 };
 
 const STAGE_KEYWORDS = {
+  none: ['אין לי כלום', 'שום דבר', 'מאפס', 'מתחיל מאפס', 'רק בודק', 'nothing yet', 'nothing', 'starting from scratch', 'just looking', 'just curious'],
   idea: ['רעיון', 'בתכנון', 'לתכנן', 'עוד לא התחלנו', 'עדיין לא', 'idea', 'planning', "haven't started", 'not started yet'],
   existing: ['יש לנו', 'יש כבר', 'קיים', 'פועל כבר', 'עסק קיים', 'מוצר קיים', 'already have', 'existing', 'up and running', 'have a business', 'have a product'],
   upgrade: ['שדרוג', 'לשדרג', 'לשפר', 'לחדש', 'לעדכן', 'upgrade', 'improve', 'revamp', 'redesign']
@@ -429,14 +441,14 @@ function toggleLanguage() {
   const setPlaceholder = (id, val) => { const el = document.getElementById(id); if (el) el.placeholder = val; };
 
   setText('navContactBtnText', data.navContactBtnText);
+  setText('heroCtaText', data.heroCtaText);
   setHtml('heroHeadline', `<span class="border-b-line">${data.h1_line1}</span><span class="border-b-line">${data.h1_line2}</span><span class="border-b-line">${data.h1_line3}</span>`);
   setHtml('heroSubtitle', data.heroDesc);
   setHtml('processTitle', `<span class="border-b-line" style="color:#cfcfcf;font-weight:300">${data.processTitle1}</span><span class="border-b-line text-brand">${data.processTitle2}</span>`);
 
-  setText('pCardNum1', data.pCardNum1); setText('pCardHead1', data.pCardHead1); setText('pCardDesc1', data.pCardDesc1);
-  setText('pCardNum2', data.pCardNum2); setText('pCardHead2', data.pCardHead2); setText('pCardDesc2', data.pCardDesc2);
-  setText('pCardNum3', data.pCardNum3); setText('pCardHead3', data.pCardHead3); setText('pCardDesc3', data.pCardDesc3);
-  setText('pCardNum4', data.pCardNum4); setText('pCardHead4', data.pCardHead4); setText('pCardDesc4', data.pCardDesc4);
+  setText('pCardHead1', data.pCardHead1); setText('pCardDesc1', data.pCardDesc1);
+  setText('pCardHead2', data.pCardHead2); setText('pCardDesc2', data.pCardDesc2);
+  setText('pCardHead3', data.pCardHead3); setText('pCardDesc3', data.pCardDesc3);
 
   setHtml('contactTitle', `<span class="border-b-line">${data.contactTitle1}</span><span class="border-b-line text-brand">${data.contactTitle2}</span>`);
   setText('contactSubtitle', data.contactSub);
@@ -490,7 +502,7 @@ function toggleLanguage() {
   const backToTop = document.getElementById('backToTopBtn');
   if (backToTop) backToTop.setAttribute('aria-label', data.backToTopAria);
   const waLink = document.getElementById('whatsappHeaderLink');
-  if (waLink) waLink.href = `https://wa.me/972500000000?text=${encodeURIComponent(data.whatsappPrefillMsg)}`;
+  if (waLink) waLink.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(data.whatsappPrefillMsg)}`;
   setText('formMechanismNote', data.formMechanismNote);
   setText('contactTrustNote', data.contactTrustNote);
 
@@ -956,17 +968,20 @@ function initSmartConcierge() {
       const waNote = isHe ? 'רוצים להמשיך את השיחה ב-WhatsApp כעת?' : 'Want to continue on WhatsApp now?';
       const btnLabel = isHe ? '📲 פתיחת שיחה ב-WhatsApp מול Code92' : '📲 Open WhatsApp chat with Code92';
 
+      // Emoji-free on purpose: some Android/WhatsApp deep-link handoffs mangle
+      // astral-plane emoji (like the 🧭 baked into needLabel) into "�" mid-transit.
+      const needSummaryPlain = stripEmoji(needSummary);
       const waMessageText = encodeURIComponent(
         isHe
-          ? `שלום Code92! 👋\n` +
+          ? `שלום Code92!\n` +
             `פנייה חדשה מהצ'אט באתר.\n` +
-            `תחום מומלץ: ${needSummary}\n` +
+            `תחום מומלץ: ${needSummaryPlain}\n` +
             `שלב: ${chatState.stageLabel || '-'}\n` +
             `לוח זמנים: ${chatState.timingLabel || '-'}\n` +
             `יצירת קשר: ${chatState.userPhone || chatState.userName}`
-          : `Hi Code92! 👋\n` +
+          : `Hi Code92!\n` +
             `New inquiry from the site chat.\n` +
-            `Recommended area: ${needSummary}\n` +
+            `Recommended area: ${needSummaryPlain}\n` +
             `Stage: ${chatState.stageLabel || '-'}\n` +
             `Timeline: ${chatState.timingLabel || '-'}\n` +
             `Contact: ${chatState.userPhone || chatState.userName}`
@@ -1640,27 +1655,29 @@ function initProcessCinematic() {
 // Project Matcher — 3-question tool. Recommendations reuse the exact same
 // service copy already shown in the process section above; nothing invented.
 // ==========================================================================
-// Badges + which pCard (1-4, see DICT) each "need" answer maps to — title/desc
+// Badges + which pCard (1-3, see DICT) each "need" answer maps to — title/desc
 // are pulled live from DICT[currentLang] so the matcher never falls out of
-// sync with the process-section copy, in either language.
+// sync with the process-section copy, in either language. "unsure" has no
+// single card to point to, so it gets its own dedicated title/desc instead
+// (see matcherUnsureTitle/matcherUnsureDesc in DICT).
 const MATCHER_BADGES = {
   web: '<svg viewBox="0 0 120 120" fill="none"><rect x="25" y="45" width="75" height="55" rx="6" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="1.5"/><rect x="15" y="25" width="80" height="58" rx="6" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><circle cx="27" cy="34" r="2.5" fill="#00e676"/><circle cx="35" cy="34" r="2.5" fill="#fff" fill-opacity="0.6"/><circle cx="43" cy="34" r="2.5" fill="#fff" fill-opacity="0.6"/></svg>',
-  ai: '<svg viewBox="0 0 120 120" fill="none"><rect x="35" y="18" width="50" height="84" rx="10" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><rect x="44" y="42" width="32" height="32" rx="6" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="1.5"/><path d="M60 48 L60 68 M50 60 L70 60" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>',
-  cloud: '<svg viewBox="0 0 120 120" fill="none"><path d="M30 65 C25 65 20 60 20 52 C20 45 26 40 33 40 C36 32 45 28 55 30 C63 25 74 28 80 35 C88 36 94 43 93 51 C98 55 97 65 90 67 Z" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><path d="M60 48 L78 56 V72 C78 84 60 92 60 92 C60 92 42 84 42 72 V56 L60 48 Z" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="1.5"/></svg>',
+  app: '<svg viewBox="0 0 120 120" fill="none"><rect x="35" y="18" width="50" height="84" rx="10" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><rect x="44" y="42" width="32" height="32" rx="6" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="1.5"/><path d="M60 48 L60 68 M50 60 L70 60" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  ai: '<svg viewBox="0 0 120 120" fill="none"><path d="M60 15 L105 38 L60 61 L15 38 Z" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.35" stroke-width="1.5"/><path d="M60 35 L105 58 L60 81 L15 58 Z" fill="#fff" fill-opacity="0.08" stroke="#00e676" stroke-opacity="0.5" stroke-width="1.5"/><path d="M60 55 L105 78 L60 101 L15 78 Z" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="2"/><circle cx="60" cy="25" r="5" fill="#00e676"/></svg>',
   unsure: '<svg viewBox="0 0 120 120" fill="none"><path d="M60 15 L105 38 L60 61 L15 38 Z" fill="#fff" fill-opacity="0.08" stroke="#fff" stroke-opacity="0.4" stroke-width="1.5"/><path d="M60 55 L105 78 L60 101 L15 78 Z" fill="#00e676" fill-opacity="0.5" stroke="#00e676" stroke-width="2"/><circle cx="60" cy="25" r="5" fill="#00e676"/></svg>',
 };
-const MATCHER_NEED_TO_CARD = { web: 2, ai: 3, cloud: 4, unsure: 1 };
+const MATCHER_NEED_TO_CARD = { web: 1, app: 2, ai: 3 };
 
 const MATCHER_LABELS = {
   he: {
-    need: { web: 'אתר או חנות אונליין', ai: 'אוטומציה או אפליקציה חכמה', cloud: 'תשתית, אבטחה או ליווי שוטף', unsure: 'לא בטוחים, צריך ייעוץ' },
-    stage: { idea: 'יש רעיון, עדיין בתכנון', existing: 'יש לנו כבר עסק או מוצר קיים', upgrade: 'רוצים לשדרג משהו קיים' },
-    timing: { asap: 'רוצים להתחיל בהקדם', quarter: 'ברבעון הקרוב', exploring: 'עדיין בודקים אפשרויות' },
+    need: { web: 'אתר חנות, תדמית או דף נחיתה', app: 'אפליקציה או חנות E-commerce', ai: 'אוטומציה חכמה', unsure: 'לא בטוחים, צריך ייעוץ' },
+    stage: { none: 'עוד אין לי כלום, בואו נדבר', idea: 'יש לי רעיון, רוצה להתחיל', existing: 'יש לי עסק, רוצה לקחת קדימה', upgrade: 'יש לי משהו קיים, צריך שדרוג' },
+    timing: { asap: 'רוצה להתחיל כמה שיותר מהר', quarter: 'מתכנן/ת להתחיל ברבעון הקרוב', exploring: 'עדיין בודק/ת, בלי לוח זמנים סגור' },
   },
   en: {
-    need: { web: 'A website or online store', ai: 'Automation or a smart app', cloud: 'Infrastructure, security or ongoing support', unsure: 'Not sure, need advice' },
-    stage: { idea: 'We have an idea, still planning', existing: 'We already have a business or product', upgrade: 'We want to upgrade something existing' },
-    timing: { asap: 'Want to start ASAP', quarter: 'Within this quarter', exploring: 'Still exploring options' },
+    need: { web: 'A store, brand or landing page site', app: 'An app or E-commerce store', ai: 'A smart automation', unsure: 'Not sure, need advice' },
+    stage: { none: "Nothing yet, let's talk", idea: 'I have an idea, ready to start', existing: 'I have a business, want to grow it', upgrade: 'I have something that needs an upgrade' },
+    timing: { asap: 'Want to start as soon as possible', quarter: 'Planning to start within the next quarter', exploring: 'Still exploring, no fixed timeline yet' },
   },
 };
 
@@ -1685,8 +1702,8 @@ function initProjectMatcher() {
     const d = DICT[currentLang];
     const labels = MATCHER_LABELS[currentLang];
     document.getElementById('matcherResultBadge').innerHTML = MATCHER_BADGES[needKey];
-    document.getElementById('matcherResultTitle').textContent = d[`pCardHead${cardIdx}`];
-    document.getElementById('matcherResultDesc').textContent = d[`pCardDesc${cardIdx}`];
+    document.getElementById('matcherResultTitle').textContent = cardIdx ? d[`pCardHead${cardIdx}`] : d.matcherUnsureTitle;
+    document.getElementById('matcherResultDesc').textContent = cardIdx ? d[`pCardDesc${cardIdx}`] : d.matcherUnsureDesc;
 
     const summary = currentLang === 'he'
       ? `היי! השתמשתי בכלי ההתאמה באתר.\n` +

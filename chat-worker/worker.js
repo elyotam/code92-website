@@ -32,17 +32,15 @@ const MAX_QUESTION_LENGTH = 400;
 // copy (index.html / main.js DICT). The model is explicitly told not to
 // invent prices, timelines, guarantees, or claims beyond this.
 const SERVICES_HE = `
-1. אסטרטגיה ואפיון — איפיון מדויק ומחקר שוק מעמיק שמאתר את מנועי הצמיחה של העסק כדי לבנות ארכיטקטורה דיגיטלית שממירה גולשים ללקוחות משלמים.
-2. פיתוח אתרים ומערכות Web — בניית אתרים יוקרתיים, חנויות E-commerce ומערכות Web מתקדמות.
-3. אוטומציות AI ואפליקציות מותאמות — פיתוח אפליקציות מותאמות אישית וסוכני AI חכמים שחוסכים עד 80% מזמן העבודה הידנית ומייעלים מכירות ושירות 24/7.
-4. מעטפת Cloud, אבטחה וצמיחה מתמדת — תשתיות ענן ואבטחת מידע קפדנית, עם מעקב שוטף מהצוות שלנו אחרי ההשקה.
+1. פיתוח אתרים — אתרי חנות, אתרי תדמית ודפי נחיתה ברמת עיצוב גבוהה, בנויים כדי להמיר גולשים ללקוחות משלמים.
+2. אפליקציות וחנויות E-commerce — פתרונות דיגיטליים מותאמים אישית לצרכי העסק, מאפליקציה ועד חנות מסחר אלקטרוני שלמה.
+3. אוטומציות AI — סוכני AI ומערכות חכמות שחוסכות עד 80% מזמן העבודה הידנית ומייעלות מכירות ושירות 24/7.
 `.trim();
 
 const SERVICES_EN = `
-1. Strategy & Scoping — precise scoping and market research that identifies the business's real growth engines to build a digital architecture that converts visitors into paying customers.
-2. Website & Web Systems Development — luxury websites, e-commerce stores, and advanced web systems.
-3. AI Automations & Custom Apps — custom apps and smart AI agents that save up to 80% of manual work and streamline sales and support 24/7.
-4. Cloud, Security & Ongoing Growth — cloud infrastructure and rigorous information security, with our team staying involved after launch.
+1. Website Development — store sites, brand websites and landing pages with premium design, built to convert visitors into paying customers.
+2. Apps & E-commerce — custom digital solutions built around the business, from a mobile app to a complete online store.
+3. AI Automations — AI agents and smart systems that save up to 80% of manual work and streamline sales and support 24/7.
 `.trim();
 
 function buildSystemPrompt(lang) {
@@ -52,7 +50,7 @@ function buildSystemPrompt(lang) {
     ? 'Respond ONLY in simple, grammatically correct, natural conversational Hebrew — full sentences, never a word list or sentence fragments. Do not mix in English words unless it is a proper noun like a technology name.'
     : 'Respond ONLY in English, in a warm, concise, professional tone.';
 
-  return `You are the AI assistant embedded in Code92's website chat widget. Code92 is a real digital agency, reachable at +972-50-000-0000 (WhatsApp).
+  return `You are the AI assistant embedded in Code92's website chat widget. Code92 is a real digital agency, reachable at +972-52-2057074 (WhatsApp).
 
 Code92's real services (the ONLY services it offers — do not invent others):
 ${services}

@@ -357,8 +357,8 @@ img, video {
 
 .process-pin-wrap {
   position: relative;
-  height: 280vh; /* shortened from 400vh — same HOLD/TRANS pacing ratio in the JS
-                    timeline, just less physical scroll distance to get through it */
+  height: 210vh; /* scaled down from 280vh when the process dropped from 4 stages to 3,
+                    keeping the same ~70vh-per-stage pacing as before */
 }
 
 .process-pin {
