@@ -1013,12 +1013,12 @@ function initSmartConcierge() {
   send?.addEventListener('click', handleUserInput);
   input?.addEventListener('keydown', e => { if (e.key === 'Enter') handleUserInput(); });
 
-  // Automatic Pop-Up after 9 seconds
+  // Automatic Pop-Up after 15 seconds
   setTimeout(() => {
     if (!isOpen) {
       toggleChat(true);
     }
-  }, 9000);
+  }, 15000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

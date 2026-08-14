@@ -500,29 +500,45 @@ img, video {
   color: var(--text-body);
 }
 
-/* Reduced-motion / mobile fallback: no pin, simple stacked cards, everything visible */
-.process-static-fallback .process-pin-wrap { height: auto; }
+/* Reduced-motion / mobile fallback: no pin, simple stacked cards, everything visible.
+   Badge/heading/padding below are the desktop cinematic-stage sizes reused as-is,
+   which made each stacked card nearly a full mobile screen tall — four of them
+   in a row read as one long stretch of near-empty black. Shrink them down for
+   this compact stacked context specifically (cinematic pinned mode is untouched). */
+.process-pin-wrap.process-static-fallback { height: auto; }
 .process-static-fallback .process-pin {
   position: static;
   height: auto;
-  padding: 60px 0;
+  padding: 40px 0;
   overflow: visible;
 }
 .process-static-fallback .stage-progress { display: none; }
 .process-static-fallback .process-stages {
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  margin-top: 40px;
+  gap: 20px;
+  margin-top: 28px;
 }
 .process-static-fallback .process-stage {
   position: static;
-  padding: 48px 24px;
+  padding: 32px 20px;
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   opacity: 1 !important;
   transform: none !important;
+}
+.process-static-fallback .stage-badge {
+  width: 84px;
+  height: 84px;
+  margin-bottom: 16px;
+}
+.process-static-fallback .stage-heading {
+  font-size: 1.375rem;
+  margin-bottom: 8px;
+}
+.process-static-fallback .stage-desc {
+  font-size: 0.95rem;
 }
 
 @media (max-width: 768px) {
@@ -1300,18 +1316,10 @@ img, video {
     min-height: 52px;
     font-size: 1rem;
   }
+  /* Chat concierge is desktop-only — on mobile it competed with the a11y
+     button for thumb space and covered content low on the page. */
   .sales-bot-widget {
-    inset-inline-end: 12px;
-    bottom: 12px;
-  }
-  .bot-fab-btn {
-    width: 54px;
-    height: 54px;
-  }
-  .sales-chat-panel {
-    width: calc(100vw - 24px);
-    height: min(490px, 78vh);
-    bottom: 68px;
+    display: none;
   }
 }
 
