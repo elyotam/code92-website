@@ -17,8 +17,8 @@ export const services: Service[] = [
     sceneId: 'website',
     title: { he: 'פיתוח אתרים', en: 'Website Development' },
     description: {
-      he: 'אתרי תדמית, נחיתה וחנות — בעיצוב ברמה גבוהה, בנויים למהירות, לנראות בגוגל ולהמרה בפועל.',
-      en: 'Marketing sites, landing pages and storefronts — designed at a high level and built for speed, search visibility, and real conversion.',
+      he: 'אתרי תדמית, נחיתה וחנות, בעיצוב ברמה גבוהה ובנויים למהירות, לנראות בגוגל ולהמרה בפועל.',
+      en: 'Marketing sites, landing pages and storefronts, designed at a high level and built for speed, search visibility, and real conversion.',
     },
   },
   {
@@ -26,8 +26,8 @@ export const services: Service[] = [
     sceneId: 'webapp',
     title: { he: 'אפליקציות ווב', en: 'Web Applications' },
     description: {
-      he: 'מערכות ווב מותאמות אישית לתהליכי העבודה של העסק שלכם — מלוחות בקרה ועד פורטלים לניהול לקוחות.',
-      en: 'Custom web applications built around how your business actually works — from internal dashboards to customer-facing portals.',
+      he: 'מערכות ווב מותאמות אישית לתהליכי העבודה של העסק שלכם, מלוחות בקרה ועד פורטלים לניהול לקוחות.',
+      en: 'Custom web applications built around how your business actually works, from internal dashboards to customer-facing portals.',
     },
   },
   {
@@ -35,8 +35,8 @@ export const services: Service[] = [
     sceneId: 'ecommerce',
     title: { he: 'חנויות מסחר אלקטרוני', en: 'E-commerce Platforms' },
     description: {
-      he: 'חנויות אונליין שלמות — מקטלוג ועגלה ועד תשלום, משלוח וניהול הזמנות — בנויות לגדול איתכם.',
-      en: 'Complete online stores — catalog, cart, checkout, shipping and order management — built to grow with your business.',
+      he: 'חנויות אונליין שלמות: קטלוג, עגלה, תשלום, משלוח וניהול הזמנות, בנויות לגדול איתכם.',
+      en: 'Complete online stores: catalog, cart, checkout, shipping, and order management, built to grow with your business.',
     },
   },
   {
@@ -53,7 +53,7 @@ export const services: Service[] = [
     sceneId: 'custom',
     title: { he: 'מוצרים דיגיטליים מותאמים אישית', en: 'Custom Digital Products' },
     description: {
-      he: 'פתרונות מותאמים אישית שמחברים בין מערכות, APIs, בסיסי נתונים וענן — לתשתית דיגיטלית אחת שעובדת בשבילכם.',
+      he: 'פתרונות מותאמים אישית שמחברים בין מערכות, APIs, בסיסי נתונים וענן, לתשתית דיגיטלית אחת שעובדת בשבילכם.',
       en: 'Tailored solutions that connect systems, APIs, databases and cloud infrastructure into one digital backbone that works for you.',
     },
   },

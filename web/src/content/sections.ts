@@ -4,7 +4,7 @@ export const sections: Record<
   Locale,
   {
     services: { eyebrow: string; title: string };
-    projects: { eyebrow: string; title: string; placeholderNote: string };
+    projects: { eyebrow: string; title: string; placeholderNote: string; placeholderBadge: string };
     contact: { eyebrow: string; title: string; body: string; whatsapp: string; email: string };
     footer: { blurb: string; rights: string };
   }
@@ -14,7 +14,8 @@ export const sections: Record<
     projects: {
       eyebrow: 'עבודות',
       title: 'מוצרים שאנחנו בונים',
-      placeholderNote: 'דוגמאות המחשה — עבודות לקוחות אמיתיות יתווספו בהמשך.',
+      placeholderNote: 'דוגמאות המחשה בלבד, עבודות לקוחות אמיתיות יתווספו בהמשך.',
+      placeholderBadge: 'תצוגה לדוגמה',
     },
     contact: {
       eyebrow: 'בואו נדבר',
@@ -33,7 +34,8 @@ export const sections: Record<
     projects: {
       eyebrow: 'Work',
       title: 'Products We Build',
-      placeholderNote: 'Illustrative examples — real client work will be added here.',
+      placeholderNote: 'Illustrative examples only, real client work will be added here.',
+      placeholderBadge: 'Sample preview',
     },
     contact: {
       eyebrow: "Let's Talk",
