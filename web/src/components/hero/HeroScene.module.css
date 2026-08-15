@@ -1,0 +1,18 @@
+.stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1600px;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  will-change: transform, opacity, filter;
+}
+
+.parallax {
+  will-change: transform;
+}

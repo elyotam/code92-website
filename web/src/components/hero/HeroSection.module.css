@@ -1,55 +1,64 @@
-.hero {
+.scrollWrapper {
   position: relative;
-  min-height: 100svh;
+  height: 420vh;
+}
+
+.staticWrapper {
+  position: relative;
+}
+
+.pin {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--bg-void);
+}
+
+.ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(50% 45% at 72% 32%, rgba(16, 224, 138, 0.1), transparent 65%),
+    radial-gradient(40% 40% at 22% 75%, rgba(143, 124, 246, 0.07), transparent 70%);
+  transition: opacity 200ms linear;
+}
+
+.headline {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
-  overflow: hidden;
   padding-top: 88px;
 }
 
-/* Marked foundation for the real Hero scene (next phase). Deliberately
-   restrained for now: a soft directional graphite gradient, nothing that
-   reads as a finished visual. */
-.canvasMount {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(60% 55% at 78% 30%, rgba(16, 224, 138, 0.08), transparent 65%),
-    radial-gradient(45% 45% at 15% 80%, rgba(143, 124, 246, 0.06), transparent 70%);
-}
-
-.inner {
-  position: relative;
-  display: grid;
-  gap: var(--space-4);
-}
-
-.badgeSlot {
-  grid-column: 1 / -1;
-}
-
-.titleSlot {
-  grid-column: 1 / -1;
+.headlineInner {
+  max-width: 640px;
 }
 
 .title {
   margin-top: var(--space-3);
-  font-size: var(--fs-display);
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
   font-style: italic;
   font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -0.01em;
-  max-width: 20ch;
+  line-height: 1.12;
+}
+
+.titleAccent {
+  color: var(--signal);
 }
 
 .subline {
+  margin-top: var(--space-3);
   font-size: var(--fs-body-lg);
   color: var(--ink-bone-dim);
-  max-width: 42ch;
-  line-height: 1.5;
+  max-width: 46ch;
+  line-height: 1.55;
 }
 
 .actions {
+  margin-top: var(--space-4);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -63,12 +72,13 @@
   color: var(--bg-void);
   background: var(--signal);
   border-radius: 3px;
-  padding: 14px 30px;
-  transition: background var(--dur-fast) var(--ease-out);
+  padding: 14px 28px;
+  transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
 
 .ctaPrimary:hover {
   background: var(--signal-strong);
+  transform: translateY(-1px);
 }
 
 .ctaSecondary {
@@ -86,22 +96,4 @@
 .ctaSecondary:hover {
   color: var(--ink-bone);
   border-color: var(--signal);
-}
-
-/* On wide viewports, break the symmetric-center habit: title spans wide,
-   subline+actions sit in a narrower offset column beneath it. */
-@media (min-width: 1000px) {
-  .inner {
-    grid-template-columns: 1fr auto;
-    align-items: end;
-  }
-
-  .sublineSlot {
-    grid-column: 1;
-  }
-
-  .actionsSlot {
-    grid-column: 2;
-    justify-self: end;
-  }
 }
