@@ -6,14 +6,12 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* No native scroll-behavior: smooth here — Lenis (see hooks/useLenis) owns
+   smooth scrolling when motion is allowed; native + Lenis together fight
+   each other. Reduced-motion users get plain instant scroll, which is
+   correct, not a fallback. */
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   *,
   *::before,
   *::after {

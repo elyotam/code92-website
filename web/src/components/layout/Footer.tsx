@@ -1,6 +1,7 @@
 import { contact } from '../../content/contact';
 import { sections } from '../../content/sections';
 import { useAppStore } from '../../store/useAppStore';
+import { Reveal } from '../motion/Reveal';
 import styles from './Footer.module.css';
 
 export function Footer() {
@@ -9,19 +10,22 @@ export function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <div className={`container ${styles.inner}`}>
-        <div>
-          <div className={styles.logo}>
-            CODE<span className={styles.logoAccent}>92</span>
-          </div>
-          <p className={styles.blurb}>{t.blurb}</p>
-        </div>
+      <div className="container">
+        <Reveal variant="clip">
+          <h2 className={styles.statement}>{t.statement}</h2>
+        </Reveal>
 
-        <div className={styles.contactBlock}>
-          <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer">
-            {contact.phoneDisplay}
-          </a>
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <div className={styles.row}>
+          <div className={styles.logo}>
+            CODE<span className={styles.logoMark}>92</span>
+          </div>
+
+          <div className={styles.contactBlock}>
+            <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer">
+              {contact.phoneDisplay}
+            </a>
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          </div>
         </div>
       </div>
 

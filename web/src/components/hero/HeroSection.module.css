@@ -1,10 +1,107 @@
-.scrollWrapper {
+.hero {
   position: relative;
-  height: 400vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 88px;
 }
 
-.pin {
+/* Marked foundation for the real Hero scene (next phase). Deliberately
+   restrained for now: a soft directional graphite gradient, nothing that
+   reads as a finished visual. */
+.canvasMount {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 55% at 78% 30%, rgba(16, 224, 138, 0.08), transparent 65%),
+    radial-gradient(45% 45% at 15% 80%, rgba(143, 124, 246, 0.06), transparent 70%);
+}
+
+.inner {
   position: relative;
-  height: 100svh;
-  overflow: hidden;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.badgeSlot {
+  grid-column: 1 / -1;
+}
+
+.titleSlot {
+  grid-column: 1 / -1;
+}
+
+.title {
+  margin-top: var(--space-3);
+  font-size: var(--fs-display);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  max-width: 20ch;
+}
+
+.subline {
+  font-size: var(--fs-body-lg);
+  color: var(--ink-bone-dim);
+  max-width: 42ch;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--bg-void);
+  background: var(--signal);
+  border-radius: 3px;
+  padding: 14px 30px;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.ctaPrimary:hover {
+  background: var(--signal-strong);
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-technical);
+  font-size: var(--fs-body-sm);
+  color: var(--ink-bone-dim);
+  border-bottom: 1px solid var(--bg-graphite-line);
+  padding-bottom: 3px;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.ctaSecondary:hover {
+  color: var(--ink-bone);
+  border-color: var(--signal);
+}
+
+/* On wide viewports, break the symmetric-center habit: title spans wide,
+   subline+actions sit in a narrower offset column beneath it. */
+@media (min-width: 1000px) {
+  .inner {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+  }
+
+  .sublineSlot {
+    grid-column: 1;
+  }
+
+  .actionsSlot {
+    grid-column: 2;
+    justify-self: end;
+  }
 }

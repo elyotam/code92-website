@@ -1,52 +1,63 @@
 .footer {
-  border-top: 1px solid var(--border-card);
+  border-top: var(--border-hairline);
   margin-top: var(--space-8);
+  padding-top: var(--space-6);
 }
 
-.inner {
-  display: grid;
-  gap: var(--space-5);
-  padding-block: var(--space-7);
+.statement {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-style: italic;
+  font-weight: 500;
+  max-width: 16ch;
+  line-height: 1.08;
 }
 
-@media (min-width: 720px) {
-  .inner {
-    grid-template-columns: 1fr auto;
-    align-items: start;
-  }
+.row {
+  margin-top: var(--space-6);
+  padding-bottom: var(--space-5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3);
 }
 
 .logo {
-  font-weight: 800;
-  font-size: var(--fs-h3);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.4rem;
 }
 
-.logoAccent {
-  color: var(--brand);
-}
-
-.blurb {
-  margin-top: var(--space-2);
-  color: var(--text-body);
-  max-width: 320px;
-  line-height: 1.6;
+.logoMark {
+  font-family: var(--font-technical);
+  font-style: normal;
+  font-size: 0.85rem;
+  vertical-align: super;
+  color: var(--signal);
 }
 
 .contactBlock {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  font-size: var(--fs-body-sm);
-  color: var(--text-body);
+  align-items: flex-end;
+  gap: var(--space-1);
+  font-family: var(--font-technical);
+  font-size: var(--fs-technical);
+  color: var(--ink-bone-dim);
+}
+
+html[dir='rtl'] .contactBlock {
+  align-items: flex-start;
 }
 
 .contactBlock a:hover {
-  color: var(--brand);
+  color: var(--signal);
 }
 
 .bottom {
-  border-top: 1px solid var(--border-card);
-  padding-block: var(--space-3);
-  color: var(--text-dim);
-  font-size: var(--fs-caption);
+  border-top: var(--border-hairline);
+  padding-block: var(--space-2);
+  color: var(--ink-bone-faint);
+  font-family: var(--font-technical);
+  font-size: 0.75rem;
 }

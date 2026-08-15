@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { nav } from '../../content/nav';
 import { useAppStore } from '../../store/useAppStore';
-import { GlassCard } from '../ui/GlassCard';
 import { LangToggle } from './LangToggle';
 import { WhatsAppButton } from './WhatsAppButton';
 import styles from './Header.module.css';
@@ -22,7 +21,7 @@ export function Header() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`container ${styles.inner}`}>
         <a href="#top" className={styles.logo} aria-label="Code92">
-          CODE<span className={styles.logoAccent}>92</span>
+          CODE<span className={styles.logoMark}>92</span>
         </a>
 
         <nav className={styles.nav} aria-label={t.services}>
@@ -34,9 +33,10 @@ export function Header() {
         <div className={styles.actions}>
           <LangToggle />
           <WhatsAppButton />
-          <GlassCard as="a" href="#contact" variant="button" className={styles.cta}>
+          <a href="#contact" className={styles.cta}>
             {t.cta}
-          </GlassCard>
+            <span className={styles.ctaArrow}>&rarr;</span>
+          </a>
         </div>
       </div>
     </header>

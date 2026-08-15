@@ -6,11 +6,11 @@ export const sections: Record<
     services: { eyebrow: string; title: string };
     projects: { eyebrow: string; title: string; placeholderNote: string; placeholderBadge: string };
     contact: { eyebrow: string; title: string; body: string; whatsapp: string; email: string };
-    footer: { blurb: string; rights: string };
+    footer: { statement: string; rights: string };
   }
 > = {
   he: {
-    services: { eyebrow: 'מה אנחנו בונים', title: 'חמישה תחומים, צוות אחד' },
+    services: { eyebrow: 'מה אנחנו בונים', title: 'משישה תחומים, מוצר אחד שעובד' },
     projects: {
       eyebrow: 'עבודות',
       title: 'מוצרים שאנחנו בונים',
@@ -25,12 +25,12 @@ export const sections: Record<
       email: 'אימייל',
     },
     footer: {
-      blurb: 'אתרים, אפליקציות, חנויות ומוצרים דיגיטליים מותאמים אישית.',
+      statement: 'רעיון היום. מוצר שעובד מחר.',
       rights: 'כל הזכויות שמורות.',
     },
   },
   en: {
-    services: { eyebrow: 'What We Build', title: 'Five Areas, One Team' },
+    services: { eyebrow: 'What We Build', title: 'Six disciplines, one product that works' },
     projects: {
       eyebrow: 'Work',
       title: 'Products We Build',
@@ -45,7 +45,7 @@ export const sections: Record<
       email: 'Email',
     },
     footer: {
-      blurb: 'Websites, apps, online stores, and custom digital products.',
+      statement: 'An idea today. A working product tomorrow.',
       rights: 'All rights reserved.',
     },
   },

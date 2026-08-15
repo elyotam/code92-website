@@ -1,8 +1,7 @@
 import { contact } from '../../content/contact';
 import { sections } from '../../content/sections';
 import { useAppStore } from '../../store/useAppStore';
-import { CodeStream } from '../code-motif/CodeStream';
-import { GlassCard } from '../ui/GlassCard';
+import { Reveal } from '../motion/Reveal';
 import { SectionHeading } from '../ui/SectionHeading';
 import styles from './ContactSection.module.css';
 
@@ -12,27 +11,22 @@ export function ContactSection() {
 
   return (
     <section id="contact" className={styles.section}>
-      <CodeStream columns={3} />
-      <div className={`container ${styles.content}`}>
-        <GlassCard variant="card" className={styles.card} tilt={false}>
-          <SectionHeading eyebrow={t.eyebrow} title={t.title} align="center" />
+      <div className="container">
+        <SectionHeading eyebrow={t.eyebrow} title={t.title} />
+        <Reveal variant="panel" delay={0.15}>
           <p className={styles.body}>{t.body}</p>
+        </Reveal>
 
+        <Reveal variant="panel" delay={0.25}>
           <div className={styles.links}>
-            <GlassCard
-              as="a"
-              href={contact.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="button"
-            >
+            <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" className={styles.linkPrimary}>
               {t.whatsapp} · {contact.phoneDisplay}
-            </GlassCard>
-            <GlassCard as="a" href={`mailto:${contact.email}`} variant="button" className={styles.secondaryLink}>
+            </a>
+            <a href={`mailto:${contact.email}`} className={styles.linkSecondary}>
               {t.email} · {contact.email}
-            </GlassCard>
+            </a>
           </div>
-        </GlassCard>
+        </Reveal>
       </div>
     </section>
   );

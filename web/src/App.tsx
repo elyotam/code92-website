@@ -7,11 +7,13 @@ import { ContactSection } from './components/sections/ContactSection';
 import { useLocale } from './hooks/useLocale';
 import { useReducedMotion } from './hooks/useReducedMotion';
 import { useWebGLSupport } from './hooks/useWebGLSupport';
+import { useLenis } from './hooks/useLenis';
 
 export default function App() {
   useLocale();
   useReducedMotion();
   useWebGLSupport();
+  useLenis();
 
   return (
     <>

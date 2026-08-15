@@ -1,25 +1,16 @@
 .heading {
-  max-width: 640px;
+  max-width: 44ch;
 }
 
 .center {
-  max-width: 640px;
+  max-width: 44ch;
   margin-inline: auto;
   text-align: center;
 }
 
-.eyebrow {
-  display: inline-block;
-  font-size: var(--fs-caption);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--brand);
-  margin-bottom: var(--space-2);
-}
-
 .title {
-  font-size: var(--fs-h2);
-  font-weight: 800;
-  line-height: 1.2;
+  margin-top: var(--space-2);
+  font-size: var(--fs-h1);
+  font-style: italic;
+  line-height: 1.1;
 }

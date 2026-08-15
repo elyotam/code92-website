@@ -1,6 +1,14 @@
 .toggle {
-  min-width: 40px;
-  height: 40px;
-  padding-inline: 12px !important;
-  font-weight: 600 !important;
+  font-family: var(--font-technical);
+  font-size: var(--fs-technical);
+  font-weight: 500;
+  color: var(--ink-bone-dim);
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+
+.toggle:hover {
+  color: var(--ink-bone);
+  background: var(--bg-graphite-raised);
 }

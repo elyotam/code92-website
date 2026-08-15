@@ -1,30 +1,23 @@
-import { projects } from '../../content/projects';
 import { sections } from '../../content/sections';
 import { useAppStore } from '../../store/useAppStore';
-import { ProjectDeviceFrame } from './ProjectDeviceFrame';
-import { ProjectsAmbientBackground } from './ProjectsAmbientBackground';
+import { Reveal } from '../motion/Reveal';
 import { SectionHeading } from '../ui/SectionHeading';
 import styles from './ProjectsSection.module.css';
 
-// PLACEHOLDER content only (see content/projects.ts) — no real client
-// footage exists yet. ProjectDeviceFrame shows an honestly-labeled
-// placeholder screen instead of implying real client work.
+// Structural stub — the real device-frame/project showcase concept is
+// future work, once it fits the new art direction. content/projects.ts
+// still holds the placeholder-labeled entries for later.
 export function ProjectsSection() {
   const locale = useAppStore((s) => s.locale);
   const t = sections[locale].projects;
 
   return (
     <section id="work" className={styles.section}>
-      <ProjectsAmbientBackground />
-      <div className={`container ${styles.content}`}>
-        <SectionHeading eyebrow={t.eyebrow} title={t.title} align="center" />
-        <p className={styles.note}>{t.placeholderNote}</p>
-
-        <div className={styles.grid}>
-          {projects.map((p) => (
-            <ProjectDeviceFrame key={p.slug} project={p} />
-          ))}
-        </div>
+      <div className="container">
+        <SectionHeading eyebrow={t.eyebrow} title={t.title} />
+        <Reveal variant="panel" delay={0.15}>
+          <p className={styles.note}>{t.placeholderNote}</p>
+        </Reveal>
       </div>
     </section>
   );
