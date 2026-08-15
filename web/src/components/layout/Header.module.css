@@ -56,25 +56,13 @@
 }
 
 .cta {
-  display: none;
-  align-items: center;
-  border-radius: 8px;
-  background: var(--brand);
-  color: var(--bg-black);
-  font-weight: 600;
-  font-size: var(--fs-body-sm);
-  padding-inline: var(--space-3);
-  height: 40px;
+  display: none !important;
+  padding: 10px 20px !important;
   margin-inline-start: var(--space-1);
-  transition: filter var(--dur) var(--ease);
-}
-
-.cta:hover {
-  filter: brightness(1.1);
 }
 
 @media (min-width: 640px) {
   .cta {
-    display: inline-flex;
+    display: inline-flex !important;
   }
 }

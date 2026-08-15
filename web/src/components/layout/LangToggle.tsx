@@ -1,5 +1,6 @@
 import { otherLocale } from '../../content/i18n';
 import { useLocale } from '../../hooks/useLocale';
+import { GlassCard } from '../ui/GlassCard';
 import styles from './LangToggle.module.css';
 
 export function LangToggle() {
@@ -7,13 +8,14 @@ export function LangToggle() {
   const next = otherLocale(locale);
 
   return (
-    <button
-      type="button"
+    <GlassCard
+      as="button"
+      variant="pill"
       className={styles.toggle}
       onClick={() => setLocale(next)}
       aria-label={next === 'en' ? 'Switch to English' : 'עבור לעברית'}
     >
       {next === 'en' ? 'EN' : 'עב'}
-    </button>
+    </GlassCard>
   );
 }

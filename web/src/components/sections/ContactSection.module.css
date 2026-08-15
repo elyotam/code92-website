@@ -3,9 +3,6 @@
 }
 
 .card {
-  border-radius: 24px;
-  border: 1px solid var(--border-card);
-  background: linear-gradient(155deg, rgba(17, 17, 22, 0.7), rgba(17, 17, 22, 0.95));
   padding: var(--space-7) var(--space-4);
   text-align: center;
 }
@@ -25,18 +22,12 @@
   gap: var(--space-3);
 }
 
-.linkPrimary {
-  border-radius: 10px;
-  background: var(--brand);
-  color: var(--bg-black);
-  font-weight: 700;
-  padding: 14px 24px;
+.secondaryLink {
+  background: transparent !important;
+  color: var(--text-title) !important;
+  border-color: var(--border-card) !important;
 }
 
-.linkSecondary {
-  border-radius: 10px;
-  border: 1px solid var(--border-card);
-  color: var(--text-title);
-  font-weight: 600;
-  padding: 14px 24px;
+.secondaryLink:hover {
+  border-color: var(--brand-glow) !important;
 }

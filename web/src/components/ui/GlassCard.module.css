@@ -1,0 +1,92 @@
+/* Base = the block-card look (default variant). .button/.pill below add
+   extra classes on top and override what they need to. */
+.card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  background: linear-gradient(155deg, rgba(17, 17, 22, 0.65), rgba(17, 17, 22, 0.92));
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 20px 50px -30px rgba(0, 0, 0, 0.6);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), filter var(--dur) var(--ease);
+  will-change: transform;
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: var(--brand-glow);
+}
+
+/* Inner reflection that tracks the cursor via --glow-x/--glow-y (set as
+   MotionValues in GlassCard.tsx). Sits above the glass fill, below content. */
+.card.glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    280px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(255, 255, 255, 0.1),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+
+.card:hover.glow::before,
+.card:focus-visible.glow::before {
+  opacity: 1;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── button: filled brand CTA ── */
+.card.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+  border-color: transparent;
+  background: var(--brand);
+  color: var(--bg-black);
+  font-weight: 700;
+  font-size: var(--fs-body-sm);
+  padding: 14px 28px;
+  cursor: pointer;
+}
+
+.card.button:hover,
+.card.button:focus-visible {
+  filter: brightness(1.08);
+}
+
+.card.button::before {
+  background: radial-gradient(280px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(255, 255, 255, 0.35), transparent 65%);
+}
+
+/* ── pill: outlined ghost (nav links, lang toggle, secondary actions) ── */
+.card.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-body);
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  padding: 8px 18px;
+  cursor: pointer;
+}
+
+.card.pill:hover,
+.card.pill:focus-visible {
+  border-color: var(--brand-glow);
+  color: var(--brand);
+}

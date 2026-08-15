@@ -19,15 +19,14 @@
 }
 
 .card {
-  border-radius: 16px;
-  border: 1px solid var(--border-card);
-  background: rgba(17, 17, 22, 0.55);
-  overflow: hidden;
+  padding: 0;
 }
 
 .frame {
   aspect-ratio: 16 / 10;
   background: linear-gradient(135deg, rgba(0, 230, 118, 0.12), rgba(17, 17, 22, 0.4));
+  border-radius: 15px 15px 0 0;
+  margin: -1px -1px 0;
 }
 
 .tag {

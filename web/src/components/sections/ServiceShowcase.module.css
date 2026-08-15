@@ -1,20 +1,9 @@
-.card {
-  border-radius: 16px;
-  border: 1px solid var(--border-card);
-  background: rgba(17, 17, 22, 0.55);
-  backdrop-filter: blur(14px) saturate(140%);
-  overflow: hidden;
-  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
-}
-
-.card:hover {
-  border-color: var(--brand-glow);
-  transform: translateY(-2px);
-}
-
 .visual {
   aspect-ratio: 4 / 3;
   background: #0b0b10;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  margin: -1px -1px 0;
 }
 
 .visual canvas {

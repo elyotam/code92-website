@@ -1,5 +1,6 @@
 import { hero } from '../../content/hero';
 import { useAppStore } from '../../store/useAppStore';
+import { GlassCard } from '../ui/GlassCard';
 import styles from './HeroCopyOverlay.module.css';
 
 export function HeroCopyOverlay({ revealed }: { revealed: boolean }) {
@@ -24,12 +25,12 @@ export function HeroCopyOverlay({ revealed }: { revealed: boolean }) {
           <p className={styles.subline}>{t.subline}</p>
 
           <div className={styles.actions}>
-            <a href="#contact" className={styles.ctaPrimary}>
+            <GlassCard as="a" href="#contact" variant="button">
               {t.ctaPrimary}
-            </a>
-            <a href="#services" className={styles.ctaSecondary}>
+            </GlassCard>
+            <GlassCard as="a" href="#services" variant="button" className={styles.ctaSecondary}>
               {t.ctaSecondary}
-            </a>
+            </GlassCard>
           </div>
         </div>
       </div>
