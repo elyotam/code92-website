@@ -9,6 +9,8 @@ import { HeroScene, type HeroSceneHandle } from './HeroScene';
 import { HeroMobile } from './HeroMobile';
 import styles from './HeroSection.module.css';
 
+const REST_PROGRESS = 0.5; // reduced-motion: show the fully-aligned "constructed" state, not the raw fan
+
 export function HeroSection() {
   const locale = useAppStore((s) => s.locale);
   const reducedMotion = useAppStore((s) => s.reducedMotion);
@@ -26,19 +28,19 @@ export function HeroSection() {
   const applyProgress = useCallback((p: number) => {
     sceneRef.current?.setProgress(p);
 
-    // Headline must be fully gone well before fragments finish assembling
-    // into the same central screen zone — otherwise fading text visually
-    // collides with an already-sharp fragment sitting right behind it.
-    const headlineOpacity = band(p, 0, 0.12) * (1 - band(p, 0.28, 0.4));
-    const headlineY = (1 - band(p, 0, 0.12)) * 24 - band(p, 0.28, 0.4) * 36;
+    // Headline is fully visible from the very first frame (p=0) — there is
+    // no scroll-tied entrance to wait for, the opening frame must already
+    // look complete. It only leaves together with the construction object
+    // at the very end, no separate fade timeline to drift out of sync.
+    const exit = band(p, 0.82, 0.98);
     if (headlineRef.current) {
-      headlineRef.current.style.opacity = String(headlineOpacity);
-      headlineRef.current.style.transform = `translateY(${headlineY}px)`;
-      headlineRef.current.style.pointerEvents = headlineOpacity > 0.4 ? 'auto' : 'none';
+      headlineRef.current.style.opacity = String(1 - exit);
+      headlineRef.current.style.transform = `translateY(${-exit * 22}px)`;
     }
 
-    const ambient = (0.5 + band(p, 0, 0.4) * 0.5) * (1 - band(p, 0.82, 1) * 0.75);
-    if (ambientRef.current) ambientRef.current.style.opacity = String(ambient);
+    if (ambientRef.current) {
+      ambientRef.current.style.opacity = String(0.85 * (1 - exit * 0.7));
+    }
   }, []);
 
   useEffect(() => {
@@ -47,18 +49,12 @@ export function HeroSection() {
       return;
     }
     if (reducedMotion) {
-      // Structural fallback: show the fully-assembled composition once,
-      // statically — no pin, no parallax loop, no scroll-hijack. Must
-      // explicitly un-arm the pin too: reducedMotion reads false on the
-      // very first render (its own probe effect hasn't run yet), so an
-      // earlier pass here may have already set pinReady(true) before we
-      // learn the real value — leaving it true would let useScrollProgress
-      // create a pin anyway once this effect re-runs.
       setPinReady(false);
-      applyProgress(0.55);
+      applyProgress(REST_PROGRESS);
       return;
     }
     setPinReady(true);
+    applyProgress(0);
   }, [isMobile, reducedMotion, applyProgress]);
 
   useScrollProgress(wrapperRef.current, pinRef.current, applyProgress, pinReady);
@@ -70,6 +66,7 @@ export function HeroSection() {
   return (
     <div id="top" ref={wrapperRef} className={reducedMotion ? styles.staticWrapper : styles.scrollWrapper}>
       <div ref={pinRef} className={styles.pin}>
+        <div className={styles.grid} aria-hidden="true" />
         <div ref={ambientRef} className={styles.ambient} aria-hidden="true" />
 
         <HeroScene ref={sceneRef} pointerRef={pointerRef} parallaxEnabled={!reducedMotion} />
@@ -86,7 +83,10 @@ export function HeroSection() {
               <p className={styles.subline}>{t.subline}</p>
               <div className={styles.actions}>
                 <a href="#contact" className={styles.ctaPrimary}>
-                  {t.ctaPrimary}
+                  <span>{t.ctaPrimary}</span>
+                  <svg viewBox="0 0 24 24" className={styles.ctaIcon} aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </a>
                 <a href="#work" className={styles.ctaSecondary}>
                   {t.ctaSecondary}

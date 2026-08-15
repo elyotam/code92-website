@@ -88,30 +88,47 @@ html[dir='rtl'] .nav a::after {
   gap: var(--space-2);
 }
 
+.iconGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .cta {
   display: none;
   align-items: center;
   gap: 8px;
+  height: 40px;
   font-size: var(--fs-body-sm);
   font-weight: 600;
-  color: var(--ink-bone);
-  border-bottom: 1px solid var(--signal-line);
-  padding-bottom: 3px;
-  transition: border-color var(--dur) var(--ease-out), gap var(--dur) var(--ease-out);
+  color: var(--bg-void);
+  background: var(--signal);
+  border-radius: 4px;
+  padding-inline: 18px;
+  transition: background var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
 }
 
 .cta:hover {
-  border-color: var(--signal);
-  gap: 12px;
+  background: var(--signal-strong);
+  box-shadow: 0 6px 22px -6px rgba(16, 224, 138, 0.5);
 }
 
 .ctaArrow {
-  color: var(--signal);
-  display: inline-block;
+  width: 14px;
+  height: 14px;
+  transition: transform var(--dur-fast) var(--ease-out);
 }
 
 html[dir='rtl'] .ctaArrow {
   transform: scaleX(-1);
+}
+
+.cta:hover .ctaArrow {
+  transform: translateX(3px);
+}
+
+html[dir='rtl'] .cta:hover .ctaArrow {
+  transform: scaleX(-1) translateX(3px);
 }
 
 @media (min-width: 640px) {

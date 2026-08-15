@@ -1,6 +1,6 @@
 .scrollWrapper {
   position: relative;
-  height: 420vh;
+  height: 320vh;
 }
 
 .staticWrapper {
@@ -14,13 +14,25 @@
   background: var(--bg-void);
 }
 
+/* A faint engineered-surface texture — replaces empty flat black with a
+   deliberate, restrained structural cue. */
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(80% 70% at 50% 55%, black 30%, transparent 85%);
+}
+
 .ambient {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background:
-    radial-gradient(50% 45% at 72% 32%, rgba(16, 224, 138, 0.1), transparent 65%),
-    radial-gradient(40% 40% at 22% 75%, rgba(143, 124, 246, 0.07), transparent 70%);
+  background: radial-gradient(48% 55% at 50% 68%, rgba(16, 224, 138, 0.16), transparent 68%),
+    radial-gradient(32% 30% at 20% 25%, rgba(143, 124, 246, 0.09), transparent 70%),
+    radial-gradient(28% 26% at 82% 20%, rgba(99, 201, 224, 0.08), transparent 70%);
   transition: opacity 200ms linear;
 }
 
@@ -29,20 +41,20 @@
   inset: 0;
   z-index: 2;
   display: flex;
-  align-items: center;
-  padding-top: 88px;
+  align-items: flex-start;
+  padding-top: 148px;
 }
 
 .headlineInner {
-  max-width: 640px;
+  max-width: 660px;
 }
 
 .title {
   margin-top: var(--space-3);
-  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
   font-style: italic;
   font-weight: 500;
-  line-height: 1.12;
+  line-height: 1.1;
 }
 
 .titleAccent {
@@ -68,23 +80,45 @@
 .ctaPrimary {
   display: inline-flex;
   align-items: center;
+  gap: 10px;
   font-weight: 600;
   color: var(--bg-void);
   background: var(--signal);
-  border-radius: 3px;
-  padding: 14px 28px;
-  transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  border-radius: 4px;
+  padding: 15px 26px;
+  box-shadow: 0 0 0 0 rgba(16, 224, 138, 0);
+  transition: background var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
 }
 
 .ctaPrimary:hover {
   background: var(--signal-strong);
+  box-shadow: 0 8px 30px -6px rgba(16, 224, 138, 0.55);
   transform: translateY(-1px);
+}
+
+.ctaIcon {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+html[dir='rtl'] .ctaIcon {
+  transform: scaleX(-1);
+}
+
+.ctaPrimary:hover .ctaIcon {
+  transform: translateX(3px);
+}
+
+html[dir='rtl'] .ctaPrimary:hover .ctaIcon {
+  transform: scaleX(-1) translateX(3px);
 }
 
 .ctaSecondary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  height: 52px;
   font-family: var(--font-technical);
   font-size: var(--fs-body-sm);
   color: var(--ink-bone-dim);

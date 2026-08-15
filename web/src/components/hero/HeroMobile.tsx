@@ -1,29 +1,25 @@
 import { hero } from '../../content/hero';
 import { useAppStore } from '../../store/useAppStore';
 import { Reveal } from '../motion/Reveal';
-import { BrowserFragment, AutomationFragment } from './fragments/Fragments';
+import { coreLayers } from './core/coreLayers';
+import { CoreLayer } from './core/CoreLayer';
 import styles from './HeroMobile.module.css';
 
-// Dedicated mobile composition — not the desktop scene at a smaller
-// width. Two fragments, a simple natural (non-pinned) entrance via the
-// shared Reveal primitive, and a light CSS-only float once settled. No
-// continuous rAF parallax loop and no scroll-hijacking on touch devices.
+// Same "Construction Core" concept, a dedicated composition — not the
+// desktop scene scaled down. Three of the five layers, arranged as a
+// small static fan, revealed once via the shared Reveal primitive
+// (natural, non-pinned entrance). No continuous rAF loop on mobile.
+const MOBILE_LAYERS = [coreLayers[0], coreLayers[2], coreLayers[4]];
+const FAN_ROTATE = [-16, 0, 16];
+
 export function HeroMobile() {
   const locale = useAppStore((s) => s.locale);
   const t = hero[locale];
 
   return (
     <section id="top" className={styles.hero}>
+      <div className={styles.grid} aria-hidden="true" />
       <div className={styles.ambient} aria-hidden="true" />
-
-      <div className={styles.cluster}>
-        <Reveal variant="panel" delay={0.1} className={`${styles.piece} ${styles.pieceBack}`}>
-          <AutomationFragment />
-        </Reveal>
-        <Reveal variant="panel" delay={0.2} className={`${styles.piece} ${styles.pieceFront}`}>
-          <BrowserFragment />
-        </Reveal>
-      </div>
 
       <div className="container">
         <Reveal variant="panel">
@@ -39,7 +35,25 @@ export function HeroMobile() {
         <Reveal variant="panel" delay={0.25}>
           <p className={styles.subline}>{t.subline}</p>
         </Reveal>
-        <Reveal variant="panel" delay={0.35}>
+      </div>
+
+      <div className={styles.fan}>
+        {MOBILE_LAYERS.map((layer, i) => (
+          <Reveal
+            key={layer.id}
+            variant="panel"
+            delay={0.35 + i * 0.1}
+            className={styles.fanSlot}
+          >
+            <div className={styles.fanCard} style={{ rotate: `${FAN_ROTATE[i]}deg` }}>
+              <CoreLayer layer={layer} />
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      <div className="container">
+        <Reveal variant="panel" delay={0.6}>
           <div className={styles.actions}>
             <a href="#contact" className={styles.ctaPrimary}>
               {t.ctaPrimary}

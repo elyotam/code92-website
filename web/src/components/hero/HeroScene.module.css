@@ -1,18 +1,38 @@
 .stage {
   position: absolute;
   inset: 0;
-  perspective: 1600px;
-  transform-style: preserve-3d;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 11vh;
+  perspective: 1900px;
   overflow: hidden;
 }
 
-.orbit {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  will-change: transform, opacity, filter;
+.pointerGroup,
+.scrollGroup {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: opacity 60ms linear;
 }
 
-.parallax {
+.layer {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform-origin: bottom center;
   will-change: transform;
+}
+
+.layer > * {
+  transform: translateX(-50%);
+}
+
+.sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: radial-gradient(60% 50% at 50% 62%, rgba(242, 237, 227, 0.5), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
 }

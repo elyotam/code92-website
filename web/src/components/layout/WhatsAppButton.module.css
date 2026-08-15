@@ -1,14 +1,17 @@
 .button {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 4px;
+  border: 1px solid var(--bg-graphite-line);
   color: var(--ink-bone-dim);
-  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
 }
 
 .button:hover {
   color: var(--signal);
+  border-color: var(--signal-line);
   background: var(--bg-graphite-raised);
 }

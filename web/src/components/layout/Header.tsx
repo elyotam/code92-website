@@ -31,11 +31,15 @@ export function Header() {
         </nav>
 
         <div className={styles.actions}>
-          <LangToggle />
-          <WhatsAppButton />
+          <div className={styles.iconGroup}>
+            <LangToggle />
+            <WhatsAppButton />
+          </div>
           <a href="#contact" className={styles.cta}>
-            {t.cta}
-            <span className={styles.ctaArrow}>&rarr;</span>
+            <span>{t.cta}</span>
+            <svg viewBox="0 0 24 24" className={styles.ctaArrow} aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </a>
         </div>
       </div>
